@@ -8,7 +8,7 @@ clone, import in idea, start developing.
 
 **unit tests:** gradlew :android-sample:testDebug
 
-**com.example.component tests:** gradlew :android-sample:testDebug
+**component tests:** gradlew :android-sample:testDebug
 
 **ui tests:** gradlew :espresso:connectedAndroidTest
 
@@ -16,7 +16,7 @@ clone, import in idea, start developing.
 
 **unit tests** choose test and use "junit" as runner config
 
-**com.example.component tests** choose test and use "junit" as runner config
+**component tests** choose test and use "junit" as runner config
 
 ***initial and after each dependency change you need to recreate custom classpath***
 
@@ -37,7 +37,7 @@ now you can run unit test like you know it
     * inside jvm
     * mockito
     * coverage on teamcity
-* com.example.component tests
+* component tests
     * inside jvm
     * coverage on teamcity
 * android fest assertions
@@ -47,7 +47,7 @@ now you can run unit test like you know it
 ## Features wish
 
 * unit test coverage on console
-* com.example.component test coverage on console
+* component test coverage on console
 * ui test coverage
 * ui test screen shots with spoon, include dialog
 * android annotation
