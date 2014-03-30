@@ -10,6 +10,6 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 public class StartPage {
 
     public void checkTextViewHasText(String expected) {
-        onView(withId(R.id.text)).check(matches(withText(expected)));
+       onView(withId(R.id.text)).check(matches(withText(expected)));
     }
 }

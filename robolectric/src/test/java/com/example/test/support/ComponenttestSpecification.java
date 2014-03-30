@@ -5,16 +5,21 @@ import android.app.Activity;
 import com.example.activity.MainActivity;
 
 import org.junit.Before;
+import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 
-public abstract class ComponentSpec<A extends Activity> {
+@Config(reportSdk = 18)
+@RunWith(RobolectricTestRunner.class)
+public abstract class ComponentTestSpecification<A extends Activity> {
 
     public A activity;
     public ActivityController<A> activityController;
     private Class<A> clazz;
 
-    public ComponentSpec(Class<A> clazz) {
+    public ComponentTestSpecification(Class<A> clazz) {
         this.clazz = clazz;
     }
 

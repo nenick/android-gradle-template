@@ -43,6 +43,7 @@ now you can run unit test like you know it
 * android fest assertions
 * ui testing with espresso
 * component and ui test looks very equal for fast test developing
+* dependency injection with android annotations
 
 ## Features wish
 

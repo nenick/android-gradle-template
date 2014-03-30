@@ -2,19 +2,16 @@ package com.example.component.tests;
 
 import com.example.activity.MainActivity;
 import com.example.component.tests.pages.StartPage;
-import com.example.test.support.ComponentSpec;
+import com.example.test.support.ComponentTestSpecification;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
-@RunWith(RobolectricTestRunner.class)
-public class MainActivityCTest extends ComponentSpec<MainActivity> {
+public class MainActivitySpec extends ComponentTestSpecification<MainActivity> {
 
     StartPage startPage = new StartPage(this);
 
-    public MainActivityCTest() {
+    public MainActivitySpec() {
         super(MainActivity.class);
     }
 
