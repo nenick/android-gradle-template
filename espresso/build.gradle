@@ -1,0 +1,76 @@
+apply plugin: 'android'
+apply plugin: 'eclipse'
+apply plugin: 'checkstyle'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    androidTestCompile files('lib/espresso-1.1.jar', 'lib/testrunner-1.1.jar', 'lib/testrunner-runtime-1.1.jar')
+    androidTestCompile 'com.google.guava:guava:14.0.1',
+            'com.squareup.dagger:dagger:1.1.0',
+            'org.hamcrest:hamcrest-integration:1.1',
+            'org.hamcrest:hamcrest-core:1.1',
+            'org.hamcrest:hamcrest-library:1.1'
+
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+
+    sourceSets {
+        main {
+            manifest.srcFile '../android-sample/AndroidManifest.xml'
+            java.srcDirs = ['../android-sample/src/main/java']
+            resources.srcDirs = ['../android-sample/src/main/java']
+            aidl.srcDirs = ['../android-sample/src/main/java']
+            renderscript.srcDirs = ['../android-sample/src/main/java']
+            res.srcDirs = ['../android-sample/src/main/res']
+            assets.srcDirs = ['../android-sample/assets']
+        }
+
+        androidTest.setRoot('.')
+        androidTest {
+            java { srcDirs = [
+                    'src/test/java'
+            ] }
+            res.srcDirs = ['res']
+            assets.srcDirs = [
+                    'assets'
+            ]
+            resources.srcDirs = [
+                    'src'
+            ]
+        }
+    }
+
+    defaultConfig {
+        testPackageName "com.octo.android.sample.espressotest"
+        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+    }
+
+    // dex compiler don't like duplicated files
+    // which will come from dependencies and other modules
+    packagingOptions {
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/ASL2.0'
+        exclude 'LICENSE.txt'
+    }
+
+}
+
+task checkstyle(type: Checkstyle) {
+    configFile file('../config/quality/checkstyle/checkstyle.xml')
+    source 'src/test/java'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    classpath = files( project.configurations.compile.asPath )
+}
