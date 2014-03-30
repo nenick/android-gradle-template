@@ -1,5 +1,6 @@
-# Professional Android App Template
-Template which enables some stuff for more advanced android app development.
+# Template for android app development
+Template show different ways for testing.
+Should show some common ui examples and how to test them.
 
 ## Getting Started
 
@@ -41,7 +42,7 @@ now you can run unit test like you know it
     * coverage on teamcity
 * android fest assertions
 * ui testing with espresso
-
+* component and ui test looks very equal for fast test developing
 
 ## Features wish
 
@@ -54,6 +55,7 @@ now you can run unit test like you know it
 * how to use yml for sdk setup
 * all nice tools from Quality-Tools-for-Android
 * jump to all test (cmd + shift + t) actual only ui tests are shown, looks like espresso path config destroy this feature
+* test server communication with wire mock (for component test and ui tests)
 
 ## Scripts
 
