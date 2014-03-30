@@ -1,18 +1,19 @@
 package com.example.component.tests;
 
-import com.example.activity.MainActivity;
+import com.example.R;
+import com.example.activity.MainActivity_;
 import com.example.component.tests.pages.StartPage;
 import com.example.test.support.ComponentTestSpecification;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class MainActivitySpec extends ComponentTestSpecification<MainActivity> {
+public class MainActivitySpec extends ComponentTestSpecification<MainActivity_> {
 
     StartPage startPage = new StartPage(this);
 
     public MainActivitySpec() {
-        super(MainActivity.class);
+        super(MainActivity_.class);
     }
 
     @Before
@@ -21,7 +22,12 @@ public class MainActivitySpec extends ComponentTestSpecification<MainActivity> {
     }
 
     @Test
-    public void testSomething() throws Exception {
+    public void testShouldUseCorrectLayout() throws Exception {
+        startPage.checkLayoutIs(R.id.activity_main);
+    }
+
+    @Test
+    public void testShouldShowText() throws Exception {
         startPage.checkTextViewHasText("Hello Espresso!");
     }
 

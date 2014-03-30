@@ -1,7 +1,8 @@
-package com.example.activity;
+package com.example.specs;
 
 import android.test.suitebuilder.annotation.LargeTest;
 
+import com.example.activity.MainActivity;
 import com.example.test.support.EspressoSpec;
 import com.example.test.support.pages.StartPage;
 

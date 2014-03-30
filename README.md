@@ -6,11 +6,11 @@ Should show some common ui examples and how to test them.
 
 clone, import in idea, start developing.
 
-**unit tests:** gradlew :android-sample:testDebug
+**unit tests:** gradlew :robolectric:testDebug
 
-**component tests:** gradlew :android-sample:testDebug
+**component tests:** gradlew :robolectric:testDebug
 
-**ui tests:** gradlew :espresso:connectedAndroidTest
+**ui tests:** gradlew :android-sample:connectedAndroidTest
 
 ## Idea Support
 
@@ -44,6 +44,7 @@ now you can run unit test like you know it
 * ui testing with espresso
 * component and ui test looks very equal for fast test developing
 * dependency injection with android annotations
+* jump between test and implementation with default short cut
 
 ## Features wish
 
@@ -54,8 +55,7 @@ now you can run unit test like you know it
 * android annotation
 * split unit and com.example.component test run on cmd line
 * how to use yml for sdk setup
-* all nice tools from Quality-Tools-for-Android
-* jump to all test (cmd + shift + t) actual only ui tests are shown, looks like espresso path config destroy this feature
+* all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
 * test server communication with wire mock (for component test and ui tests)
 
 ## Scripts

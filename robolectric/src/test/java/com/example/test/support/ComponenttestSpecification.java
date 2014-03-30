@@ -2,20 +2,20 @@ package com.example.test.support;
 
 import android.app.Activity;
 
-import com.example.activity.MainActivity;
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.util.ActivityController;
 
-@Config(reportSdk = 18)
+import static org.robolectric.Robolectric.shadowOf;
+
 @RunWith(RobolectricTestRunner.class)
 public abstract class ComponentTestSpecification<A extends Activity> {
 
     public A activity;
+    public ShadowActivity activityShadow;
     public ActivityController<A> activityController;
     private Class<A> clazz;
 
@@ -31,6 +31,7 @@ public abstract class ComponentTestSpecification<A extends Activity> {
     public void setUpComponentTest() {
         activityController = Robolectric.buildActivity(clazz);
         activity = activityController.get();
+        activityShadow = shadowOf(activity);
     }
 
 }

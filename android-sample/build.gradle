@@ -1,4 +1,7 @@
+
+
 apply plugin: 'android'
+apply plugin: 'android-apt'
 apply plugin: 'android-test'
 
 android {
@@ -12,12 +15,9 @@ android {
     buildToolsVersion "19.0.3"
 
     defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 18
-        versionCode 2
-        versionName "1.0.0-SNAPSHOT"
         testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
     }
+
     buildTypes {
         release {
             runProguard true
@@ -60,12 +60,22 @@ dependencies {
 
     compile 'com.android.support:support-v4:19.0.1'
 
+    apt "org.androidannotations:androidannotations:$ext.androidAnnotationsVersion"
+    compile "org.androidannotations:androidannotations-api:$ext.androidAnnotationsAPIVersion"
+
     androidTestCompile files('lib/espresso-1.1.jar', 'lib/testrunner-1.1.jar', 'lib/testrunner-runtime-1.1.jar')
     androidTestCompile 'com.google.guava:guava:14.0.1',
             'com.squareup.dagger:dagger:1.1.0',
             'org.hamcrest:hamcrest-integration:1.1',
             'org.hamcrest:hamcrest-core:1.1',
             'org.hamcrest:hamcrest-library:1.1'
+}
+
+apt {
+    arguments {
+        androidManifestFile variant.processResources.manifestFile
+        resourcePackageName 'com.example'
+    }
 }
 
 apply plugin: 'idea'
