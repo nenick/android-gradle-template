@@ -1,8 +1,5 @@
-
-
 apply plugin: 'android'
 apply plugin: 'android-apt'
-apply plugin: 'android-test'
 
 android {
     packagingOptions {
@@ -50,10 +47,6 @@ android {
             ]
         }
     }
-}
-
-androidTest {
-    include '**/*Test.class'
 }
 
 dependencies {
