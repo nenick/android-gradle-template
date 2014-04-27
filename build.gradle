@@ -13,7 +13,6 @@ project('android-sample') {
         dependencies {
             classpath 'com.android.tools.build:gradle:0.9.+'
             classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
-            classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.9.4-SNAPSHOT'
         }
     }
 }
