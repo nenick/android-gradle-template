@@ -4,17 +4,22 @@
           android:versionName="1.0.0-SNAPSHOT"
           package="com.example">
 
-    <uses-sdk android:minSdkVersion="10"
+    <uses-sdk android:minSdkVersion="11"
               android:targetSdkVersion="19"/>
 
     <application android:name=".ExampleApplication">
 
-        <activity android:name=".activity.MainActivity_" android:screenOrientation="portrait">
+        <activity android:name=".activities.MainActivity_" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="com.example.provider.AgendaProvider"
+            android:authorities="com.example.provider"
+            android:exported="false" />
 
     </application>
 </manifest>

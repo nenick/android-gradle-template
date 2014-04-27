@@ -64,14 +64,15 @@ now you can run unit test like you know it
     * coverage on teamcity
 * android fest assertions
 * ui testing with espresso
-* component and ui test looks very equal for fast test developing
-* dependency injection with android annotations
+* generate dependency injection with [AndroidAnnotations](http://androidannotations.org/)
+* generate database management with [RoboCop](https://github.com/mediarain/RoboCoP)
 * jump between test and implementation with default short cut
 
 ## Features wish
 
 * unit test coverage on console
 * component test coverage on console
+* component test in own module
 * ui test coverage
 * ui test screen shots with spoon, include dialog
 * android annotation
@@ -82,9 +83,20 @@ now you can run unit test like you know it
 
 ## Scripts
 
-* install-android-test-gradle-plugin-snapshot.sh build the necessary plugin version
-* .travis.yml sdk setup
+* run-tests.sh execute all test variants
 
+## Project structure
+
+**activities** activity classes
+**adapters** data adapters with cursor loader
+**fragments** fragment classes
+**receivers**
+**services**
+**viewmodel** model classes for your views
+
+**model** (generated) helper classes to access cursor content
+**provider** (generated) provider for your database content
+**database** (generated) database tables and helpers
 
 ## See also my inspiration sources
 

@@ -27,6 +27,7 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs += 'src/gen'
             res.srcDirs = ['res']
         }
         test {
@@ -51,7 +52,8 @@ android {
 
 dependencies {
 
-    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:support-v4:19.0.+',
+            'de.greenrobot:greendao:1.3.+'
 
     apt "org.androidannotations:androidannotations:$ext.androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$ext.androidAnnotationsAPIVersion"

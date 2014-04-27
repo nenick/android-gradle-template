@@ -1,4 +1,6 @@
-package com.example.activity;
+package com.example.activities;
+
+import com.example.activities.MainActivity;
 
 import org.junit.Before;
 import org.junit.Test;

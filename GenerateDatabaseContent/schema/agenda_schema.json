@@ -1,0 +1,89 @@
+{
+  "packageName": "com.example",
+  "providerName": "agenda",
+  "databaseVersion": 1,
+  "tables": [
+    {
+      "name": "agenda",
+      "members": [
+        {
+          "type": "string",
+          "name": "name"
+        },
+        {
+          "type": "string",
+          "name": "date"
+        },
+        {
+          "type": "string",
+          "name": "person_conducting"
+        }
+      ]
+    },
+    {
+      "name": "calendar_item",
+      "members": [
+        {
+          "type": "string",
+          "name": "title"
+        },
+        {
+          "type": "string",
+          "name": "date"
+        },
+        {
+          "type": "string",
+          "name": "time"
+        },
+        {
+          "type": "string",
+          "name": "location"
+        },
+        {
+          "type": "string",
+          "name": "notes"
+        }
+      ]
+    },
+    {
+      "name": "agenda_item_group",
+      "members": [
+        {
+          "type": "string",
+          "name": "title"
+        },
+        {
+          "type": "string",
+          "name": "description"
+        }
+      ]
+    },
+    {
+      "name": "agenda_item",
+      "members": [
+        {
+          "type": "string",
+          "name": "title"
+        },
+        {
+          "type": "string",
+          "name": "comment"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "agenda_calendar_item",
+      "left_table": "agenda",
+      "right_table": "calendar_item",
+      "type": "to_many"
+    },
+    {
+      "name": "agenda_group_item",
+      "left_table": "agenda_item_group",
+      "right_table": "agenda_item",
+      "type": "to_many"
+    }
+  ]
+}
