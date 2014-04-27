@@ -11,7 +11,7 @@ configure(allprojects) { project ->
 project('android-sample') {
     buildscript {
         dependencies {
-            classpath 'com.android.tools.build:gradle:0.9.2'
+            classpath 'com.android.tools.build:gradle:0.9.+'
             classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
             classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.9.4-SNAPSHOT'
         }
@@ -21,7 +21,7 @@ project('android-sample') {
 project('robolectric') {
     buildscript {
         dependencies {
-            classpath 'com.android.tools.build:gradle:0.9.2'
+            classpath 'com.android.tools.build:gradle:0.9.+'
             classpath "com.novoda:gradle-android-test-plugin:0.9.8-SNAPSHOT"
         }
     }
