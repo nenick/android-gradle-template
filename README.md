@@ -10,7 +10,29 @@ clone, import in idea, start developing.
 
 **component tests:** gradlew :robolectric:testDebug
 
-**ui tests:** gradlew :android-sample:connectedAndroidTest
+**acceptance tests:** gradlew :android-sample:connectedAndroidTest
+
+## Test variants
+
+**unit test**
+Test with mocks for all class dependencies. Common android methods are disabled e.g onCreate() at
+the super classes. So you may test your own onCreate() method without throwing exceptions on super
+onCreate() call.
+For testing direct database operations i don't like to mock the real database. Database is fast
+enough for unit tests and writing cursor mocks need much effort. Database tests are done here too.
+
+**component test**
+Put app components under test. It's your decision, what you call a component. Good approaches maybe
+Activities, Fragments, (any other ideas?), ...
+
+***experimental***
+For apps designed with single activity to handle all fragments. Try writing tests as component test
+like you will write they in espresso. This should work and is very fast, but not suggested by google
+coding guides and not from the robolectric programmer.
+
+**acceptance tests**
+Instrument your app with espresso to show that your app may handle the basic work flows correctly
+on one or all your device variants.
 
 ## Idea Support
 
@@ -69,3 +91,12 @@ now you can run unit test like you know it
 [Quality-Tools-for-Android](https://github.com/stephanenicolas/Quality-Tools-for-Android)
 
 [deckard-gradle](https://github.com/robolectric/deckard-gradle)
+
+## Why I don't use the linked projects?
+
+I like having the possibility to run robolectric in a separated module, details read test variants.
+
+deckard-gradle has a disadvantage in compile time. Dependencies for robolectric also compiled for
+espresso tests which results in long compile times because of dex incompatible libraries.
+
+Quality-Tools-for-Android contains to much mix up of maven/gradle.
