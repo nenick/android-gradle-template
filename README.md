@@ -87,16 +87,23 @@ now you can run unit test like you know it
 
 ## Project structure
 
-**activities** activity classes
-**adapters** data adapters with cursor loader
-**fragments** fragment classes
-**receivers**
-**services**
-**viewmodel** model classes for your views
+AndroidSample
 
-**model** (generated) helper classes to access cursor content
-**provider** (generated) provider for your database content
-**database** (generated) database tables and helpers
+* src/main/java/com/example/
+    * **activities** activity classes
+    * **adapters** data adapters with cursor loader
+    * **fragments** fragment classes
+    * **receivers**
+    * **services**
+    * **viewmodel** model classes for your views
+* src/gen/com/example/
+    * **database** (generated) database tables and helpers
+    * **provider** (generated) provider for your database content
+    * **model** (generated) helper classes to access cursor content
+* src/test/java/
+    * **com/example** tests with espresso
+* build/source/apt/<buildvariant>/
+    * **com/example** (generated) classes with AndroidAnnotations
 
 ## See also my inspiration sources
 
