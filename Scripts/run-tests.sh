@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./gradlew :robolectric:testDebug :android-sample:connectedAndroidTest
+./gradlew :UnitTestsRobolectric:testDebug :ComponentTestsRobolectric:testDebug :AndroidSample:connectedAndroidTest

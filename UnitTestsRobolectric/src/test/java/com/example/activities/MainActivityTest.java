@@ -1,16 +1,13 @@
 package com.example.activities;
 
-import com.example.activities.MainActivity;
+import com.example.test.support.UnitTestSpecification;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 
-@RunWith(RobolectricTestRunner.class)
-public class MainActivityTest {
+public class MainActivityTest extends UnitTestSpecification {
 
     @InjectMocks
     private MainActivity activity = new MainActivity();

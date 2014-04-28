@@ -3,7 +3,7 @@ apply plugin: 'android-test'
 apply plugin: "sonar-runner"
 
 android {
-    projectUnderTest ':android-sample'
+    projectUnderTest ':AndroidSample'
 }
 
 dependencies {

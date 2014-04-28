@@ -1,2 +1,2 @@
-include ':android-sample', 'GenerateDatabaseContent'
-include ':robolectric'
+include ':GenerateDatabaseContent',
+        ':AndroidSample', 'ComponentTestsRobolectric', 'UnitTestsRobolectric'
