@@ -6,11 +6,11 @@ Should show some common ui examples and how to test them.
 
 clone, import in idea, start developing.
 
-**unit tests:** gradlew :robolectric:testDebug
+**unit tests:** gradlew :UnitTestsRobolectric:testDebug
 
-**component tests:** gradlew :robolectric:testDebug
+**component tests:** gradlew :ComponentTestsRobolectric:testDebug
 
-**acceptance tests:** gradlew :android-sample:connectedAndroidTest
+**acceptance tests:** gradlew :AndroidSample:connectedAndroidTest
 
 ## Test variants
 
