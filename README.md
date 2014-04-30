@@ -1,4 +1,4 @@
-***Wishes, improvements and discussions about the stuff here are welcome***
+***Wishes, improvements and discussions about the stuff here are welcome*** [![Build Status](https://travis-ci.org/nenick/android-gradle-template.svg?branch=master)](https://travis-ci.org/nenick/android-gradle-template)
 
 # Template for android app development
 Template show different ways for testing.
