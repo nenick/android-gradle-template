@@ -1,5 +1,5 @@
 language: java
-    before_install:
+before_install:
     - wget http://dl.google.com/android/android-sdk_r22.3-linux.tgz
     - tar xzf android-sdk_r22.3-linux.tgz
     - export ANDROID_HOME=$PWD/android-sdk-linux
