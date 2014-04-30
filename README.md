@@ -1,3 +1,5 @@
+***Wishes, improvements and discussions about the stuff here are welcome***
+
 # Template for android app development
 Template show different ways for testing.
 Should show some common ui examples and how to test them.
@@ -80,6 +82,7 @@ now you can run unit test like you know it
 * how to use yml for sdk setup
 * all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
 * test server communication with wire mock (for component test and ui tests)
+* generate database content at same time like android annotations
 
 ## Scripts
 
