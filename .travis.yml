@@ -1,4 +1,4 @@
-language: android
+language: java
 jdk: oraclejdk7
 
 env:
