@@ -52,3 +52,13 @@ jacocoTestReport {
             new File('../AndroidSample/build/source/r/debug'))
     executionData = files('build/jacoco/testDebug.exec')
 }
+
+
+sourceSets {
+    coveralls.allSource = [
+            '../AndroidSample/src/main/java',
+            '../AndroidSample/src/gen',
+            '../AndroidSample/build/source/apt/debug',
+            '../AndroidSample/build/source/buildConfig/debug',
+            '../AndroidSample/build/source/r/debug']
+}
