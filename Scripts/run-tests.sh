@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ./gradlew :UnitTestsRobolectric:testDebug \
+          :UnitTestsRobolectric:jacocoTestReport \
           :ComponentTestsRobolectric:testDebug \
           :AndroidSample:connectedAndroidTest
 
