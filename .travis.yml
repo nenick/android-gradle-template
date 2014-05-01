@@ -23,4 +23,4 @@ install:
   - true
 
 script:
-  ./Scripts/run-tests-travis.sh
+  - TERM=dumb ./Scripts/run-tests-travis.sh

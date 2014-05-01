@@ -10,6 +10,8 @@ ls UnitTestsRobolectric/build/reports/jacoco/test/
 
 cp UnitTestsRobolectric/build/jacoco/testDebug.exec UnitTestsRobolectric/build/reports/jacoco/test/.
 mkdir -p UnitTestsRobolectric/src/main
-cp -r AndroidSample/src/main UnitTestsRobolectric/src/main
+cp -r AndroidSample/src/main/java/* UnitTestsRobolectric/
+
+
 
 ./gradlew :UnitTestsRobolectric:coveralls -d
