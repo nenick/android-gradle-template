@@ -1,12 +1,18 @@
-language: java
+language: android
 jdk: oraclejdk7
-before_install:
-    - wget http://dl.google.com/android/android-sdk_r22.3-linux.tgz
-    - tar xzf android-sdk_r22.3-linux.tgz
-    - export ANDROID_HOME=$PWD/android-sdk-linux
-    - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-    - echo y | android update sdk --filter platform-tools,android-19,addon-google_apis-google-18,extra-android-m2repository --no-ui --force
-install:
-  - true
-script:
-  - TERM=dumb ./gradlew assembleDebug :UnitTestsRobolectric:testDebug :ComponentTestsRobolectric:testDebug
+env:
+  matrix:
+    - ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
+
+android:
+  components:
+    - build-tools-19.0.3
+
+before_script:
+  # Create and start emulator
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - adb wait-for-device
+  - adb shell input keyevent 82 &
+
+script: ./Scripts/run-tests.sh
