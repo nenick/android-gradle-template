@@ -1,7 +1,7 @@
 #!/bin/bash
 
-./gradlew :UnitTestsRobolectric:testDebug \
-          :UnitTestsRobolectric:jacocoTestReport
+./gradlew :UnitTestsRobolectric:clean :UnitTestsRobolectric:testDebug :UnitTestsRobolectric:jacocoTestReport -i
+
 
 pwd
 ls UnitTestsRobolectric/build/reports/
