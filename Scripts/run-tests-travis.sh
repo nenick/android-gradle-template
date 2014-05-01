@@ -2,19 +2,14 @@
 
 ./gradlew :UnitTestsRobolectric:clean :UnitTestsRobolectric:testDebug :UnitTestsRobolectric:jacocoTestReport
 
+# provide a source files for coveralls-gradle-plugin
+# necessary to report code coverage to coveralls
 
-pwd
-ls UnitTestsRobolectric/build/reports/
-ls UnitTestsRobolectric/build/reports/jacoco/
-ls UnitTestsRobolectric/build/reports/jacoco/test/
-
-cp UnitTestsRobolectric/build/jacoco/testDebug.exec UnitTestsRobolectric/build/reports/jacoco/test/.
-mkdir -p UnitTestsRobolectric/src/main
 mkdir -p UnitTestsRobolectric/src/main/java
 cp -r AndroidSample/src/main/java/* UnitTestsRobolectric/src/main/java
-ls UnitTestsRobolectric/src/main/java
-ls UnitTestsRobolectric/src/main/java/com/example
+cp -r AndroidSample/src/gen/* UnitTestsRobolectric/src/main/java
+cp -r AndroidSample/build/source/apt/debug/* UnitTestsRobolectric/src/main/java
+cp -r AndroidSample/build/source/buildConfig/debug/* UnitTestsRobolectric/src/main/java
+cp -r AndroidSample/build/source/r/debug/* UnitTestsRobolectric/src/main/java
 
-
-
-./gradlew :UnitTestsRobolectric:coveralls -i
+./gradlew :UnitTestsRobolectric:coveralls
