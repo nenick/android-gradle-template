@@ -9,7 +9,9 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 clone, import to android studio, start development.
 
-**unit tests:** gradlew :UnitTestsRobolectric:testDebug (append :UnitTestsRobolectric:jacocoTestReport for coverage)
+**unit tests:** gradlew :UnitTestsRobolectric:testDebug
+
+* append :UnitTestsRobolectric:jacocoTestReport for coverage
 
 **component tests:** gradlew :ComponentTestsRobolectric:testDebug
 
