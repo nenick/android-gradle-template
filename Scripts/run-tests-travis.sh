@@ -4,4 +4,4 @@
           :ComponentTestsRobolectric:testDebug \
           :AndroidSample:connectedAndroidTest \
           :UnitTestsRobolectric:jacocoTestReport
-./gradlew :UnitTestsRobolectric:coveralls -debug
+./gradlew :UnitTestsRobolectric:coveralls -d
