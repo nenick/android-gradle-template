@@ -59,3 +59,13 @@ configure(subprojects) { subProject ->
     }
 }
 
+apply plugin: 'java'
+apply plugin: 'build-dashboard'
+
+buildDashboard {
+    reports {
+        html {
+            destination "build/"
+        }
+    }
+}

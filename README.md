@@ -41,6 +41,7 @@ on one or all your device variants.
 
 ## Test results
 
+* build/index.html (**all test reports collected**)
 * UnitTestsRobolectric/build/reports/jacoco/test/html/index.html (**unit test**)
 * UnitTestsRobolectric/build/test-report/debug/index.html (**unit test coverage**)
 * ComponentTestsRobolectric/build/test-report/debug/index.html (**component test**)
