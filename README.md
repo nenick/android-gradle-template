@@ -1,5 +1,5 @@
-# Rapid start android development and test
-with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP
+# Rapid start development and test
+with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP, JaCoCo
 
 [![Build Status](https://travis-ci.org/nenick/android-gradle-template.svg?branch=master)](https://travis-ci.org/nenick/android-gradle-template)
 
@@ -9,7 +9,7 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP
 
 clone, import to android studio, start development.
 
-**unit tests:** gradlew :UnitTestsRobolectric:testDebug
+**unit tests:** gradlew :UnitTestsRobolectric:testDebug (append :UnitTestsRobolectric:jacocoTestReport for coverage)
 
 **component tests:** gradlew :ComponentTestsRobolectric:testDebug
 
@@ -37,6 +37,13 @@ coding guides and not from the robolectric programmer.
 Instrument your app with espresso to show that your app may handle the basic work flows correctly
 on one or all your device variants.
 
+## Test results
+
+* UnitTestsRobolectric/build/reports/jacoco/test/html/index.html (**unit test**)
+* UnitTestsRobolectric/build/test-report/debug/index.html (**unit test coverage**)
+* ComponentTestsRobolectric/build/test-report/debug/index.html (**component test**)
+* AndroidSample/build/reports/androidTests/connected/index.html (**acceptance tests**)
+
 ## Idea Support
 
 **unit tests** choose test and use "junit" as runner config
@@ -61,10 +68,11 @@ now you can run unit test like you know it
 * unit tests
     * inside jvm
     * mockito
-    * coverage on teamcity
+    * coverage with jacoco
+    * coverage with teamcity tools
 * component tests
     * inside jvm
-    * coverage on teamcity
+    * coverage with teamcity tools
 * android fest assertions
 * ui testing with espresso
 * generate dependency injection with [AndroidAnnotations](http://androidannotations.org/)
@@ -74,17 +82,16 @@ now you can run unit test like you know it
 
 ## Features wish
 
-* unit test coverage on console
 * component test coverage on console
-* component test in own module
 * ui test coverage
-* ui test screen shots with spoon, include dialog
-* android annotation
+* ui test screen shots with spoon, include dialogs
 * split unit and com.example.component test run on cmd line
-* how to use yml for sdk setup
 * all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
 * test server communication with wire mock (for component test and ui tests)
 * generate database content at same time like android annotations
+* Travis CI code coverage to Coveralls
+* Sonar for code statistics
+* RoboCoP + SQLiteCipher
 
 ## Scripts
 
@@ -116,11 +123,4 @@ AndroidSample
 
 [deckard-gradle](https://github.com/robolectric/deckard-gradle)
 
-## Why I don't use the linked projects?
-
-I like having the possibility to run robolectric in a separated module, details read test variants.
-
-deckard-gradle has a disadvantage in compile time. Dependencies for robolectric also compiled for
-espresso tests which results in long compile times because of dex incompatible libraries.
-
-Quality-Tools-for-Android contains to much mix up of maven/gradle.
+[android-tdd-playground](https://github.com/pestrada/android-tdd-playground)

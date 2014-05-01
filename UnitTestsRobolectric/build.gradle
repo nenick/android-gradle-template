@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'android-test'
 apply plugin: "sonar-runner"
+apply plugin: "jacoco"
 
 android {
     projectUnderTest ':AndroidSample'
@@ -30,4 +31,18 @@ dependencies {
         exclude module: 'wagon-http-shared'
         exclude module: 'wagon-provider-api'
     }
+}
+
+jacoco {
+    toolVersion = "0.7.0.201403182114"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+    classDirectories = fileTree(dir: '../AndroidSample/build/classes/debug', include: 'com/example/**')
+    sourceDirectories = fileTree(dir: '../AndroidSample/src/main/java', include: 'com/example/**')
+    executionData = files('build/jacoco/testDebug.exec')
 }
