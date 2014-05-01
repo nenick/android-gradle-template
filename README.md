@@ -1,5 +1,5 @@
-# Rapid start with app development and testing (TDD is possible)
-With Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP
+# Rapid start android development and test
+with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP
 
 [![Build Status](https://travis-ci.org/nenick/android-gradle-template.svg?branch=master)](https://travis-ci.org/nenick/android-gradle-template)
 
