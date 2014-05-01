@@ -20,7 +20,4 @@ install:
   - true
 
 script:
-  ./Scripts/run-tests.sh
-
-after_success:
-- gradle :UnitTestsRobolectric:jacocoTestReport :UnitTestsRobolectric:coveralls
+  ./Scripts/run-tests-travis.sh
