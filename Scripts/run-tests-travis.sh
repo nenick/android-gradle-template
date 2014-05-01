@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./gradlew :UnitTestsRobolectric:clean :UnitTestsRobolectric:testDebug :UnitTestsRobolectric:jacocoTestReport -i
+./gradlew :UnitTestsRobolectric:clean :UnitTestsRobolectric:testDebug :UnitTestsRobolectric:jacocoTestReport
 
 
 pwd
@@ -10,8 +10,11 @@ ls UnitTestsRobolectric/build/reports/jacoco/test/
 
 cp UnitTestsRobolectric/build/jacoco/testDebug.exec UnitTestsRobolectric/build/reports/jacoco/test/.
 mkdir -p UnitTestsRobolectric/src/main
-cp -r AndroidSample/src/main/java/* UnitTestsRobolectric/
+mkdir -p UnitTestsRobolectric/src/main/java
+cp -r AndroidSample/src/main/java/* UnitTestsRobolectric/src/main/java
+ls UnitTestsRobolectric/src/main/java
+ls UnitTestsRobolectric/src/main/java/com/example
 
 
 
-./gradlew :UnitTestsRobolectric:coveralls -d
+./gradlew :UnitTestsRobolectric:coveralls -i
