@@ -1,12 +1,13 @@
-***Wishes, improvements and discussions about the stuff here are welcome*** [![Build Status](https://travis-ci.org/nenick/android-gradle-template.svg?branch=master)](https://travis-ci.org/nenick/android-gradle-template)
+# Rapid start with app development and testing (TDD is possible)
+With Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP
 
-# Template for android app development
-Template show different ways for testing.
-Should show some common ui examples and how to test them.
+[![Build Status](https://travis-ci.org/nenick/android-gradle-template.svg?branch=master)](https://travis-ci.org/nenick/android-gradle-template)
+
+***Wishes, improvements and discussions about the stuff here are welcome***
 
 ## Getting Started
 
-clone, import in idea, start developing.
+clone, import to android studio, start development.
 
 **unit tests:** gradlew :UnitTestsRobolectric:testDebug
 
@@ -67,8 +68,9 @@ now you can run unit test like you know it
 * android fest assertions
 * ui testing with espresso
 * generate dependency injection with [AndroidAnnotations](http://androidannotations.org/)
-* generate database management with [RoboCop](https://github.com/mediarain/RoboCoP)
+* generate database management with [RoboCoP](https://github.com/mediarain/RoboCoP)
 * jump between test and implementation with default short cut
+* Travis CI runs all test variants
 
 ## Features wish
 
