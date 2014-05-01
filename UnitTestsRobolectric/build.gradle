@@ -43,6 +43,9 @@ jacocoTestReport {
         html.enabled = true
     }
     classDirectories = fileTree(dir: '../AndroidSample/build/classes/debug', include: 'com/example/**')
-    sourceDirectories = fileTree(dir: '../AndroidSample/src/main/java', include: 'com/example/**')
+    additionalSourceDirs = files(
+            new File('../AndroidSample/src/main/java'),
+            new File('../AndroidSample/src/gen'),
+            new File('../AndroidSample/build/source/apt/debug'))
     executionData = files('build/jacoco/testDebug.exec')
 }
