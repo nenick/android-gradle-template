@@ -79,7 +79,8 @@ now you can run unit test like you know it
 * [AndroidAnnotations](http://androidannotations.org/) generate dependency injection
 * [RoboCoP](https://github.com/mediarain/RoboCoP) generate database management
 * Shortcut: jump between test and implementation with default short cut
-* Travis CI runs all test variants
+* [Travis](https://travis-ci.org/) CI runs all test variants
+* [Coveralls](https://coveralls.io/) shows unit test code coverage [coveralls-gradle-plugin](https://github.com/kt3k/coveralls-gradle-plugin)
 
 ## Features wish
 
