@@ -1,7 +1,7 @@
 # Rapid start development and test
 with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP, JaCoCo
 
-[![Build Status](https://travis-ci.org/nenick/android-gradle-template.svg?branch=master)](https://travis-ci.org/nenick/android-gradle-template)
+[![Build Status](https://travis-ci.org/nenick/android-gradle-template.svg?branch=master)](https://travis-ci.org/nenick/android-gradle-template) [![Coverage Status](https://coveralls.io/repos/nenick/android-gradle-template/badge.png)](https://coveralls.io/r/nenick/android-gradle-template)
 
 ***Wishes, improvements and discussions about the stuff here are welcome***
 
@@ -66,20 +66,18 @@ now you can run unit test like you know it
 
 ## Features done
 
-* work with idea / android studio
-* unit tests
-    * inside jvm
-    * mockito
-    * coverage with jacoco
-    * coverage with teamcity tools
-* component tests
-    * inside jvm
-    * coverage with teamcity tools
-* android fest assertions
-* ui testing with espresso
-* generate dependency injection with [AndroidAnnotations](http://androidannotations.org/)
-* generate database management with [RoboCoP](https://github.com/mediarain/RoboCoP)
-* jump between test and implementation with default short cut
+* Gradle + AndroidStudio as development Enironment
+* Robolectric for unit tests
+    * Mockito
+    * Code coverage with JaCoCo
+    * Code coverage with Teamcity
+* Robolectric for component tests
+    * Code coverage with Teamcity
+* FEST Android assertions
+* Espresso for acceptance tests
+* [AndroidAnnotations](http://androidannotations.org/) generate dependency injection
+* [RoboCoP](https://github.com/mediarain/RoboCoP) generate database management
+* Shortcut: jump between test and implementation with default short cut
 * Travis CI runs all test variants
 
 ## Features wish
@@ -87,13 +85,13 @@ now you can run unit test like you know it
 * component test coverage on console
 * ui test coverage
 * ui test screen shots with spoon, include dialogs
-* split unit and com.example.component test run on cmd line
 * all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
 * test server communication with wire mock (for component test and ui tests)
 * generate database content at same time like android annotations
 * Travis CI code coverage to Coveralls
 * Sonar for code statistics
 * RoboCoP + SQLiteCipher
+
 
 ## Scripts
 
