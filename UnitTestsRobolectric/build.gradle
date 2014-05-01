@@ -53,12 +53,13 @@ jacocoTestReport {
     executionData = files('build/jacoco/testDebug.exec')
 }
 
+compileJava.enabled = false
 
-sourceSets {
-    coveralls.allSource = [
-            '../AndroidSample/src/main/java',
-            '../AndroidSample/src/gen',
-            '../AndroidSample/build/source/apt/debug',
-            '../AndroidSample/build/source/buildConfig/debug',
-            '../AndroidSample/build/source/r/debug']
+coveralls {
+    sourceSets.main.java.srcDirs += [
+                        '../AndroidSample/src/main/java',
+                        '../AndroidSample/src/gen',
+                        '../AndroidSample/build/source/apt/debug',
+                        '../AndroidSample/build/source/buildConfig/debug',
+                        '../AndroidSample/build/source/r/debug']
 }
