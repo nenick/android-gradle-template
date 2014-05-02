@@ -49,23 +49,11 @@ on one or all your device variants.
 * ComponentTestsRobolectric/build/test-report/debug/index.html (**component test**)
 * AndroidSample/build/reports/androidTests/connected/index.html (**acceptance tests**)
 
-## Idea Support
+## IDE Support
 
-**unit tests** choose test and use "junit" as runner config
+This project template is developed with AndroidStudio and will only support the newest versions.
 
-**component tests** choose test and use "junit" as runner config
-
-***initial and after each dependency change you need to recreate custom classpath***
-
-1. run random unit test
-2. copy shown classpath on console output
-3. modify classpath
-    1. junit 4 path must be moved as first in classpath
-    2. append test-classes path at end of classpath
-4. use modified classpath in your default junit run configuration
-now you can run unit test like you know it
-
-**ui tests** choose test and use "android test" as runner config
+Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
 
 ## Features done
 
