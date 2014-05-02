@@ -3,6 +3,7 @@ apply plugin: 'android-test'
 apply plugin: "sonar-runner"
 apply plugin: "jacoco"
 apply plugin: 'coveralls'
+apply plugin: 'idea'
 
 android {
     projectUnderTest ':AndroidSample'
@@ -38,28 +39,29 @@ jacoco {
     toolVersion = "0.7.0.201403182114"
 }
 
+def coverageSourceDirs = [
+        '../AndroidSample/src/main/java',
+        '../AndroidSample/src/gen',
+        '../AndroidSample/build/source/apt/debug',
+        '../AndroidSample/build/source/buildConfig/debug',
+        '../AndroidSample/build/source/r/debug']
+
 jacocoTestReport {
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
         html.enabled = true
     }
     classDirectories = fileTree(dir: '../AndroidSample/build/classes/debug', include: 'com/example/**')
-    additionalSourceDirs = files(
-            new File('../AndroidSample/src/main/java'),
-            new File('../AndroidSample/src/gen'),
-            new File('../AndroidSample/build/source/apt/debug'),
-            new File('../AndroidSample/build/source/buildConfig/debug'),
-            new File('../AndroidSample/build/source/r/debug'))
+    additionalSourceDirs = files(coverageSourceDirs)
     executionData = files('build/jacoco/testDebug.exec')
 }
 
-compileJava.enabled = false
-
-/*coveralls {
-    sourceSets.main.java.srcDirs += [
-                        '../AndroidSample/src/main/java',
-                        '../AndroidSample/src/gen',
-                        '../AndroidSample/build/source/apt/debug',
-                        '../AndroidSample/build/source/buildConfig/debug',
-                        '../AndroidSample/build/source/r/debug']
-}*/
+// Send code coverage report to coveralls with coveralls-gradle-plugin. To get the plugin working
+// we need to include the coverageSourceDirs as main sources. But this conflicts with android
+// studio and also with jacocoTestReport task.
+compileJava.enabled = false // avoid jacocoTestReport task conflicts
+coveralls {
+    if(hasProperty('travis-ci')) { // avoid android studio source root conflicts
+        sourceSets.main.java.srcDirs += coverageSourceDirs
+    }
+}

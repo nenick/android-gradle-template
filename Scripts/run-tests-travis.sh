@@ -4,4 +4,5 @@
           :ComponentTestsRobolectric:testDebug \
           :AndroidSample:connectedAndroidTest \
           :UnitTestsRobolectric:jacocoTestReport \
-          :UnitTestsRobolectric:coveralls
+          :UnitTestsRobolectric:coveralls \
+          -Ptravis-ci
