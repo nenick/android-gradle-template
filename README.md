@@ -96,6 +96,14 @@ now you can run unit test like you know it
 * Sonar for code statistics
 * RoboCoP + SQLiteCipher
 
+## Milestones
+
+1. (done) working setup android studio + gradle + espresso + robolectric
+2. (done) extended app sample with database access
+3. (done) test automation with code coverage
+4. (progress) decent test coverage with unit, component and acceptance tests
+* (plan) http calls with android annotations + wiremock
+* (plan) )...
 
 ## Scripts
 
