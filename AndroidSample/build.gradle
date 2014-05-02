@@ -6,7 +6,9 @@ android {
         exclude 'LICENSE.txt'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
         exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
     }
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
@@ -18,6 +20,7 @@ android {
     buildTypes {
         release {
             runProguard true
+            proguardFile 'proguard-project.txt'
         }
         debug {
             runProguard false
@@ -54,6 +57,11 @@ dependencies {
 
     compile 'com.android.support:support-v4:19.0.+',
             'de.greenrobot:greendao:1.3.+'
+
+    compile("org.springframework.android:spring-android-auth:1.0.1.RELEASE") { exclude module: '*' }
+    compile("org.springframework.android:spring-android-core:1.0.1.RELEASE") { exclude module: '*' }
+    compile("org.springframework.android:spring-android-rest-template:1.0.1.RELEASE") { exclude module: '*' }
+
 
     apt "org.androidannotations:androidannotations:$ext.androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$ext.androidAnnotationsAPIVersion"
