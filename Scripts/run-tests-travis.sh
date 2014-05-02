@@ -5,4 +5,4 @@
           :AndroidSample:connectedAndroidTest \
           :UnitTestsRobolectric:jacocoTestReport \
           :UnitTestsRobolectric:coveralls \
-          -Ptravis-ci
+          -Ptravis-ci -PdisablePreDex

@@ -1,3 +1,5 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 configure(allprojects) { project ->
     buildscript {
         repositories {
@@ -8,36 +10,9 @@ configure(allprojects) { project ->
     }
 }
 
-project('AndroidSample') {
-    buildscript {
-        dependencies {
-            classpath 'com.android.tools.build:gradle:0.9.+'
-            classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
-        }
-    }
-}
+project.ext.preDexLibs = !project.hasProperty('disablePreDex')
 
-project('UnitTestsRobolectric') {
-    buildscript {
-        dependencies {
-            classpath 'com.android.tools.build:gradle:0.9.+'
-            classpath "com.novoda:gradle-android-test-plugin:0.9.8-SNAPSHOT"
-            classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.4.0'
-        }
-    }
-}
-
-project('ComponentTestsRobolectric') {
-    buildscript {
-        dependencies {
-            classpath 'com.android.tools.build:gradle:0.9.+'
-            classpath "com.novoda:gradle-android-test-plugin:0.9.8-SNAPSHOT"
-        }
-    }
-}
-
-configure(allprojects) { project ->
-    print project
+subprojects {
     group = 'com.example'
 
     ext.androidBuildToolsVersion    = '19.0.3';
@@ -47,25 +22,28 @@ configure(allprojects) { project ->
 
     ext.androidAnnotationsVersion = '3.0.1';
     ext.androidAnnotationsAPIVersion = '3.0.1';
-}
 
-configure(subprojects) { subProject ->
-    print subProject
     repositories {
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url "file://${System.getenv("ANDROID_HOME")}/extras/android/m2repository" }
         mavenLocal()
     }
+
+    // Improve build server performance by allowing disabling of pre-dexing
+    // (see http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance.)
+    project.plugins.whenPluginAdded { plugin ->
+        if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
+            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
+            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        }
+    }
 }
 
-apply plugin: 'java'
+apply plugin: 'java' // ensure clean is also triggered for root build folder
 apply plugin: 'build-dashboard'
 
 buildDashboard {
-    reports {
-        html {
-            destination "build/"
-        }
-    }
+    reports.html.destination = "build/"
 }

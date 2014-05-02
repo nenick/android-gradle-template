@@ -1,3 +1,10 @@
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath "com.novoda:gradle-android-test-plugin:0.9.8-SNAPSHOT"
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'android-test'
 apply plugin: "sonar-runner"
