@@ -4,10 +4,10 @@ import android.os.Bundle;
 
 import com.example.adapters.AgendaAdapter;
 import com.example.adapters.AgendaLoader;
-import com.example.database.table.AgendaTable;
+import com.example.managers.AgendaManager;
 import com.example.model.Agenda;
-import com.example.provider.AgendaProvider;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
@@ -19,6 +19,9 @@ public class MainPresenter {
 
     @RootContext
     MainActivity view;
+
+    @Bean
+    AgendaManager agendaManager;
 
     AgendaAdapter mAdapter;
 
@@ -39,11 +42,11 @@ public class MainPresenter {
         agenda.setName(inputAgenda);
         agenda.setDate(comment);
 
-        view.getContentResolver().insert(AgendaProvider.AGENDA_CONTENT_URI, agenda.getContentValues());
+        agendaManager.insert(agenda);
     }
 
     public void onDeleteAenda() {
         long itemId = mAdapter.getItemId(0);
-        view.getContentResolver().delete(AgendaProvider.AGENDA_CONTENT_URI, AgendaTable._ID + " = ?", new String[]{String.valueOf(itemId)});
+        agendaManager.deleteById(itemId);
     }
 }

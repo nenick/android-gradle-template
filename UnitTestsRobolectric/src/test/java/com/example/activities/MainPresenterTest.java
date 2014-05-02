@@ -1,14 +1,12 @@
 package com.example.activities;
 
 import android.app.LoaderManager;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.os.Bundle;
 
 import com.example.adapters.AgendaAdapter;
 import com.example.adapters.AgendaLoader;
-import com.example.database.table.AgendaTable;
-import com.example.provider.AgendaProvider;
+import com.example.managers.AgendaManager;
+import com.example.model.Agenda;
 import com.example.test.support.UnitTestSpecification;
 
 import org.junit.Before;
@@ -39,18 +37,17 @@ public class MainPresenterTest extends UnitTestSpecification {
     AgendaAdapter agendaAdapter;
 
     @Mock
-    ContentResolver contentResolver;
+    AgendaManager agendaManager;
 
     @InjectMocks
     MainPresenter presenter;
 
-    ArgumentCaptor<ContentValues> contentValueCaptor = ArgumentCaptor.forClass(ContentValues.class);
+    ArgumentCaptor<Agenda> agendaCaptor = ArgumentCaptor.forClass(Agenda.class);
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(view.getLoaderManager()).thenReturn(loaderManager);
-        when(view.getContentResolver()).thenReturn(contentResolver);
     }
 
     @Test
@@ -65,16 +62,16 @@ public class MainPresenterTest extends UnitTestSpecification {
         when(view.getInputAgenda()).thenReturn(TEST_AGENDA);
         presenter.onAddAgenda();
         verify(view).resetInputFields();
-        verify(contentResolver).insert(eq(AgendaProvider.AGENDA_CONTENT_URI), contentValueCaptor.capture());
-        ContentValues contentValues = contentValueCaptor.getValue();
-        assertThat(contentValues.getAsString(AgendaTable.NAME)).isEqualTo(TEST_AGENDA);
-        assertThat(contentValues.getAsString(AgendaTable.DATE)).matches("Added on .+");
+        verify(agendaManager).insert(agendaCaptor.capture());
+        Agenda agenda = agendaCaptor.getValue();
+        assertThat(agenda.getName()).isEqualTo(TEST_AGENDA);
+        assertThat(agenda.getDate()).matches("Added on .+");
     }
 
     @Test
     public void test_onDeleteAgenda() throws Exception {
         when(agendaAdapter.getItemId(0)).thenReturn(TEST_ITEM_ID);
         presenter.onDeleteAenda();
-        verify(contentResolver).delete(AgendaProvider.AGENDA_CONTENT_URI, AgendaTable._ID + " = ?", new String[]{String.valueOf(TEST_ITEM_ID)});
+        verify(agendaManager).deleteById(TEST_ITEM_ID);
     }
 }

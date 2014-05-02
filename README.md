@@ -105,6 +105,7 @@ AndroidSample
     * **activities** activity classes
     * **adapters** data adapters with cursor loader
     * **fragments** fragment classes
+    * **managers** wraps content provider usage
     * **receivers**
     * **services**
     * **viewmodel** model classes for your views
