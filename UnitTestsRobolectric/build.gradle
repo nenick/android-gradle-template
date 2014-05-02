@@ -69,7 +69,7 @@ jacocoTestReport {
 // studio and also with jacocoTestReport task.
 compileJava.enabled = false // avoid jacocoTestReport task conflicts
 coveralls {
-    if(hasProperty('travis-ci')) { // avoid android studio source root conflicts
+    if(project.hasProperty('travisCi')) { // avoid android studio source root conflicts
         sourceSets.main.java.srcDirs += coverageSourceDirs
     }
 }
