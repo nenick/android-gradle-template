@@ -55,11 +55,11 @@ jacocoTestReport {
 
 compileJava.enabled = false
 
-coveralls {
+/*coveralls {
     sourceSets.main.java.srcDirs += [
                         '../AndroidSample/src/main/java',
                         '../AndroidSample/src/gen',
                         '../AndroidSample/build/source/apt/debug',
                         '../AndroidSample/build/source/buildConfig/debug',
                         '../AndroidSample/build/source/r/debug']
-}
+}*/
