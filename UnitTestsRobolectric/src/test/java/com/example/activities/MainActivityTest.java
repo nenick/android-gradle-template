@@ -24,7 +24,6 @@ public class MainActivityTest extends UnitTestSpecification {
     @Mock
     MainPresenter presenter;
 
-    @InjectMocks
     private MainActivity_ view = Robolectric.buildActivity(MainActivity_.class).create().get();
 
     TextView input;
@@ -34,6 +33,7 @@ public class MainActivityTest extends UnitTestSpecification {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        view.presenter = presenter;
         add = (Button) view.findViewById(R.id.add);
         input = (TextView) view.findViewById(R.id.editTextNote);
         delete = (Button) view.findViewById(R.id.delete);
