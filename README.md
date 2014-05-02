@@ -5,6 +5,8 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 ***Wishes, improvements and discussions about the stuff here are welcome***
 
+[see also wiki for more help](https://github.com/nenick/android-gradle-template/wiki)
+
 ## Getting Started
 
 clone, import to android studio, start development.
