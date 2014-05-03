@@ -23,6 +23,8 @@ For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-
 
 **component tests:** gradlew :ComponentTestsRobolectric:testDebug
 
+* append :ComponentTestsRobolectric:jacocoTestReport for coverage report
+
 **acceptance tests:** gradlew :AndroidSample:connectedAndroidTest
 
 * replace by :AndroidSample:connectedCheck for coverage report
@@ -50,9 +52,10 @@ on one or all your device variants.
 ## Test results
 
 * build/index.html (**should collect all reports, current is miss the AndroidSample module reports **)
-* UnitTestsRobolectric/build/reports/jacoco/test/html/index.html (**unit test**)
-* UnitTestsRobolectric/build/test-report/debug/index.html (**unit test coverage**)
+* UnitTestsRobolectric/build/test-report/debug/index.html (**unit test**)
+* UnitTestsRobolectric/build/reports/jacoco/test/html/index.html (**unit test coverage**)
 * ComponentTestsRobolectric/build/test-report/debug/index.html (**component test**)
+* ComponentTestsRobolectric/build/reports/jacoco/test/html/index.html (**component test coverage**)
 * AndroidSample/build/reports/androidTests/connected/index.html (**acceptance tests**)
 * AndroidSample/build/reports/coverage/debug/index.html (**acceptance tests coverage**)
 
@@ -70,6 +73,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
     * Code coverage with JaCoCo
     * Code coverage with Teamcity
 * Robolectric for component tests
+    * Code coverage with JaCoCo
     * Code coverage with Teamcity
 * FEST Android assertions
 * Espresso for acceptance tests
@@ -82,13 +86,11 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 ## Features wish
 
 * ui test coverage (is done when novoda test plguin is updated)
-* component test coverage on console
 * ui test screen shots with spoon, include dialogs
 * collect all test reports nicely
 * all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
 * test server communication with wire mock (for component test and ui tests)
 * generate database content at same time like android annotations
-* Travis CI code coverage to Coveralls
 * Sonar for code statistics
 * RoboCoP + SQLiteCipher
 

@@ -8,7 +8,6 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'android-test'
-apply plugin: "sonar-runner"
 apply plugin: "jacoco"
 apply plugin: 'coveralls'
 apply plugin: 'idea'
