@@ -6,10 +6,12 @@ import com.example.adapters.AgendaAdapter;
 import com.example.adapters.AgendaLoader;
 import com.example.managers.AgendaManager;
 import com.example.model.Agenda;
+import com.example.rest.EventClient;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.rest.RestService;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -19,6 +21,9 @@ public class MainPresenter {
 
     @RootContext
     MainActivity view;
+
+    @RestService
+    EventClient eventClient;
 
     @Bean
     AgendaManager agendaManager;

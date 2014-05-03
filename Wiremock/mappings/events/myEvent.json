@@ -1,0 +1,25 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/events/myEvent"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "/events/myEvent-get.json",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    }
+},
+{
+    "request": {
+        "method": "DELETE",
+        "url": "/events/myEvent"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    }
+}

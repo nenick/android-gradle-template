@@ -13,7 +13,7 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-test-plugin.sh
 
-***clone, attach phone (or start emulator), run Scripts/run-tests.sh in project root***
+***clone, attach phone (or start emulator), run Scripts/run-tests.sh from project root***
 
 ***import to android studio, start development***
 
@@ -83,7 +83,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * [Travis](https://travis-ci.org/) CI runs all test variants
 * [Coveralls](https://coveralls.io/) shows unit test code coverage [coveralls-gradle-plugin](https://github.com/kt3k/coveralls-gradle-plugin)
 
-## Features wish
+## Features wish (or just ideas)
 
 * ui test coverage (is done when novoda test plguin is updated)
 * ui test screen shots with spoon, include dialogs
@@ -94,8 +94,11 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * json mapping object generated with [jsonschema2pojo](https://github.com/joelittlejohn/jsonschema2pojo)
 * test server communication with wire mock (for component test and ui tests)
 * generate database content at same time like android annotations
+* in application communication events with [Otto](http://square.github.io/otto/)
+* package-by-feature instead of package-by-layer
 * Sonar for code statistics
 * RoboCoP + SQLiteCipher
+* MVVM pattern with [android-binding](https://code.google.com/p/android-binding/)
 
 ## Milestones
 
@@ -104,7 +107,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 3. (done) test automation with code coverage
 4. (progress) decent test coverage with unit, component and acceptance tests
 * (plan) http calls with android annotations + wiremock
-* (plan) )...
+* (plan) ...
 
 ## Scripts
 

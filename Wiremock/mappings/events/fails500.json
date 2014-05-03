@@ -1,0 +1,24 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/events/fails500"
+    },
+    "response": {
+        "status": 500,
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    }
+},
+{
+    "request": {
+        "method": "DELETE",
+        "url": "/events/fails500"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    }
+}

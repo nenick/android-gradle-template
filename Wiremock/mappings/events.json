@@ -1,0 +1,38 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/events"
+    },
+    "response": {                                   
+        "status": 200,                          
+        "bodyFileName": "/events-get.json",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    }
+},
+{
+    "request": {
+        "method": "POST",
+        "url": "/events"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "/events-post.json",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    }
+},
+{
+    "request": {
+        "method": "PUT",
+        "url": "/events"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    }
+}
