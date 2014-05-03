@@ -13,11 +13,19 @@ clone, import to android studio, start development.
 
 **unit tests:** gradlew :UnitTestsRobolectric:testDebug
 
-* append :UnitTestsRobolectric:jacocoTestReport for coverage
+* append :UnitTestsRobolectric:jacocoTestReport for coverage report
 
 **component tests:** gradlew :ComponentTestsRobolectric:testDebug
 
 **acceptance tests:** gradlew :AndroidSample:connectedAndroidTest
+
+* replace with :AndroidSample:connectedCheck for coverage report (works only with gradle build tools 0.10.+)
+
+## codeCoverage with gradle build tools 0.10 (until novoda plugin is not updated)
+
+* remove test modules from settings.gradle
+* replace build tools 0.9.+ with 0.10.+
+* insert at build-types -> debug: testCoverageEnabled = true
 
 ## Test variants
 
@@ -74,8 +82,8 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 
 ## Features wish
 
+* ui test coverage (is done when novoda test plguin is updated)
 * component test coverage on console
-* ui test coverage
 * ui test screen shots with spoon, include dialogs
 * all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
 * test server communication with wire mock (for component test and ui tests)
