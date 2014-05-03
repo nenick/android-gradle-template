@@ -6,6 +6,10 @@ buildscript {
 }
 
 apply plugin: 'java'
+
+test.reports.html.enabled = false     // just clean up dashboard from not generated reports
+test.reports.junitXml.enabled = false // just clean up dashboard from not generated reports
+
 apply plugin: 'android-test'
 apply plugin: "jacoco"
 
@@ -59,3 +63,8 @@ jacocoTestReport {
     additionalSourceDirs = files(coverageSourceDirs)
     executionData = files('build/jacoco/testDebug.exec')
 }
+
+// just clean up dashboard, following reports are not of interest
+testRelease.reports.html.enabled = false
+testRelease.reports.junitXml.enabled = false
+testDebug.reports.junitXml.enabled = false

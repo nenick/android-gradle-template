@@ -47,3 +47,6 @@ apply plugin: 'build-dashboard'
 buildDashboard {
     reports.html.destination = "build/"
 }
+
+test.reports.html.enabled = false     // just clean up dashboard from not generated reports
+test.reports.junitXml.enabled = false // just clean up dashboard from not generated reports
