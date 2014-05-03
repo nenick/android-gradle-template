@@ -10,6 +10,7 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 ## Getting Started
 
 ***until next release of novodes test plugin, we use our own custom version***
+
 For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-test-plugin.sh
 
 clone, import to android studio, start development.
