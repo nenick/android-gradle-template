@@ -1,7 +1,7 @@
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
-        classpath "com.novoda:gradle-android-test-plugin:0.9.8-SNAPSHOT"
+        classpath 'com.android.tools.build:gradle:0.10.+'
+        classpath "com.novoda:gradle-android-test-plugin:0.9.9-SNAPSHOT"
     }
 }
 

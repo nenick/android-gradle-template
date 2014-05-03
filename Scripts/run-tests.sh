@@ -3,6 +3,6 @@
 ./gradlew :UnitTestsRobolectric:testDebug \
           :UnitTestsRobolectric:jacocoTestReport \
           :ComponentTestsRobolectric:testDebug \
-          :AndroidSample:connectedAndroidTest
+          :AndroidSample:connectedCheck
 
 echo "test reports: $(pwd)/build/index.html"

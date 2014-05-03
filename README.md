@@ -9,6 +9,9 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 ## Getting Started
 
+***until next release of novodes test plugin, we use our own custom version***
+For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-test-plugin.sh
+
 clone, import to android studio, start development.
 
 **unit tests:** gradlew :UnitTestsRobolectric:testDebug
@@ -19,13 +22,7 @@ clone, import to android studio, start development.
 
 **acceptance tests:** gradlew :AndroidSample:connectedAndroidTest
 
-* replace with :AndroidSample:connectedCheck for coverage report (works only with gradle build tools 0.10.+)
-
-## codeCoverage with gradle build tools 0.10 (until novoda plugin is not updated)
-
-* remove test modules from settings.gradle
-* replace build tools 0.9.+ with 0.10.+
-* insert at build-types -> debug: testCoverageEnabled = true
+* replace by :AndroidSample:connectedCheck for coverage report
 
 ## Test variants
 
@@ -51,11 +48,12 @@ on one or all your device variants.
 
 ## Test results
 
-* build/index.html (**all test reports collected**)
+* build/index.html (**should collect all reports, current is miss the AndroidSample module reports **)
 * UnitTestsRobolectric/build/reports/jacoco/test/html/index.html (**unit test**)
 * UnitTestsRobolectric/build/test-report/debug/index.html (**unit test coverage**)
 * ComponentTestsRobolectric/build/test-report/debug/index.html (**component test**)
 * AndroidSample/build/reports/androidTests/connected/index.html (**acceptance tests**)
+* AndroidSample/build/reports/coverage/debug/index.html (**acceptance tests coverage**)
 
 ## IDE Support
 
@@ -85,6 +83,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * ui test coverage (is done when novoda test plguin is updated)
 * component test coverage on console
 * ui test screen shots with spoon, include dialogs
+* collect all test reports nicely
 * all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
 * test server communication with wire mock (for component test and ui tests)
 * generate database content at same time like android annotations
