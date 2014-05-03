@@ -13,7 +13,7 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-test-plugin.sh
 
-clone, import to android studio, start development.
+***clone, attach phone (or start emulator), run ./Scripts/run-tests.sh in project root, import to android studio, start development***
 
 **unit tests:** gradlew :UnitTestsRobolectric:testDebug
 
@@ -28,9 +28,7 @@ clone, import to android studio, start development.
 ## Test variants
 
 **unit test**
-Test with mocks for all class dependencies. Common android methods are disabled e.g onCreate() at
-the super classes. So you may test your own onCreate() method without throwing exceptions on super
-onCreate() call.
+Test with mocks for all class dependencies.
 For testing direct database operations i don't like to mock the real database. Database is fast
 enough for unit tests and writing cursor mocks need much effort. Database tests are done here too.
 
