@@ -89,6 +89,8 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * ui test screen shots with spoon, include dialogs
 * collect all test reports nicely
 * all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
+* rest communication genrated with AndroidAnnotations
+* json mapping object generated with [jsonschema2pojo](https://github.com/joelittlejohn/jsonschema2pojo)
 * test server communication with wire mock (for component test and ui tests)
 * generate database content at same time like android annotations
 * Sonar for code statistics
