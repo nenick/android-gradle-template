@@ -13,7 +13,9 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-test-plugin.sh
 
-***clone, attach phone (or start emulator), run ./Scripts/run-tests.sh in project root, import to android studio, start development***
+***clone, attach phone (or start emulator), run Scripts/run-tests.sh in project root***
+
+***import to android studio, start development***
 
 **unit tests:** gradlew :UnitTestsRobolectric:testDebug
 
@@ -54,7 +56,7 @@ on one or all your device variants.
 * AndroidSample/build/reports/androidTests/connected/index.html (**acceptance tests**)
 * AndroidSample/build/reports/coverage/debug/index.html (**acceptance tests coverage**)
 
-## IDE Support
+## Test support in IDE
 
 This project template is developed with AndroidStudio and will only support the newest versions.
 
