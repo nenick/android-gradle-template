@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activities.DatabaseActivity_" />
+        <activity android:name=".activities.RestActivity_" />
 
         <provider
             android:name="com.example.provider.AgendaProvider"

@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 
+import static org.mockito.Mockito.verify;
+
 public class MainActivityTest extends UnitTestSpecification {
 
     @Mock
@@ -22,7 +24,14 @@ public class MainActivityTest extends UnitTestSpecification {
     }
 
     @Test
-    public void dummy() throws Exception {
+    public void shouldDelegateDatabaseButtonClick() throws Exception {
+        view.onDatabaseButton();
+        verify(presenter).onOpenDatabaseExample();
+    }
 
+    @Test
+    public void shouldDelegateRestButtonClick() throws Exception {
+        view.onRestButton();
+        verify(presenter).onOpenRestExample();
     }
 }

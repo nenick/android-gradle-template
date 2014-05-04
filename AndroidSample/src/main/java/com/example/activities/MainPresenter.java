@@ -8,4 +8,12 @@ public class MainPresenter {
 
     @RootContext
     MainActivity view;
+
+    public void onOpenDatabaseExample() {
+        DatabaseActivity_.intent(view).start();
+    }
+
+    public void onOpenRestExample() {
+        RestActivity_.intent(view).start();
+    }
 }
