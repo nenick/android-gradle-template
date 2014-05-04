@@ -121,7 +121,9 @@ AndroidSample
     * **activities** activity classes
     * **adapters** data adapters with cursor loader
     * **fragments** fragment classes
+    * **json** model classes for rest communication
     * **managers** wraps content provider usage
+    * **rest** rest communication clients
     * **receivers**
     * **services**
     * **viewmodel** model classes for your views
