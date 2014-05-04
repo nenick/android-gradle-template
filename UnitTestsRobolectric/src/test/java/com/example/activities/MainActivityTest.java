@@ -1,5 +1,8 @@
 package com.example.activities;
 
+import android.widget.Button;
+
+import com.example.R;
 import com.example.test.support.UnitTestSpecification;
 
 import org.junit.Before;
@@ -17,21 +20,26 @@ public class MainActivityTest extends UnitTestSpecification {
 
     MainActivity_ view = Robolectric.buildActivity(MainActivity_.class).create().get();
 
+    Button database;
+    Button rest;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         view.presenter = presenter;
+        database = (Button) view.findViewById(R.id.database);
+        rest = (Button) view.findViewById(R.id.rest);
     }
 
     @Test
     public void shouldDelegateDatabaseButtonClick() throws Exception {
-        view.onDatabaseButton();
+        database.performClick();
         verify(presenter).onOpenDatabaseExample();
     }
 
     @Test
     public void shouldDelegateRestButtonClick() throws Exception {
-        view.onRestButton();
+        rest.performClick();
         verify(presenter).onOpenRestExample();
     }
 }
