@@ -51,7 +51,7 @@ on one or all your device variants.
 
 ## Test results
 
-* build/index.html (**should collect all reports, current is miss the AndroidSample module reports **)
+* build/index.html *(should collect all reports, current is miss the AndroidSample module reports)*
 * UnitTestsRobolectric/build/test-report/debug/index.html (**unit test**)
 * UnitTestsRobolectric/build/reports/jacoco/test/html/index.html (**unit test coverage**)
 * ComponentTestsRobolectric/build/test-report/debug/index.html (**component test**)
@@ -97,6 +97,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * in application communication events with [Otto](http://square.github.io/otto/)
 * package-by-feature instead of package-by-layer
 * Sonar for code statistics
+* follow more best practices (use string.xml, ...)
 * RoboCoP + SQLiteCipher
 * MVVM pattern with [android-binding](https://code.google.com/p/android-binding/)
 
@@ -105,8 +106,8 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 1. (done) working setup android studio + gradle + espresso + robolectric
 2. (done) extended app sample with database access
 3. (done) test automation with code coverage
-4. (progress) decent test coverage with unit, component and acceptance tests
-* (plan) http calls with android annotations + wiremock
+4. (done) decent test coverage with unit, component and acceptance tests
+5. (progress) http calls with android annotations + wiremock
 * (plan) ...
 
 ## Scripts
