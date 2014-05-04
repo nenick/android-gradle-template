@@ -59,7 +59,8 @@ jacocoTestReport {
         xml.enabled = false
         html.enabled = true
     }
-    classDirectories = fileTree(dir: '../AndroidSample/build/classes/debug', include: 'com/example/**')
+    // class R is used, but usage will not be covered, so ignore this class from report
+    classDirectories = fileTree(dir: '../AndroidSample/build/classes/debug', exclude: 'com/example/R*.class')
     additionalSourceDirs = files(coverageSourceDirs)
     executionData = files('build/jacoco/testDebug.exec')
 }

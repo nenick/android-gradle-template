@@ -57,12 +57,14 @@ def coverageSourceDirs = [
         '../AndroidSample/build/source/buildConfig/debug',
         '../AndroidSample/build/source/r/debug']
 
+
 jacocoTestReport {
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
         html.enabled = true
     }
-    classDirectories = fileTree(dir: '../AndroidSample/build/classes/debug', include: 'com/example/**')
+    // class R is used, but usage will not be covered, so ignore this class from report
+    classDirectories = fileTree(dir: '../AndroidSample/build/classes/debug', exclude: 'com/example/R*.class')
     additionalSourceDirs = files(coverageSourceDirs)
     executionData = files('build/jacoco/testDebug.exec')
 }
