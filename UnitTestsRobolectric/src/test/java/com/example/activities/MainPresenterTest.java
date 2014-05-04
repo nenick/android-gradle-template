@@ -71,7 +71,7 @@ public class MainPresenterTest extends UnitTestSpecification {
     @Test
     public void test_onDeleteAgenda() throws Exception {
         when(agendaAdapter.getItemId(0)).thenReturn(TEST_ITEM_ID);
-        presenter.onDeleteAenda();
+        presenter.onDeleteAgenda();
         verify(agendaManager).deleteById(TEST_ITEM_ID);
     }
 }

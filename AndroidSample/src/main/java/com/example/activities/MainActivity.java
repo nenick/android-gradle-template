@@ -43,7 +43,7 @@ public class MainActivity extends ListActivity {
 
     @Click(R.id.delete)
     public void onDeleteAgenda() {
-        presenter.onDeleteAenda();
+        presenter.onDeleteAgenda();
     }
 
     @Override

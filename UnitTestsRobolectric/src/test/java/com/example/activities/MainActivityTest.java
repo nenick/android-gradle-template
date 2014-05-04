@@ -9,7 +9,6 @@ import com.example.test.support.UnitTestSpecification;
 import org.fest.assertions.api.ANDROID;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -49,7 +48,7 @@ public class MainActivityTest extends UnitTestSpecification {
     @Test
     public void test_delegateDeleteAgenda() throws Exception {
         delete.performClick();
-        verify(presenter).onDeleteAenda();
+        verify(presenter).onDeleteAgenda();
     }
 
     @Test

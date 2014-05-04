@@ -50,7 +50,7 @@ public class MainPresenter {
         agendaManager.insert(agenda);
     }
 
-    public void onDeleteAenda() {
+    public void onDeleteAgenda() {
         long itemId = mAdapter.getItemId(0);
         agendaManager.deleteById(itemId);
     }
