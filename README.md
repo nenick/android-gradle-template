@@ -68,6 +68,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 ## Features done
 
 * Gradle + AndroidStudio as development Enironment
+* Use [novoda/gradle-android-test-plugin](https://github.com/novoda/gradle-android-test-plugin) to use Robolectric in submodule
 * Robolectric for unit tests
     * Mockito
     * Code coverage with JaCoCo
@@ -108,6 +109,8 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 3. (done) test automation with code coverage
 4. (done) decent test coverage with unit, component and acceptance tests
 5. (progress) http calls with android annotations + wiremock
+* (plan) more component tests
+* (plan) more acceptance tests
 * (plan) ...
 
 ## Scripts
