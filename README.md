@@ -112,6 +112,8 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * (plan) more component tests
 * (plan) more acceptance tests
 * (plan) 3 week journey to USA west coast
+* (plan) fragment activity example with unit, component and acceptance tests
+* (plan) example what i mean with the experimental acceptance test with robolectric
 * (plan) ...
 
 ## Scripts
