@@ -111,6 +111,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 5. (progress) http calls with android annotations + wiremock
 * (plan) more component tests
 * (plan) more acceptance tests
+* (plan) 3 week journey to USA west coast
 * (plan) ...
 
 ## Scripts
