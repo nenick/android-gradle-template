@@ -101,6 +101,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * follow more best practices (use string.xml, ...)
 * RoboCoP + SQLiteCipher
 * MVVM pattern with [android-binding](https://code.google.com/p/android-binding/)
+* There are many more interesting libraries out http://www.appbrain.com/stats/libraries/dev 
 
 ## Milestones
 
