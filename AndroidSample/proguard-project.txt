@@ -8,3 +8,7 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 -dontwarn org.springframework.**
+
+# referenced by jackson-mapper (joda library is not used)
+-dontwarn org.joda.**
+-dontwarn org.w3c.dom.bootstrap.**

@@ -101,18 +101,20 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * follow more best practices (use string.xml, ...)
 * RoboCoP + SQLiteCipher
 * MVVM pattern with [android-binding](https://code.google.com/p/android-binding/)
-* There are many more interesting libraries out http://www.appbrain.com/stats/libraries/dev 
+* There are many more interesting libraries out http://www.appbrain.com/stats/libraries/dev
+
 
 ## Milestones
 
 1. (done) working setup android studio + gradle + espresso + robolectric
 2. (done) extended app sample with database access
-3. (done) test automation with code coverage
-4. (done) decent test coverage with unit, component and acceptance tests
-5. (progress) http calls with android annotations + wiremock
+* (done) test automation with code coverage
+* (done) decent test coverage with unit, component and acceptance tests
+* (progress) http calls with android annotations + wiremock + improve rest communication http://android-restful-pattern.blogspot.de/ https://github.com/posco2k8/rest_loader_tutorial
 * (plan) more component tests
 * (plan) more acceptance tests
 * (plan) 3 week journey to USA west coast
+* (plan) measure memory usage, i believe there is a memory leak
 * (plan) fragment activity example with unit, component and acceptance tests
 * (plan) example what i mean with the experimental acceptance test with robolectric
 * (plan) ...
