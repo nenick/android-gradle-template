@@ -69,3 +69,13 @@ jacocoTestReport {
 testRelease.reports.html.enabled = false
 testRelease.reports.junitXml.enabled = false
 testDebug.reports.junitXml.enabled = false
+
+apply plugin: 'idea'
+// workaround to use android studio and robolectric without build classpath effort
+// the 'outputDir' is used as reference to the resource directory, found no other way
+idea {
+    module {
+        outputDir = file('build/resources/debug')
+        testOutputDir = file('build/test-classes/debug')
+    }
+}
