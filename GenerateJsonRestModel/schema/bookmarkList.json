@@ -1,0 +1,12 @@
+{
+    "description": "Collection of bookmarks.",
+    "type": "object",
+    "properties": {
+        "bookmarks" : {
+            "type" : "array",
+            "items" : {
+                "$ref" : "bookmark.json"
+            }
+        }
+    }
+}

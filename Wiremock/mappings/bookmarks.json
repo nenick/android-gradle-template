@@ -1,11 +1,11 @@
 {
     "request": {
         "method": "GET",
-        "url": "/events"
+        "url": "/bookmarks"
     },
     "response": {                                   
         "status": 200,                          
-        "bodyFileName": "/events-get.json",
+        "bodyFileName": "/bookmarks-get.json",
         "headers": {
             "Content-Type": "application/json;charset=UTF-8"
         }
@@ -14,11 +14,11 @@
 {
     "request": {
         "method": "POST",
-        "url": "/events"
+        "url": "/bookmarks"
     },
     "response": {
         "status": 200,
-        "bodyFileName": "/events-post.json",
+        "bodyFileName": "/bookmarks-post.json",
         "headers": {
             "Content-Type": "application/json;charset=UTF-8"
         }
@@ -27,7 +27,7 @@
 {
     "request": {
         "method": "PUT",
-        "url": "/events"
+        "url": "/bookmarks"
     },
     "response": {
         "status": 200,

@@ -1,0 +1,12 @@
+{
+    "bookmarks": [
+    {
+        "id": "123456",
+        "name": "first"
+    },
+    {
+        "id": "234567",
+        "name": "second"
+    }
+    ]
+}

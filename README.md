@@ -7,6 +7,9 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 [see also wiki for more help](https://github.com/nenick/android-gradle-template/wiki)
 
+#Great news: 
+smoother integration into Android Studio, no more classpath manipulation for robolectric tests [see wiki new way to configure](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)  
+
 ## Getting Started
 
 ***until next release of novodes test plugin, we use our own custom version***
@@ -28,6 +31,12 @@ For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-
 **acceptance tests:** gradlew :AndroidSample:connectedAndroidTest
 
 * replace by :AndroidSample:connectedCheck for coverage report
+
+###rest example
+Currently RestActivity example fails when no server is reachable. 
+
+* start Script/start-wiremock.sh
+* kill  Script/start-wiremock.sh kill
 
 ## Test variants
 
@@ -102,6 +111,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * RoboCoP + SQLiteCipher
 * MVVM pattern with [android-binding](https://code.google.com/p/android-binding/)
 * There are many more interesting libraries out http://www.appbrain.com/stats/libraries/dev
+* rest error handling
 
 
 ## Milestones

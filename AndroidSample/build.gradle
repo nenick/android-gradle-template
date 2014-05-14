@@ -52,6 +52,16 @@ android {
         }
     }
 
+    applicationVariants.all { variant ->
+        variant.mergeResources.doLast {
+            def localIp = obtainCurrentIpAddress()
+            File valuesFile = file("${buildDir}/res/all/${variant.dirName}/values/values.xml")
+            String content = valuesFile.getText('UTF-8')
+            content = content.replaceAll("#const_wiremock_ip#", localIp)
+            valuesFile.write(content, 'UTF-8')
+        }
+    }
+
     // avoid errors with message 'Duplicate files copied in APK ...'
     packagingOptions {
         exclude 'LICENSE.txt'
@@ -68,7 +78,7 @@ dependencies {
 
     compile 'com.android.support:support-v4:19.1.+'
 
-    compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+    compile project(':GenerateJsonRestModel')
     compile("org.springframework.android:spring-android-auth:1.0.1.RELEASE") { exclude module: '*' }
     compile("org.springframework.android:spring-android-core:1.0.1.RELEASE") { exclude module: '*' }
     compile("org.springframework.android:spring-android-rest-template:1.0.1.RELEASE") { exclude module: '*' }
@@ -91,6 +101,20 @@ apt {
     }
 }
 
+def obtainCurrentIpAddress() {
+    InetAddress inetAddr = InetAddress.getLocalHost();
+
+    byte[] addr = inetAddr.getAddress();
+    String ipAddr = "";
+    for (int i = 0; i < addr.length; i++) {
+        if (i > 0) {
+            ipAddr += ".";
+        }
+        ipAddr += addr[i] & 0xFF;
+    }
+    ipAddr
+}
+
 apply plugin: 'idea'
 
 idea {
@@ -99,3 +123,9 @@ idea {
         testSourceDirs += file('src/test')
     }
 }
+
+// will be necessary when wiremock is used, to check if running
+Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+int returnVal = p1.waitFor();
+boolean reachable = (returnVal==0);
+println "Internet is reachable $reachable"

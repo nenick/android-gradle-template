@@ -9,7 +9,7 @@ function killCurrentWiremockInstance {
 killCurrentWiremockInstance
 
 if [ "$1" != "kill" ]; then
-    java -jar wiremock-1.44-standalone.jar --port 2345 --https-port 5432 --verbose --root-dir 'Wiremock' &
+    java -jar Wiremock/wiremock-1.44-standalone.jar --port 9999 --https-port 5432 --verbose --root-dir 'Wiremock' &
 else
     echo "only kill servers"
 fi

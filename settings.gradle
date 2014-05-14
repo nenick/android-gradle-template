@@ -1,2 +1,2 @@
-include ':GenerateDatabaseContent',
+include ':GenerateDatabaseContent', 'GenerateJsonRestModel',
         ':AndroidSample', 'ComponentTestsRobolectric', 'UnitTestsRobolectric'

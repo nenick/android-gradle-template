@@ -4,4 +4,5 @@
 *~
 *.iml
 **/build
+GenerateJsonRestModel/gen/*
 local.properties

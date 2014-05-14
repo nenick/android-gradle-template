@@ -1,11 +1,11 @@
 {
     "request": {
         "method": "GET",
-        "url": "/events/myEvent"
+        "url": "/bookmarks/myBookmark"
     },
     "response": {
         "status": 200,
-        "bodyFileName": "/events/myEvent-get.json",
+        "bodyFileName": "/bookmarks/myBookmark-get.json",
         "headers": {
             "Content-Type": "application/json;charset=UTF-8"
         }
@@ -14,7 +14,7 @@
 {
     "request": {
         "method": "DELETE",
-        "url": "/events/myEvent"
+        "url": "/bookmarks/myBookmark"
     },
     "response": {
         "status": 200,
