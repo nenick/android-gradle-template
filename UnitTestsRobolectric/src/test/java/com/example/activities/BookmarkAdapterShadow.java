@@ -1,7 +1,15 @@
 package com.example.activities;
 
-/**
- * Created by nico.kuechler on 14/05/14.
- */
+import com.example.adapters.BookmarkAdapter;
+
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+
+@Implements(BookmarkAdapter.class)
 public class BookmarkAdapterShadow {
+
+    @Implementation
+    public void afterInject() {
+        // avoid rest calls
+    }
 }
