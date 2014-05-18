@@ -75,7 +75,7 @@ apply plugin: 'idea'
 // the 'outputDir' is used as reference to the resource directory, found no other way
 idea {
     module {
-        outputDir = file('build/resources/test')
+        outputDir = file('build/resources/testDebug')
         testOutputDir = file('build/test-classes/debug')
     }
 }
