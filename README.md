@@ -120,10 +120,10 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 2. (done) extended app sample with database access
 * (done) test automation with code coverage
 * (done) decent test coverage with unit, component and acceptance tests
-* (progress) http calls with android annotations + wiremock + improve rest communication http://android-restful-pattern.blogspot.de/ https://github.com/posco2k8/rest_loader_tutorial
+* (done) http calls with android annotations + wiremock + improve rest communication http://android-restful-pattern.blogspot.de/ https://github.com/posco2k8/rest_loader_tutorial
+* (progress) 3 week journey to USA west coast
 * (plan) more component tests
 * (plan) more acceptance tests
-* (plan) 3 week journey to USA west coast
 * (plan) measure memory usage, i believe there is a memory leak
 * (plan) fragment activity example with unit, component and acceptance tests
 * (plan) example what i mean with the experimental acceptance test with robolectric
