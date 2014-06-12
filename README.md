@@ -7,9 +7,6 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 [see also wiki for more help](https://github.com/nenick/android-gradle-template/wiki)
 
-#Great news: 
-smoother integration into Android Studio, no more classpath manipulation for robolectric tests [see wiki new way to configure](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)  
-
 ## Getting Started
 
 ***until next release of novodes test plugin, we use our own custom version***
@@ -112,7 +109,7 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * MVVM pattern with [android-binding](https://code.google.com/p/android-binding/)
 * There are many more interesting libraries out http://www.appbrain.com/stats/libraries/dev
 * rest error handling
-
+* try robolectric + espresso solution at https://github.com/JCAndKSolutions/android-unit-test
 
 ## Milestones
 
@@ -121,7 +118,8 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * (done) test automation with code coverage
 * (done) decent test coverage with unit, component and acceptance tests
 * (done) http calls with android annotations + wiremock + improve rest communication http://android-restful-pattern.blogspot.de/ https://github.com/posco2k8/rest_loader_tutorial
-* (progress) 3 week journey to USA west coast
+* (done) 3 week journey to USA west coast
+* (in progress) update dependencies like build tools
 * (plan) more component tests
 * (plan) more acceptance tests
 * (plan) measure memory usage, i believe there is a memory leak
