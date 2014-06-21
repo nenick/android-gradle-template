@@ -11,9 +11,9 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 Until we find a way to change them we must do it by hand. Following properties at the *.iml files should look like this:
 
-<output url="file://$MODULE_DIR$/build/test-classes/debug" />
+&lt;output url="file://$MODULE_DIR$/build/test-classes/debug" /&gt;
 
-<output-test url="file://$MODULE_DIR$/build/resources/testDebug" />
+&lt;output-test url="file://$MODULE_DIR$/build/resources/testDebug" /&gt;
 
 ## Getting Started
 
