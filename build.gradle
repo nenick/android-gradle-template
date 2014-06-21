@@ -15,7 +15,8 @@ project.ext.preDexLibs = !project.hasProperty('disablePreDex')
 subprojects {
     group = 'com.example'
 
-    ext.androidBuildToolsVersion    = '19.0.3';
+    ext.androidToolsBuildGradle     = '0.11.+'
+    ext.androidBuildToolsVersion    = '19.1';
     ext.androidMinSdkVersion        = 10;
     ext.androidCompileSdkVersion    = 19;
     ext.androidTargetSdkVersion     = 19;

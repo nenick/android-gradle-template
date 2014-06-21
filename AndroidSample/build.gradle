@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.10.+'
+        classpath "com.android.tools.build:gradle:$ext.androidToolsBuildGradle"
         classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
     }
 }
@@ -9,8 +9,8 @@ apply plugin: 'android'
 apply plugin: 'android-apt'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
         testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
@@ -52,10 +52,11 @@ android {
         }
     }
 
+    // replace the #const_wiremock_ip# with your curent ip address for test with wiremock
     applicationVariants.all { variant ->
         variant.mergeResources.doLast {
             def localIp = obtainCurrentIpAddress()
-            File valuesFile = file("${buildDir}/res/all/${variant.dirName}/values/values.xml")
+            File valuesFile = file("${buildDir}/intermediates/res/release/values/values.xml")
             String content = valuesFile.getText('UTF-8')
             content = content.replaceAll("#const_wiremock_ip#", localIp)
             valuesFile.write(content, 'UTF-8')

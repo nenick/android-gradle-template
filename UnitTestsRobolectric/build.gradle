@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.10.+'
+        classpath "com.android.tools.build:gradle:$ext.androidToolsBuildGradle"
         classpath "com.novoda:gradle-android-test-plugin:0.9.9-SNAPSHOT"
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.4.0'
     }
