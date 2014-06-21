@@ -7,6 +7,14 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 [see also wiki for more help](https://github.com/nenick/android-gradle-template/wiki)
 
+#Bad news .. manipulating the output directories for Android Stuido isn't working anymore
+
+Until we find a way to change them we must do it by hand. Following properties at the *.iml files should look like this:
+
+<output url="file://$MODULE_DIR$/build/test-classes/debug" />
+
+<output-test url="file://$MODULE_DIR$/build/resources/testDebug" />
+
 ## Getting Started
 
 ***until next release of novodes test plugin, we use our own custom version***
