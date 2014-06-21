@@ -15,6 +15,11 @@ Until we find a way to change them we must do it by hand. Following properties a
 
 &lt;output-test url="file://$MODULE_DIR$/build/resources/testDebug" /&gt;
 
+## Last tests done with
+
+* Android Studio 6.1
+* Gradle Build Tools 0.11.+
+
 ## Getting Started
 
 ***until next release of novodes test plugin, we use our own custom version***
