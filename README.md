@@ -42,31 +42,11 @@ For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-
 
 * replace by :AndroidSample:connectedCheck for coverage report
 
-###rest example
+### rest example
 Currently RestActivity example fails when no server is reachable. 
 
 * start Script/start-wiremock.sh
 * kill  Script/start-wiremock.sh kill
-
-## Test variants
-
-**unit test**
-Test with mocks for all class dependencies.
-For testing direct database operations i don't like to mock the real database. Database is fast
-enough for unit tests and writing cursor mocks need much effort. Database tests are done here too.
-
-**component test**
-Put app components under test. It's your decision, what you call a component. Good approaches maybe
-Activities, Fragments, (any other ideas?), ...
-
-***experimental***
-For apps designed with single activity to handle all fragments. Try writing tests as component test
-like you will write they in espresso. This should work and is very fast, but not suggested by google
-coding guides and not from the robolectric programmer.
-
-**acceptance tests**
-Instrument your app with espresso to show that your app may handle the basic work flows correctly
-on one or all your device variants.
 
 ## Test results
 
@@ -124,22 +104,6 @@ Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/
 * rest error handling
 * try robolectric + espresso solution at https://github.com/JCAndKSolutions/android-unit-test
 
-## Milestones
-
-1. (done) working setup android studio + gradle + espresso + robolectric
-2. (done) extended app sample with database access
-* (done) test automation with code coverage
-* (done) decent test coverage with unit, component and acceptance tests
-* (done) http calls with android annotations + wiremock + improve rest communication http://android-restful-pattern.blogspot.de/ https://github.com/posco2k8/rest_loader_tutorial
-* (done) 3 week journey to USA west coast
-* (in progress) update dependencies like build tools
-* (plan) more component tests
-* (plan) more acceptance tests
-* (plan) measure memory usage, i believe there is a memory leak
-* (plan) fragment activity example with unit, component and acceptance tests
-* (plan) example what i mean with the experimental acceptance test with robolectric
-* (plan) ...
-
 ## Scripts
 
 * run-tests.sh execute all test variants
@@ -167,10 +131,3 @@ AndroidSample
 * build/source/apt/<buildvariant>/
     * **com/example** (generated) classes with AndroidAnnotations
 
-## See also my inspiration sources
-
-[Quality-Tools-for-Android](https://github.com/stephanenicolas/Quality-Tools-for-Android)
-
-[deckard-gradle](https://github.com/robolectric/deckard-gradle)
-
-[android-tdd-playground](https://github.com/pestrada/android-tdd-playground)

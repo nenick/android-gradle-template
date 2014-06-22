@@ -92,7 +92,7 @@ dependencies {
             'org.hamcrest:hamcrest-integration:1.1',
             'org.hamcrest:hamcrest-core:1.1',
             'org.hamcrest:hamcrest-library:1.1',
-            'com.jakewharton.espresso:espresso:1.1-r2'
+            'com.jakewharton.espresso:espresso:1.1-r3'
 }
 
 apt {
