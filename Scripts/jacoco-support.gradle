@@ -2,7 +2,7 @@ jacoco {
     toolVersion = "0.7.0.201403182114"
 }
 
-def coverageSourceDirs = [
+coverageSourceDirs = [
         '../AndroidSample/src/main/java',
         '../AndroidSample/src/gen',
         '../AndroidSample/build/source/apt/debug',
