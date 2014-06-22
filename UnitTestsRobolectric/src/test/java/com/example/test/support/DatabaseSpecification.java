@@ -7,7 +7,7 @@ import org.robolectric.Robolectric;
 
 import java.io.File;
 
-public class DatabaseSpecification extends UnitTestSpecification {
+public abstract class DatabaseSpecification extends UnitTestSpecification {
 
     public Context context;
 
@@ -21,7 +21,6 @@ public class DatabaseSpecification extends UnitTestSpecification {
         File dbFile = context.getDatabasePath(null);
         if (dbFile.exists()) {
             context.deleteDatabase(dbFile.getAbsolutePath());
-            //dbFile.delete();
         }
     }
 }
