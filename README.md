@@ -7,14 +7,6 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 [see also wiki for more help](https://github.com/nenick/android-gradle-template/wiki)
 
-#Bad news .. manipulating the output directories for Android Stuido isn't working anymore
-
-Until we find a way to change them we must do it by hand. Following properties at the *.iml files should look like this:
-
-&lt;output url="file://$MODULE_DIR$/build/test-classes/debug" /&gt;
-
-&lt;output-test url="file://$MODULE_DIR$/build/resources/testDebug" /&gt;
-
 ## Last tests done with
 
 * Android Studio 6.1
@@ -60,9 +52,9 @@ Currently RestActivity example fails when no server is reachable.
 
 ## Test support in IDE
 
-This project template is developed with AndroidStudio and will only support the newest versions.
+This project template support AndroidStudio.
 
-Test run in IDE is a bit tricky:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
+Run robolectric tests in Android Studio need some configuration:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
 
 ## Features done
 
