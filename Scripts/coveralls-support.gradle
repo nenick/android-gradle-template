@@ -1,0 +1,11 @@
+jacocoTestReport.reports.xml.enabled = true // coveralls plugin depends on xml format report
+
+// Send code coverage report to coveralls with coveralls-gradle-plugin. To get the plugin working
+// we need to include the coverageSourceDirs as main sources. But this conflicts with android
+// studio and also with jacocoTestReport task.
+compileJava.enabled = false // avoid jacocoTestReport task conflicts
+coveralls {
+    if(project.hasProperty('travisCi')) { // avoid android studio source root conflicts
+        sourceSets.main.java.srcDirs += coverageSourceDirs
+    }
+}
