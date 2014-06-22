@@ -22,23 +22,23 @@ For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-
 
 ***import to android studio, start development***
 
-**unit tests:** gradlew :UnitTestsRobolectric:testDebug
+**unit tests:** `./gradlew :UnitTestsRobolectric:testDebug`
 
-* append :UnitTestsRobolectric:jacocoTestReport for coverage report
+* append `:UnitTestsRobolectric:jacocoTestReport` for coverage report
 
-**component tests:** gradlew :ComponentTestsRobolectric:testDebug
+**component tests:** `./gradlew :ComponentTestsRobolectric:testDebug`
 
 * append :ComponentTestsRobolectric:jacocoTestReport for coverage report
 
-**acceptance tests:** gradlew :AndroidSample:connectedAndroidTest
+**acceptance tests:** `./gradlew :AndroidSample:connectedAndroidTest`
 
-* replace by :AndroidSample:connectedCheck for coverage report
+* replace by `:AndroidSample:connectedCheck` for coverage report
 
 ### rest example
 Currently RestActivity example fails when no server is reachable. 
 
-* start Script/start-wiremock.sh
-* kill  Script/start-wiremock.sh kill
+* start `Script/start-wiremock.sh`
+* kill  `Script/start-wiremock.sh kill`
 
 ## Test results
 
