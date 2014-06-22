@@ -52,14 +52,16 @@ android {
         }
     }
 
-    // replace the #const_wiremock_ip# with your curent ip address for test with wiremock
+    // replace the #const_wiremock_ip# with your current ip address for test with wiremock
     applicationVariants.all { variant ->
         variant.mergeResources.doLast {
             def localIp = obtainCurrentIpAddress()
             File valuesFile = file("${buildDir}/intermediates/res/release/values/values.xml")
-            String content = valuesFile.getText('UTF-8')
-            content = content.replaceAll("#const_wiremock_ip#", localIp)
-            valuesFile.write(content, 'UTF-8')
+            if(valuesFile.exists()) {
+                String content = valuesFile.getText('UTF-8')
+                content = content.replaceAll("#const_wiremock_ip#", localIp)
+                valuesFile.write(content, 'UTF-8')
+            }
         }
     }
 
