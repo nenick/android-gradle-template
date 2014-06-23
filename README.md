@@ -14,13 +14,25 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 ## Getting Started
 
-***until next release of novodes test plugin, we use our own custom version***
+***until next release of novodes test plugin [with this pull request](https://github.com/novoda/gradle-android-test-plugin/pull/11) , we use our own custom version*** 
 
-For gradle-android-test-plugin:0.9.9-SNAPSHOT run Scripts/install-custom-gradle-test-plugin.sh
+For gradle-android-test-plugin:0.9.9-SNAPSHOT run `Scripts/install-custom-gradle-test-plugin.sh`
 
-***clone, attach phone (or start emulator), run Scripts/run-tests.sh from project root***
+### Check if the projects works on your machine
 
-***import to android studio, start development***
+***clone, attach phone (or start emulator), run `Scripts/run-tests.sh` from project root***
+
+### Check if you get it to work with andorid studio
+
+***import to android studio, start development, press play***
+
+## Test support in IDE
+
+This project template support AndroidStudio.
+
+Run robolectric tests in Android Studio need some configuration:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
+
+## Tests on command line
 
 **unit tests:** `./gradlew :UnitTestsRobolectric:testDebug`
 
@@ -49,12 +61,6 @@ Currently RestActivity example fails when no server is reachable.
 * ComponentTestsRobolectric/build/reports/jacoco/test/html/index.html (**component test coverage**)
 * AndroidSample/build/reports/androidTests/connected/index.html (**acceptance tests**)
 * AndroidSample/build/reports/coverage/debug/index.html (**acceptance tests coverage**)
-
-## Test support in IDE
-
-This project template support AndroidStudio.
-
-Run robolectric tests in Android Studio need some configuration:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
 
 ## Features done
 
