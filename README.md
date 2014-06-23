@@ -18,11 +18,11 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 For gradle-android-test-plugin:0.9.9-SNAPSHOT run `Scripts/install-custom-gradle-test-plugin.sh`
 
-### Check if the projects works on your machine
+### Check if the project and tests works on your machine
 
 ***clone, attach phone (or start emulator), run `Scripts/run-tests.sh` from project root***
 
-### Check if you get it to work with andorid studio
+### Check if you get this project to work with andorid studio
 
 ***import to android studio, start development, press play***
 
@@ -30,7 +30,7 @@ For gradle-android-test-plugin:0.9.9-SNAPSHOT run `Scripts/install-custom-gradle
 
 This project template support AndroidStudio.
 
-Run robolectric tests in Android Studio need some configuration:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
+Run tests in Android Studio need some configuration:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
 
 ## Tests on command line
 
@@ -81,51 +81,8 @@ Currently RestActivity example fails when no server is reachable.
 * [Travis](https://travis-ci.org/) CI runs all test variants
 * [Coveralls](https://coveralls.io/) shows unit test code coverage [coveralls-gradle-plugin](https://github.com/kt3k/coveralls-gradle-plugin)
 
-## Features wish (or just ideas)
-
-* ui test coverage (is done when novoda test plguin is updated)
-* ui test screen shots with spoon, include dialogs
-* collect all test reports nicely
-* all nice tools from Quality-Tools-for-Android (pmd, checkstyle, ..)
-* improve adapter handling with https://github.com/excilys/androidannotations/wiki/Adapters-and-lists
-* rest communication genrated with AndroidAnnotations
-* json mapping object generated with [jsonschema2pojo](https://github.com/joelittlejohn/jsonschema2pojo)
-* test server communication with wire mock (for component test and ui tests)
-* generate database content at same time like android annotations
-* in application communication events with [Otto](http://square.github.io/otto/)
-* package-by-feature instead of package-by-layer
-* Sonar for code statistics
-* follow more best practices (use string.xml, ...)
-* RoboCoP + SQLiteCipher
-* MVVM pattern with [android-binding](https://code.google.com/p/android-binding/)
-* There are many more interesting libraries out http://www.appbrain.com/stats/libraries/dev
-* rest error handling
-* try robolectric + espresso solution at https://github.com/JCAndKSolutions/android-unit-test
-
 ## Scripts
 
 * run-tests.sh execute all test variants
-
-## Project structure
-
-AndroidSample
-
-* src/main/java/com/example/
-    * **activities** activity classes
-    * **adapters** data adapters with cursor loader
-    * **fragments** fragment classes
-    * **json** model classes for rest communication
-    * **managers** wraps content provider usage
-    * **rest** rest communication clients
-    * **receivers**
-    * **services**
-    * **viewmodel** model classes for your views
-* src/gen/com/example/
-    * **database** (generated) database tables and helpers
-    * **provider** (generated) provider for your database content
-    * **model** (generated) helper classes to access cursor content
-* src/test/java/
-    * **com/example** tests with espresso
-* build/source/apt/<buildvariant>/
-    * **com/example** (generated) classes with AndroidAnnotations
-
+* run-tests-fast.sh execute just the robolectric tests
+* run-tests-travis.sh do all steps necessary for full automatic builds, like install custom dependencies
