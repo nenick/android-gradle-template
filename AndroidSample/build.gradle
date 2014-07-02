@@ -1,6 +1,7 @@
+
 buildscript {
     dependencies {
-        classpath "com.android.tools.build:gradle:$ext.androidToolsBuildGradle"
+        classpath "com.android.tools.build:gradle:" + androidToolsBuildGradle
         classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
     }
 }
@@ -86,8 +87,8 @@ dependencies {
     compile("org.springframework.android:spring-android-core:1.0.1.RELEASE") { exclude module: '*' }
     compile("org.springframework.android:spring-android-rest-template:1.0.1.RELEASE") { exclude module: '*' }
 
-    apt "org.androidannotations:androidannotations:$ext.androidAnnotationsVersion"
-    compile("org.androidannotations:androidannotations-api:$ext.androidAnnotationsAPIVersion")
+    apt "org.androidannotations:androidannotations:" + androidAnnotationsVersion
+    compile("org.androidannotations:androidannotations-api:" + androidAnnotationsAPIVersion )
 
     androidTestCompile 'com.google.guava:guava:14.0.1',
             'com.squareup.dagger:dagger:1.1.0',
@@ -128,7 +129,7 @@ idea {
 }
 
 // will be necessary when wiremock is used, to check if running
-Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+Process p1 = Runtime.getRuntime().exec("ping -c 1 www.google.com");
 int returnVal = p1.waitFor();
 boolean reachable = (returnVal==0);
 println "Internet is reachable $reachable"

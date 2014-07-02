@@ -9,8 +9,9 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 ## Last tests done with
 
-* Android Studio 6.1
-* Gradle Build Tools 0.11.+
+* Android Studio 0.8.1
+* Gradle Build Tools 0.12.+
+* Gradle 1.12
 
 ## Getting Started
 
