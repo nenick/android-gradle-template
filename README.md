@@ -1,6 +1,8 @@
 # Rapid start development and test
 with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP, JaCoCo
 
+Travis has no build tools 20.0.0 yet, maybe later i will try workaround https://github.com/travis-ci/travis-ci/issues/2470
+
 [![Build Status](https://travis-ci.org/nenick/android-gradle-template.svg?branch=master)](https://travis-ci.org/nenick/android-gradle-template) **& UnitTest** [![Coverage Status](https://coveralls.io/repos/nenick/android-gradle-template/badge.png)](https://coveralls.io/r/nenick/android-gradle-template)
 
 ***Wishes, improvements and discussions about the stuff here are welcome***
