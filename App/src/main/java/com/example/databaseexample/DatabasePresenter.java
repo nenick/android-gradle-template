@@ -1,10 +1,7 @@
-package com.example.activities;
+package com.example.databaseexample;
 
 import android.os.Bundle;
 
-import com.example.adapters.AgendaAdapter;
-import com.example.adapters.AgendaLoader;
-import com.example.managers.AgendaManager;
 import com.example.model.Agenda;
 
 import org.androidannotations.annotations.Bean;

@@ -1,4 +1,4 @@
-package com.example.adapters;
+package com.example.restexample;
 
 import android.content.Context;
 import android.widget.LinearLayout;

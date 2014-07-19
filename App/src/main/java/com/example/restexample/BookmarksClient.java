@@ -1,4 +1,4 @@
-package com.example.rest;
+package com.example.restexample;
 
 import com.example.json.Bookmark;
 import com.example.json.BookmarkList;

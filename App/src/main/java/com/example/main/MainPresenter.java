@@ -1,4 +1,4 @@
-package com.example.activities;
+package com.example.main;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;

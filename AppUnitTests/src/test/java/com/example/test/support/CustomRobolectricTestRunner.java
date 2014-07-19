@@ -1,6 +1,6 @@
 package com.example.test.support;
 
-import com.example.adapters.BookmarkAdapter;
+import com.example.restexample.BookmarkAdapter;
 
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;

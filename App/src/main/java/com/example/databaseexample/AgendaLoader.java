@@ -1,4 +1,4 @@
-package com.example.adapters;
+package com.example.databaseexample;
 
 import android.app.LoaderManager;
 import android.content.Context;

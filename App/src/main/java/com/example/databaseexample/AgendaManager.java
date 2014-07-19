@@ -1,4 +1,4 @@
-package com.example.managers;
+package com.example.databaseexample;
 
 import android.content.ContentUris;
 import android.content.Context;

@@ -1,11 +1,13 @@
-package com.example.activities;
+package com.example.main;
 
 import android.app.LoaderManager;
 import android.os.Bundle;
 
-import com.example.adapters.AgendaAdapter;
-import com.example.adapters.AgendaLoader;
-import com.example.managers.AgendaManager;
+import com.example.databaseexample.AgendaAdapter;
+import com.example.databaseexample.AgendaLoader;
+import com.example.databaseexample.DatabaseActivity;
+import com.example.databaseexample.DatabasePresenter;
+import com.example.databaseexample.AgendaManager;
 import com.example.model.Agenda;
 import com.example.test.support.UnitTestSpecification;
 

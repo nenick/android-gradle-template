@@ -1,4 +1,4 @@
-package com.example.activities;
+package com.example.main;
 
 import com.example.test.support.UnitTestSpecification;
 

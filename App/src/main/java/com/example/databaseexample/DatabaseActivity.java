@@ -1,4 +1,4 @@
-package com.example.activities;
+package com.example.databaseexample;
 
 import android.app.ListActivity;
 import android.os.Bundle;

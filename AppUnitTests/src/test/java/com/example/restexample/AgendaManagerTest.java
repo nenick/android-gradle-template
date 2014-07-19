@@ -1,7 +1,8 @@
-package com.example.managers;
+package com.example.restexample;
 
 import android.database.Cursor;
 
+import com.example.databaseexample.AgendaManager;
 import com.example.model.Agenda;
 import com.example.provider.AgendaProvider;
 import com.example.test.support.DatabaseSpecification;

@@ -1,11 +1,9 @@
-package com.example.activities;
+package com.example.restexample;
 
 import android.app.ListActivity;
 import android.widget.EditText;
 
 import com.example.R;
-import com.example.adapters.BookmarkAdapter;
-import com.example.rest.BookmarksClient;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;

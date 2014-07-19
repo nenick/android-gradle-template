@@ -1,7 +1,7 @@
 package com.example.component.tests;
 
 import com.example.R;
-import com.example.activities.MainActivity_;
+import com.example.main.MainActivity_;
 import com.example.component.tests.pages.StartPage;
 import com.example.test.support.ComponentTestSpecification;
 

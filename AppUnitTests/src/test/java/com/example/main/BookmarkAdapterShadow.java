@@ -1,6 +1,6 @@
-package com.example.activities;
+package com.example.main;
 
-import com.example.adapters.BookmarkAdapter;
+import com.example.restexample.BookmarkAdapter;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;

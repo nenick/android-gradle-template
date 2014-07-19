@@ -1,4 +1,4 @@
-package com.example.adapters;
+package com.example.restexample;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.R;
+
 import com.example.json.Bookmark;
 import com.example.json.BookmarkList;
-import com.example.rest.BookmarksClient;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
