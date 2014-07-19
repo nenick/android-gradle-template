@@ -1,5 +1,8 @@
 package com.example.main;
 
+import com.example.databaseexample.DatabaseActivity_;
+import com.example.restexample.RestActivity_;
+
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
