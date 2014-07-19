@@ -3,9 +3,9 @@
 Scripts/install-custom-gradle-test-plugin.sh
 
 ./gradlew :build \
-          :UnitTestsRobolectric:testDebug \
-          :ComponentTestsRobolectric:testDebug \
-          :AndroidSample:connectedAndroidTest \
-          :UnitTestsRobolectric:jacocoTestReport \
-          :UnitTestsRobolectric:coveralls \
+          :AppUnitTests:testDebug \
+          :AppComponentTests:testDebug \
+          :App:connectedAndroidTest \
+          :AppUnitTests:jacocoTestReport \
+          :AppUnitTests:coveralls \
           -PtravisCi -PdisablePreDex

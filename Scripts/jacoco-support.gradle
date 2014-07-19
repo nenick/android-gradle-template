@@ -3,11 +3,11 @@ jacoco {
 }
 
 coverageSourceDirs = [
-        '../AndroidSample/src/main/java',
-        '../AndroidSample/src/gen',
-        '../AndroidSample/build/source/apt/debug',
-        '../AndroidSample/build/source/generated/buildConfig/debug',
-        '../AndroidSample/build/source/generated/r/debug']
+        '../App/src/main/java',
+        '../App/src/gen',
+        '../App/build/source/apt/debug',
+        '../App/build/source/generated/buildConfig/debug',
+        '../App/build/source/generated/r/debug']
 
 jacocoTestReport {
     reports {
@@ -15,7 +15,7 @@ jacocoTestReport {
         html.enabled = true
     }
     // class R is used, but usage will not be covered, so ignore this class from report
-    classDirectories = fileTree(dir: '../AndroidSample/build/intermediates/classes/debug', exclude: 'com/example/R*.class')
+    classDirectories = fileTree(dir: '../App/build/intermediates/classes/debug', exclude: 'com/example/R*.class')
     additionalSourceDirs = files(coverageSourceDirs)
     executionData = files('build/jacoco/testDebug.exec')
 }

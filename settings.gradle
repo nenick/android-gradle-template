@@ -1,2 +1,3 @@
-include ':GenerateDatabaseContent', 'GenerateJsonRestModel',
-        ':AndroidSample', 'ComponentTestsRobolectric', 'UnitTestsRobolectric'
+include ':App', ':AppUnitTests', ':AppComponentTests',
+        ':GenerateDatabaseClasses', 'GenerateJsonRestModel'
+

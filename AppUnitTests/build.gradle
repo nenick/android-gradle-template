@@ -2,6 +2,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:" + androidToolsBuildGradle
         classpath "com.novoda:gradle-android-test-plugin:0.9.9-SNAPSHOT"
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.4.0'
     }
 }
 
@@ -12,16 +13,17 @@ test.reports.junitXml.enabled = false // just clean up dashboard from not genera
 
 apply plugin: 'android-test'
 apply plugin: "jacoco"
+apply plugin: 'coveralls'
 
 android {
-    projectUnderTest ':AndroidSample'
+    projectUnderTest ':App'
 }
 
 dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'org.mockito:mockito-core:1.9.5'
     testCompile('com.squareup:fest-android:1.0.+') { exclude module: 'support-v4' }
-    testCompile('org.robolectric:robolectric:2.3') {
+    testCompile ('org.robolectric:robolectric:2.3') {
         exclude module: 'classworlds'
         exclude module: 'maven-artifact'
         exclude module: 'maven-artifact-manager'
@@ -44,5 +46,7 @@ dependencies {
 }
 
 apply from: '../Scripts/jacoco-support.gradle'
+
+apply from: '../Scripts/coveralls-support.gradle'
 
 apply from: '../Scripts/android-studio-robolectric-support.gradle'

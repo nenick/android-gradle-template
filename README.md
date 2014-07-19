@@ -35,17 +35,17 @@ Run tests in Android Studio need some configuration:  [see wiki for description]
 
 ## Tests on command line
 
-**unit tests:** `./gradlew :UnitTestsRobolectric:testDebug`
+**unit tests:** `./gradlew :AppUnitTests:testDebug`
 
-* append `:UnitTestsRobolectric:jacocoTestReport` for coverage report
+* append `:AppUnitTests:jacocoTestReport` for coverage report
 
-**component tests:** `./gradlew :ComponentTestsRobolectric:testDebug`
+**component tests:** `./gradlew :AppComponentTests:testDebug`
 
-* append :ComponentTestsRobolectric:jacocoTestReport for coverage report
+* append `:AppComponentTests:jacocoTestReport for coverage report
 
-**acceptance tests:** `./gradlew :AndroidSample:connectedAndroidTest`
+**acceptance tests:** `./gradlew :App:connectedAndroidTest`
 
-* replace by `:AndroidSample:connectedCheck` for coverage report
+* replace by `:App:connectedCheck` for coverage report
 
 ### rest example
 Currently RestActivity example fails when no server is reachable. 
@@ -56,12 +56,12 @@ Currently RestActivity example fails when no server is reachable.
 ## Test results
 
 * build/index.html *(should collect all reports, current is miss the AndroidSample module reports)*
-* UnitTestsRobolectric/build/test-report/debug/index.html (**unit test**)
-* UnitTestsRobolectric/build/reports/jacoco/test/html/index.html (**unit test coverage**)
-* ComponentTestsRobolectric/build/test-report/debug/index.html (**component test**)
-* ComponentTestsRobolectric/build/reports/jacoco/test/html/index.html (**component test coverage**)
-* AndroidSample/build/reports/androidTests/connected/index.html (**acceptance tests**)
-* AndroidSample/build/reports/coverage/debug/index.html (**acceptance tests coverage**)
+* AppUnitTests/build/test-report/debug/index.html (**unit test**)
+* AppUnitTests/build/reports/jacoco/test/html/index.html (**unit test coverage**)
+* AppComponentTests/build/test-report/debug/index.html (**component test**)
+* AppComponentTests/build/reports/jacoco/test/html/index.html (**component test coverage**)
+* App/build/reports/androidTests/connected/index.html (**acceptance tests**)
+* App/build/reports/coverage/debug/index.html (**acceptance tests coverage**)
 
 ## Features done
 
