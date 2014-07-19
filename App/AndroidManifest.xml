@@ -10,9 +10,11 @@
     <!-- remove this permission if no network communication necessary -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <application android:name=".ExampleApplication">
+    <application
+        android:name=".ExampleApplication"
+        android:label="TemplateApp">
 
-        <activity android:name=".activities.MainActivity_" android:screenOrientation="portrait">
+        <activity android:name=".activities.MainActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
