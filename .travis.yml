@@ -15,7 +15,8 @@ android:
 before_script:
 
   # Workaround to provide necessary updated android tools
-  - sudo mv /usr/local/android-sdk/tools/android-* /usr/local/bin
+  - 'sudo mv /usr/local/android-sdk/tools/android-* /usr/local/bin'
+  - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
   - echo yes | android update sdk --no-ui --all --filter build-tools-20.0.0
   - echo yes | android update sdk --no-ui --all --filter android-20
 
