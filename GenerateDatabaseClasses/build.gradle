@@ -3,6 +3,7 @@ buildscript {
         classpath files('libs/RoboCoP-0.5.1-jar-with-dependencies.jar')
     }
 }
+apply plugin: "java"
 
 import com.rain.utils.android.robocop.generator.*;
 
@@ -11,8 +12,10 @@ task contentProviderGen {
     doLast {
         System.out.println("Generating ContentProvider...")
         String schemaFilename = "$buildDir/../schema/agenda_schema.json";//replace with the path to your schema
-        String baseOutputDir = "$buildDir/../../App/src/gen/";
+        String baseOutputDir = "$buildDir/../../App/build/generated/source/db/";
         //if gradle throws an error on the following line, you probably either don't have your import statement set or you have the wrong path in your buildscript definition
         ContentProviderGenerator.generateContentProvider(schemaFilename, baseOutputDir);
     }
 }
+
+compileJava.dependsOn contentProviderGen

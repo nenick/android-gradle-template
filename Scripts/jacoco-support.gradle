@@ -4,10 +4,10 @@ jacoco {
 
 coverageSourceDirs = [
         '../App/src/main/java',
-        '../App/src/gen',
         '../App/build/source/apt/debug',
-        '../App/build/source/generated/buildConfig/debug',
-        '../App/build/source/generated/r/debug']
+        '../App/build/generated/source/db',
+        '../App/build/generated/source/buildConfig/debug',
+        '../App/build/generated/source/r/debug']
 
 jacocoTestReport {
     reports {

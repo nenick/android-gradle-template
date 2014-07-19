@@ -28,29 +28,9 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs += 'src/gen'
-            res.srcDirs = ['res']
-        }
-        test {
-            java.srcDir file('src/test/java')
-            resources.srcDir file('src/test/resources')
-        }
-        androidTest.setRoot('.')
-        androidTest {
-            java { srcDirs = [
-                    'src/test/java'
-            ] }
-            res.srcDirs = ['res']
-            assets.srcDirs = [
-                    'assets'
-            ]
-            resources.srcDirs = [
-                    'src'
-            ]
-        }
+    sourceSets.main {
+        // src/gen is the target for generated content like json model
+        java.srcDirs += 'build/generated/source/db'
     }
 
     // replace the #const_wiremock_ip# with your current ip address for test with wiremock
@@ -82,6 +62,7 @@ dependencies {
 
     compile 'com.android.support:support-v4:19.1.+'
 
+    compile project(':GenerateDatabaseClasses')
     compile project(':GenerateJsonRestModel')
     compile("org.springframework.android:spring-android-auth:1.0.1.RELEASE") { exclude module: '*' }
     compile("org.springframework.android:spring-android-core:1.0.1.RELEASE") { exclude module: '*' }
