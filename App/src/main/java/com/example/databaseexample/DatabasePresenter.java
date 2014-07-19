@@ -18,7 +18,7 @@ public class DatabasePresenter {
     DatabaseActivity view;
 
     @Bean
-    AgendaManager agendaManager;
+    AgendaData agendaData;
 
     AgendaAdapter mAdapter;
 
@@ -39,11 +39,11 @@ public class DatabasePresenter {
         agenda.setName(inputAgenda);
         agenda.setDate(comment);
 
-        agendaManager.insert(agenda);
+        agendaData.insert(agenda);
     }
 
     public void onDeleteAgenda() {
         long itemId = mAdapter.getItemId(0);
-        agendaManager.deleteById(itemId);
+        agendaData.deleteById(itemId);
     }
 }

@@ -2,6 +2,8 @@ package com.example.main;
 
 import android.content.Intent;
 
+import com.example.databaseexample.DatabaseActivity_;
+import com.example.restexample.RestActivity_;
 import com.example.test.support.UnitTestSpecification;
 
 import org.junit.Before;

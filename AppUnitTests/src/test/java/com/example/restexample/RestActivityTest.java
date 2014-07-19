@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.restexample;
 
 import com.example.test.support.UnitTestSpecification;
 

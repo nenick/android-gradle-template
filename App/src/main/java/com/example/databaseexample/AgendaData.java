@@ -12,7 +12,7 @@ import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
 @EBean
-public class AgendaManager {
+public class AgendaData {
 
     @RootContext
     Context context;

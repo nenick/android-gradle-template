@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.databaseexample;
 
 import android.widget.Button;
 import android.widget.TextView;

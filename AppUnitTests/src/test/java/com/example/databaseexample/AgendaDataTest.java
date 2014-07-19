@@ -1,8 +1,7 @@
-package com.example.restexample;
+package com.example.databaseexample;
 
 import android.database.Cursor;
 
-import com.example.databaseexample.AgendaManager;
 import com.example.model.Agenda;
 import com.example.provider.AgendaProvider;
 import com.example.test.support.DatabaseSpecification;
@@ -12,13 +11,13 @@ import org.junit.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class AgendaManagerTest extends DatabaseSpecification {
+public class AgendaDataTest extends DatabaseSpecification {
 
-    AgendaManager agendaManager = new AgendaManager();
+    AgendaData agendaData = new AgendaData();
 
     @Before
     public void setUp() {
-        agendaManager.context = context;
+        agendaData.context = context;
     }
 
     @Test
@@ -26,7 +25,7 @@ public class AgendaManagerTest extends DatabaseSpecification {
         Agenda agenda = new Agenda();
         agenda.setName("MyAgenda");
         agenda.setDate("current date");
-        long rowId = agendaManager.insert(agenda);
+        long rowId = agendaData.insert(agenda);
 
         Cursor query = context.getContentResolver().query(AgendaProvider.AGENDA_CONTENT_URI, null, null, null, null);
         assertThat(query.getCount()).isEqualTo(1);
@@ -43,9 +42,9 @@ public class AgendaManagerTest extends DatabaseSpecification {
         Agenda agenda = new Agenda();
         agenda.setName("MyAgenda");
         agenda.setDate("current date");
-        long rowId = agendaManager.insert(agenda);
+        long rowId = agendaData.insert(agenda);
 
-        agendaManager.deleteById(rowId);
+        agendaData.deleteById(rowId);
 
         Cursor query = context.getContentResolver().query(AgendaProvider.AGENDA_CONTENT_URI, null, null, null, null);
         assertThat(query.getCount()).isZero();

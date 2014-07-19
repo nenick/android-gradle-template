@@ -1,13 +1,8 @@
-package com.example.main;
+package com.example.databaseexample;
 
 import android.app.LoaderManager;
 import android.os.Bundle;
 
-import com.example.databaseexample.AgendaAdapter;
-import com.example.databaseexample.AgendaLoader;
-import com.example.databaseexample.DatabaseActivity;
-import com.example.databaseexample.DatabasePresenter;
-import com.example.databaseexample.AgendaManager;
 import com.example.model.Agenda;
 import com.example.test.support.UnitTestSpecification;
 
@@ -39,7 +34,7 @@ public class DatabasePresenterTest extends UnitTestSpecification {
     AgendaAdapter agendaAdapter;
 
     @Mock
-    AgendaManager agendaManager;
+    AgendaData agendaData;
 
     @InjectMocks
     DatabasePresenter presenter;
@@ -64,7 +59,7 @@ public class DatabasePresenterTest extends UnitTestSpecification {
         when(view.getInputAgenda()).thenReturn(TEST_AGENDA);
         presenter.onAddAgenda();
         verify(view).resetInputFields();
-        verify(agendaManager).insert(agendaCaptor.capture());
+        verify(agendaData).insert(agendaCaptor.capture());
         Agenda agenda = agendaCaptor.getValue();
         assertThat(agenda.getName()).isEqualTo(TEST_AGENDA);
         assertThat(agenda.getDate()).matches("Added on .+");
@@ -74,6 +69,6 @@ public class DatabasePresenterTest extends UnitTestSpecification {
     public void test_onDeleteAgenda() throws Exception {
         when(agendaAdapter.getItemId(0)).thenReturn(TEST_ITEM_ID);
         presenter.onDeleteAgenda();
-        verify(agendaManager).deleteById(TEST_ITEM_ID);
+        verify(agendaData).deleteById(TEST_ITEM_ID);
     }
 }
