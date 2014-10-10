@@ -15,7 +15,7 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 ## Getting Started
 
-***until next release of novodes test plugin [with this pull request](https://github.com/novoda/gradle-android-test-plugin/pull/11) , we use our own custom version*** 
+***until next release of novodas test plugin [with this pull request](https://github.com/novoda/gradle-android-test-plugin/pull/11) , we use our own custom version*** 
 
 For gradle-android-test-plugin:0.9.9-SNAPSHOT run `Scripts/install-custom-gradle-test-plugin.sh`
 
