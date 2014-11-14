@@ -2,7 +2,9 @@
 buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:" + androidToolsBuildGradle
+        classpath 'com.github.jcandksolutions.gradle:android-unit-test:1.6.3'
         classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.4.0'
     }
 }
 
@@ -10,6 +12,7 @@ apply plugin: 'android'
 apply plugin: 'android-apt'
 
 android {
+
     compileSdkVersion androidCompileSdkVersion
     buildToolsVersion androidBuildToolsVersion
 
@@ -25,6 +28,14 @@ android {
         debug {
             runProguard false
             testCoverageEnabled = true
+        }
+    }
+
+    productFlavors {
+        normal {
+
+        }
+        integration {
         }
     }
 
@@ -58,6 +69,9 @@ android {
     }
 }
 
+apply plugin: 'android-unit-test'
+tasks.findByName("assembleDebug").dependsOn("testDebugClasses")
+
 dependencies {
 
     compile 'com.android.support:support-v4:19.1.+'
@@ -70,6 +84,30 @@ dependencies {
 
     apt "org.androidannotations:androidannotations:" + androidAnnotationsVersion
     compile("org.androidannotations:androidannotations-api:" + androidAnnotationsAPIVersion )
+
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile('com.squareup:fest-android:1.0.+') { exclude module: 'support-v4' }
+    testCompile ('org.robolectric:robolectric:2.4') {
+        exclude module: 'classworlds'
+        exclude module: 'maven-artifact'
+        exclude module: 'maven-artifact-manager'
+        exclude module: 'maven-error-diagnostics'
+        exclude module: 'maven-model'
+        exclude module: 'maven-plugin-registry'
+        exclude module: 'maven-profile'
+        exclude module: 'maven-project'
+        exclude module: 'maven-settings'
+        exclude module: 'nekohtml'
+        exclude module: 'plexus-container-default'
+        exclude module: 'plexus-interpolation'
+        exclude module: 'plexus-utils'
+        exclude module: 'support-v4' // crazy but my android studio don't like this dependency and to fix it remove .idea and re import project
+        exclude module: 'wagon-file'
+        exclude module: 'wagon-http-lightweight'
+        exclude module: 'wagon-http-shared'
+        exclude module: 'wagon-provider-api'
+    }
 
     androidTestCompile 'com.google.guava:guava:14.0.1',
             'com.squareup.dagger:dagger:1.1.0',
@@ -105,7 +143,7 @@ apply plugin: 'idea'
 idea {
     module {
         //and some extra test source dirs
-        testSourceDirs += file('src/test')
+        testSourceDirs += file('src/test/resources')
     }
 }
 
@@ -114,3 +152,14 @@ Process p1 = Runtime.getRuntime().exec("ping -c 1 www.google.com");
 int returnVal = p1.waitFor();
 boolean reachable = (returnVal==0);
 println "Internet is reachable $reachable"
+
+//apply plugin: "java"
+
+//test.reports.html.enabled = false     // just clean up dashboard from not generated reports
+//test.reports.junitXml.enabled = false // just clean up dashboard from not generated reports
+
+apply plugin: 'coveralls'
+
+apply from: '../Scripts/jacoco-support.gradle'
+
+apply from: '../Scripts/coveralls-support.gradle'

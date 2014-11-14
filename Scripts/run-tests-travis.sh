@@ -1,11 +1,9 @@
 #!/bin/bash
 
-Scripts/install-custom-gradle-test-plugin.sh
+#Scripts/install-custom-gradle-test-plugin.sh
 
 ./gradlew :build \
-          :AppUnitTests:testDebug \
-          :AppComponentTests:testDebug \
-          :App:connectedAndroidTest \
-          :AppUnitTests:jacocoTestReport \
-          :AppUnitTests:coveralls \
+          :App:test \
+#          :App:jacocoReport \
+#          :App:coveralls \
           -PtravisCi -PdisablePreDex

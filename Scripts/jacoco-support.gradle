@@ -1,26 +1,41 @@
-jacoco {
-    toolVersion = "0.7.0.201403182114"
+apply plugin: "jacoco"
+
+configurations {
+    jacocoReport
 }
 
-coverageSourceDirs = [
-        '../App/src/main/java',
-        '../App/build/source/apt/debug',
-        '../App/build/generated/source/db',
-        '../App/build/generated/source/buildConfig/debug',
-        '../App/build/generated/source/r/debug']
+task jacocoReport(dependsOn: 'test') << {
+    ant {
+        taskdef(name:'jacocoreport',
+                classname: 'org.jacoco.ant.ReportTask',
+                classpath: configurations.jacocoReport.asPath)
 
-jacocoTestReport {
-    reports {
-        xml.enabled = false
-        html.enabled = true
+        mkdir dir: "${buildDir}/test-coverage-report"
+
+        jacocoreport {
+            executiondata {
+                fileset dir: "${buildDir}/jacoco"
+            }
+
+            structure(name: "${rootProject.name}") {
+                classfiles {
+                    fileset (dir: "${buildDir}/intermediates/classes") {
+                        exclude(name: '**/BuildConfig.class')
+                    }
+                }
+
+                sourcefiles {
+                    fileset dir: "src/main/java"
+                    fileset dir: "src/mock/java"
+                }
+            }
+
+            xml destfile: "${buildDir}/test-coverage-report/jacoco.xml"
+            html destdir: "${buildDir}/test-coverage-report/"
+        }
     }
-    // class R is used, but usage will not be covered, so ignore this class from report
-    classDirectories = fileTree(dir: '../App/build/intermediates/classes/debug', exclude: 'com/example/R*.class')
-    additionalSourceDirs = files(coverageSourceDirs)
-    executionData = files('build/jacoco/testDebug.exec')
 }
 
-// just clean up dashboard, following reports are not of interest
-testRelease.reports.html.enabled = false
-testRelease.reports.junitXml.enabled = false
-testDebug.reports.junitXml.enabled = false
+dependencies {
+    jacocoReport 'org.jacoco:org.jacoco.ant:0.7.2.201409121644'
+}

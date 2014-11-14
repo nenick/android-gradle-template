@@ -1,3 +1,2 @@
-include ':App', ':AppUnitTests', ':AppComponentTests',
-        ':GenerateDatabaseClasses', 'GenerateJsonRestModel'
+include ':App', ':GenerateDatabaseClasses', 'GenerateJsonRestModel'
 

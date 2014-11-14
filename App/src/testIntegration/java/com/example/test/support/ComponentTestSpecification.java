@@ -2,6 +2,8 @@ package com.example.test.support;
 
 import android.app.Activity;
 
+import com.example.CustomRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -11,7 +13,7 @@ import org.robolectric.util.ActivityController;
 
 import static org.robolectric.Robolectric.shadowOf;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(CustomRobolectricTestRunner.class)
 public abstract class ComponentTestSpecification<A extends Activity> {
 
     public A activity;

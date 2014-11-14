@@ -8,11 +8,11 @@ import com.example.test.support.ComponentTestSpecification;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MainActivitySpec extends ComponentTestSpecification<MainActivity_> {
+public class MainActivityTest extends ComponentTestSpecification<MainActivity_> {
 
     StartPage startPage = new StartPage(this);
 
-    public MainActivitySpec() {
+    public MainActivityTest() {
         super(MainActivity_.class);
     }
 
