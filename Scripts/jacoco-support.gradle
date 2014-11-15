@@ -13,7 +13,7 @@ configurations {
     }
 }*/
 
-task jacocoReport(dependsOn: 'test') << {
+task jacocoReport(dependsOn: 'testNormalDebug') << {
     ant {
         taskdef(name:'jacocoreport',
                 classname: 'org.jacoco.ant.ReportTask',
