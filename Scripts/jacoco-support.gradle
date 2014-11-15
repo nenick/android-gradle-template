@@ -20,6 +20,7 @@ task jacocoReport(dependsOn: 'testNormalDebug') << {
                 classpath: configurations.jacocoReport.asPath)
 
         mkdir dir: "${buildDir}/test-coverage-report"
+        mkdir dir: "${buildDir}/reports/jacoco/test/"
 
         jacocoreport {
             executiondata {
