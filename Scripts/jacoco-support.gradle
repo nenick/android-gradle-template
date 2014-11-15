@@ -6,10 +6,10 @@ configurations {
 
 task mergedData(type: JacocoMerge) {
     // can pass in any task set up for Jacoco
-    executionData "build/jacoco/testNormalDebug.exec", "build/jacoco/testIntegrationDebug.exec"
+    executionData "${buildDir}/jacoco/testNormalDebug.exec", "build/jacoco/testIntegrationDebug.exec"
     doLast {
-        file("build/jacoco/testNormalDebug.exec").delete()
-        file("build/jacoco/testIntegrationDebug.exec").delete()
+        file("${buildDir}/jacoco/testNormalDebug.exec").delete()
+        file("${buildDir}/jacoco/testIntegrationDebug.exec").delete()
     }
 }
 
