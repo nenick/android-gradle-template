@@ -9,7 +9,7 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 ## Choose your favourite way
 
-### Tests in a saperated module
+### Tests in a seperated module
 
 Switch to the branch https://github.com/nenick/android-gradle-template/tree/novoda for more informations
 
