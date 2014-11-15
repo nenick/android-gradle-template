@@ -7,7 +7,15 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 [see also wiki for more help](https://github.com/nenick/android-gradle-template/wiki)
 
-### I'm prefer switching to https://github.com/JCAndKSolutions/android-unit-test solution how to support robolectric because it integrates much better with the extra created IDE Plugin. But you can still use and improve the novoda solution on the branch https://github.com/nenick/android-gradle-template/tree/novoda
+## Choose your favourite way
+
+### Tests in a saperated module
+
+Switch to the branch https://github.com/nenick/android-gradle-template/tree/novoda for more informations
+
+### Tests in the same module
+
+I'm prefer https://github.com/JCAndKSolutions/android-unit-test to support robolectric because it integrates much better through the extra created IDE Plugin.
 
 ***Migration to JCAndKSolutions in progress ...***
 
