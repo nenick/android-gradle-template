@@ -5,8 +5,6 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 ***Wishes, improvements and discussions about the stuff here are welcome***
 
-[see also wiki for more help](https://github.com/nenick/android-gradle-template/wiki)
-
 ## Choose your favourite way
 
 ### Tests in a seperated module
@@ -32,8 +30,6 @@ I'm prefer https://github.com/JCAndKSolutions/android-unit-test to support robol
 install the plugin https://github.com/evant/android-studio-unit-test-plugin you can install the plugin through the plugin installer in Android Studio
 
 This project template support AndroidStudio.
-
-Run tests in Android Studio need some configuration:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
 
 ## Tests on command line
 
