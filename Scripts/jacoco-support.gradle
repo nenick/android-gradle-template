@@ -26,7 +26,7 @@ task jacocoReport(dependsOn: 'test') << {
 
                 sourcefiles {
                     fileset dir: "src/main/java"
-                    fileset dir: "src/mock/java"
+                    //fileset dir: "src/mock/java"
                 }
             }
 
