@@ -4,6 +4,13 @@ configurations {
     jacocoReport
 }
 
+coverageSourceDirs = [
+        '../App/src/main/java',
+        '../App/build/source/apt/debug',
+        '../App/build/generated/source/db',
+        '../App/build/generated/source/buildConfig/debug',
+        '../App/build/generated/source/r/debug']
+
 /*task mergedData(type: JacocoMerge) {
     // can pass in any task set up for Jacoco
     executionData "${buildDir}/jacoco/testNormalDebug.exec", "build/jacoco/testIntegrationDebug.exec"
@@ -30,13 +37,18 @@ task jacocoReport(dependsOn: 'testNormalDebug') << {
             structure(name: "${rootProject.name}") {
                 classfiles {
                     fileset (dir: "${buildDir}/intermediates/classes") {
-                        exclude(name: '**/BuildConfig.class')
+                        //exclude(name: '**/*_*.class')
+                        exclude(name: '**/R.class')
+                        exclude(name: '**/R$*.class')
                     }
                 }
 
                 sourcefiles {
                     fileset dir: "src/main/java"
-                    //fileset dir: "src/mock/java"
+                    fileset dir: '../App/build/source/apt/normal/debug'
+                    fileset dir: '../App/build/generated/source/db'
+                    fileset dir: '../App/build/generated/source/buildConfig/normal/debug'
+                    fileset dir: '../App/build/generated/source/r/normal/debug'
                 }
             }
 
