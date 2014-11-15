@@ -15,6 +15,6 @@ coverageSourceDirs = [
 
 coveralls {
     if(project.hasProperty('travisCi')) { // avoid android studio source root conflicts
-       sourceSets.main.java.srcDirs += coverageSourceDirs
+      // sourceSets.main.java.srcDirs += coverageSourceDirs
     }
 }
