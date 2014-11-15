@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ./gradlew :build \
-          :App:test \
-          :App:connectedAndroidTestIntegrationDebug \
-          :App:mergedData \
+          :App:testNormalDebug \
           :App:jacocoReport \
           :App:coveralls \
+          :App:testIntegrationDebug \
+          :App:connectedAndroidTestIntegrationDebug \
           -PtravisCi -PdisablePreDex
