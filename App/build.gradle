@@ -158,7 +158,7 @@ println "Internet is reachable $reachable"
 //test.reports.html.enabled = false     // just clean up dashboard from not generated reports
 //test.reports.junitXml.enabled = false // just clean up dashboard from not generated reports
 
-apply plugin: 'coveralls'
+apply plugin: 'com.github.kt3k.coveralls'
 
 apply from: '../Scripts/jacoco-support.gradle'
 
