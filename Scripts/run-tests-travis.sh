@@ -5,7 +5,6 @@
 ./gradlew :build \
           :App:test \
           :App:connectedAndroidTest \
+          :App:jacocoReport \
+          :App:coveralls \
           -PtravisCi -PdisablePreDex
-
-#          :App:jacocoReport \
-#          :App:coveralls \
