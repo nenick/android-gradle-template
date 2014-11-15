@@ -25,60 +25,9 @@ I'm prefer https://github.com/JCAndKSolutions/android-unit-test to support robol
 * Gradle Build Tools 0.12.+
 * Gradle 1.12
 
-## Getting Started
-
-***until next release of novodas test plugin [with this pull request](https://github.com/novoda/gradle-android-test-plugin/pull/11) , we use our own custom version*** 
-
-For gradle-android-test-plugin:0.9.9-SNAPSHOT run `Scripts/install-custom-gradle-test-plugin.sh`
-
-### Check if the project and tests works on your machine
-
-***clone, attach phone (or start emulator), run `Scripts/run-tests.sh` from project root***
-
-### Check if you get this project to work with andorid studio
-
-***import to android studio, start development, press play***
-
-## Test support in IDE
-
-This project template support AndroidStudio.
-
-Run tests in Android Studio need some configuration:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
-
-## Tests on command line
-
-**unit tests:** `./gradlew :AppUnitTests:testDebug`
-
-* append `:AppUnitTests:jacocoTestReport` for coverage report
-
-**component tests:** `./gradlew :AppComponentTests:testDebug`
-
-* append `:AppComponentTests:jacocoTestReport for coverage report
-
-**acceptance tests:** `./gradlew :App:connectedAndroidTest`
-
-* replace by `:App:connectedCheck` for coverage report
-
-### rest example
-Currently RestActivity example fails when no server is reachable. 
-
-* start `Script/start-wiremock.sh`
-* kill  `Script/start-wiremock.sh kill`
-
-## Test results
-
-* build/index.html *(should collect all reports, current is miss the AndroidSample module reports)*
-* AppUnitTests/build/test-report/debug/index.html (**unit test**)
-* AppUnitTests/build/reports/jacoco/test/html/index.html (**unit test coverage**)
-* AppComponentTests/build/test-report/debug/index.html (**component test**)
-* AppComponentTests/build/reports/jacoco/test/html/index.html (**component test coverage**)
-* App/build/reports/androidTests/connected/index.html (**acceptance tests**)
-* App/build/reports/coverage/debug/index.html (**acceptance tests coverage**)
-
 ## Features done
 
 * Gradle + AndroidStudio as development Enironment
-* Use [novoda/gradle-android-test-plugin](https://github.com/novoda/gradle-android-test-plugin) to use Robolectric in submodule
 * Robolectric for unit tests
     * Mockito
     * Code coverage with JaCoCo
@@ -93,9 +42,3 @@ Currently RestActivity example fails when no server is reachable.
 * Shortcut: jump between test and implementation with default short cut
 * [Travis](https://travis-ci.org/) CI runs all test variants
 * [Coveralls](https://coveralls.io/) shows unit test code coverage [coveralls-gradle-plugin](https://github.com/kt3k/coveralls-gradle-plugin)
-
-## Scripts
-
-* run-tests.sh execute all test variants
-* run-tests-fast.sh execute just the robolectric tests
-* run-tests-travis.sh do all steps necessary for full automatic builds, like install custom dependencies
