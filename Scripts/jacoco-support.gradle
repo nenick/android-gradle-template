@@ -39,7 +39,7 @@ task jacocoReport(dependsOn: 'testNormalDebug') << {
                 }
             }
 
-            xml destfile: "${buildDir}/test-coverage-report/jacoco.xml"
+            xml destfile: "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
             html destdir: "${buildDir}/test-coverage-report/"
         }
     }
