@@ -4,6 +4,15 @@ configurations {
     jacocoReport
 }
 
+task mergedData(type: JacocoMerge) {
+    // can pass in any task set up for Jacoco
+    executionData "build/jacoco/testNormalDebug.exec", "build/jacoco/testIntegrationDebug.exec"
+    doLast {
+        file("build/jacoco/testNormalDebug.exec").delete()
+        file("build/jacoco/testIntegrationDebug.exec").delete()
+    }
+}
+
 task jacocoReport(dependsOn: 'test') << {
     ant {
         taskdef(name:'jacocoreport',
