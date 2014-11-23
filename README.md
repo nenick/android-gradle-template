@@ -15,6 +15,10 @@ Switch to the branch https://github.com/nenick/android-gradle-template/tree/novo
 
 I'm prefer https://github.com/JCAndKSolutions/android-unit-test to support robolectric because it integrates much better through the extra created IDE Plugin.
 
+### More extended example with a clean architecture concept
+
+https://github.com/nenick/AndroidAppDevelopment
+
 ## Getting Started
 
 ### Check if the project and tests works on your machine
