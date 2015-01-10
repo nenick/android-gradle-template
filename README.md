@@ -66,9 +66,9 @@ Currently RestActivity example fails when no server is reachable.
 
 ## Last tests done with
 
-* Android Studio 0.8.14
-* Gradle Build Tools 0.12.+
-* Gradle 1.12
+* Android Studio 1.0.2
+* Gradle Build Tools 1.0.0
+* Gradle 2.1.1
 
 ## Features done
 
