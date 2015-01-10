@@ -1,14 +1,14 @@
 
 buildscript {
     dependencies {
-        classpath "com.android.tools.build:gradle:" + androidToolsBuildGradle
-        classpath 'com.github.jcandksolutions.gradle:android-unit-test:1.6.3'
+        classpath "com.android.tools.build:gradle:1.0.0"
+        classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.1.1'
         classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:1.0.2'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.1.0'
     }
 }
 
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 android {
@@ -22,11 +22,11 @@ android {
 
     buildTypes {
         release {
-            runProguard true
+            minifyEnabled true
             proguardFile 'proguard-project.txt'
         }
         debug {
-            runProguard false
+            minifyEnabled false
             testCoverageEnabled = true
         }
     }
@@ -119,7 +119,7 @@ dependencies {
 
 apt {
     arguments {
-        androidManifestFile variant.processResources.manifestFile
+        androidManifestFile variant.outputs[0].processResources.manifestFile
         resourcePackageName 'com.example'
     }
 }

@@ -4,7 +4,7 @@ configurations {
     jacocoReport
 }
 
-coverageSourceDirs = [
+ext.coverageSourceDirs = [
         '../App/src/main/java',
         '../App/build/source/apt/debug',
         '../App/build/generated/source/db',
