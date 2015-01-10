@@ -13,7 +13,7 @@ test.reports.junitXml.enabled = false // just clean up dashboard from not genera
 
 apply plugin: 'android-test'
 apply plugin: "jacoco"
-apply plugin: 'coveralls'
+apply plugin: 'com.github.kt3k.coveralls'
 
 android {
     projectUnderTest ':App'
