@@ -37,7 +37,7 @@ This project template support AndroidStudio.
 
 ## Tests on command line
 
-**unit tests:** `./gradlew testNormLDebug`
+**unit tests:** `./gradlew testNormalDebug`
 
 * append `jacocoReport` for coverage report ***can't be combined with the integration tests***
 
@@ -52,8 +52,8 @@ This project template support AndroidStudio.
 ### rest example
 Currently RestActivity example fails when no server is reachable.
 
-* start `Script/start-wiremock.sh`
-* kill  `Script/start-wiremock.sh kill`
+* start `Scripts/start-wiremock.sh`
+* kill  `Scripts/start-wiremock.sh kill`
 
 ## Test results
 
