@@ -7,6 +7,8 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 ## Choose your favourite way
 
+Looks like we need no plugins anymore. With the new experimental unit test feature we can easy use robolectric. See the example https://github.com/nenick/AndroidStudioAndRobolectric or read a step by step guide http://nenick-android.blogspot.de/2015/02/android-studio-110-beta-4-and.html
+
 ### Tests in a seperated module
 
 Switch to the branch https://github.com/nenick/android-gradle-template/tree/novoda for more informations
