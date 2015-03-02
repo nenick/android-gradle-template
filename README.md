@@ -7,17 +7,17 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 
 [see also wiki for more help](https://github.com/nenick/android-gradle-template/wiki)
 
+* A more minimalistic robolectric example can be found at https://github.com/nenick/AndroidStudioAndRobolectric
+* Basic examples how to use gradle-android-test-plugin see https://github.com/novoda/gradle-android-test-plugin
+
 ## Last tests done with
 
-* Android Studio 1.0.2
-* Gradle Build Tools 1.0.0
-* Gradle 2.1.1
+* Android Studio 1.1.0
+* Gradle Build Tools 1.1.2
+* Gradle 2.2.1
+* Novoda gradle-android-test-plugin 0.10.3
 
 ## Getting Started
-
-***until next release of novodas test plugin [with this pull request](https://github.com/novoda/gradle-android-test-plugin/pull/11) , we use our own custom version*** 
-
-For gradle-android-test-plugin:0.9.9-SNAPSHOT run `Scripts/install-custom-gradle-test-plugin.sh`
 
 ### Check if the project and tests works on your machine
 

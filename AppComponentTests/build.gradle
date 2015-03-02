@@ -1,7 +1,11 @@
 buildscript {
+    repositories {
+        jcenter()
+    }
+
     dependencies {
-        classpath "com.android.tools.build:gradle:1.0.0"
-        classpath "com.novoda:gradle-android-test-plugin:0.10.0"
+        classpath "com.android.tools.build:gradle:1.1.2"
+        classpath "com.novoda:gradle-android-test-plugin:0.10.3"
     }
 }
 
