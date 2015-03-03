@@ -15,9 +15,11 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 * Android Studio 1.1.0
 * Gradle Build Tools 1.1.2
 * Gradle 2.2.1
-* Novoda gradle-android-test-plugin 0.10.3
+* Novoda gradle-android-test-plugin 0.10.4 (Not yet releases)
 
 ## Getting Started
+
+Until next novoda plugin release use the Script/install-custom-gradle-test-plugin.sh to install the necessary plugin version
 
 ### Check if the project and tests works on your machine
 
