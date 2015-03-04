@@ -15,7 +15,7 @@ with Android Studio, Gradle, Espresso, Robolectric, AndroidAnnotations, RoboCoP,
 * Android Studio 1.1.0
 * Gradle Build Tools 1.1.2
 * Gradle 2.2.1
-* Novoda gradle-android-test-plugin 0.10.4 (Not yet releases)
+* Novoda gradle-android-test-plugin 0.10.4 (Not yet released)
 
 ## Getting Started
 
