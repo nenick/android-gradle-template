@@ -1,15 +1,8 @@
-apply plugin: 'idea'
-// workaround to use android studio and robolectric without build classpath effort
-// the 'outputDir' is used as reference to the resource directory, found no other way
-// ** current has this workaround no effect, since android studio 6.0 **
-idea {
-    module {
-        outputDir = file('build/resources/testDebug')
-        testOutputDir = file('build/test-classes/debug')
-    }
-}
 
-// new workaround to force add custom output dirs for android studio
+// workaround force compile the test classes in android studio
+tasks.testClasses.dependsOn(tasks.testDebugClasses)
+
+// workaround to force recognize correct output dirs for android studio
 task addTest {
     def file = file(project.name + ".iml")
     doLast {
@@ -51,8 +44,5 @@ task addTest {
 
     }
 }
+tasks.testClasses.dependsOn(tasks.addTest)
 
-// always do the addtest on prebuild
-gradle.projectsEvaluated {
-    testDebugClasses.dependsOn(addTest)
-}

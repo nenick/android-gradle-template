@@ -11,7 +11,7 @@ import org.robolectric.util.ActivityController;
 
 import static org.robolectric.Robolectric.shadowOf;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(CustomRobolectricTestRunner.class)
 public abstract class ComponentTestSpecification<A extends Activity> {
 
     public A activity;
