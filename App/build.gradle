@@ -215,7 +215,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
     reports {
         xml {
             enabled = true
-            destination = "${project.buildDir}/reports/jacoco/jacoco.xml"
+            destination = "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
         }
         csv.enabled false
         html {
