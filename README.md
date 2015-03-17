@@ -29,11 +29,9 @@ Until next novoda plugin release use the Script/install-custom-gradle-test-plugi
 
 ***import to android studio, start development, press play***
 
-## Test support in IDE
+## Support for Android studio
 
-This project template support AndroidStudio.
-
-Run tests in Android Studio need some configuration:  [see wiki for description](https://github.com/nenick/android-gradle-template/wiki/Tests-in-Android-Studio---IntellJ)
+Out of the box
 
 ## Tests on command line
 
