@@ -4,7 +4,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.R;
-import com.example.databaseexample.DatabasePresenter;
 import com.example.test.support.UnitTestSpecification;
 
 import org.fest.assertions.api.ANDROID;

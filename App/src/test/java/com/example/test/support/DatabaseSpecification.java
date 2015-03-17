@@ -18,9 +18,9 @@ public abstract class DatabaseSpecification extends UnitTestSpecification {
     }
 
     public void resetDatabase() {
-        File dbFile = context.getDatabasePath(null);
+/*        File dbFile = context.getDatabasePath(null);
         if (dbFile.exists()) {
             context.deleteDatabase(dbFile.getAbsolutePath());
-        }
+        }*/
     }
 }

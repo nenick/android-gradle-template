@@ -1,7 +1,7 @@
 jacoco {
     toolVersion = "0.7.0.201403182114"
 }
-
+/*
 ext.coverageSourceDirs = [
         '../App/src/main/java',
         '../App/build/source/apt/debug',
@@ -24,3 +24,5 @@ jacocoTestReport {
 testRelease.reports.html.enabled = false
 testRelease.reports.junitXml.enabled = false
 testDebug.reports.junitXml.enabled = false
+*/
+

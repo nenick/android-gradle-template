@@ -1,13 +1,19 @@
 
 buildscript {
+    repositories {
+        jcenter()
+    }
     dependencies {
         classpath "com.android.tools.build:gradle:1.1.2"
         classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.1.0'
     }
 }
 
+apply plugin: "jacoco"
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'com.github.kt3k.coveralls'
 
 android {
     compileSdkVersion androidCompileSdkVersion
@@ -100,17 +106,121 @@ def obtainCurrentIpAddress() {
     ipAddr
 }
 
-apply plugin: 'idea'
-
-idea {
-    module {
-        //and some extra test source dirs
-        testSourceDirs += file('src/test')
-    }
-}
-
 // will be necessary when wiremock is used, to check if running
 Process p1 = Runtime.getRuntime().exec("ping -c 1 www.google.com");
 int returnVal = p1.waitFor();
 boolean reachable = (returnVal==0);
 println "Internet is reachable $reachable"
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile('com.squareup:fest-android:1.0.+') { exclude module: 'support-v4' }
+    testCompile ('org.robolectric:robolectric:2.4') {
+        exclude module: 'classworlds'
+        exclude module: 'maven-artifact'
+        exclude module: 'maven-artifact-manager'
+        exclude module: 'maven-error-diagnostics'
+        exclude module: 'maven-model'
+        exclude module: 'maven-plugin-registry'
+        exclude module: 'maven-profile'
+        exclude module: 'maven-project'
+        exclude module: 'maven-settings'
+        exclude module: 'nekohtml'
+        exclude module: 'plexus-container-default'
+        exclude module: 'plexus-interpolation'
+        exclude module: 'plexus-utils'
+        exclude module: 'support-v4' // crazy but my android studio don't like this dependency and to fix it remove .idea and re import project
+        exclude module: 'wagon-file'
+        exclude module: 'wagon-http-lightweight'
+        exclude module: 'wagon-http-shared'
+        exclude module: 'wagon-provider-api'
+    }
+}
+
+apply from: '../Scripts/jacoco-support.gradle'
+
+apply from: '../Scripts/coveralls-support.gradle'
+
+gradle.projectsEvaluated {
+    def variants = android.applicationVariants.collect()
+
+    tasks.withType(Test) { task ->
+        try {
+            variants.each { variant ->
+                def buildTypeName = variant.buildType.name.capitalize()
+
+                def productFlavorNames = variant.productFlavors.collect { it.name.capitalize() }
+                if (productFlavorNames.isEmpty()) {
+                    productFlavorNames = [""]
+                }
+                def productFlavorName = productFlavorNames.join('')
+                def flavor = uncapitalize(productFlavorName)
+
+                def variationName = "${productFlavorName}${buildTypeName}"
+
+                if (task.name.contains(variationName)) {
+                    def variationPath = variant.buildType.name;
+
+                    if (productFlavorName != null && !productFlavorName.isEmpty()) {
+                        variationPath = uncapitalize(productFlavorName) + "/" + variationPath
+                    }
+
+                    def copyTestResourcesTask = project.tasks.create("copyTest${variationName}Resources", Copy)
+                    copyTestResourcesTask.from("${projectDir}/src/test/resources")
+                    copyTestResourcesTask.into("${buildDir}/intermediates/classes/test/${variationPath}")
+
+                    // Makes the test task depend on the copy test resource variation task
+                    task.dependsOn(copyTestResourcesTask)
+
+                    variants.remove(variant)
+
+                    throw new Exception("Break") // Breaking the loop
+                }
+            }
+        } catch (Exception e) {} // Just drop the exception
+    }
+}
+
+def uncapitalize(String str) {
+    int strLen;
+    if (str == null || (strLen = str.length()) == 0) {
+        return str;
+    }
+    return new StringBuffer(strLen)
+            .append(Character.toLowerCase(str.charAt(0)))
+            .append(str.substring(1))
+            .toString();
+}
+
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
+    description = "Generates Jacoco coverage reports: XML and HTML"
+    group = "Reporting"
+//                outputs.upToDateWhen { false }
+
+    // use hidden configuration, for details look into JacocoPlugin.groovy
+    jacocoClasspath = project.configurations['androidJacocoAnt']
+
+    // exclude auto-generated classes and tests
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*',
+                      'android/**/*.*']
+    def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
+
+    reports {
+        xml {
+            enabled = true
+            destination = "${project.buildDir}/reports/jacoco/jacoco.xml"
+        }
+        csv.enabled false
+        html {
+            enabled = true
+            destination = "${project.buildDir}/reports/jacoco"
+        }
+    }
+}

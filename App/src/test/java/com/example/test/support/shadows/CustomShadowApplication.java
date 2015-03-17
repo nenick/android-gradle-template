@@ -14,12 +14,4 @@ import java.io.File;
 @Implements(Application.class)
 public class CustomShadowApplication extends ShadowApplication {
 
-    private static final String alternativeDatabasePath = "build/resources/unit-test.db";
-    private File database = new File(alternativeDatabasePath);
-
-    @Override
-    @Implementation
-    public File getDatabasePath(String name) {
-        return database;
-    }
 }

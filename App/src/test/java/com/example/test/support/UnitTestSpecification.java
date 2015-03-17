@@ -13,7 +13,7 @@ public abstract class UnitTestSpecification {
     public UnitTestSpecification() {
         // found no other way to set LogManager configuration by property file
         try {
-            LogManager.getLogManager().readConfiguration(new FileInputStream("logging.properties"));
+            LogManager.getLogManager().readConfiguration(getClass().getResourceAsStream("/logging.properties"));
             ShadowLog.stream = System.out; // current ShadowLog ignore log levels
         } catch (IOException e) {
             throw new RuntimeException(e);
