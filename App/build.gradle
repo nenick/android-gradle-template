@@ -138,7 +138,9 @@ dependencies {
     }
 }
 
-apply from: '../Scripts/jacoco-support.gradle'
+jacoco {
+    toolVersion = "0.7.0.201403182114"
+}
 
 apply from: '../Scripts/coveralls-support.gradle'
 
