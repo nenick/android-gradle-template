@@ -37,13 +37,13 @@ Run tests in Android Studio need some configuration:  [see wiki for description]
 
 ## Tests on command line
 
-**unit tests:** `./gradlew :AppUnitTests:testDebug`
+**unit tests:** `./gradlew :App:testDebug`
 
-* append `:AppUnitTests:jacocoTestReport` for coverage report
+* append `:App:jacocoTestReport` for coverage report
 
 **component tests:** `./gradlew :AppComponentTests:testDebug`
 
-* append `:AppComponentTests:jacocoTestReport for coverage report
+* append `:AppComponentTests:jacocoTestReport` for coverage report
 
 **acceptance tests:** `./gradlew :App:connectedAndroidTest`
 
