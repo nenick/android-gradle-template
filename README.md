@@ -58,8 +58,8 @@ Currently RestActivity example fails when no server is reachable.
 ## Test results
 
 * build/index.html *(should collect all reports, current is miss the AndroidSample module reports)*
-* AppUnitTests/build/test-report/debug/index.html (**unit test**)
-* AppUnitTests/build/reports/jacoco/test/html/index.html (**unit test coverage**)
+* App/build/test-report/debug/index.html (**unit test**)
+* App/build/reports/jacoco/jacoco.html (**unit test coverage**)
 * AppComponentTests/build/test-report/debug/index.html (**component test**)
 * AppComponentTests/build/reports/jacoco/test/html/index.html (**component test coverage**)
 * App/build/reports/androidTests/connected/index.html (**acceptance tests**)
@@ -68,19 +68,14 @@ Currently RestActivity example fails when no server is reachable.
 ## Features done
 
 * Gradle + AndroidStudio as development Enironment
-* Use [novoda/gradle-android-test-plugin](https://github.com/novoda/gradle-android-test-plugin) to use Robolectric in submodule
-* Robolectric for unit tests
-    * Mockito
+* Robolectric for unit tests at jvm instead on devices
     * Code coverage with JaCoCo
-    * Code coverage with Teamcity
-* Robolectric for component tests
+* [novoda/gradle-android-test-plugin](https://github.com/novoda/gradle-android-test-plugin) to use Robolectric in submodule
     * Code coverage with JaCoCo
-    * Code coverage with Teamcity
 * FEST Android assertions
 * Espresso for acceptance tests
 * [AndroidAnnotations](http://androidannotations.org/) generate dependency injection
 * [RoboCoP](https://github.com/mediarain/RoboCoP) generate database management
-* Shortcut: jump between test and implementation with default short cut
 * [Travis](https://travis-ci.org/) CI runs all test variants
 * [Coveralls](https://coveralls.io/) shows unit test code coverage [coveralls-gradle-plugin](https://github.com/kt3k/coveralls-gradle-plugin)
 
