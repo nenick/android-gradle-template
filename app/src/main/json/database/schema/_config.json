@@ -1,0 +1,13 @@
+{
+  "syntaxVersion": 3,
+  "projectPackageId": "com.example.project",
+  "authority": "com.example.project",
+  "providerJavaPackage": "com.example.project.database",
+  "providerClassName": "ExampleProvider",
+  "sqliteOpenHelperClassName": "ExampleSQLiteOpenHelper",
+  "sqliteOpenHelperCallbacksClassName": "QuAccSQLiteOpenHelperCallbacks",
+  "databaseFileName": "example.db",
+  "databaseVersion": 1,
+  "enableForeignKeys": true,
+  "useAnnotations": true
+}

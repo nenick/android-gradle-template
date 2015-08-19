@@ -1,0 +1,1 @@
+For details see [project docs](docs/src/main/resources/index.md)

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.project">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".view.start.StartActivity_"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.contact_list.ContactListActivity_"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.example.project.view.contact_details.DetailActivity_"
+            android:label="@string/app_name" />
+        <provider
+            android:name="com.example.project.database.ExampleProvider"
+            android:authorities="com.example.project"
+            android:exported="false" />
+    </application>
+
+</manifest>

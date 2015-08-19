@@ -1,0 +1,48 @@
+// workaround force compile the test classes in android studio
+tasks.testClasses.dependsOn(tasks.testDebugClasses)
+
+// workaround to force recognize correct output dirs for android studio
+task addTest {
+    def file = file(project.name + ".iml")
+    doLast {
+        try {
+            def parsedXml = (new XmlParser()).parse(file)
+            def node = parsedXml.component[1]
+            def outputNode = parsedXml.component[1].output[0]
+            def outputTestNode = parsedXml.component[1].'output-test'[0]
+            def rewrite = false
+
+            new Node(node, 'sourceFolder', ['url': 'file://$MODULE_DIR$/' + "${it}", 'isTestSource': "true"])
+
+            if (outputNode == null) {
+                new Node(node, 'output', ['url': 'file://$MODULE_DIR$/build/resources/testDebug'])
+                rewrite = true
+            } else {
+                if (outputNode.attributes['url'] != 'file://$MODULE_DIR$/build/resources/testDebug') {
+                    outputNode.attributes = ['url': 'file://$MODULE_DIR$/build/resources/testDebug']
+                    rewrite = true
+                }
+            }
+
+            if (outputTestNode == null) {
+                new Node(node, 'output-test', ['url': 'file://$MODULE_DIR$/build/test-classes/debug'])
+                rewrite = true
+            } else {
+                if (outputTestNode.attributes['url'] != 'file://$MODULE_DIR$/build/test-classes/debug') {
+                    outputTestNode.attributes = ['url': 'file://$MODULE_DIR$/build/test-classes/debug']
+                    rewrite = true
+                }
+            }
+
+            if (rewrite) {
+                def writer = new StringWriter()
+                new XmlNodePrinter(new PrintWriter(writer)).print(parsedXml)
+                file.text = writer.toString()
+            }
+        } catch (FileNotFoundException e) {
+            // iml not found, common on command line only builds
+        }
+
+    }
+}
+tasks.testClasses.dependsOn(tasks.addTest)

@@ -1,0 +1,64 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+plugins {
+    id "de.undercouch.download" version "1.2"
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply from: 'build-generate-database.gradle'
+apply from: 'build-robolectric.gradle'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.example.project"
+        minSdkVersion 8 // v8 is latest supported version by google playstore app (august 2015)
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "MODULE_PATH", "\"$projectDir\"".replace('\\', '\\\\')
+        }
+        debug {
+            buildConfigField "String", "MODULE_PATH", "\"$projectDir\"".replace('\\', '\\\\')
+        }
+    }
+}
+
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.1'
+
+    apt "org.androidannotations:androidannotations:3.3.2"
+    compile "org.androidannotations:androidannotations-api:3.3.2"
+
+    compile 'commons-lang:commons-lang:2.6'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.squareup.assertj:assertj-android:1.1.0'
+    testCompile 'org.mockito:mockito-all:2.0.2-beta'
+}
