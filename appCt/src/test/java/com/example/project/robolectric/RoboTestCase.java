@@ -1,13 +1,13 @@
-package com.example.project;
+package com.example.project.robolectric;
 
 import android.content.Context;
 
+import com.example.project.BuildConfig;
 import com.example.project.database.ExampleSQLiteOpenHelper;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 

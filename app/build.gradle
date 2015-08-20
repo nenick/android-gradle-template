@@ -14,7 +14,6 @@ plugins {
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 apply from: 'build-generate-database.gradle'
-apply from: 'build-robolectric.gradle'
 
 android {
     compileSdkVersion 22
@@ -61,4 +60,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'com.squareup.assertj:assertj-android:1.1.0'
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
+    testCompile 'org.robolectric:shadows-support-v4:3.0'
+    testCompile 'org.robolectric:robolectric:3.0'
 }

@@ -45,3 +45,9 @@ You will get strange behavior when you forget to reset your tests. Most times yo
             throw new RuntimeException();
         }
     }
+
+### Use extra shadow modules
+
+List of available extra modules <http://robolectric.org/using-add-on-modules/>
+
+For apps using classes from v4 support must add *testCompile 'org.robolectric:shadows-support-v4:3.0'* or it may result in unstable tests.

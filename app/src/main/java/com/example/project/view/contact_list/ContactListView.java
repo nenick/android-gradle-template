@@ -15,7 +15,7 @@ public class ContactListView implements BaseView {
     @ViewById(R.id.listView)
     ListView contactList;
 
-    public void setContactList(ListAdapter listAdapter) {
+    public void showContacts(ListAdapter listAdapter) {
         contactList.setAdapter(listAdapter);
     }
 }

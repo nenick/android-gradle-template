@@ -1,7 +1,8 @@
-package com.example.project;
+package com.example.project.robolectric;
+
+import com.example.project.BuildConfig;
 
 import org.junit.runners.model.InitializationError;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RobolectricTestRunner;
 
 import java.io.File;
