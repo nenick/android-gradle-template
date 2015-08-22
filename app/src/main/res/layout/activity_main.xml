@@ -1,5 +1,5 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
-    android:name="com.example.project.view.contact_list.ContactListFragment_"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment_list"
+    android:name="com.example.project.views.contact_list.ContactListFragment_"
     tools:layout="@layout/fragment_list" android:layout_width="match_parent"
     android:layout_height="match_parent" />
