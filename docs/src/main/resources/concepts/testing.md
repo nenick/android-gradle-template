@@ -29,14 +29,14 @@ unit test without robolectric this give you the fastest development cycle (TDD).
 Check that units work together in combination with database, network, android services, business logic, views, etc...
 
 For this kind of tests I love robolectric.
-Test execution is around 20x faster than on device/emulator with espresso.
+Test execution is up to 20x faster than on device/emulator with espresso.
 But not all android features are supported or must first be configured to your needs.
 
 ## Integration Tests
 
 At least check that your app does run on device.
 Again you can choose between different approaches, see <http://testdroid.com/tech/top-5-android-testing-frameworks-with-examples>.
-My favourite concept is to navigate through each page and most feature and take a screenshot.
+One concept may be to navigate through each page and feature and take a screenshot.
 After each runs you can compare the layout and style to look same the effort. This can be improved with automatic image compare.
 
 

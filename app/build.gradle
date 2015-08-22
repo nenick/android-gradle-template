@@ -37,6 +37,9 @@ android {
             buildConfigField "String", "MODULE_PATH", "\"$projectDir\"".replace('\\', '\\\\')
         }
     }
+
+    // instrumentation test module need to access the expected variant, default is only release
+    publishNonDefault true
 }
 
 apt {

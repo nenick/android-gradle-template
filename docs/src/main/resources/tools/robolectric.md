@@ -51,37 +51,3 @@ You will get strange behavior when you forget to reset your tests. Most times yo
 List of available extra modules <http://robolectric.org/using-add-on-modules/>
 
 For apps using classes from v4 support must add *testCompile 'org.robolectric:shadows-support-v4:3.0'* or it may result in unstable tests.
-
-### robolectric in extra test module
-
-** check if issue is gone**
-avoid release builds for test runs, and conflict between lint and test runs
-
-    afterEvaluate {
-
-        def isLintRun = false
-        def isTestRun = false
-
-        gradle.startParameter.taskNames.each {
-            if (it.contains("lint")) {
-                isLintRun = true
-            }
-            if (it.contains("test")) {
-                isTestRun = true
-            }
-        }
-
-        if (isLintRun && isTestRun) {
-            println "WARNING: tests for release type are disabled for supporting jacoco"
-            println "WARNING: run test and lint at same time is not supported"
-            exit 1
-        }
-
-        if (isTestRun) {
-            tasks.each {
-                if (it.name.contains("Release")) {
-                    it.enabled = false
-                }
-            }
-        }
-    }
