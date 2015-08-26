@@ -1,12 +1,11 @@
-
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:1.1.2"
-        classpath "com.neenbedankt.gradle.plugins:android-apt:1.2"
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.1.0'
+        classpath "com.android.tools.build:gradle:1.3.0"
+        classpath "com.neenbedankt.gradle.plugins:android-apt:1.7"
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
     }
 }
 
@@ -20,7 +19,13 @@ android {
     buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
-        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+        applicationId "com.example"
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 2
+        versionName "1.0.0-SNAPSHOT"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -66,7 +71,7 @@ android {
 
 dependencies {
 
-    compile 'com.android.support:support-v4:19.1.+'
+    compile 'com.android.support:support-v4:23.0.0'
 
     compile project(':GenerateDatabaseClasses')
     compile project(':GenerateJsonRestModel')
@@ -113,10 +118,10 @@ boolean reachable = (returnVal==0);
 println "Internet is reachable $reachable"
 
 dependencies {
-    testCompile 'junit:junit:4.11'
-    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
     testCompile('com.squareup:fest-android:1.0.+') { exclude module: 'support-v4' }
-    testCompile ('org.robolectric:robolectric:2.4') {
+    testCompile('org.robolectric:robolectric:3.0') {
         exclude module: 'classworlds'
         exclude module: 'maven-artifact'
         exclude module: 'maven-artifact-manager'
