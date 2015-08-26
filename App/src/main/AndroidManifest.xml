@@ -4,9 +4,6 @@
           android:versionName="1.0.0-SNAPSHOT"
           package="com.example">
 
-    <uses-sdk android:minSdkVersion="11"
-              android:targetSdkVersion="19"/>
-
     <!-- remove this permission if no network communication necessary -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
