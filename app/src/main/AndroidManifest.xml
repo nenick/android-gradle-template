@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.project">
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +10,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".views.start.StartActivity_"
-            android:label="@string/app_name">
+            android:finishOnTaskLaunch="true"
+            android:label="@string/app_name"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -17,17 +20,22 @@
         </activity>
         <activity
             android:name=".views.contact_list.ContactListActivity_"
-            android:label="@string/app_name" />
+            android:label="List" />
         <activity
             android:name=".views.contact_details.DetailActivity_"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".views.contact_edit.EditActivity_"
-            android:label="@string/app_name" >
+            android:label="Details">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.contact_list.ContactListActivity_" />
         </activity>
+        <activity
+            android:name=".views.contact_edit.EditActivity_"
+            android:label="Create or Update">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.contact_list.ContactListActivity_" />
+        </activity>
+
         <provider
             android:name="com.example.project.database.ExampleProvider"
             android:authorities="com.example.project"

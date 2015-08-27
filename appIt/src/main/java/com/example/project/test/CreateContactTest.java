@@ -4,7 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.project.pages.EspContactListPage;
-import com.example.project.pages.EspCreateContactPage;
+import com.example.project.pages.EspEditContactPage;
 import com.example.project.views.contact_list.ContactListActivity_;
 
 import org.junit.Rule;
@@ -19,7 +19,7 @@ public class CreateContactTest {
     @Rule
     public ActivityTestRule<ContactListActivity_> activityRule = new ActivityTestRule<>(ContactListActivity_.class);
 
-    EspContactListPage contactListPage = new EspContactListPage(activityRule);
+    EspContactListPage contactListPage = new EspContactListPage();
 
     @Test
     public void testCreateNewContact() {
@@ -33,11 +33,11 @@ public class CreateContactTest {
     }
 
     private void whenAddContact() {
-        EspCreateContactPage createContactPage = contactListPage.createContact().click();
-        createContactPage.firstName().insert("My First Name");
-        createContactPage.lastName().insert("My Last Name");
-        createContactPage.birthDate().insert("11.11.1984");
-        contactListPage =  createContactPage.confirm().click();
+        EspEditContactPage editContactPage = contactListPage.createContact().click();
+        editContactPage.firstName().insert("My First Name");
+        editContactPage.lastName().insert("My Last Name");
+        editContactPage.birthDate().insert("11.11.1984");
+        contactListPage =  editContactPage.confirm().click();
     }
 
     private void givenListHasNoContacts() {

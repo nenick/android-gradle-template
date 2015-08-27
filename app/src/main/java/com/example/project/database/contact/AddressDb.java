@@ -11,7 +11,7 @@ import com.example.project.database.address.AddressSelection;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 @EBean
 public class AddressDb {

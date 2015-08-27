@@ -1,11 +1,12 @@
 apply plugin: 'com.android.test'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion projectAndroidVersion
+    buildToolsVersion projectAndroidBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion 8
+        // minimal should be same from app module
+        minSdkVersion projectAndroidMinVersion
         testApplicationId 'com.example.project.test'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -15,9 +16,13 @@ android {
 }
 
 dependencies {
-    // support-annotations version must be the same from the app module
-    compile 'com.android.support:support-annotations:22.2.1'
+    // force dependencies to use the same support-annotations version (must be same from app)
+    compile "com.android.support:support-annotations:$projectAndroidSupportToolsVersion"
+
+    // fluent assertion support and android specific assertions
     compile 'com.squareup.assertj:assertj-android:1.1.0'
-    compile ('com.android.support.test.espresso:espresso-core:2.2')
+
+    // espresso support
+    compile 'com.android.support.test.espresso:espresso-core:2.2'
     compile 'com.android.support.test:runner:0.3'
 }

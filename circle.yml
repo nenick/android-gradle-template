@@ -1,0 +1,53 @@
+machine:
+  environment:
+    GRADLE_OPTS: -Xmx512m
+    COVERALLS_REPO_TOKEN: nnpAVCsxCl2hK5BlVUd6VsMNE78LaBuh4
+
+test:
+  pre:
+    - emulator -avd circleci-android22 -no-audio -no-window:
+        background: true
+        parallel: true
+    - circle-android wait-for-boot
+
+  override:
+    # Build the code
+    - ./gradlew app:assembleDebug
+
+    # Execute Unit Tests
+    - ./gradlew app:test
+
+    # Execute Component Tests
+    - ./gradlew appCt:test
+
+    # Build instrumented test code and execute them on emulator
+    - ./gradlew appIt:assembleDebugAndroidTest
+    - ./gradlew appIt:connectedCheck
+
+    # Create coverage report
+    - ./gradlew jacocoTestReport
+
+    # Check lint hints
+    - ./gradlew app:lint
+
+    # copy test results
+    - mv app/build/reports/tests/debug $CIRCLE_TEST_REPORTS/AppUnitTests
+    - mv appCt/build/test-report $CIRCLE_TEST_REPORTS/ComponentTests
+    - mv appIt/build/reports/androidTests/connected $CIRCLE_TEST_REPORTS/AndroidTests
+    - mv build/reports/jacoco/test/html $CIRCLE_TEST_REPORTS/CodeCoverageReport
+
+    # copy lint report
+    - mkdir $CIRCLE_TEST_REPORTS/Lint
+    - mv app/build/outputs/lint-results_files $CIRCLE_TEST_REPORTS/Lint
+    - mv app/build/outputs/lint-results.html $CIRCLE_TEST_REPORTS/Lint/lint-app-results.html
+
+    # try circleCi proper test value feature
+    - mkdir $CIRCLE_TEST_REPORTS/junit
+    - find */build/test-results -name "*.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+
+deployment:
+  # Only report code coverage if all tasks are successful
+  coverage:
+    branch: [master]
+    commands:
+    - ./gradlew coveralls

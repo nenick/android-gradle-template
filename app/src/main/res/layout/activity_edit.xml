@@ -1,7 +1,7 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_detail"
-    android:name="com.example.project.views.contact_details.DetailFragment_"
+    android:id="@+id/fragment_edit"
+    android:name="com.example.project.views.contact_edit.EditFragment_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout="@layout/fragment_detail" />
+    tools:layout="@layout/fragment_edit" />

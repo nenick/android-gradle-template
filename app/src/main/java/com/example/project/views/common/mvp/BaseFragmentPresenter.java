@@ -11,9 +11,6 @@ import org.androidannotations.annotations.EFragment;
 @EFragment
 public abstract class BaseFragmentPresenter extends Fragment implements BasePresenter {
 
-    /** Guard to avoid multiple calls to {@link BasePresenter#onViewCreated} */
-    private boolean firstTimeOnAfterViews = true;
-
     // wrapper for the life cycles
 
     @Override

@@ -13,6 +13,10 @@ public class ContactDb {
     @RootContext
     Context context;
 
+    public ContactContentValues insertDataContainer() {
+        return new ContactContentValues();
+    }
+
     public long insert(ContactContentValues contentValues) {
         Uri contentUri = contentValues.insert(context.getContentResolver());
         return ContentUris.parseId(contentUri);
@@ -20,5 +24,9 @@ public class ContactDb {
 
     public ContactCursor queryAll() {
         return new ContactSelection().query(context.getContentResolver());
+    }
+
+    public ContactCursor queryById(long contactId) {
+        return new ContactSelection().id(contactId).query(context.getContentResolver());
     }
 }

@@ -12,7 +12,18 @@ buildscript {
     }
 }
 
+
+// current robolectric has no support for android M (v23) https://github.com/robolectric/robolectric/issues/1865
+ext.projectAndroidVersion = 22
+// latest supported version by google playstore app is v8 (august 2015)
+// latest supported version by joda time library is v10
+ext.projectAndroidMinVersion = 10
+// sometimes support tools and build tools have same version but support tools version grow faster with time
+ext.projectAndroidBuildToolsVersion = "22.0.1"
+ext.projectAndroidSupportToolsVersion = "22.2.1"
+
 allprojects {
+
     repositories {
         jcenter()
     }
