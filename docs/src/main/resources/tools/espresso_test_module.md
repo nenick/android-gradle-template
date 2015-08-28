@@ -19,3 +19,7 @@ base build.gradle
         targetProjectPath ':app'
         targetVariant 'debug'
     }
+
+### APK not build issue
+
+workaround is to call https://code.google.com/p/android/issues/detail?id=180689

@@ -21,7 +21,8 @@ test:
     - ./gradlew appCt:test
 
     # Build instrumented test code and execute them on emulator
-    - ./gradlew appIt:assembleAndroidTest
+    # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
+    - ./gradlew appIt:assembleDebug
     - ./gradlew appIt:connectedCheck
 
     # Create coverage report

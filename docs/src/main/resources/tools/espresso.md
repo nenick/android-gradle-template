@@ -6,7 +6,3 @@ Resolve issue http://stackoverflow.com/questions/28999124/resolved-versions-for-
 ### insert text issue
 
 http://stackoverflow.com/questions/20436968/espresso-typetext-not-working
-
-
-Adb Transfer Protocol Error.
-Is a directory
