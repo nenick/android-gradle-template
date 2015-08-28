@@ -21,7 +21,7 @@ test:
     - ./gradlew appCt:test
 
     # Build instrumented test code and execute them on emulator
-    - ./gradlew appIt:assembleDebugAndroidTest
+    - ./gradlew appIt:assembleAndroidTest
     - ./gradlew appIt:connectedCheck
 
     # Create coverage report
