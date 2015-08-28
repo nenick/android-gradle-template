@@ -37,7 +37,7 @@
         </activity>
 
         <provider
-            android:name="com.example.project.database.ExampleProvider"
+            android:name="com.example.project.database.ExampleDbProvider_"
             android:authorities="com.example.project"
             android:exported="false" />
     </application>

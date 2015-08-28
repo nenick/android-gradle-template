@@ -1,0 +1,10 @@
+{
+  "description": "Simple single contact.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer" },
+    "firstName": { "type": "string" },
+    "lastName": { "type": "string" },
+    "birthDateInMilliseconds": { "type": "string" }
+  }
+}

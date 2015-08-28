@@ -5,6 +5,7 @@ buildscript {
     dependencies {
         // code generation support for android annotations
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+
         // code generation for json string - object mapping
         classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.14'
     }
@@ -16,12 +17,16 @@ plugins {
 }
 
 apply plugin: 'com.android.application'
+
 // code generation support for android annotations
 apply plugin: 'android-apt'
-// code generation for json string - object mapping
-apply plugin: 'jsonschema2pojo'
+
+// code generation for json object mapping
+apply from: 'build-generate-json-objects.gradle'
+
 // code generation database files
 apply from: 'build-generate-database.gradle'
+
 // test support for android specific unit tests like database checks
 apply from: 'build-robolectric.gradle'
 
@@ -88,10 +93,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'com.squareup.assertj:assertj-android:1.1.0'
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
-}
-
-jsonSchema2Pojo {
-    source = files("${project.projectDir}/json/network/schema")
-    targetDirectory = file("${project.projectDir}/src/gen/java")
-    targetPackage = 'com.example.project.network'
 }

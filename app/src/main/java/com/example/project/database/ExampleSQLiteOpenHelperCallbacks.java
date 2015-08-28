@@ -9,11 +9,9 @@ import com.example.project.BuildConfig;
 
 /**
  * Implement your custom database creation or upgrade code here.
- *
- * This file will not be overwritten if you re-run the content provider generator.
  */
-public class QuAccSQLiteOpenHelperCallbacks {
-    private static final String TAG = QuAccSQLiteOpenHelperCallbacks.class.getSimpleName();
+public class ExampleSQLiteOpenHelperCallbacks {
+    private static final String TAG = ExampleSQLiteOpenHelperCallbacks.class.getSimpleName();
 
     public void onOpen(final Context context, final SQLiteDatabase db) {
         if (BuildConfig.DEBUG) Log.d(TAG, "onOpen");

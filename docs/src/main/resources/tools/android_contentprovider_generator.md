@@ -75,3 +75,15 @@ After the generation you will get a hint how to register your new database provi
             android:authorities="com.example.project.database.provider"
             android:exported="false" />
      </application>
+
+### subclass for dependency injection
+
+    @EBean
+    public class ExampleDbProvider extends ExampleProvider {
+    }
+
+### Move SQLiteOpenHelper Callbacks
+
+By default this class would not be overwritten but with some custom changes to the generation process it does.
+Best is to move it to src/main/java instead of src/gen/java within the same package to keep custom callback implementations.
+After each you must delete

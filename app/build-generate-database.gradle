@@ -15,7 +15,7 @@ task generateDatabaseFiles << {
     }
 
     // delete last generated files
-    file(dbClassesPath).deleteDir()
+    // file(dbClassesPath).deleteDir()
 
     // execute the generator
     exec {

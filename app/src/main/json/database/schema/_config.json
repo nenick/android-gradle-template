@@ -5,7 +5,7 @@
   "providerJavaPackage": "com.example.project.database",
   "providerClassName": "ExampleProvider",
   "sqliteOpenHelperClassName": "ExampleSQLiteOpenHelper",
-  "sqliteOpenHelperCallbacksClassName": "QuAccSQLiteOpenHelperCallbacks",
+  "sqliteOpenHelperCallbacksClassName": "ExampleSQLiteOpenHelperCallbacks",
   "databaseFileName": "example.db",
   "databaseVersion": 1,
   "enableForeignKeys": true,

@@ -20,7 +20,7 @@ public class ExampleSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static ExampleSQLiteOpenHelper sInstance;
     private final Context mContext;
-    private final QuAccSQLiteOpenHelperCallbacks mOpenHelperCallbacks;
+    private final ExampleSQLiteOpenHelperCallbacks mOpenHelperCallbacks;
 
     // @formatter:off
     public static final String SQL_CREATE_TABLE_ADDRESS = "CREATE TABLE IF NOT EXISTS "
@@ -75,7 +75,7 @@ public class ExampleSQLiteOpenHelper extends SQLiteOpenHelper {
     private ExampleSQLiteOpenHelper(Context context) {
         super(context, DATABASE_FILE_NAME, null, DATABASE_VERSION);
         mContext = context;
-        mOpenHelperCallbacks = new QuAccSQLiteOpenHelperCallbacks();
+        mOpenHelperCallbacks = new ExampleSQLiteOpenHelperCallbacks();
     }
 
 
@@ -91,7 +91,7 @@ public class ExampleSQLiteOpenHelper extends SQLiteOpenHelper {
     private ExampleSQLiteOpenHelper(Context context, DatabaseErrorHandler errorHandler) {
         super(context, DATABASE_FILE_NAME, null, DATABASE_VERSION, errorHandler);
         mContext = context;
-        mOpenHelperCallbacks = new QuAccSQLiteOpenHelperCallbacks();
+        mOpenHelperCallbacks = new ExampleSQLiteOpenHelperCallbacks();
     }
 
 

@@ -1,0 +1,12 @@
+{
+  "description": "Collection of contacts.",
+  "type": "object",
+  "properties": {
+    "contacts" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "contact.json"
+      }
+    }
+  }
+}
