@@ -1,6 +1,6 @@
 package com.example.project.testdata;
 
-import com.example.project.database.contact.ContactContentValues;
+import com.example.project.database.provider.contact.ContactContentValues;
 import com.example.project.database.contact.ContactDb;
 import com.example.project.database.contact.ContactDb_;
 
