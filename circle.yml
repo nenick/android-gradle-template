@@ -8,12 +8,12 @@ test:
     - emulator -avd circleci-android22 -no-audio -no-window -no-snapshot-load -no-snapshot-save -wipe-data:
         background: true
         parallel: true
-    - sh Scripts/src/main/resources/wait-for-boot.sh
+    - sh scripts/src/main/resources/wait-for-boot.sh
     - circle-android wait-for-boot
 
   override:
     # Build the code
-    - sh Scripts/src/main/resources/wait-for-boot.sh
+    - sh scripts/src/main/resources/wait-for-boot.sh
     - ./gradlew app:assembleDebug
 
     # Execute Unit Tests
@@ -25,7 +25,7 @@ test:
     # Build instrumented test code and execute them on emulator
     # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
     - ./gradlew appIt:assembleDebug
-    - sh Scripts/src/main/resources/wait-for-boot.sh
+    - sh scripts/src/main/resources/wait-for-boot.sh
     - ./gradlew appIt:connectedCheck
 
     # Create coverage report
