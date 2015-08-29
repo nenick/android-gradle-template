@@ -23,6 +23,7 @@ test:
     # Build instrumented test code and execute them on emulator
     # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
     - ./gradlew appIt:assembleDebug
+    - sh Scripts/wait-for-boot.sh
     - ./gradlew appIt:connectedCheck
 
     # Create coverage report
