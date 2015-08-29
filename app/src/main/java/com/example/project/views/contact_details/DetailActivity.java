@@ -7,7 +7,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.FragmentById;
 
-@EActivity()
+@EActivity(R.layout.activity_detail)
 public class DetailActivity extends BaseActivityPresenter {
 
     @FragmentById(R.id.fragment_detail)

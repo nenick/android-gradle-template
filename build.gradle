@@ -12,7 +12,6 @@ buildscript {
     }
 }
 
-
 // current robolectric has no support for android M (v23) https://github.com/robolectric/robolectric/issues/1865
 ext.projectAndroidVersion = 22
 

@@ -1,7 +1,5 @@
 package com.example.project.views.common.mvp;
 
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
 import org.androidannotations.annotations.AfterViews;

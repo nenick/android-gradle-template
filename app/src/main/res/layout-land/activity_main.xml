@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:baselineAligned="false"
+    android:orientation="horizontal">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment
         android:id="@+id/fragment_list"
         android:name="com.example.project.views.contact_list.ContactListFragment_"
         android:layout_width="0dp"
@@ -12,13 +13,13 @@
         android:layout_weight="0.3"
         tools:layout="@layout/fragment_list" />
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment
         android:id="@+id/fragment_detail"
         android:name="com.example.project.views.contact_details.DetailFragment_"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.7"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail"
+        tools:ignore="InconsistentLayout" />
 
 </LinearLayout>

@@ -10,7 +10,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 
 @EBean
-public class ContactCursorAdapterWithLoader extends CursorAdapterWithCursorLoader {
+public class ContactAdapterLoader extends CursorAdapterWithCursorLoader {
 
     @Bean
     ContactAdapter contactAdapter;

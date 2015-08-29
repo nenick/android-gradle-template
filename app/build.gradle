@@ -44,6 +44,7 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -53,6 +54,11 @@ android {
         debug {
             buildConfigField "String", "MODULE_PATH", "\"$projectDir\"".replace('\\', '\\\\')
         }
+    }
+
+    lintOptions {
+        // GradleDependency Current we can't switch to support v23 tools because of robolectric
+        disable 'GradleDependency'
     }
 
     // instrumentation test module need to access the expected variant, default is only release publish

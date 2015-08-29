@@ -17,7 +17,7 @@
             android:id="@+id/first_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="First Name" />
+            android:hint="@string/first_name" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -29,7 +29,7 @@
             android:id="@+id/last_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="Last Name" />
+            android:hint="@string/last_name" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -42,7 +42,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:hint="Birth Date" />
+            android:hint="@string/birth_date" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -50,6 +50,6 @@
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add" />
+        android:text="@string/create_contact" />
 
 </LinearLayout>
