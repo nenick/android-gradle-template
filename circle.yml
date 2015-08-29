@@ -12,7 +12,6 @@ test:
 
   override:
     # Build the code
-    - sh scripts/src/main/resources/wait-for-boot.sh
     - ./gradlew app:assembleDebug
 
     # Execute Unit Tests
@@ -28,7 +27,7 @@ test:
     # ensure that the emulator is ready to use
     - circle-android wait-for-boot
     # the necessary sleep duration may change with time depending on the pre tasks length
-    - sleep 120
+    - sleep 60
     - adb shell input keyevent 82
 
     # execute tests on emulator
