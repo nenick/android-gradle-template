@@ -23,8 +23,8 @@ More is not necessary, all code generation is automatically be done by a build.
 
 Short overview:
 
-* **buildscript:** classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-* **apply plugin:** 'android-apt'
+* **buildscript:** classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
+* **apply plugin:** 'com.neenbedankt.android-apt'
 * **add config:**
     apt {
         arguments {

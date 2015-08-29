@@ -3,11 +3,14 @@ buildscript {
         jcenter()
     }
     dependencies {
+        // support to get app module under test with robolectric in separated test module
         classpath "com.novoda:gradle-android-test-plugin:0.10.4"
     }
 }
 
 apply plugin: 'java'
+
+// support to get app module under test with robolectric in separated test module
 apply plugin: 'android-test'
 
 android {

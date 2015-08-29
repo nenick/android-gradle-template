@@ -9,7 +9,6 @@ test:
     - emulator -avd circleci-android22 -no-audio -no-window:
         background: true
         parallel: true
-    - circle-android wait-for-boot &
 
   override:
     # Build the code
@@ -28,6 +27,8 @@ test:
 
     # ensure that the emulator is ready to use
     - circle-android wait-for-boot
+    # the necessary sleep duration may change with time depending on the pre tasks length
+    - sleep 120
     - adb shell input keyevent 82
 
     # execute tests on emulator

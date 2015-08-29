@@ -8,6 +8,9 @@ buildscript {
 
         // code generation for json string - object mapping
         classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.14'
+
+        // plguin for reporting code coverage to coveralls
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
     }
 }
 
