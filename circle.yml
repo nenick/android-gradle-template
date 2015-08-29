@@ -5,11 +5,10 @@ machine:
 
 test:
   pre:
+  # emulator startup need some minutes that's why start it before first build/test steps for build speed up
     - emulator -avd circleci-android22 -no-audio -no-window:
         background: true
         parallel: true
-    - sh scripts/src/main/resources/wait-for-boot.sh
-    - circle-android wait-for-boot
 
   override:
     # Build the code
@@ -22,12 +21,15 @@ test:
     # Execute Component Tests
     - ./gradlew appCt:test
 
-    # Build instrumented test code and execute them on emulator
+    # Build instrumented test code
     # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
     - ./gradlew appIt:assembleDebug
-    - sh scripts/src/main/resources/wait-for-boot.sh
-    - sleep 120
-    - sh scripts/src/main/resources/wait-for-boot.sh
+
+    # ensure that the emulator is ready to use
+    - circle-android wait-for-boot
+    - adb shell input keyevent 82
+
+    # execute tests on emulator
     - ./gradlew appIt:connectedCheck
 
     # Create coverage report
