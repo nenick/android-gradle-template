@@ -1,2 +1,2 @@
 include 'app', 'appCt', 'appIt'
-include 'docs', 'scripts'
+include 'wiremock', 'docs', 'tools'

@@ -34,6 +34,9 @@ apply from: 'build-robolectric.gradle'
 apply plugin: "jacoco"
 apply from: 'build-jacoco-test-report.gradle'
 
+// replace target ip for REST calls to use local wiremock
+apply from: "build-wiremock-replace-ip.gradle"
+
 android {
     compileSdkVersion projectAndroidVersion
     buildToolsVersion projectAndroidBuildToolsVersion
@@ -51,9 +54,13 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "MODULE_PATH", "\"$projectDir\"".replace('\\', '\\\\')
+            // avoid warning for "Not all execution paths return a value"
+            return true
         }
         debug {
             buildConfigField "String", "MODULE_PATH", "\"$projectDir\"".replace('\\', '\\\\')
+            // avoid warning for "Not all execution paths return a value"
+            return true
         }
     }
 
@@ -106,3 +113,4 @@ dependencies {
     testCompile 'com.squareup.assertj:assertj-android:1.1.0'
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
 }
+

@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "method": "GET",
+      "url": "/bookmarks"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "/bookmarks-get.json",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8"
+      }
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "/bookmarks"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "/bookmarks-post.json",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8"
+      }
+    }
+  },
+  {
+    "request": {
+      "method": "PUT",
+      "url": "/bookmarks"
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8"
+      }
+    }
+  }
+]

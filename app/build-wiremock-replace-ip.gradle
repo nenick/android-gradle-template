@@ -1,0 +1,32 @@
+// replace the #const_wiremock_ip# with your current ip address for test with wiremock
+android.applicationVariants.all { variant ->
+    variant.mergeResources.doLast {
+        def String localIp = obtainCurrentIpAddress()
+        File valuesFile = file("${buildDir}/intermediates/res/release/values/values.xml")
+        if(valuesFile.exists()) {
+            String content = valuesFile.getText('UTF-8')
+            content = content.replaceAll("#const_wiremock_ip#", localIp)
+            valuesFile.write(content, 'UTF-8')
+        }
+    }
+}
+
+def obtainCurrentIpAddress() {
+    InetAddress inetAddr = InetAddress.getLocalHost();
+
+    byte[] addr = inetAddr.getAddress();
+    String ipAddr = "";
+    for (int i = 0; i < addr.length; i++) {
+        if (i > 0) {
+            ipAddr += ".";
+        }
+        ipAddr += addr[i] & 0xFF;
+    }
+    ipAddr
+}
+
+// may be used to check if wiremock is running
+Process p1 = Runtime.getRuntime().exec("curl " + obtainCurrentIpAddress() + ":1337/bookmarks");
+int returnVal = p1.waitFor();
+boolean reachable = (returnVal==0);
+println "Wiremock is reachable $reachable"
