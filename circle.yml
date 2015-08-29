@@ -5,7 +5,7 @@ machine:
 
 test:
   pre:
-    - emulator -avd circleci-android22 -no-audio -no-window:
+    - emulator -avd circleci-android22 -no-audio -no-window -no-snapshot-load -no-snapshot-save -wipe-data:
         background: true
         parallel: true
     - circle-android wait-for-boot
