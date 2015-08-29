@@ -1,0 +1,1 @@
+./gradlew clean app:test appCt:test appIt:assembleDebug appIt:connectedCheck jacocoTestReport

@@ -8,9 +8,6 @@ buildscript {
 
         // code generation for json string - object mapping
         classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.14'
-
-        // plguin for reporting code coverage to coveralls
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
     }
 }
 
@@ -32,6 +29,10 @@ apply from: 'build-generate-database.gradle'
 
 // test support for android specific unit tests like database checks
 apply from: 'build-robolectric.gradle'
+
+// support code coverage for the unit tests
+apply plugin: "jacoco"
+apply from: 'build-jacoco-test-report.gradle'
 
 android {
     compileSdkVersion projectAndroidVersion

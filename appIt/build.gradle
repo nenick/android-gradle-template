@@ -11,6 +11,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    buildTypes {
+        debug {
+            // support code coverage for the integration tests
+            testCoverageEnabled = true
+        }
+    }
+
     targetProjectPath ':app'
     targetVariant 'debug'
 }

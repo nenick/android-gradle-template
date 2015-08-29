@@ -7,10 +7,16 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.3.0'
 
+        // plugin for reporting code coverage to coveralls
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+
+// set flag whether we are on a build server
+ext.isCi = ("true".equals(System.getenv("TRAVIS")) || "true".equals(System.getenv("CIRCLECI")))
 
 // current robolectric has no support for android M (v23) https://github.com/robolectric/robolectric/issues/1865
 ext.projectAndroidVersion = 22
@@ -28,3 +34,22 @@ allprojects {
         jcenter()
     }
 }
+
+// ensure clean is also triggered for root build folder
+apply plugin: 'java'
+
+// support to see all reports on one page
+apply plugin: 'build-dashboard'
+buildDashboard {
+    reports.html.destination = "build/"
+}
+buildDashboard << {
+    println file("build/index.html").absolutePath
+}
+
+// just clean up dashboard from not generated reports
+test.reports.html.enabled = false
+test.reports.junitXml.enabled = false
+
+// support combined test code coverage for all levels (unit, component, integration)
+apply from: "build-jacoco-test-report.gradle"

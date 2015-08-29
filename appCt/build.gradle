@@ -10,6 +10,10 @@ buildscript {
 
 apply plugin: 'java'
 
+// support code coverage for the component tests
+// this must be before the plugin: 'android-test' declaration
+apply plugin: "jacoco"
+
 // support to get app module under test with robolectric in separated test module
 apply plugin: 'android-test'
 
@@ -17,7 +21,13 @@ android {
     projectUnderTest ':app'
 }
 
+// support to get the separated test module work inside android studio
+// this must be after the projectUnderTest declaration
 apply from: 'build-novoda-android-studio.gradle'
+
+// support code coverage for the component tests
+// this must be after the projectUnderTest declaration
+apply from: "build-jacoco-test-report.gradle"
 
 dependencies {
     testCompile 'junit:junit:4.12'
