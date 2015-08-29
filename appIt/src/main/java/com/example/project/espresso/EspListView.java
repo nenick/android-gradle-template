@@ -6,7 +6,7 @@ import android.widget.ListView;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
-import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
@@ -19,7 +19,7 @@ public class EspListView {
 
     public int count() {
         final int[] counts = new int[1];
-        onData(withId(resourceId)).check(matches(new TypeSafeMatcher<View>() {
+        onView(withId(resourceId)).check(matches(new TypeSafeMatcher<View>() {
             @Override
             public boolean matchesSafely(View view) {
                 ListView listView = (ListView) view;

@@ -13,17 +13,33 @@ import com.example.project.views.common.mvp.BaseActivityPresenter;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
+/**
+ * Simplify handling for basic cursor loader + cursor adapter combination.
+ * <p/>
+ * Always listen for changes on the data source and reload new content.
+ * <p/>
+ * Implement this class, add the Adapter to a AdapterView and call {@link #start()}.
+ */
 @EBean
-public abstract class AdapterCursorLoader {
+public abstract class CursorAdapterWithCursorLoader {
+
+    /**
+     * Expecting the adapter where the swap cursor method will be called.
+     */
+    public abstract CursorAdapter getCursorAdapter();
+
+    /**
+     * Provide an unique identifier for the cursor loader.
+     */
+    public abstract int getLoaderId();
+
+    /**
+     * Will be called on background when the cursor should loaded
+     */
+    public abstract Cursor loadCursor();
 
     @RootContext
     protected BaseActivityPresenter context;
-
-    public abstract CursorAdapter getCursorAdapter();
-
-    public abstract int getLoaderId();
-
-    public abstract Cursor loadCursor();
 
     public void start() {
         LoaderManager loaderManager = context.getSupportLoaderManager();
@@ -41,9 +57,14 @@ public abstract class AdapterCursorLoader {
             @Override
             public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                 return new CursorLoader(context) {
+
+                    private ForceLoadContentObserver observer = new ForceLoadContentObserver();
+
                     @Override
                     public Cursor loadInBackground() {
-                        return loadCursor();
+                        Cursor cursor = loadCursor();
+                        cursor.registerContentObserver(observer);
+                        return cursor;
                     }
                 };
             }

@@ -1,6 +1,7 @@
 package com.example.project.robolectric;
 
 import android.content.Context;
+import android.database.ShadowContentObservable;
 
 import com.example.project.BuildConfig;
 import com.example.project.database.ExampleSQLiteOpenHelper;
@@ -14,7 +15,7 @@ import org.robolectric.annotation.Config;
 import java.lang.reflect.Field;
 
 @RunWith(CostomRobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowContentObservable.class})
 public abstract class RoboTestCase {
 
     protected Context context;

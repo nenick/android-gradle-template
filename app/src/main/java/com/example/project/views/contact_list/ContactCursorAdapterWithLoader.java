@@ -4,13 +4,13 @@ import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
 
 import com.example.project.business.contact.QueryContactListFunction;
-import com.example.project.views.common.cursorloader.AdapterCursorLoader;
+import com.example.project.views.common.cursorloader.CursorAdapterWithCursorLoader;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 
 @EBean
-public class ContactAdapterLoader extends AdapterCursorLoader {
+public class ContactCursorAdapterWithLoader extends CursorAdapterWithCursorLoader {
 
     @Bean
     ContactAdapter contactAdapter;

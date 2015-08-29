@@ -15,8 +15,10 @@ import org.androidannotations.annotations.EBean;
 @EBean
 public class ContactAdapter extends CursorAdapter {
 
+    public static final int AVOID_AUTO_QUERY_AND_CONTENT_OBSERVERS = 0;
+
     public ContactAdapter(Context context) {
-        super(context, null, false);
+        super(context, null, AVOID_AUTO_QUERY_AND_CONTENT_OBSERVERS);
     }
 
     @Override

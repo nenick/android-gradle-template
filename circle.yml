@@ -26,7 +26,8 @@ test:
 
     # ensure that the emulator is ready to use
     - circle-android wait-for-boot
-    # the necessary sleep duration may change with time depending on the pre tasks length
+    # the necessary sleep duration may change with time and depends on the pre tasks length.
+    # When all pre tasks are run long enough then waiting will not be necessary anymore.
     - sleep 60
     - adb shell input keyevent 82
 

@@ -51,3 +51,12 @@ You will get strange behavior when you forget to reset your tests. Most times yo
 List of available extra modules <http://robolectric.org/using-add-on-modules/>
 
 For apps using classes from v4 support must add *testCompile 'org.robolectric:shadows-support-v4:3.0'* or it may result in unstable tests.
+
+### debugging with shadows
+
+They may a bit confuse when you try to debug.
+
+When you see are in RobolectricInternals#methodInvoked(...) then use step out to reach the expected method.
+
+When you reach ShadowWrangler#ShadowMethodPlan#run then step over until *return shadowMethod.invoke(shadow, params);*
+and then step into then you reach the shadowed method and can debug there.

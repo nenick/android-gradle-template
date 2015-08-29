@@ -17,7 +17,7 @@ public class ContactListFragmentTest {
     ContactListView view;
 
     @Mock
-    ContactAdapterLoader contactAdapterLoader;
+    ContactCursorAdapterWithLoader contactAdapterLoader;
 
     @Mock
     ContactAdapter contactAdapter;

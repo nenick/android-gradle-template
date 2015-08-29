@@ -15,7 +15,7 @@ public class ContactListFragment extends BaseFragmentPresenter {
     ContactListView view;
 
     @Bean
-    ContactAdapterLoader contactsLoader;
+    ContactCursorAdapterWithLoader contactsLoader;
 
     private ShowContactListener showContactListener;
 
