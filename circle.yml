@@ -58,6 +58,6 @@ test:
 deployment:
   # Only report code coverage if all tasks are successful
   coverage:
-    branch: [master]
+    branch: [master, rewrite]
     commands:
     - ./gradlew coveralls
