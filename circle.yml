@@ -26,7 +26,7 @@ test:
     # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
     - ./gradlew appIt:assembleDebug
     - sh scripts/src/main/resources/wait-for-boot.sh
-    - sleep 360
+    - sleep 120
     - sh scripts/src/main/resources/wait-for-boot.sh
     - ./gradlew appIt:connectedCheck
 
