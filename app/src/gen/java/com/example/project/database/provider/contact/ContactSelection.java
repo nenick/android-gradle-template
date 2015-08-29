@@ -1,4 +1,4 @@
-package com.example.project.database.contact;
+package com.example.project.database.provider.contact;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.example.project.database.base.AbstractSelection;
+import com.example.project.database.provider.base.AbstractSelection;
 
 /**
  * Selection for the {@code contact} table.

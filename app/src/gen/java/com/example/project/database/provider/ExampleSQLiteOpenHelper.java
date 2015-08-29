@@ -1,4 +1,4 @@
-package com.example.project.database;
+package com.example.project.database.provider;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -10,8 +10,8 @@ import android.os.Build;
 import android.util.Log;
 
 import com.example.project.BuildConfig;
-import com.example.project.database.address.AddressColumns;
-import com.example.project.database.contact.ContactColumns;
+import com.example.project.database.provider.address.AddressColumns;
+import com.example.project.database.provider.contact.ContactColumns;
 
 public class ExampleSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = ExampleSQLiteOpenHelper.class.getSimpleName();

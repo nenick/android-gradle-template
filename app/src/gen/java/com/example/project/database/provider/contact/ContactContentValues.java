@@ -1,4 +1,4 @@
-package com.example.project.database.contact;
+package com.example.project.database.provider.contact;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.project.database.base.AbstractContentValues;
+import com.example.project.database.provider.base.AbstractContentValues;
 
 /**
  * Content values wrapper for the {@code contact} table.

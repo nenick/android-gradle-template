@@ -4,6 +4,10 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.net.Uri;
 
+import com.example.project.database.provider.contact.ContactContentValues;
+import com.example.project.database.provider.contact.ContactCursor;
+import com.example.project.database.provider.contact.ContactSelection;
+
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 

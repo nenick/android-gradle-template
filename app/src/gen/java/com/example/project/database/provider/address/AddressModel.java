@@ -1,6 +1,6 @@
-package com.example.project.database.address;
+package com.example.project.database.provider.address;
 
-import com.example.project.database.base.BaseModel;
+import com.example.project.database.provider.base.BaseModel;
 
 import java.util.Date;
 

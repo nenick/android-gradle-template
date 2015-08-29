@@ -3,7 +3,7 @@ package com.example.project.views.contact_edit;
 import com.example.project.R;
 import com.example.project.business.contact.CreateContactFunction;
 import com.example.project.business.contact.QueryContactFunction;
-import com.example.project.database.contact.ContactModel;
+import com.example.project.database.provider.contact.ContactModel;
 import com.example.project.views.common.mvp.BaseFragmentPresenter;
 
 import org.androidannotations.annotations.Background;

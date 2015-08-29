@@ -4,6 +4,7 @@ package com.example.project.database.contact;
 import android.database.sqlite.SQLiteException;
 
 import com.example.project.RoboTestCase;
+import com.example.project.database.provider.contact.ContactContentValues;
 
 import org.junit.Before;
 import org.junit.Test;

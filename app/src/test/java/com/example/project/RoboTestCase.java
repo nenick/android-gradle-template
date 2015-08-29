@@ -2,7 +2,7 @@ package com.example.project;
 
 import android.content.Context;
 
-import com.example.project.database.ExampleSQLiteOpenHelper;
+import com.example.project.database.provider.ExampleSQLiteOpenHelper;
 
 import org.junit.After;
 import org.junit.Before;

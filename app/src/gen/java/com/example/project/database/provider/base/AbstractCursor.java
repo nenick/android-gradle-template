@@ -1,4 +1,4 @@
-package com.example.project.database.base;
+package com.example.project.database.provider.base;
 
 import java.util.Date;
 import java.util.HashMap;

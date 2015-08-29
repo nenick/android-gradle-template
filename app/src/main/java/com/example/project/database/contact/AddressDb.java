@@ -4,10 +4,11 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.net.Uri;
 
-import com.example.project.database.address.AddressColumns;
-import com.example.project.database.address.AddressContentValues;
-import com.example.project.database.address.AddressCursor;
-import com.example.project.database.address.AddressSelection;
+import com.example.project.database.provider.address.AddressColumns;
+import com.example.project.database.provider.address.AddressContentValues;
+import com.example.project.database.provider.address.AddressCursor;
+import com.example.project.database.provider.address.AddressSelection;
+import com.example.project.database.provider.contact.ContactColumns;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;

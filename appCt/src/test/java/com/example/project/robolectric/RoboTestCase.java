@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.ShadowContentObservable;
 
 import com.example.project.BuildConfig;
-import com.example.project.database.ExampleSQLiteOpenHelper;
+import com.example.project.database.provider.ExampleSQLiteOpenHelper;
 
 import org.junit.After;
 import org.junit.Before;

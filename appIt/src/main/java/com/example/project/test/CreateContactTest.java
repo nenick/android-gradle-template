@@ -4,14 +4,12 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.project.database.ExampleSQLiteOpenHelper;
-import com.example.project.database.address.AddressSelection;
-import com.example.project.database.contact.ContactSelection;
+import com.example.project.database.provider.address.AddressSelection;
+import com.example.project.database.provider.contact.ContactSelection;
 import com.example.project.pages.EspContactListPage;
 import com.example.project.pages.EspEditContactPage;
 import com.example.project.views.contact_list.ContactListActivity_;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.example.project.database;
+package com.example.project.database.provider;
 
 import java.util.Arrays;
 
@@ -11,9 +11,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.project.BuildConfig;
-import com.example.project.database.base.BaseContentProvider;
-import com.example.project.database.address.AddressColumns;
-import com.example.project.database.contact.ContactColumns;
+import com.example.project.database.provider.base.BaseContentProvider;
+import com.example.project.database.provider.address.AddressColumns;
+import com.example.project.database.provider.contact.ContactColumns;
 
 public class ExampleProvider extends BaseContentProvider {
     private static final String TAG = ExampleProvider.class.getSimpleName();

@@ -1,4 +1,4 @@
-package com.example.project.database.address;
+package com.example.project.database.provider.address;
 
 import java.util.Date;
 
@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.project.database.base.AbstractCursor;
-import com.example.project.database.contact.*;
+import com.example.project.database.provider.base.AbstractCursor;
+import com.example.project.database.provider.contact.*;
 
 /**
  * Cursor wrapper for the {@code address} table.

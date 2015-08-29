@@ -2,9 +2,9 @@ package com.example.project.business.contact;
 
 import android.support.annotation.Nullable;
 
-import com.example.project.database.contact.ContactCursor;
+import com.example.project.database.provider.contact.ContactCursor;
 import com.example.project.database.contact.ContactDb;
-import com.example.project.database.contact.ContactModel;
+import com.example.project.database.provider.contact.ContactModel;
 
 import org.androidannotations.annotations.EBean;
 

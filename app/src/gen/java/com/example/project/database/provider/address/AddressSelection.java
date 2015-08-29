@@ -1,4 +1,4 @@
-package com.example.project.database.address;
+package com.example.project.database.provider.address;
 
 import java.util.Date;
 
@@ -6,8 +6,8 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.example.project.database.base.AbstractSelection;
-import com.example.project.database.contact.*;
+import com.example.project.database.provider.base.AbstractSelection;
+import com.example.project.database.provider.contact.*;
 
 /**
  * Selection for the {@code address} table.

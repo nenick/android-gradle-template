@@ -1,4 +1,4 @@
-package com.example.project.database.base;
+package com.example.project.database.provider.base;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;

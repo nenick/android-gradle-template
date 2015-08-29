@@ -3,13 +3,11 @@ package com.example.project.database.contact;
 import android.database.sqlite.SQLiteException;
 
 import com.example.project.RoboTestCase;
-import com.example.project.database.address.AddressContentValues;
-import com.example.project.database.address.AddressCursor;
+import com.example.project.database.provider.address.AddressContentValues;
+import com.example.project.database.provider.contact.ContactContentValues;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

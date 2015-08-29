@@ -2,7 +2,7 @@
   "syntaxVersion": 3,
   "projectPackageId": "com.example.project",
   "authority": "com.example.project",
-  "providerJavaPackage": "com.example.project.database",
+  "providerJavaPackage": "com.example.project.database.provider",
   "providerClassName": "ExampleProvider",
   "sqliteOpenHelperClassName": "ExampleSQLiteOpenHelper",
   "sqliteOpenHelperCallbacksClassName": "ExampleSQLiteOpenHelperCallbacks",

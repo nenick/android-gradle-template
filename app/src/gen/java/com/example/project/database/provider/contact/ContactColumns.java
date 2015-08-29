@@ -1,11 +1,11 @@
-package com.example.project.database.contact;
+package com.example.project.database.provider.contact;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.example.project.database.ExampleProvider;
-import com.example.project.database.address.AddressColumns;
-import com.example.project.database.contact.ContactColumns;
+import com.example.project.database.provider.ExampleProvider;
+import com.example.project.database.provider.address.AddressColumns;
+import com.example.project.database.provider.contact.ContactColumns;
 
 /**
  * Columns for the {@code contact} table.

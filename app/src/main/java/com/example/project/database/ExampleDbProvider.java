@@ -1,6 +1,7 @@
 package com.example.project.database;
 
-import org.androidannotations.annotations.EBean;
+import com.example.project.database.provider.ExampleProvider;
+
 import org.androidannotations.annotations.EProvider;
 
 @EProvider

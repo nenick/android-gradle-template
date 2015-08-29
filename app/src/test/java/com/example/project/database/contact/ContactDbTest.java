@@ -2,6 +2,8 @@ package com.example.project.database.contact;
 
 
 import com.example.project.RoboTestCase;
+import com.example.project.database.provider.contact.ContactContentValues;
+import com.example.project.database.provider.contact.ContactCursor;
 
 import org.junit.Before;
 import org.junit.Test;

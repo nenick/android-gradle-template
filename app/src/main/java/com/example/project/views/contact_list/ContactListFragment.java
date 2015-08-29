@@ -1,7 +1,7 @@
 package com.example.project.views.contact_list;
 
 import com.example.project.R;
-import com.example.project.database.contact.ContactCursor;
+import com.example.project.database.provider.contact.ContactCursor;
 import com.example.project.views.common.mvp.BaseFragmentPresenter;
 
 import org.androidannotations.annotations.Bean;

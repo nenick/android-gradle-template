@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.project.database.contact.ContactCursor;
+import com.example.project.database.provider.contact.ContactCursor;
 
 import org.androidannotations.annotations.EBean;
 

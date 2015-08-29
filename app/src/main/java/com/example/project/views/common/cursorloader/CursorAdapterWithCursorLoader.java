@@ -7,7 +7,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 
-import com.example.project.database.contact.ContactCursor;
+import com.example.project.database.provider.contact.ContactCursor;
 import com.example.project.views.common.mvp.BaseActivityPresenter;
 
 import org.androidannotations.annotations.EBean;
