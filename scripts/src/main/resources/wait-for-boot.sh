@@ -1,3 +1,5 @@
 echo "start"
-echo "`adb shell getprop init.svc.bootanim`"
+echo "BootCompSys: `adb shell getprop sys.boot_completed`"
+echo "BootCompDev: `adb shell getprop dev.bootcomplete`"
+echo "BootAnim: `adb shell getprop init.svc.bootanim`"
 echo "ende"
