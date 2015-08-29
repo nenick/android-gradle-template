@@ -20,6 +20,9 @@ test:
     # Execute Component Tests
     - ./gradlew appCt:test
 
+    # Check lint hints
+    - ./gradlew app:lint
+
     # Build instrumented test code
     # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
     - ./gradlew appIt:assembleDebug
@@ -36,9 +39,6 @@ test:
 
     # Create coverage report
     - ./gradlew jacocoTestReport
-
-    # Check lint hints
-    - ./gradlew app:lint
 
     # copy test results
     - mv app/build/reports/tests/debug $CIRCLE_TEST_REPORTS/AppUnitTests
