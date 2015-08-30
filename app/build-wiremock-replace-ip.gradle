@@ -11,7 +11,7 @@ android.applicationVariants.all { variant ->
     }
 }
 
-def obtainCurrentIpAddress() {
+def String obtainCurrentIpAddress() {
     InetAddress inetAddr = InetAddress.getLocalHost();
 
     byte[] addr = inetAddr.getAddress();

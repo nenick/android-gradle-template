@@ -1,15 +1,10 @@
 package com.example.project.test;
 
-import android.support.test.InstrumentationRegistry;
-
 import com.example.project.EspressoTestCase;
-import com.example.project.database.provider.address.AddressSelection;
-import com.example.project.database.provider.contact.ContactSelection;
 import com.example.project.pages.EspContactListPage;
 import com.example.project.pages.EspEditContactPage;
 import com.example.project.views.contact_list.ContactListActivity_;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

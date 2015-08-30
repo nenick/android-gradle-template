@@ -26,6 +26,7 @@ ext.projectAndroidVersion = 22
 ext.projectAndroidMinVersion = 10
 
 // sometimes support tools and build tools have same version but support tools version grow faster with time
+// current robolectric has no support for android M (v23) stuff
 ext.projectAndroidBuildToolsVersion = "22.0.1"
 ext.projectAndroidSupportToolsVersion = "22.2.1"
 
