@@ -25,7 +25,7 @@ Since we can use a test module for instrumentation tests we don't need to switch
 
 * replace by `:appIt:connectedCheck` for coverage report
 
-**combined coverage report:** ./gradlew jacocoTestReport
+**combined coverage report:** `./gradlew jacocoTestReport` after you run all tests
 
 ## Android Studio - Espresso
 

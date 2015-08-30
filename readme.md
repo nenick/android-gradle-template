@@ -16,6 +16,8 @@ Also show shows a clean architecture example with MVP and package by feature app
 
 For more documentation see [Project Documentations](docs/src/main/resources/index.md)
 
+[![Circle CI](https://circleci.com/gh/nenick/android-gradle-template.svg?style=shield)](https://circleci.com/gh/nenick/android-gradle-template) [![Coverage Status](https://coveralls.io/repos/nenick/android-gradle-template/badge.svg?branch=master)](https://coveralls.io/r/nenick/android-gradle-template?branch=master)
+
 ## Latest tested basic tool versions
 
 * Android Studio 1.3.2

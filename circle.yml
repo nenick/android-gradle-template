@@ -1,7 +1,7 @@
 machine:
   environment:
     GRADLE_OPTS: -Xmx512m
-    COVERALLS_REPO_TOKEN: WRCC432MnN68yfq15QbagWqazBbkABrzz
+    COVERALLS_REPO_TOKEN: mHJjy4h8zt9RIIBKg8sBosF5JkKsFk139
 
 test:
   pre:
