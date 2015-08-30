@@ -25,7 +25,11 @@ public class RoboContactListPage {
     }
 
     public Menu createContact() {
-        return new Menu();
+        return new Menu(R.id.action_add_contact);
+    }
+
+    public Menu syncContacts() {
+        return new Menu(R.id.action_sync_contacts);
     }
 
     public Intent nextStartedActivity() {
@@ -33,8 +37,14 @@ public class RoboContactListPage {
     }
 
     public class Menu {
+        private int resourceId;
+
+        public Menu(int resourceId) {
+            this.resourceId = resourceId;
+        }
+
         public void click() {
-            assertThat(Shadows.shadowOf(contactListActivity).clickMenuItem(R.id.action_add_contact)).isTrue();
+            assertThat(Shadows.shadowOf(contactListActivity).clickMenuItem(resourceId)).isTrue();
         }
     }
 }

@@ -17,6 +17,9 @@ test:
     # Execute Unit Tests
     - ./gradlew app:test
 
+    # start wiremock to support tests with network communication
+    - tools/src/main/resources/start-wiremock.sh
+
     # Execute Component Tests
     - ./gradlew appCt:test
 

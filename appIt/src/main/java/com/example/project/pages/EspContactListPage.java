@@ -16,6 +16,16 @@ public class EspContactListPage {
         };
     }
 
+    public EspMenuItem<EspContactListPage> syncContacts() {
+        return new EspMenuItem<EspContactListPage>(R.id.action_sync_contacts) {
+            @Override
+            public EspContactListPage click() {
+                super.click();
+                return EspContactListPage.this;
+            }
+        };
+    }
+
     public EspListView contactList() {
         return new EspListView(R.id.listView);
     }

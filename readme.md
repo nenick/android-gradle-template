@@ -12,7 +12,7 @@ Also show shows a clean architecture example with MVP and package by feature app
 * Testing your app on Device/Emulator with [Espresso](docs/src/main/resources/tools/espresso.md)
 * Testing your app at JVM with [Robolectric](docs/src/main/resources/tools/robolectric.md) or simple Unit Tests
 
-**Wishes, improvements and discussions about the stuff here are welcome.**
+**Wishes, improvements, questions and discussions about the stuff here are welcome.**
 
 For more documentation see [Project Documentations](docs/src/main/resources/index.md)
 
@@ -27,9 +27,5 @@ For more documentation see [Project Documentations](docs/src/main/resources/inde
 
 ## Getting Started
 
-Start an emulator or connect with device.
-Then on commandline navigate into the project root and execute from there `tools/src/main/resources/test-all-with-coverage.sh`
-and check that all works. (Script works on Mac and Linux but Windows user must use `tools\src\main\resources\test-all-with-coverage.bat`)
-
-With Android Studio import the project and start developing. For more details see [Getting Started](docs/src/main/resources/getting_started.md)
+Import the project into Android Studio and start developing. For more details see [Getting Started](docs/src/main/resources/getting_started.md)
 

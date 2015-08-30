@@ -30,7 +30,7 @@ results at: result at: appCt/build/reports/jacoco/test/html/com.example.project/
 
 # combined coverage report
 
-see
+see projectRoot/build-jacoco-test-report.gradle
 
 # Jacoco Version
 

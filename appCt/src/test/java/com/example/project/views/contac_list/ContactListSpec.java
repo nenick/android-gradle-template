@@ -28,19 +28,30 @@ public class ContactListSpec extends RobolectricTestCase {
 
     @Test
     public void openCreateContact() {
-        givenPageWithoutContent();
+        givenPageWithoutContacts();
         whenClickCreateContact();
         thenCreateNewContactIsShownInNewPage();
     }
 
     @Test
     public void refreshContactListOnNewContact() {
-        givenPageWithoutContent();
+        givenPageWithoutContacts();
         whenInsertNewContact();
-        thenPageHasContact();
+        thenPageHasContacts();
     }
 
-    private void thenPageHasContact() {
+    @Test
+    public void syncContacts() {
+        givenPageWithoutContacts();
+        whenClickSyncContact();
+        thenPageHasContacts();
+    }
+
+    private void whenClickSyncContact() {
+        roboContactListPage.syncContacts().click();
+    }
+
+    private void thenPageHasContacts() {
         assertThat(roboContactListPage.list().count()).isPositive();
     }
 
@@ -67,7 +78,7 @@ public class ContactListSpec extends RobolectricTestCase {
         assertThat(intent).hasComponent(context, DetailActivity_.class);
     }
 
-    private void givenPageWithoutContent() {
+    private void givenPageWithoutContacts() {
         roboContactListPage.startPage();
         assertThat(roboContactListPage.list().count()).isZero();
     }
