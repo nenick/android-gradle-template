@@ -2,10 +2,7 @@ machine:
   environment:
     GRADLE_OPTS: -Xmx512m
     COVERALLS_REPO_TOKEN: mHJjy4h8zt9RIIBKg8sBosF5JkKsFk139
-  post:
-    - ./daemon:
-          # enable support to start process at background (e.g. wiremock instance)
-          background: true
+
 test:
   pre:
   # emulator startup need some minutes that's why start it before first build/test steps for build speed up
