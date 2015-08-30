@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 import java.lang.reflect.ParameterizedType;
 
 @RunWith(AndroidJUnit4.class)
-public class EspressoTestCase<A extends Activity> {
+public abstract class EspressoTestCase<A extends Activity> {
 
     @Rule
     public ActivityTestRule<A> activityRule = new ActivityTestRule<>(getGenericActivityClass());
