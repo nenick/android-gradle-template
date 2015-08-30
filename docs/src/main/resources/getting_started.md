@@ -21,7 +21,7 @@ Since we can use a test module for instrumentation tests we don't need to switch
 
 * append `:appCt:jacocoTestReport` for coverage report
 
-**acceptance tests:** `./gradlew :appIt:connectedAndroidTest`
+**acceptance tests:** `./gradlew :appIt:connectedAndroidTest` (Use `connectedCheck` until bug closed <https://code.google.com/p/android/issues/detail?id=183936>)
 
 * replace by `:appIt:connectedCheck` for coverage report
 
@@ -32,3 +32,13 @@ Since we can use a test module for instrumentation tests we don't need to switch
 When you are on `Test Artifact: Unit Tests` then you don't get the possibility to start instrumented tests.
 Switch to `Test Artifact: Instrumentation Tests` and then start/create test run configuration.
 Later this created configuration can still be used when you are on `Test Artifact: Unit Tests` without changing it.
+
+I hope this behavior can be adjusted so that the test module only support instrumented tests and we need no more to switch the test artifact type <https://code.google.com/p/android/issues/detail?id=183931>
+
+### Android Project View
+
+On the left top about your project structure you can switch between different project content views.
+I like the minimal Android View, but at project view you can see more files.
+Switch there to you preferred style.
+
+*Some modules only are modules instead of simple folders to support the Android Project View. Without they would not be visible.*
