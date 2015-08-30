@@ -22,6 +22,15 @@ public class CostomRobolectricTestRunner extends RobolectricTestRunner {
 
     public CostomRobolectricTestRunner(Class<?> testClass) throws InitializationError {
         super(testClass);
+
+        // provide UncaughtExceptionHandler to avoid nullponter exception if error on thread occur
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         String buildVariant = (BuildConfig.FLAVOR.isEmpty() ? "" : BuildConfig.FLAVOR + "/") + BuildConfig.BUILD_TYPE;
         String intermediatesPath = BuildConfig.MODULE_PATH + "/build//intermediates";
 

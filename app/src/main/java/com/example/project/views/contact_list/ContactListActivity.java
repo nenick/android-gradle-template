@@ -53,12 +53,12 @@ public class ContactListActivity extends BaseActivityPresenter implements ShowCo
         showSyncResult(result);
     }
 
-    @UiThread
+    @UiThread(propagation = UiThread.Propagation.REUSE)
     void showSyncResult(SyncContactsFunction.Result result) {
         if(result.successful) {
             Toast.makeText(this, "Sync done", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Sync failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sync failed: " + result.errorReason, Toast.LENGTH_SHORT).show();
         }
     }
 

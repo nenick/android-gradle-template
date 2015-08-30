@@ -2,16 +2,29 @@ package com.example.project.views.contac_list;
 
 import android.content.Intent;
 
+import com.example.project.R;
 import com.example.project.business.contact.CreateContactFunction_;
 import com.example.project.RobolectricTestCase;
 import com.example.project.testdata.TestContactData;
 import com.example.project.views.contact_details.DetailActivity_;
 import com.example.project.views.contact_edit.EditActivity_;
+import com.github.tomakehurst.wiremock.client.MappingBuilder;
+import com.github.tomakehurst.wiremock.client.UrlMatchingStrategy;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.http.Fault;
+import com.github.tomakehurst.wiremock.http.RequestMethod;
 
 import org.junit.Test;
+import org.robolectric.shadows.ShadowToast;
 
 import java.util.Date;
 
+import wiremock.org.apache.http.impl.conn.Wire;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.assertj.android.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +58,35 @@ public class ContactListSpec extends RobolectricTestCase {
         givenPageWithoutContacts();
         whenClickSyncContact();
         thenPageHasContacts();
+        thenToastWasShown("Sync done");
+    }
+
+    @Test
+    public void syncContactsFail() {
+        givenContactsRequestAnswerWithError(500);
+        givenPageWithoutContacts();
+        whenClickSyncContact();
+        thenToastWasShown("Sync failed: 500 Internal Server Error");
+    }
+
+    @Test
+    public void syncContactsWithConnectionLost() {
+        givenContactsRequestAnswerWithFault(Fault.RANDOM_DATA_THEN_CLOSE);
+        givenPageWithoutContacts();
+        whenClickSyncContact();
+        thenToastWasShown("Sync failed: Unknown status code [-1] null");
+    }
+
+    private void givenContactsRequestAnswerWithFault(Fault fault) {
+        stubFor(get(urlEqualTo("/contacts")).willReturn(aResponse().withFault(fault)));
+    }
+
+    private void givenContactsRequestAnswerWithError(int statusCode) {
+        stubFor(get(urlEqualTo("/contacts")).willReturn(aResponse().withStatus(statusCode)));
+    }
+
+    private void thenToastWasShown(String expectedMessage) {
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(expectedMessage);
     }
 
     private void whenClickSyncContact() {

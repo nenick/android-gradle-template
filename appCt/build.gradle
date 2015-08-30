@@ -29,36 +29,21 @@ apply from: 'build-novoda-android-studio.gradle'
 // this must be after the projectUnderTest declaration
 apply from: "build-jacoco-test-report.gradle"
 
+// test support for android specific stuff like database and network
+apply from: 'build-robolectric.gradle'
+
 dependencies {
+
+    // basic unit tests support + mocks + fluent assertions + android assertions
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-all:2.0.2-beta'
     testCompile('com.squareup.assertj:assertj-android:1.1.0') {
         exclude module: "support-annotations"
     }
-    testCompile 'org.mockito:mockito-all:2.0.2-beta'
 
-    testCompile('org.robolectric:shadows-support-v4:3.0') {
-        exclude module: "robolectric"
-        exclude module: "support-v4"
-        exclude module: "support-annotations"
-    }
-
-    testCompile('org.robolectric:robolectric:3.0') {
-        exclude module: 'classworlds'
-        exclude module: 'commons-logging'
-        exclude module: 'httpclient'
-        exclude module: 'maven-artifact'
-        exclude module: 'maven-artifact-manager'
-        exclude module: 'maven-error-diagnostics'
-        exclude module: 'maven-model'
-        exclude module: 'maven-project'
-        exclude module: 'maven-settings'
-        exclude module: 'plexus-container-default'
-        exclude module: 'plexus-interpolation'
-        exclude module: 'plexus-utils'
-        exclude module: 'wagon-file'
-        exclude module: 'wagon-http-lightweight'
-        exclude module: 'wagon-provider-api'
-    }
+    // easy modify wiremock stubbing support
+    // need standalone version to avoid conflicts with org.apache.http classes (not all tests will run anymore)
+    testCompile ('com.github.tomakehurst:wiremock:1.42:standalone') { exclude module: "*" }
 }
 
 
@@ -67,6 +52,8 @@ tasks.withType(JavaCompile) {
     options.encoding = "utf-8"
 }
 
+// avoid release compile for tests for less build time
+// avoid lint and tests in same process (TODO check if still necessary)
 afterEvaluate {
 
     def isLintRun = false

@@ -7,6 +7,7 @@ import com.example.project.BuildConfig;
 import com.example.project.database.provider.ExampleSQLiteOpenHelper;
 import com.example.project.robolectric.CostomRobolectricTestRunner;
 import com.example.project.robolectric.ShadowBackgroundExecutor;
+import com.github.tomakehurst.wiremock.client.WireMock;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,6 +26,8 @@ public abstract class RobolectricTestCase {
     @Before
     public void roboSetup() {
         context = RuntimeEnvironment.application;
+        WireMock.configureFor(context.getString(R.string.const_wiremock_ip), 1337);
+        WireMock.resetToDefault();
     }
 
     @After
