@@ -60,3 +60,22 @@ When you see are in RobolectricInternals#methodInvoked(...) then use step out to
 
 When you reach ShadowWrangler#ShadowMethodPlan#run then step over until *return shadowMethod.invoke(shadow, params);*
 and then step into then you reach the shadowed method and can debug there.
+
+### Create shadows for non android classes
+
+Register a class which could be shadowed (android classes can be shadowed without extra registration)
+
+    class CustomRobolectricTestRunner {
+        public InstrumentationConfiguration createClassLoaderConfig() {
+            InstrumentationConfiguration.Builder builder = InstrumentationConfiguration.newBuilder();
+            builder.addInstrumentedClass(MyClass.class.getName());
+            return builder.build();
+        }
+    }
+
+Register a Shadow for the class
+
+    @Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowMyClass.class})
+    class RobolectricTestCase {}
+
+More informations at <http://robolectric.org/custom-shadows/>

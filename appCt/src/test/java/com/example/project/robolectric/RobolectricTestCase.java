@@ -15,8 +15,8 @@ import org.robolectric.annotation.Config;
 import java.lang.reflect.Field;
 
 @RunWith(CostomRobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowContentObservable.class})
-public abstract class RoboTestCase {
+@Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowContentObservable.class, ShadowBackgroundExecutor.class})
+public abstract class RobolectricTestCase {
 
     protected Context context;
 

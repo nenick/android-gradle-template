@@ -3,20 +3,19 @@ package com.example.project.views.contac_list;
 import android.content.Intent;
 
 import com.example.project.business.contact.CreateContactFunction_;
-import com.example.project.robolectric.RoboTestCase;
+import com.example.project.robolectric.RobolectricTestCase;
 import com.example.project.testdata.TestContactData;
 import com.example.project.views.contact_details.DetailActivity_;
 import com.example.project.views.contact_edit.EditActivity_;
 
 import org.junit.Test;
-import org.robolectric.Robolectric;
 
 import java.util.Date;
 
 import static org.assertj.android.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ContactListSpec extends RoboTestCase {
+public class ContactListSpec extends RobolectricTestCase {
 
     RoboContactListPage roboContactListPage = new RoboContactListPage();
 
