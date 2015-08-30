@@ -1,13 +1,14 @@
 # Android - Rapid Test Driven Development
 
-Mainly this template shows how tools which can be used to generate all the boilerplate code and provides examples how to test different aspects of an android application.
-Also show shows a clean architecture example with MVP and package by feature.
+Mainly this template shows which tools can be used to generate most of the boilerplate code and
+provides examples how to test different aspects of an android application.
+Also show shows a clean architecture example with MVP and package by feature approach.
 
 **Wishes, improvements and discussions about the stuff here are welcome.**
 
 * Generate view access and listener by [Android Annotations](docs/src/main/resources/tools/androidannotations.md)
 * Generate REST Client by [Android Annotations](docs/src/main/resources/tools/androidannotations.md)
-* Generate Json Mapping by [JsonSchema 2 Pojo](docs/src/main/resources/tools/jsonschema2pojo.md)
+* Generate Json Mapping by [JsonSchema2Pojo](docs/src/main/resources/tools/jsonschema2pojo.md)
 * Generate Database handling by [ContentProvider Generator](docs/src/main/resources/tools/android_contentprovider_generator.md)
 * Simplify Background and UiThread actions with [Android Annotations](docs/src/main/resources/tools/androidannotations.md)
 * Testing your app on Device/Emulator with [Espresso](docs/src/main/resources/tools/espresso.md)
@@ -24,7 +25,9 @@ For more documentation see [Project Documentations](docs/src/main/resources/inde
 
 ## Getting Started
 
-Start an emulator or connect with device, on commandline navigate into the project root and execute from there `tools/src/main/resources/test-all-with-coverage.sh` to check that all works. Import the project with Android Studio and start developing.
+Start an emulator or connect with device.
+Then on commandline navigate into the project root and execute from there `tools/src/main/resources/test-all-with-coverage.sh`
+and check that all works. (Works with Mac and Linux but Windows user must use `tools\src\main\resources\test-all-with-coverage.bat`)
 
-For more details see [Getting Started](docs/src/main/resources/getting_started.md)
+With Android Studio import the project and start developing. For more details see [Getting Started](docs/src/main/resources/getting_started.md)
 
