@@ -1,3 +1,7 @@
+# gradle-android-test-plugin
+
+Move some of the robolectric supported tests into an own module to separate simple units from component tests.
+
 For Robolectric basics see also [Robolectrc](robolectric.md)
 
 ### avoid release builds for test runs, and conflict between lint and test runs

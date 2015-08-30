@@ -1,6 +1,6 @@
 # AndroidAnnotations
 
-I decided me for androidannotations instead of dagger, butterknife and co because just I like it more.
+I decided me for androidannotations instead of dagger, butterknife and co because it just fit perfectly into all my need.
 
 * dependency injection
 * view injection
