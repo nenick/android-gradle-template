@@ -18,6 +18,10 @@ android {
         }
     }
 
+    jacoco {
+        version projectJacocoVersion
+    }
+
     targetProjectPath ':app'
     targetVariant 'debug'
 }

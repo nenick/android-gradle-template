@@ -31,7 +31,6 @@ apply from: 'build-generate-database.gradle'
 apply from: 'build-robolectric.gradle'
 
 // support code coverage for the unit tests
-apply plugin: "jacoco"
 apply from: 'build-jacoco-test-report.gradle'
 
 // replace target ip for REST calls to use local wiremock

@@ -30,6 +30,10 @@ ext.projectAndroidMinVersion = 10
 ext.projectAndroidBuildToolsVersion = "22.0.1"
 ext.projectAndroidSupportToolsVersion = "22.2.1"
 
+// not all jacoco versions work without issues
+// TODO try which is the latest working version without issues, with 0.7.5 is saw some
+ext.projectJacocoVersion = "0.7.0.201403182114"
+
 allprojects {
     repositories {
         jcenter()
