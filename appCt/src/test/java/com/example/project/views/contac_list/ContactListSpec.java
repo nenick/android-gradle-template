@@ -3,7 +3,7 @@ package com.example.project.views.contac_list;
 import android.content.Intent;
 
 import com.example.project.business.contact.CreateContactFunction_;
-import com.example.project.robolectric.RobolectricTestCase;
+import com.example.project.RobolectricTestCase;
 import com.example.project.testdata.TestContactData;
 import com.example.project.views.contact_details.DetailActivity_;
 import com.example.project.views.contact_edit.EditActivity_;

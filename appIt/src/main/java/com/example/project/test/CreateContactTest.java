@@ -1,9 +1,8 @@
 package com.example.project.test;
 
 import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 
+import com.example.project.EspressoTestCase;
 import com.example.project.database.provider.address.AddressSelection;
 import com.example.project.database.provider.contact.ContactSelection;
 import com.example.project.pages.EspContactListPage;
@@ -11,25 +10,13 @@ import com.example.project.pages.EspEditContactPage;
 import com.example.project.views.contact_list.ContactListActivity_;
 
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(AndroidJUnit4.class)
-public class CreateContactTest {
-
-    @Rule
-    public ActivityTestRule<ContactListActivity_> activityRule = new ActivityTestRule<>(ContactListActivity_.class);
+public class CreateContactTest extends EspressoTestCase<ContactListActivity_> {
 
     EspContactListPage contactListPage = new EspContactListPage();
-
-    @BeforeClass
-    public static void setup() {
-        new ContactSelection().delete(InstrumentationRegistry.getContext().getContentResolver());
-        new AddressSelection().delete(InstrumentationRegistry.getContext().getContentResolver());
-    }
 
     @Test
     public void testCreateNewContact() {

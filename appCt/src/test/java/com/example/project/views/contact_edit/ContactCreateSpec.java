@@ -2,7 +2,7 @@ package com.example.project.views.contact_edit;
 
 import com.example.project.database.contact.ContactDb_;
 import com.example.project.database.provider.contact.ContactCursor;
-import com.example.project.robolectric.RobolectricTestCase;
+import com.example.project.RobolectricTestCase;
 
 import org.junit.Test;
 
