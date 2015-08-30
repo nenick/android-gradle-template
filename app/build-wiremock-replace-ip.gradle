@@ -1,3 +1,10 @@
+
+// may be used to check if wiremock is running
+Process p1 = Runtime.getRuntime().exec("curl " + obtainCurrentIpAddress() + ":1337/");
+int returnVal = p1.waitFor();
+boolean reachable = (returnVal==0);
+println "\nWiremock is reachable $reachable\n"
+
 // replace the #const_wiremock_ip# with your current ip address for test with wiremock
 android.applicationVariants.all { variant ->
     variant.mergeResources.doLast {
@@ -26,9 +33,3 @@ def String obtainCurrentIpAddress() {
     }
     ipAddr
 }
-
-// may be used to check if wiremock is running
-Process p1 = Runtime.getRuntime().exec("curl " + obtainCurrentIpAddress() + ":1337/bookmarks");
-int returnVal = p1.waitFor();
-boolean reachable = (returnVal==0);
-println "Wiremock is reachable $reachable"
