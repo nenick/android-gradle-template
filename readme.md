@@ -24,6 +24,7 @@ For more documentation see [Project Documentations](docs/src/main/resources/inde
 * Gradle Build Tools 1.3.0
 * Gradle 2.6
 * Android v22
+* Java 8
 
 ## Getting Started
 
