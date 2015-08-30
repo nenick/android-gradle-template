@@ -3,17 +3,16 @@
 
 ## Some basis information
 
-* [Package Structure](package_structure.md)
-* [Adjust Project to your needs](adjust_project_to_your_needs.md)
 * [Getting Start](getting_started.md)
+* [Adjust Project to your needs](adjust_project_to_your_needs.md)
 
 ## Concepts explanation
 
 * [MVP Pattern](concepts/model_view_presenter.md)
-* [project Structure](concepts/project_structure.md)
+* [Project Structure](concepts/project_structure.md)
 * [Package Structure](concepts/package_structure.md)
 * [Function classes](concepts/function_class.md)
-* [How and what to Test](concepts/tewting.md)
+* [How and what to Test](concepts/testing.md)
 
 ## Used tools
 

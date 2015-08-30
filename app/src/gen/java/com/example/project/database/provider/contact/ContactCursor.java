@@ -27,6 +27,16 @@ public class ContactCursor extends AbstractCursor implements ContactModel {
     }
 
     /**
+     * Get the {@code uid} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    public String getUid() {
+        String res = getStringOrNull(ContactColumns.UID);
+        return res;
+    }
+
+    /**
      * Get the {@code first_name} value.
      * Can be {@code null}.
      */

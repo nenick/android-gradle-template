@@ -19,6 +19,7 @@ android {
     }
 
     jacoco {
+        //noinspection GroovyAssignabilityCheck
         version projectJacocoVersion
     }
 

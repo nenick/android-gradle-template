@@ -33,7 +33,14 @@ Short overview:
     }
 * **dependency:** apt "org.androidannotations:androidannotations:3.3.2"
 * **dependency:** compile "org.androidannotations:androidannotations-api:3.3.2"
-* **dependency (optional) compile spring
 
-When you don't use the http support then you must adjust your proguard config.
+When you don't use the http support then you must adjust your proguard config to avoid proguard issues.
 -dontwarn org.androidannotations.api.rest.*
+
+## REST Support
+
+Andorid Annotations use Spring for network communication <http://projects.spring.io/spring-android/>
+latest version <https://maven-repository.com/artifact/org.springframework.android/spring-android-rest-template>
+
+* **dependency:** (optional) compile spring
+https://github.com/excilys/androidannotations/wiki/Rest-API

@@ -39,6 +39,7 @@ public class ExampleSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_TABLE_CONTACT = "CREATE TABLE IF NOT EXISTS "
             + ContactColumns.TABLE_NAME + " ( "
             + ContactColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + ContactColumns.UID + " TEXT, "
             + ContactColumns.FIRST_NAME + " TEXT, "
             + ContactColumns.LAST_NAME + " TEXT, "
             + ContactColumns.BIRTHDATE + " INTEGER "

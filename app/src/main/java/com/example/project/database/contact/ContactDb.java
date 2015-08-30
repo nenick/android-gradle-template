@@ -33,4 +33,8 @@ public class ContactDb {
     public ContactCursor queryById(long contactId) {
         return new ContactSelection().id(contactId).query(context.getContentResolver());
     }
+
+    public ContactCursor queryByUid(String contactUid) {
+        return new ContactSelection().uid(contactUid).query(context.getContentResolver());
+    }
 }

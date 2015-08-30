@@ -2,9 +2,9 @@
   "description": "Simple single contact.",
   "type": "object",
   "properties": {
-    "id": { "type": "integer" },
+    "id": { "type": "string" },
     "firstName": { "type": "string" },
     "lastName": { "type": "string" },
-    "birthDateInMilliseconds": { "type": "string" }
+    "birthDate": { "type": "string" }
   }
 }

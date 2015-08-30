@@ -19,6 +19,8 @@ public class ContactColumns implements BaseColumns {
      */
     public static final String _ID = BaseColumns._ID;
 
+    public static final String UID = "uid";
+
     public static final String FIRST_NAME = "first_name";
 
     public static final String LAST_NAME = "last_name";
@@ -31,6 +33,7 @@ public class ContactColumns implements BaseColumns {
     // @formatter:off
     public static final String[] ALL_COLUMNS = new String[] {
             _ID,
+            UID,
             FIRST_NAME,
             LAST_NAME,
             BIRTHDATE
@@ -40,6 +43,7 @@ public class ContactColumns implements BaseColumns {
     public static boolean hasColumns(String[] projection) {
         if (projection == null) return true;
         for (String c : projection) {
+            if (c.equals(UID) || c.contains("." + UID)) return true;
             if (c.equals(FIRST_NAME) || c.contains("." + FIRST_NAME)) return true;
             if (c.equals(LAST_NAME) || c.contains("." + LAST_NAME)) return true;
             if (c.equals(BIRTHDATE) || c.contains("." + BIRTHDATE)) return true;

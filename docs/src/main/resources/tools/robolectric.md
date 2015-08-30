@@ -79,3 +79,11 @@ Register a Shadow for the class
     class RobolectricTestCase {}
 
 More informations at <http://robolectric.org/custom-shadows/>
+
+### Avoid jumping virtual desktops
+
+I detected this behaviour just on mac os. Every time i run robolectric tests at IDE or on command line it was jumping to another desktop.
+
+On command line you can avoid it with `export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'`
+
+In your IDE set as VM option in your run configuration `-Djava.awt.headless=true`

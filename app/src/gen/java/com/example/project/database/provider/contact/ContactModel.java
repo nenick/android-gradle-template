@@ -13,6 +13,13 @@ import android.support.annotation.Nullable;
 public interface ContactModel extends BaseModel {
 
     /**
+     * Get the {@code uid} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    String getUid();
+
+    /**
      * Get the {@code first_name} value.
      * Can be {@code null}.
      */

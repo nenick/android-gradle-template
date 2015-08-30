@@ -38,6 +38,16 @@ public class AddressCursor extends AbstractCursor implements AddressModel {
     }
 
     /**
+     * Get the {@code uid} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    public String getContactUid() {
+        String res = getStringOrNull(ContactColumns.UID);
+        return res;
+    }
+
+    /**
      * Get the {@code first_name} value.
      * Can be {@code null}.
      */

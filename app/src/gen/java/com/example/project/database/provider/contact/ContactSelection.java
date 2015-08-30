@@ -52,6 +52,36 @@ public class ContactSelection extends AbstractSelection<ContactSelection> {
         return this;
     }
 
+    public ContactSelection uid(String... value) {
+        addEquals(ContactColumns.UID, value);
+        return this;
+    }
+
+    public ContactSelection uidNot(String... value) {
+        addNotEquals(ContactColumns.UID, value);
+        return this;
+    }
+
+    public ContactSelection uidLike(String... value) {
+        addLike(ContactColumns.UID, value);
+        return this;
+    }
+
+    public ContactSelection uidContains(String... value) {
+        addContains(ContactColumns.UID, value);
+        return this;
+    }
+
+    public ContactSelection uidStartsWith(String... value) {
+        addStartsWith(ContactColumns.UID, value);
+        return this;
+    }
+
+    public ContactSelection uidEndsWith(String... value) {
+        addEndsWith(ContactColumns.UID, value);
+        return this;
+    }
+
     public ContactSelection firstName(String... value) {
         addEquals(ContactColumns.FIRST_NAME, value);
         return this;

@@ -1,6 +1,11 @@
 {
   "fields": [
     {
+      "name": "uid",
+      "type": "String",
+      "nullable": true
+    },
+    {
       "name": "first_name",
       "type": "String",
       "nullable": true

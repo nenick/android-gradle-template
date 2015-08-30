@@ -5,7 +5,7 @@
     "contacts" : {
       "type" : "array",
       "items" : {
-        "$ref" : "contact.json"
+        "$ref" : "contactJson.json"
       }
     }
   }

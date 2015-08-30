@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">InitialAndroidProject</string>
     <string name="hello_world">Hello world!</string>
+
     <string name="action_add_contact">Add Contact</string>
+    <string name="action_sync_contacts">Sync Contacts</string>
 </resources>

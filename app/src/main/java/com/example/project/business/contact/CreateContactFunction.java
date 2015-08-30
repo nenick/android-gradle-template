@@ -14,11 +14,16 @@ public class CreateContactFunction {
     @Bean
     ContactDb contactDb;
 
-    public void apply(String firstName, String lastName, Date birhtDate) {
+    public void apply(String firstName, String lastName, Date birthDate) {
+        apply("", firstName, lastName, birthDate);
+    }
+
+    public void apply(String uid, String firstName, String lastName, Date birthDate) {
         ContactContentValues contentValues = contactDb.insertDataContainer();
+        contentValues.putUid(uid);
         contentValues.putFirstName(firstName);
         contentValues.putLastName(lastName);
-        contentValues.putBirthdate(birhtDate);
+        contentValues.putBirthdate(birthDate);
         contactDb.insert(contentValues);
     }
 }

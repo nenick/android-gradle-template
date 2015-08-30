@@ -1,0 +1,9 @@
+{
+  "request": {
+    "method": "DELETE",
+    "urlPattern": "/contacts/.*"
+  },
+  "response": {
+    "status": 204
+  }
+}

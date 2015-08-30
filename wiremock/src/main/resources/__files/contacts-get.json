@@ -1,0 +1,18 @@
+{
+  "contacts": [
+    {
+      "id": "k345lbhjt5er",
+      "firstName": "Max",
+      "lastName": "FromServer",
+      "birthDate": "1984-11-11",
+      "lastModification" : "2345678"
+    },
+    {
+      "id": "v4cn478cn8bz7",
+      "firstName": "Susi",
+      "lastName": "FromServer",
+      "birthDate": "1984-11-11",
+      "lastModification" : "2345678"
+    }
+  ]
+}

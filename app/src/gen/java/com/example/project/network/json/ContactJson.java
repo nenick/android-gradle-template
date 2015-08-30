@@ -1,5 +1,5 @@
 
-package com.example.project.network;
+package com.example.project.network.json;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,18 +25,18 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "id",
     "firstName",
     "lastName",
-    "birthDateInMilliseconds"
+    "birthDate"
 })
-public class Contact {
+public class ContactJson {
 
     @JsonProperty("id")
-    private Integer id;
+    private String id;
     @JsonProperty("firstName")
     private String firstName;
     @JsonProperty("lastName")
     private String lastName;
-    @JsonProperty("birthDateInMilliseconds")
-    private String birthDateInMilliseconds;
+    @JsonProperty("birthDate")
+    private String birthDate;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -46,7 +46,7 @@ public class Contact {
      *     The id
      */
     @JsonProperty("id")
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -56,7 +56,7 @@ public class Contact {
      *     The id
      */
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -103,21 +103,21 @@ public class Contact {
     /**
      * 
      * @return
-     *     The birthDateInMilliseconds
+     *     The birthDate
      */
-    @JsonProperty("birthDateInMilliseconds")
-    public String getBirthDateInMilliseconds() {
-        return birthDateInMilliseconds;
+    @JsonProperty("birthDate")
+    public String getBirthDate() {
+        return birthDate;
     }
 
     /**
      * 
-     * @param birthDateInMilliseconds
-     *     The birthDateInMilliseconds
+     * @param birthDate
+     *     The birthDate
      */
-    @JsonProperty("birthDateInMilliseconds")
-    public void setBirthDateInMilliseconds(String birthDateInMilliseconds) {
-        this.birthDateInMilliseconds = birthDateInMilliseconds;
+    @JsonProperty("birthDate")
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     @Override
@@ -137,7 +137,7 @@ public class Contact {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(firstName).append(lastName).append(birthDateInMilliseconds).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(id).append(firstName).append(lastName).append(birthDate).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -145,11 +145,11 @@ public class Contact {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Contact) == false) {
+        if ((other instanceof ContactJson) == false) {
             return false;
         }
-        Contact rhs = ((Contact) other);
-        return new EqualsBuilder().append(id, rhs.id).append(firstName, rhs.firstName).append(lastName, rhs.lastName).append(birthDateInMilliseconds, rhs.birthDateInMilliseconds).append(additionalProperties, rhs.additionalProperties).isEquals();
+        ContactJson rhs = ((ContactJson) other);
+        return new EqualsBuilder().append(id, rhs.id).append(firstName, rhs.firstName).append(lastName, rhs.lastName).append(birthDate, rhs.birthDate).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

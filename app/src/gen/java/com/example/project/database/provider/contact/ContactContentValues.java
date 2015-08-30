@@ -28,6 +28,16 @@ public class ContactContentValues extends AbstractContentValues {
         return contentResolver.update(uri(), values(), where == null ? null : where.sel(), where == null ? null : where.args());
     }
 
+    public ContactContentValues putUid(@Nullable String value) {
+        mContentValues.put(ContactColumns.UID, value);
+        return this;
+    }
+
+    public ContactContentValues putUidNull() {
+        mContentValues.putNull(ContactColumns.UID);
+        return this;
+    }
+
     public ContactContentValues putFirstName(@Nullable String value) {
         mContentValues.put(ContactColumns.FIRST_NAME, value);
         return this;

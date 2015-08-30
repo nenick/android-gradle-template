@@ -8,6 +8,6 @@ dependencies {
 jsonSchema2Pojo {
     source = files("${project.projectDir}/src/main/json/network/schema")
     targetDirectory = file("${project.projectDir}/src/gen/java")
-    targetPackage = 'com.example.project.network'
+    targetPackage = 'com.example.project.network.json'
     useCommonsLang3 = true
 }

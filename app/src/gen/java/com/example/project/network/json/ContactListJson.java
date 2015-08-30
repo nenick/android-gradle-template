@@ -1,5 +1,5 @@
 
-package com.example.project.network;
+package com.example.project.network.json;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,10 +26,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonPropertyOrder({
     "contacts"
 })
-public class ContactList {
+public class ContactListJson {
 
     @JsonProperty("contacts")
-    private List<Contact> contacts = new ArrayList<Contact>();
+    private List<ContactJson> contacts = new ArrayList<ContactJson>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -39,7 +39,7 @@ public class ContactList {
      *     The contacts
      */
     @JsonProperty("contacts")
-    public List<Contact> getContacts() {
+    public List<ContactJson> getContacts() {
         return contacts;
     }
 
@@ -49,7 +49,7 @@ public class ContactList {
      *     The contacts
      */
     @JsonProperty("contacts")
-    public void setContacts(List<Contact> contacts) {
+    public void setContacts(List<ContactJson> contacts) {
         this.contacts = contacts;
     }
 
@@ -78,10 +78,10 @@ public class ContactList {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ContactList) == false) {
+        if ((other instanceof ContactListJson) == false) {
             return false;
         }
-        ContactList rhs = ((ContactList) other);
+        ContactListJson rhs = ((ContactListJson) other);
         return new EqualsBuilder().append(contacts, rhs.contacts).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
