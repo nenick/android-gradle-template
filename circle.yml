@@ -22,6 +22,8 @@ test:
 
     # start wiremock to support tests with network communication
     - tools/src/main/resources/start-wiremock.sh
+              # start at background to use wiremock in next build steps
+              background: true
 
     # Execute Component Tests
     - ./gradlew appCt:test
