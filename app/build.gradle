@@ -74,9 +74,10 @@ android {
             // but the combination exceed the max memory and to less value let it run for long time.
             // javaMaxHeapSize "1024M"
 
-            // speed up build for CI by ignoring extra build steps which should speed up build for developers (also reduce memory usage)
-            //incremental false
-            //preDexLibraries = false
+            // Speed up build for CI by ignoring extra build steps which should speed up build for developers.
+            // Also reduce memory usage by avoiding multiple (pre) dex processes.
+            incremental false
+            preDexLibraries = false
         }
     }
 
