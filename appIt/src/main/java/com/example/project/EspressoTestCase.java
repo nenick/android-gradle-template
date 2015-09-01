@@ -2,12 +2,15 @@ package com.example.project;
 
 import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.WindowManager;
 
 import com.example.project.database.provider.address.AddressSelection;
 import com.example.project.database.provider.contact.ContactSelection;
+import com.example.project.views.common.AppIdlingResources;
+import com.example.project.views.common.AppIdlingResources_;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -23,6 +26,8 @@ public abstract class EspressoTestCase<A extends Activity> {
 
     @Before
     public void setupEspresso() {
+        Espresso.registerIdlingResources(AppIdlingResources_.getInstance_(InstrumentationRegistry.getContext()).getIdlingResource());
+
         clearDatabase();
         avoidLockScreen();
     }

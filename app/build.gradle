@@ -108,6 +108,9 @@ dependencies {
     // java language tools like StringUtils
     compile 'org.apache.commons:commons-lang3:3.4'
 
+    // add CountIdlingResource to avoid flaky espresso test
+    compile('com.android.support.test.espresso:espresso-contrib:2.2') { exclude module: "accessibility-test-framework" }
+
     // force test dependencies to use the same support-annotations version
     testCompile "com.android.support:support-annotations:$projectAndroidSupportToolsVersion"
 

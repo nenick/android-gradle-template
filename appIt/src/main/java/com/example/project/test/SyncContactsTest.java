@@ -14,7 +14,7 @@ public class SyncContactsTest extends EspressoTestCase<ContactListActivity_> {
     EspContactListPage contactListPage = new EspContactListPage();
 
     @Test
-    public void testCreateNewContact() {
+    public void testSyncContacts() {
         givenListHasNoContacts();
         whenSyncContacts();
         thenListHasContacts();
