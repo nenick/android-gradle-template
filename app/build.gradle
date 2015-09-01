@@ -70,7 +70,11 @@ android {
     dexOptions {
         if(isCi) {
             // circle ci allow max 4G memory for all processes together and dex does exceed it.
-            javaMaxHeapSize "2048M"
+            javaMaxHeapSize "1024M"
+
+            // speed up build for CI by ignoring extra build steps which should speed up build for developers
+            //incremental false
+            //preDexLibraries = false
         }
     }
 
