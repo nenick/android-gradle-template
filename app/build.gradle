@@ -75,8 +75,8 @@ android {
             // javaMaxHeapSize "1024M"
 
             // speed up build for CI by ignoring extra build steps which should speed up build for developers (also reduce memory usage)
-            incremental false
-            preDexLibraries = false
+            //incremental false
+            //preDexLibraries = false
         }
     }
 
