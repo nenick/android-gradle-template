@@ -67,6 +67,13 @@ android {
         disable 'GradleDependency'
     }
 
+    dexOptions {
+        if(isCi) {
+            // circle ci allow max 4G memory for all processes together and dex does exceed it.
+            javaMaxHeapSize "2048M"
+        }
+    }
+
     // instrumentation test module need to access the expected variant, default is only release publish
     publishNonDefault true
 
@@ -108,7 +115,7 @@ dependencies {
     // java language tools like StringUtils
     compile 'org.apache.commons:commons-lang3:3.4'
 
-    // add CountIdlingResource to avoid flaky espresso test
+    // add CountingIdlingResource to avoid flaky espresso test
     compile('com.android.support.test.espresso:espresso-contrib:2.2') { exclude module: "accessibility-test-framework" }
 
     // force test dependencies to use the same support-annotations version

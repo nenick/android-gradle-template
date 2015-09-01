@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import com.example.project.R;
 import com.example.project.business.contact_sync.SyncContactsFunction;
+import com.example.project.views.common.AppIdlingResources;
 import com.example.project.views.common.mvp.BaseActivityPresenter;
 import com.example.project.views.contact_details.DetailActivityIntent;
 import com.example.project.views.contact_details.DetailFragment;
@@ -36,6 +37,9 @@ public class ContactListActivity extends BaseActivityPresenter implements ShowCo
     @Bean
     SyncContactsFunction syncContactsFunction;
 
+    @Bean
+    AppIdlingResources appIdlingResources;
+
     @Override
     public void onViewCreated() {
         contactListFragment.setShowContactListener(this);
@@ -49,8 +53,10 @@ public class ContactListActivity extends BaseActivityPresenter implements ShowCo
     @OptionsItem(R.id.action_sync_contacts)
     @Background
     void onSyncContacts() {
+        appIdlingResources.increment();
         SyncContactsFunction.Result result = syncContactsFunction.apply();
         showSyncResult(result);
+        appIdlingResources.decrement();
     }
 
     @UiThread(propagation = UiThread.Propagation.REUSE)
