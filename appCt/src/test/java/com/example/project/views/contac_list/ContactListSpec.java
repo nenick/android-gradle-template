@@ -2,24 +2,17 @@ package com.example.project.views.contac_list;
 
 import android.content.Intent;
 
-import com.example.project.R;
-import com.example.project.business.contact.CreateContactFunction_;
 import com.example.project.RobolectricTestCase;
+import com.example.project.business.contact.CreateContactFunction_;
 import com.example.project.testdata.TestContactData;
 import com.example.project.views.contact_details.DetailActivity_;
 import com.example.project.views.contact_edit.EditActivity_;
-import com.github.tomakehurst.wiremock.client.MappingBuilder;
-import com.github.tomakehurst.wiremock.client.UrlMatchingStrategy;
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.http.Fault;
-import com.github.tomakehurst.wiremock.http.RequestMethod;
 
 import org.junit.Test;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.Date;
-
-import wiremock.org.apache.http.impl.conn.Wire;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
