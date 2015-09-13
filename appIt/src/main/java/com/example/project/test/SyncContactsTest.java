@@ -7,6 +7,14 @@ import com.example.project.views.contact_list.ContactListActivity_;
 
 import org.junit.Test;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SyncContactsTest extends EspressoTestCase<ContactListActivity_> {
@@ -17,11 +25,9 @@ public class SyncContactsTest extends EspressoTestCase<ContactListActivity_> {
     public void testSyncContacts() {
         givenListHasNoContacts();
         whenSyncContacts();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        onView(withText("Sync done")).inRoot(withDecorView(not(is(activityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+
         thenListHasContacts();
     }
 

@@ -44,6 +44,9 @@ test:
     # at least remove the look screen
     - adb shell input keyevent 82
 
+    # later we collect the logs from test run
+    - adb logcat -d
+
     # execute tests on emulator
     - ./gradlew appIt:connectedCheck
 
@@ -66,7 +69,8 @@ test:
     - find */build/test-results -name "*.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - find */build/outputs/androidTest-results/ -name "*.xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 
-    - adb logcat -d > $CIRCLE_TEST_REPORTS/logcat_emulator.txt
+    # collect logs from emulator
+    - adb logcat -d > $CIRCLE_ARTIFACTS/logcat_emulator.txt
 
 # Only executed if all tasks are successful
 deployment:
