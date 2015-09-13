@@ -17,6 +17,11 @@ public class SyncContactsTest extends EspressoTestCase<ContactListActivity_> {
     public void testSyncContacts() {
         givenListHasNoContacts();
         whenSyncContacts();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         thenListHasContacts();
     }
 
