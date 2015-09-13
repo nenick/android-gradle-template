@@ -1,5 +1,6 @@
 package com.example.project.views.contact_list;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.project.R;
@@ -62,8 +63,10 @@ public class ContactListActivity extends BaseActivityPresenter implements ShowCo
     @UiThread(propagation = UiThread.Propagation.REUSE)
     void showSyncResult(SyncContactsFunction.Result result) {
         if(result.successful) {
+            Log.e("sync", "sync success");
             Toast.makeText(this, "Sync done", Toast.LENGTH_SHORT).show();
         } else {
+            Log.e("sync", "sync failed");
             Toast.makeText(this, "Sync failed: " + result.errorReason, Toast.LENGTH_SHORT).show();
         }
     }
