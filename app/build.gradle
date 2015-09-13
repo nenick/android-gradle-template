@@ -122,8 +122,12 @@ dependencies {
     // java language tools like StringUtils
     compile 'org.apache.commons:commons-lang3:3.4'
 
-    // add CountingIdlingResource to avoid flaky espresso test
-    compile('com.android.support.test.espresso:espresso-contrib:2.2') { exclude module: "accessibility-test-framework" }
+    // Use CountIdlingResource class to avoid flaky espresso tests.
+    // Interface is provided by own dependency but ready to use implementation comes with contrib library.
+    // Looks like contrib library was only intended to be used within test scope.
+    // Exclude transitiv dependencies to avoid conflicts with test support libraries.
+    compile('com.android.support.test.espresso:espresso-idling-resource:2.2')
+    compile('com.android.support.test.espresso:espresso-contrib:2.2') { exclude module: "*" }
 
     // force test dependencies to use the same support-annotations version
     testCompile "com.android.support:support-annotations:$projectAndroidSupportToolsVersion"
