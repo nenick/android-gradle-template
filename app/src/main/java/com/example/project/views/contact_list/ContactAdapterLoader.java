@@ -2,6 +2,7 @@ package com.example.project.views.contact_list;
 
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 
 import com.example.project.business.contact.QueryContactListFunction;
 import com.example.project.views.common.cursorloader.CursorAdapterWithCursorLoader;
@@ -30,6 +31,7 @@ public class ContactAdapterLoader extends CursorAdapterWithCursorLoader {
 
     @Override
     public Cursor loadCursor() {
+        Log.e("sync", "sync load");
         return queryContactListFunction.apply();
     }
 }

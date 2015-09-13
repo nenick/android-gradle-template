@@ -54,10 +54,12 @@ public class ContactListActivity extends BaseActivityPresenter implements ShowCo
     @OptionsItem(R.id.action_sync_contacts)
     @Background
     void onSyncContacts() {
+        Log.e("sync", "sync start");
         appIdlingResources.increment();
         SyncContactsFunction.Result result = syncContactsFunction.apply();
         showSyncResult(result);
         appIdlingResources.decrement();
+        Log.e("sync", "sync finish");
     }
 
     @UiThread(propagation = UiThread.Propagation.REUSE)
