@@ -15,12 +15,13 @@ android.applicationVariants.all { variant ->
             content = content.replaceAll("#const_wiremock_ip#", localIp)
             valuesFile.write(content, 'UTF-8')
         } else {
-            println "Wrning: value.xml not found for replace current ip"
+            println "Warning: value.xml not found for replace current ip"
         }
     }
 }
 
 def String obtainCurrentIpAddress() {
+    def ipAddress = null;
 
     Enumeration networkInterfaces = NetworkInterface.getNetworkInterfaces();
     while(networkInterfaces.hasMoreElements()) {
@@ -28,19 +29,15 @@ def String obtainCurrentIpAddress() {
         Enumeration inetAddresses = networkInterface.getInetAddresses();
 
         InetAddress inetAddress = (InetAddress) inetAddresses.nextElement();
-        println " Found network [${networkInterface.getName()}/${networkInterface.getDisplayName()}] with IP ${inetAddress.getHostAddress()}"
-    }
-
-    InetAddress inetAddr = InetAddress.getLocalHost();
-
-    byte[] addr = inetAddr.getAddress();
-    String ipAddr = "";
-    for (int i = 0; i < addr.length; i++) {
-        if (i > 0) {
-            ipAddr += ".";
+        def logString = " Found network [${networkInterface.getName()}/${networkInterface.getDisplayName()}] with IP ${inetAddress.getHostAddress()}"
+        if (ipAddress == null) {
+            ipAddress = inetAddress.getHostAddress();
+            logString += " [USED]";
         }
-        ipAddr += addr[i] & 0xFF;
+
+        println logString
     }
-    ipAddr
+
+    ipAddress
 }
 
