@@ -28,7 +28,7 @@ def String obtainCurrentIpAddress() {
         Enumeration inetAddresses = networkInterface.getInetAddresses();
 
         InetAddress inetAddress = (InetAddress) inetAddresses.nextElement();
-        println "Found network with IP ${inetAddress.getHostAddress()}"
+        println " Found network [${networkInterface.getName()}/${networkInterface.getDisplayName()}] with IP ${inetAddress.getHostAddress()}"
     }
 
     InetAddress inetAddr = InetAddress.getLocalHost();
