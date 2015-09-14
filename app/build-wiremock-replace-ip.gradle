@@ -1,8 +1,7 @@
-
 // may be used to check if wiremock is running
 Process p1 = Runtime.getRuntime().exec("curl " + obtainCurrentIpAddress() + ":1337/");
 int returnVal = p1.waitFor();
-boolean reachable = (returnVal==0);
+boolean reachable = (returnVal == 0);
 println "\nWiremock is reachable $reachable\n"
 
 // replace the #const_wiremock_ip# with your current ip address for test with wiremock
@@ -10,7 +9,7 @@ android.applicationVariants.all { variant ->
     variant.mergeResources.doLast {
         def String localIp = obtainCurrentIpAddress()
         File valuesFile = file("${buildDir}/intermediates/res/merged/debug/values/values.xml")
-        if(valuesFile.exists()) {
+        if (valuesFile.exists()) {
             String content = valuesFile.getText('UTF-8')
             content = content.replaceAll("#const_wiremock_ip#", localIp)
             valuesFile.write(content, 'UTF-8')
@@ -21,21 +20,33 @@ android.applicationVariants.all { variant ->
 }
 
 def String obtainCurrentIpAddress() {
+
+    def wantedInterfaceDisplayName = System.getenv("TEST_MOCK_IFACE");
+
+    if ((wantedInterfaceDisplayName != null) && (!wantedInterfaceDisplayName.isEmpty())) {
+        println "interface wanted: " + wantedInterfaceDisplayName
+    } else {
+        println "No interface wanted, you can select one by setting the interface name to environment variable TEST_MOCK_IFACE"
+    }
+
     def ipAddress = null;
 
     Enumeration networkInterfaces = NetworkInterface.getNetworkInterfaces();
-    while(networkInterfaces.hasMoreElements()) {
+    while (networkInterfaces.hasMoreElements()) {
         NetworkInterface networkInterface = (NetworkInterface) networkInterfaces.nextElement();
-        Enumeration inetAddresses = networkInterface.getInetAddresses();
 
+        Enumeration inetAddresses = networkInterface.getInetAddresses();
         InetAddress inetAddress = (InetAddress) inetAddresses.nextElement();
-        def logString = " Found network [${networkInterface.getName()}/${networkInterface.getDisplayName()}] with IP ${inetAddress.getHostAddress()}"
-        if (ipAddress == null) {
-            ipAddress = inetAddress.getHostAddress();
-            logString += " [USED]";
+        println " Found network [${networkInterface.getDisplayName()}] with IP ${inetAddress.getHostAddress()}"
+
+        if (wantedInterfaceDisplayName?.trim() && !wantedInterfaceDisplayName.equalsIgnoreCase(networkInterface.displayName)) {
+            continue;
         }
 
-        println logString
+        if (ipAddress == null) {
+            ipAddress = inetAddress.getHostAddress();
+            println " Found network [SELECTED] ${ipAddress}"
+        }
     }
 
     ipAddress
