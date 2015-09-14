@@ -1,3 +1,5 @@
+[Back to Index](../index.md)
+
 # Function Class
 
 I don't know if this style has a name.
@@ -13,3 +15,7 @@ Additional convenience methods are also possible.
         public <return value> apply(<inout values>) {
         }
     }
+
+---
+
+[Back to Index](../index.md)

@@ -1,3 +1,5 @@
+[Back to Index](../index.md)
+
 # AndroidAnnotations
 
 I decided me for androidannotations instead of dagger, butterknife and co because it just fit perfectly into all my need.
@@ -44,3 +46,7 @@ latest version <https://maven-repository.com/artifact/org.springframework.androi
 
 * **dependency:** (optional) compile spring
 https://github.com/excilys/androidannotations/wiki/Rest-API
+
+---
+
+[Back to Index](../index.md)

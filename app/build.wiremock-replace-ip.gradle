@@ -2,7 +2,7 @@
 Process p1 = Runtime.getRuntime().exec("curl " + obtainCurrentIpAddress() + ":1337/");
 int returnVal = p1.waitFor();
 boolean reachable = (returnVal == 0);
-println "\nWiremock is reachable $reachable\n"
+println "\n Wiremock is reachable $reachable\n"
 
 // replace the #const_wiremock_ip# with your current ip address for test with wiremock
 android.applicationVariants.all { variant ->
@@ -24,9 +24,9 @@ def String obtainCurrentIpAddress() {
     def wantedInterfaceDisplayName = System.getenv("TEST_MOCK_IFACE");
 
     if ((wantedInterfaceDisplayName != null) && (!wantedInterfaceDisplayName.isEmpty())) {
-        println "interface wanted: " + wantedInterfaceDisplayName
+        println "\n Interface wanted: " + wantedInterfaceDisplayName
     } else {
-        println "No interface wanted, you can select one by setting the interface name to environment variable TEST_MOCK_IFACE"
+        println "\n No interface wanted, you can select one by setting the interface name to environment variable TEST_MOCK_IFACE"
     }
 
     def ipAddress = null;
@@ -45,7 +45,7 @@ def String obtainCurrentIpAddress() {
 
         if (ipAddress == null) {
             ipAddress = inetAddress.getHostAddress();
-            println " Found network [SELECTED] ${ipAddress}"
+            println " Selected network ${ipAddress}"
         }
     }
 

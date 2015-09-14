@@ -1,4 +1,4 @@
-
+[Back to Index](../index.md)
 
 module under test need to publish variants: publishNonDefault true
 
@@ -23,3 +23,7 @@ base build.gradle
 ### APK not build issue
 
 workaround is to call https://code.google.com/p/android/issues/detail?id=180689
+
+---
+
+[Back to Index](../index.md)

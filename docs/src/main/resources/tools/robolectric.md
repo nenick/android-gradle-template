@@ -1,3 +1,5 @@
+[Back to Index](../index.md)
+
 # Robolectric
 
 Is a create tool for testing your app inside jvm insdead to deploy it on a device or emulator.
@@ -87,3 +89,13 @@ I detected this behaviour just on mac os. Every time i run robolectric tests at 
 On command line you can avoid it with `export JAVA_TOOL_OPTIONS='-Djava.awt.headless=true'`
 
 In your IDE set as VM option in your run configuration `-Djava.awt.headless=true`
+
+---
+
+See also
+
+* [Testing Concept](../concepts/testing.md)
+
+---
+
+[Back to Index](../index.md)

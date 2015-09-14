@@ -1,3 +1,5 @@
+[Back to Index](index.md)
+
 # Adjust the project to your needs
 
 ### Remove database support
@@ -51,3 +53,7 @@
             }
         }
     }
+
+---
+
+[Back to Index](index.md)

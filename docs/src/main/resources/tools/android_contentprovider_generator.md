@@ -1,3 +1,5 @@
+[Back to Index](../index.md)
+
 # Android ContentProvider Generator
 
 Create tool for generating all necessary database files.
@@ -87,3 +89,7 @@ After the generation you will get a hint how to register your new database provi
 By default this class would not be overwritten but with some custom changes to the generation process it does.
 Best is to move it to src/main/java instead of src/gen/java within the same package to keep custom callback implementations.
 After each you must delete
+
+---
+
+[Back to Index](../index.md)

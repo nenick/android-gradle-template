@@ -1,3 +1,5 @@
+[Back to Index](../index.md)
+
 # Package structure
 
 The project package structure follows mainly the package by feature approach.
@@ -66,3 +68,7 @@ Content should not change often like other do. The most parts of this package co
 *(replace 'stuff' with a describing name for your , e.g. contact.)*
 
 Put here basic stuff used by different views.
+
+---
+
+[Back to Index](../index.md)

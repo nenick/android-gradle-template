@@ -1,3 +1,5 @@
+[Back to Index](../index.md)
+
 # Model View Presenter
 
 * [Wikipedia.org - Model View Presenter](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter)
@@ -27,3 +29,7 @@ The base for the MVP can be found at *com.example.project.view.common.mvp* for t
 The activity is most time only the glue between fragments.
 When fragments has something to show they will tell it back through a Show...Listener to the current activity.
 The root activity may differ between portrait and landscape mode.
+
+---
+
+[Back to Index](../index.md)

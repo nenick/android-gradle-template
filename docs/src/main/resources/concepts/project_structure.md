@@ -1,3 +1,5 @@
+[Back to Index](../index.md)
+
 # Project structure
 
 ### app - Application
@@ -19,3 +21,7 @@ Runs the app on device/emulator to check that all work in a real environment.
 ### Modules which could be simple folders
 
 *Some modules only are modules instead of simple folders to support the Android Project View. Without they would not be visible.*
+
+---
+
+[Back to Index](../index.md)

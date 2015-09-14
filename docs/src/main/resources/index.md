@@ -1,3 +1,4 @@
+[Back to Project](https://github.com/nenick/android-gradle-template)
 
 # Template explanation
 
@@ -29,3 +30,6 @@
 * Test with robolectric [Robolectric tests in own module](tools/robolectric_test_module.md)
 * Mock REST Services [Wiremock](tools/wiremock.md)
 
+---
+
+[Back to Project](https://github.com/nenick/android-gradle-template)

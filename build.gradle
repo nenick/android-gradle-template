@@ -57,4 +57,4 @@ test.reports.html.enabled = false
 test.reports.junitXml.enabled = false
 
 // support combined test code coverage for all levels (unit, component, integration)
-apply from: "build-jacoco-test-report.gradle"
+apply from: "build.jacoco-test-report.gradle"

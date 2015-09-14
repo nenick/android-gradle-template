@@ -1,3 +1,4 @@
+[Back to Index](../index.md)
 
 Getting startes wiki: https://code.google.com/p/android-test-kit/wiki/EspressoSetupInstructions
 
@@ -12,3 +13,7 @@ http://stackoverflow.com/questions/20436968/espresso-typetext-not-working
 compile 'com.android.support.test.espresso:espresso-contrib:2.2'
 
 see CountingIdlingResource
+
+---
+
+[Back to Index](../index.md)

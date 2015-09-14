@@ -1,3 +1,5 @@
+[Back to Index](../index.md)
+
 # Mocking REST Service
 
 http://wiremock.org/running-standalone.html
@@ -15,3 +17,7 @@ Latest Wiremock versions needs Java 8. For Java 7 we need older wiremock version
         at com.github.tomakehurst.wiremock.http.AdminRequestHandler.handleRequest(AdminRequestHandler.java:55)
         at com.github.tomakehurst.wiremock.http.AbstractRequestHandler.handle(AbstractRequestHandler.java:38)
         at com.github.tomakehurst.wiremock.jetty6.Jetty6HandlerDispatchingServlet.service(Jetty6HandlerDispatchingServlet.java:98)
+
+---
+
+[Back to Index](../index.md)

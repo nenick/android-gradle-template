@@ -1,3 +1,4 @@
+[Back to Index](../index.md)
 
 https://github.com/joelittlejohn/jsonschema2pojo
 https://github.com/joelittlejohn/jsonschema2pojo/wiki/Reference
@@ -19,3 +20,7 @@ jsonSchema2Pojo {
 }
 
 https://github.com/joelittlejohn/jsonschema2pojo/blob/37a98588312679391f7e660962a8d40de3c826b5/jsonschema2pojo-gradle-plugin/example/android/app/build.gradle
+
+---
+
+[Back to Index](../index.md)
