@@ -21,6 +21,16 @@ android.applicationVariants.all { variant ->
 }
 
 def String obtainCurrentIpAddress() {
+
+    Enumeration networkInterfaces = NetworkInterface.getNetworkInterfaces();
+    while(networkInterfaces.hasMoreElements()) {
+        NetworkInterface networkInterface = (NetworkInterface) networkInterfaces.nextElement();
+        Enumeration inetAddresses = networkInterface.getInetAddresses();
+
+        InetAddress inetAddress = (InetAddress) inetAddresses.nextElement();
+        println "Found network with IP ${inetAddress.getHostAddress()}"
+    }
+
     InetAddress inetAddr = InetAddress.getLocalHost();
 
     byte[] addr = inetAddr.getAddress();
@@ -33,3 +43,4 @@ def String obtainCurrentIpAddress() {
     }
     ipAddr
 }
+
