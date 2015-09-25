@@ -36,6 +36,9 @@ apply from: 'build.jacoco-test-report.gradle'
 // replace target ip for REST calls to use local wiremock
 apply from: "build.wiremock-replace-ip.gradle"
 
+// makes adb wait as needed https://code.google.com/p/android/issues/detail?id=104305
+com.android.ddmlib.DdmPreferences.setTimeOut(120000)
+
 android {
     compileSdkVersion projectAndroidVersion
     buildToolsVersion projectAndroidBuildToolsVersion
@@ -65,11 +68,6 @@ android {
     lintOptions {
         // GradleDependency Current we can't switch to support v23 tools because of robolectric
         disable 'GradleDependency'
-    }
-
-    adbOptions {
-        // avoid the com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
-        timeOutInMs 90 * 1000
     }
 
     dexOptions {
