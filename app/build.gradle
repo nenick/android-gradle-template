@@ -67,6 +67,11 @@ android {
         disable 'GradleDependency'
     }
 
+    adbOptions {
+        // avoid the com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
+        timeOutInMs 90 * 1000
+    }
+
     dexOptions {
         if(isCi) {
             // CircleCi allow max 4G memory for all processes together and dex does exceed it
