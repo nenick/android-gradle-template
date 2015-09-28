@@ -36,6 +36,9 @@ apply from: 'build.jacoco-test-report.gradle'
 // replace target ip for REST calls to use local wiremock
 apply from: "build.wiremock-replace-ip.gradle"
 
+// makes adb wait as needed https://code.google.com/p/android/issues/detail?id=104305
+com.android.ddmlib.DdmPreferences.setTimeOut(240000)
+
 android {
     compileSdkVersion projectAndroidVersion
     buildToolsVersion projectAndroidBuildToolsVersion
