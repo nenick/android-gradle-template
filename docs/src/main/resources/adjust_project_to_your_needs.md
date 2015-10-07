@@ -15,6 +15,10 @@ git remote add origin <remote_repo_url>
 git push --all --set-upstream origin
 ```
 
+### Prototyping
+
+For fast prototyping just remove appCt, appIt, tools and docs for a clean code base.
+
 ### Remove database support
 
 * clean up the app/build.gradle file from stuff which is added for [database example](database.md)
