@@ -8,7 +8,7 @@ Start by cloning the project `git clone https://github.com/nenick/android-gradle
 
 Remove the git folder `rm -rf .git` and create a new history by `git init`.
 
-You can connect it with an already existing remote reository by:
+You can connect it with an already existing remote repository by:
 
 ```
 git remote add origin <remote_repo_url>
