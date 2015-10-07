@@ -10,8 +10,10 @@ Remove the git folder `rm -rf .git` and create a new history by `git init`.
 
 You can connect it with an already existing remote reository by:
 
+```
 git remote add origin <remote_repo_url>
 git push --all --set-upstream origin
+```
 
 ### Remove database support
 
