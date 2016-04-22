@@ -1,0 +1,54 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        // code generation support for android annotations
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+plugins {
+    // provide download task for gradle to download database generator
+    id "de.undercouch.download" version "1.2"
+}
+
+apply plugin: 'com.android.library'
+
+// code generation support for android annotations
+apply plugin: 'android-apt'
+
+// code generation database files
+apply from: 'build.generate-database.gradle'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.0 rc2"
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // java language tools like StringUtils
+    compile 'org.apache.commons:commons-lang3:3.4'
+
+    // database generator use support annotations
+    compile "com.android.support:support-annotations:23.3.0"
+
+    // android annotations support
+    apt "org.androidannotations:androidannotations:4.0.0"
+    compile "org.androidannotations:androidannotations-api:4.0.0"
+
+    testCompile 'junit:junit:4.12'
+}

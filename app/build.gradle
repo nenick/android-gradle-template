@@ -4,28 +4,14 @@ buildscript {
     }
     dependencies {
         // code generation support for android annotations
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-
-        // code generation for json string - object mapping
-        classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.14'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
-}
-
-plugins {
-    // provide download task for gradle
-    id "de.undercouch.download" version "1.2"
 }
 
 apply plugin: 'com.android.application'
 
 // code generation support for android annotations
 apply plugin: 'android-apt'
-
-// code generation for json object mapping
-apply from: 'build.generate-json-objects.gradle'
-
-// code generation database files
-apply from: 'build.generate-database.gradle'
 
 // test support for android specific unit tests like database checks
 apply from: 'build.robolectric.gradle'
@@ -37,13 +23,13 @@ apply from: 'build.jacoco-test-report.gradle'
 apply from: "build.wiremock-replace-ip.gradle"
 
 android {
-    compileSdkVersion projectAndroidVersion
-    buildToolsVersion projectAndroidBuildToolsVersion
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
-        applicationId "com.example.project"
-        minSdkVersion projectAndroidMinVersion
-        targetSdkVersion projectAndroidVersion
+        applicationId "com.example.app"
+        minSdkVersion 10
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -96,7 +82,7 @@ android {
 
 apt {
     arguments {
-        androidManifestFile variant.outputs.collect()[0].processResources.manifestFile
+        androidManifestFile variant.outputs.collect()[0]?.processResources?.manifestFile
     }
 }
 
@@ -106,21 +92,16 @@ repositories {
 
 dependencies {
     // ui design and backward compatibility
-    compile "com.android.support:appcompat-v7:$projectAndroidSupportToolsVersion"
-    compile "com.android.support:design:$projectAndroidSupportToolsVersion"
+    compile "com.android.support:appcompat-v7:23.3.0"
+    compile "com.android.support:design:23.3.0"
+
+    compile(project(':core')) {
+        exclude module: "design"
+    }
 
     // android annotations support
-    apt "org.androidannotations:androidannotations:3.3.2"
-    compile "org.androidannotations:androidannotations-api:3.3.2"
-
-    // network support with android annotations
-    compile "org.springframework.android:spring-android-rest-template:2.0.0.M3"
-
-    // better time handling with DateTime
-    compile 'net.danlew:android.joda:2.8.2'
-
-    // java language tools like StringUtils
-    compile 'org.apache.commons:commons-lang3:3.4'
+    apt "org.androidannotations:androidannotations:4.0.0"
+    compile "org.androidannotations:androidannotations-api:4.0.0"
 
     // Use CountIdlingResource class to avoid flaky espresso tests.
     // Interface is provided by own dependency but ready to use implementation comes with contrib library.
@@ -129,12 +110,11 @@ dependencies {
     compile('com.android.support.test.espresso:espresso-idling-resource:2.2')
     compile('com.android.support.test.espresso:espresso-contrib:2.2') { exclude module: "*" }
 
-    // force test dependencies to use the same support-annotations version
-    testCompile "com.android.support:support-annotations:$projectAndroidSupportToolsVersion"
-
     // basic unit tests support + mocks + fluent assertions + android assertions
     testCompile 'junit:junit:4.12'
-    testCompile 'com.squareup.assertj:assertj-android:1.1.0'
+    testCompile('com.squareup.assertj:assertj-android:1.1.0') {
+        exclude module: 'support-annotations' // Avoid Error:Conflict ... Resolved versions for app (X) and test app (Y) differ ...
+    }
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
 }
 

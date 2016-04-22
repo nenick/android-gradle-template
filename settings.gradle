@@ -1,2 +1,14 @@
-include 'app', 'appCt', 'appIt'
-include 'wiremock', 'docs', 'tools'
+include 'app'
+
+// optional libraries for different aspects from android development
+include ':core'
+include ':database'
+include ':network'
+
+// separated android instrumentation tests
+include 'apptests'
+
+// includes just to make them accessible inside Android Studios project Android view
+include 'docs'
+include 'tools'
+include 'wiremock'

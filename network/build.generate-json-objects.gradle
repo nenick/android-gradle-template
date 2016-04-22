@@ -1,0 +1,14 @@
+apply plugin: 'jsonschema2pojo'
+android.sourceSets.main.java.srcDirs += "src/gen/java"
+
+dependencies {
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.1'
+    compile 'javax.annotation:javax.annotation-api:1.2'
+}
+
+jsonSchema2Pojo {
+    source = files("${project.projectDir}/src/main/json/network/schema")
+    targetDirectory = file("${project.projectDir}/src/gen/java")
+    targetPackage = 'com.example.app.network.json'
+    useCommonsLang3 = true
+}

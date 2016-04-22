@@ -24,6 +24,6 @@ jacocoTestReport {
 }
 
 // just clean up dashboard, following reports are not of interest
-testRelease.reports.html.enabled = false
-testRelease.reports.junitXml.enabled = false
-testDebug.reports.junitXml.enabled = false
+//testRelease.reports.html.enabled = false
+//testRelease.reports.junitXml.enabled = false
+//testDebug.reports.junitXml.enabled = false

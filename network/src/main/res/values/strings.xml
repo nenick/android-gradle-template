@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">network</string>
+    <string name="const_wiremock_ip">#const_wiremock_ip</string>
+</resources>

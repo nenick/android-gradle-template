@@ -23,7 +23,7 @@ android {
 
 // support to get the separated test module work inside android studio
 // this must be after the projectUnderTest declaration
-apply from: 'build.novoda-android-studio.gradle'
+//apply from: 'build.novoda-android-studio.gradle'
 
 // support code coverage for the component tests
 // this must be after the projectUnderTest declaration
@@ -40,6 +40,15 @@ dependencies {
     testCompile('com.squareup.assertj:assertj-android:1.1.0') {
         exclude module: "support-annotations"
     }
+
+    def androidModule = project(':app')
+    testCompile project(':app').android.applicationVariants.toList().first().javaCompile.classpath
+    testCompile project(':app').android.applicationVariants.toList().first().javaCompile.outputs.files
+    //println androidPlugin.androidBuilder.bootClasspath
+    def androidPlugin = androidModule.plugins.getPlugin(androidModule.plugins.hasPlugin( "com.android.application") ? "com.android.application" : "com.android.library")
+    println androidPlugin.androidBuilder
+    def androidRuntime = project.files(androidPlugin.androidBuilder.getBootClasspath(true))
+    testCompile androidRuntime
 
     // easy modify wiremock stubbing support
     // need standalone version to avoid conflicts with org.apache.http classes (not all tests will run anymore)

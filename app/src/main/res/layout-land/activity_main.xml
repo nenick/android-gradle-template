@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_list"
-        android:name="com.example.project.views.contact_list.ContactListFragment_"
+        android:name="com.example.app.views.contact_list.ContactListFragment_"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/fragment_detail"
-        android:name="com.example.project.views.contact_details.DetailFragment_"
+        android:name="com.example.app.views.contact_details.DetailFragment_"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.7"

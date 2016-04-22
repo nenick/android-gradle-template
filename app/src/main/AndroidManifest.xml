@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.project">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    package="com.example.app">
 
     <application
         android:allowBackup="true"
@@ -10,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".views.start.StartActivity_"
+            android:name="com.example.app.views.start.StartActivity_"
             android:finishOnTaskLaunch="true"
             android:label="@string/app_name"
             android:noHistory="true">
@@ -20,25 +18,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.contact_list.ContactListActivity_"
+            android:name="com.example.app.views.contact_list.ContactListActivity_"
             android:label="List" />
         <activity
-            android:name=".views.contact_details.DetailActivity_"
+            android:name="com.example.app.views.contact_details.DetailActivity_"
             android:label="Details">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.contact_list.ContactListActivity_" />
+                android:value="com.example.app.views.contact_list.ContactListActivity_" />
         </activity>
         <activity
-            android:name=".views.contact_edit.EditActivity_"
+            android:name="com.example.app.views.contact_edit.EditActivity_"
             android:label="Create or Update">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.contact_list.ContactListActivity_" />
+                android:value="com.example.app.views.contact_list.ContactListActivity_" />
         </activity>
 
         <provider
-            android:name="com.example.project.database.ExampleDbProvider_"
+            android:name="com.example.app.database.ExampleDbProvider_"
             android:authorities="com.example.project"
             android:exported="false" />
     </application>
