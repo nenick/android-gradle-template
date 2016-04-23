@@ -11,6 +11,11 @@ machine:
 
 test:
   pre:
+    # workaround for "failed to find Build Tools revision ..."
+    # android list sdk --all --extended
+    - echo y | android update sdk --no-ui --all --filter tool,android-8 #,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository,android-23
+    - echo y | android update sdk --no-ui --all --filter build-tools-23.0.3
+
   # emulator startup need some minutes that's why start it before first build/test steps for build speed up
     - emulator -avd circleci-android22 -no-audio -no-window:
         background: true
