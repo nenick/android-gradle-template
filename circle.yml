@@ -13,7 +13,8 @@ dependencies:
   pre:
     # workaround for "failed to find Build Tools revision ..."
     # android list sdk --all --extended
-    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,android-23,extra-google-m2repository,extra-android-m2repository,extra-android-support
+    # https://discuss.circleci.com/t/circleci-not-compiling-on-gradle-2-0-failed-to-resolve-support-annotations-23-3-0/3396
+    - ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --all --filter tools,platform-tools,android-23,extra-google-m2repository,extra-android-m2repository,extra-android-support
     - echo y | android update sdk --no-ui --all --filter build-tools-23.0.3
 
 test:
