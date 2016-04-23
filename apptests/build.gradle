@@ -42,12 +42,6 @@ android {
 }
 
 dependencies {
-    // force dependencies to use the same support-annotations version (must be same from app)
-    compile "com.android.support:support-annotations:$projectAndroidSupportToolsVersion"
-
-    // fluent assertion support and android specific assertions
-    compile 'com.squareup.assertj:assertj-android:1.1.0'
-
     // espresso support
     compile 'com.android.support.test.espresso:espresso-core:2.2'
     compile 'com.android.support.test:runner:0.3'

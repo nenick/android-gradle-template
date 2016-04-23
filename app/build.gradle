@@ -113,5 +113,9 @@ dependencies {
         exclude module: 'support-annotations' // Avoid Error:Conflict ... Resolved versions for app (X) and test app (Y) differ ...
     }
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
+
+    androidTestCompile "com.android.support:support-annotations:23.3.0"
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+    androidTestCompile 'com.android.support.test:runner:0.3'
 }
 
