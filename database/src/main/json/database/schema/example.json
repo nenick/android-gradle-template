@@ -1,0 +1,9 @@
+{
+  "fields": [
+    {
+      "name": "name",
+      "type": "String",
+      "nullable": true
+    }
+  ]
+}

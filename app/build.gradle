@@ -19,9 +19,6 @@ apply from: 'build.robolectric.gradle'
 // support code coverage for the unit tests
 apply from: 'build.jacoco-test-report.gradle'
 
-// replace target ip for REST calls to use local wiremock
-apply from: "build.wiremock-replace-ip.gradle"
-
 android {
     compileSdkVersion 23
     buildToolsVersion '23.0.3'
