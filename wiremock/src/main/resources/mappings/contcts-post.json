@@ -1,9 +1,0 @@
-{
-  "request": {
-    "method": "POST",
-    "url": "/contacts"
-  },
-  "response": {
-    "status": 201
-  }
-}
