@@ -1,10 +1,10 @@
-def dbSchemaPath = "src/main/json/database/schema"
-def dbClassesPath = "src/gen/java"
+def dbSchemaPath = 'src/main/json/database/schema'
+def dbClassesPath = 'src/gen/java'
 android.sourceSets.main.java.srcDirs += dbClassesPath
-android.sourceSets.main.java.srcDirs += "src/main/json"
+android.sourceSets.main.java.srcDirs += 'src/main/json'
 
 task generateDatabaseFiles << {
-    def generatorVersion = "1.9.2"
+    def generatorVersion = '1.9.2'
 
     // download android contentprovider generator
     if (!file("$buildDir/android_contentprovider_generator-${generatorVersion}-bundle.jar").exists()) {
@@ -19,7 +19,7 @@ task generateDatabaseFiles << {
 
     // execute the generator
     exec {
-        executable "java"
-        args = ["-jar", "$buildDir/android_contentprovider_generator-${generatorVersion}-bundle.jar", "-i", dbSchemaPath, "-o", dbClassesPath]
+        executable 'java'
+        args = ['-jar', "$buildDir/android_contentprovider_generator-${generatorVersion}-bundle.jar", '-i', dbSchemaPath, '-o', dbClassesPath]
     }
 }

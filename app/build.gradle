@@ -24,13 +24,14 @@ android {
     buildToolsVersion '23.0.3'
 
     defaultConfig {
-        applicationId "com.example.app"
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId 'com.example.app'
+        versionCode 1
+        versionName '1.0'
+
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -40,16 +41,11 @@ android {
         }
     }
 
-    lintOptions {
-        // GradleDependency Current we can't switch to support v23 tools because of robolectric
-        disable 'GradleDependency'
-    }
-
     dexOptions {
         // CircleCi allow max 4G memory for all processes together and dex does exceed it
         // with his parallel execution. Shrink the javaMaxHeapSize does it only per dex process
         // but the combination exceed the max memory and to less value let it run for long time.
-        // javaMaxHeapSize "1024M"
+        // javaMaxHeapSize '1024M'
 
         // Speed up build for CI by ignoring extra build steps which should speed up build for developers.
         // Also reduce memory usage by avoiding multiple (pre) dex processes.
@@ -77,21 +73,21 @@ apt {
 }
 
 repositories {
-    maven { url = "https://dl.bintray.com/nenick/maven/" }
+    maven { url = 'https://dl.bintray.com/nenick/maven/' }
 }
 
 dependencies {
     // ui design and backward compatibility
-    compile "com.android.support:appcompat-v7:23.3.0"
-    compile "com.android.support:design:23.3.0"
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
 
     compile(project(':core')) {
-        exclude module: "design"
+        exclude module: 'design'
     }
 
     // android annotations support
-    apt "org.androidannotations:androidannotations:4.0.0"
-    compile "org.androidannotations:androidannotations-api:4.0.0"
+    apt 'org.androidannotations:androidannotations:4.0.0'
+    compile 'org.androidannotations:androidannotations-api:4.0.0'
 
     // Use CountIdlingResource class to avoid flaky espresso tests
     compile('com.android.support.test.espresso:espresso-idling-resource:2.2.2')
@@ -104,8 +100,8 @@ dependencies {
     }
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
 
-    androidTestCompile "com.android.support:appcompat-v7:23.3.0"
-    androidTestCompile "com.android.support:design:23.3.0"
+    androidTestCompile 'com.android.support:appcompat-v7:23.3.0'
+    androidTestCompile 'com.android.support:design:23.3.0'
     androidTestCompile 'de.nenick:espresso-macchiato:0.4.0'
 }
 

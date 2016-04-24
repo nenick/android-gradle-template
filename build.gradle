@@ -16,7 +16,7 @@ buildscript {
 }
 
 // set flag whether we are on a build server
-ext.isCi = ("true".equals(System.getenv("TRAVIS")) || "true".equals(System.getenv("CIRCLECI")))
+ext.isCi = ('true'.equals(System.getenv('TRAVIS')) || 'true'.equals(System.getenv('CIRCLECI')))
 
 // current robolectric has no support for android M (v23) https://github.com/robolectric/robolectric/issues/1865
 ext.projectAndroidVersion = 22
@@ -27,12 +27,12 @@ ext.projectAndroidMinVersion = 10
 
 // sometimes support tools and build tools have same version but support tools version grow faster with time
 // current robolectric has no support for android M (v23) stuff
-ext.projectAndroidBuildToolsVersion = "22.0.1"
-ext.projectAndroidSupportToolsVersion = "22.2.1"
+ext.projectAndroidBuildToolsVersion = '22.0.1'
+ext.projectAndroidSupportToolsVersion = '22.2.1'
 
 // not all jacoco versions work without issues
 // TODO try which is the latest working version without issues, with 0.7.5 is saw some
-ext.projectJacocoVersion = "0.7.0.201403182114"
+ext.projectJacocoVersion = '0.7.0.201403182114'
 
 allprojects {
     repositories {
@@ -46,10 +46,10 @@ apply plugin: 'java'
 // support to see all reports on one page
 apply plugin: 'build-dashboard'
 buildDashboard {
-    reports.html.destination = "build/"
+    reports.html.destination = 'build/'
 }
 buildDashboard << {
-    println file("build/index.html").absolutePath
+    println file('build/index.html').absolutePath
 }
 
 // just clean up dashboard from not generated reports
@@ -57,4 +57,4 @@ test.reports.html.enabled = false
 test.reports.junitXml.enabled = false
 
 // support combined test code coverage for all levels (unit, component, integration)
-apply from: "build.jacoco-test-report.gradle"
+apply from: 'build.jacoco-test-report.gradle'

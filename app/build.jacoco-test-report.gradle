@@ -1,12 +1,12 @@
-apply plugin: "jacoco"
+apply plugin: 'jacoco'
 
 jacoco {
     toolVersion = projectJacocoVersion
 }
 
 task jacocoTestReport(type: JacocoReport /*, dependsOn: ['test'] */ ) {
-    description = "Generates Jacoco coverage reports: XML and HTML"
-    group = "Reporting"
+    description = 'Generates Jacoco coverage reports: XML and HTML'
+    group = 'Reporting'
 //                outputs.upToDateWhen { false }
 
     // use hidden configuration, for details look into JacocoPlugin.groovy
@@ -28,11 +28,10 @@ task jacocoTestReport(type: JacocoReport /*, dependsOn: ['test'] */ ) {
     executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
 
     reports {
-        xml {
-            enabled = true
-            destination = "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
-        }
-        csv.enabled false
+        xml.enabled = true
+        xml.destination = "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+
+        csv.enabled = false
         html {
             enabled = true
             destination = "${project.buildDir}/reports/jacoco"

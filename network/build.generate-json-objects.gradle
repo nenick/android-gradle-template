@@ -1,5 +1,5 @@
 apply plugin: 'jsonschema2pojo'
-android.sourceSets.main.java.srcDirs += "src/gen/java"
+android.sourceSets.main.java.srcDirs += 'src/gen/java'
 
 dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.1'

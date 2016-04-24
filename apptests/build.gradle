@@ -2,7 +2,7 @@ apply plugin: 'com.android.test'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         // minimal should be same from app module
@@ -28,7 +28,7 @@ android {
             // CircleCi allow max 4G memory for all processes together and dex does exceed it
             // with his parallel execution. Shrink the javaMaxHeapSize does it only per dex process
             // but the combination exceed the max memory and to less value let it run for long time.
-            // javaMaxHeapSize "1024M"
+            // javaMaxHeapSize '1024M'
 
             // Speed up build for CI by ignoring extra build steps which should speed up build for developers.
             // Also reduce memory usage by avoiding multiple (pre) dex processes.
@@ -39,7 +39,7 @@ android {
 }
 
 repositories {
-    maven { url = "https://dl.bintray.com/nenick/maven/" }
+    maven { url = 'https://dl.bintray.com/nenick/maven/' }
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-apply plugin: "jacoco"
+apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 
 jacoco {
@@ -8,8 +8,8 @@ jacoco {
 task configureCoverageReport {
     doFirst {
         def includeAppSrc = false;
-        def includeCoreSrc = false;
-        def includeDatabaseSrc = false;
+        //def includeCoreSrc = false;
+        //def includeDatabaseSrc = false;
         def coverageFiles = []
         def coverageSourceDirs = []
 
@@ -24,19 +24,19 @@ task configureCoverageReport {
 
         def currentCoverageFile = 'app/build/jacoco/testDebugUnitTest.exec'
         if (file(currentCoverageFile).exists()) {
-            println "found app unit test coverage"
+            println 'found app unit test coverage'
             includeAppSrc = true;
             coverageFiles += currentCoverageFile
         }
         currentCoverageFile = 'appIt/build/outputs/code-coverage/connected/coverage.ec'
         if (file(currentCoverageFile).exists()) {
-            println "found app integration test coverage"
+            println 'found app integration test coverage'
             includeAppSrc = true;
             coverageFiles += currentCoverageFile
         }
         currentCoverageFile = 'appCt/build/jacoco/testDebug.exec'
         if (file(currentCoverageFile).exists()) {
-            println "found app component test coverage"
+            println 'found app component test coverage'
             includeAppSrc = true;
             coverageFiles += currentCoverageFile
         }

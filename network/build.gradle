@@ -21,13 +21,13 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
     buildTypes {
         release {
@@ -42,14 +42,14 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
 
     // android annotations support
-    apt "org.androidannotations:androidannotations:4.0.0"
-    compile "org.androidannotations:androidannotations-api:4.0.0"
-    apt "org.androidannotations:rest-spring:4.0.0"
-    compile "org.androidannotations:rest-spring-api:4.0.0"
+    apt 'org.androidannotations:androidannotations:4.0.0'
+    compile 'org.androidannotations:androidannotations-api:4.0.0'
+    apt 'org.androidannotations:rest-spring:4.0.0'
+    compile 'org.androidannotations:rest-spring-api:4.0.0'
 
 
     // network support with android annotations
-    compile "org.springframework.android:spring-android-rest-template:2.0.0.M3"
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
 
     testCompile 'junit:junit:4.12'
 }

@@ -10,7 +10,7 @@ buildscript {
 
 plugins {
     // provide download task for gradle to download database generator
-    id "de.undercouch.download" version "1.2"
+    id 'de.undercouch.download' version '1.2'
 }
 
 apply plugin: 'com.android.library'
@@ -23,13 +23,13 @@ apply from: 'build.generate-database.gradle'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
     buildTypes {
         release {
@@ -44,11 +44,11 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
 
     // database generator use support annotations
-    compile "com.android.support:support-annotations:23.3.0"
+    compile 'com.android.support:support-annotations:23.3.0'
 
     // android annotations support
-    apt "org.androidannotations:androidannotations:4.0.0"
-    compile "org.androidannotations:androidannotations-api:4.0.0"
+    apt 'org.androidannotations:androidannotations:4.0.0'
+    compile 'org.androidannotations:androidannotations-api:4.0.0'
 
     testCompile 'junit:junit:4.12'
 }
