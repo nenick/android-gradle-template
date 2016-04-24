@@ -55,7 +55,7 @@ test:
     - adb shell input keyevent 82
 
     # later we collect the logs from test run
-    - adb logcat clear
+    - adb logcat -c
 
     # execute tests on emulator
     - ./gradlew app:connectedCheck
