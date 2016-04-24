@@ -1,14 +1,16 @@
 apply plugin: 'com.android.test'
 
 android {
-    compileSdkVersion projectAndroidVersion
-    buildToolsVersion projectAndroidBuildToolsVersion
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         // minimal should be same from app module
-        minSdkVersion projectAndroidMinVersion
-        testApplicationId 'com.example.app.test'
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion 10
+        targetSdkVersion 23
+
+        testApplicationId 'com.example.app.apptests.test'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -16,11 +18,6 @@ android {
             // support code coverage for the integration tests
             testCoverageEnabled = true
         }
-    }
-
-    jacoco {
-        //noinspection GroovyAssignabilityCheck
-        version projectJacocoVersion
     }
 
     targetProjectPath ':app'
@@ -47,4 +44,5 @@ repositories {
 
 dependencies {
     compile 'de.nenick:espresso-macchiato:0.4.0'
+    compile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 }

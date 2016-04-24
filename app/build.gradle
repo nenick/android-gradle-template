@@ -37,13 +37,6 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "MODULE_PATH", "\"$projectDir\"".replace('\\', '\\\\')
-            // avoid warning for "Not all execution paths return a value"
-            return true
-        }
-        debug {
-            buildConfigField "String", "MODULE_PATH", "\"$projectDir\"".replace('\\', '\\\\')
-            return true
         }
     }
 
@@ -53,17 +46,15 @@ android {
     }
 
     dexOptions {
-        if(isCi) {
-            // CircleCi allow max 4G memory for all processes together and dex does exceed it
-            // with his parallel execution. Shrink the javaMaxHeapSize does it only per dex process
-            // but the combination exceed the max memory and to less value let it run for long time.
-            // javaMaxHeapSize "1024M"
+        // CircleCi allow max 4G memory for all processes together and dex does exceed it
+        // with his parallel execution. Shrink the javaMaxHeapSize does it only per dex process
+        // but the combination exceed the max memory and to less value let it run for long time.
+        // javaMaxHeapSize "1024M"
 
-            // Speed up build for CI by ignoring extra build steps which should speed up build for developers.
-            // Also reduce memory usage by avoiding multiple (pre) dex processes.
-            incremental false
-            preDexLibraries = false
-        }
+        // Speed up build for CI by ignoring extra build steps which should speed up build for developers.
+        // Also reduce memory usage by avoiding multiple (pre) dex processes.
+        incremental !isCi
+        preDexLibraries = !isCi
     }
 
     // instrumentation test module need to access the expected variant, default is only release publish
@@ -86,10 +77,6 @@ apt {
 }
 
 repositories {
-    jcenter()
-}
-
-repositories {
     maven { url = "https://dl.bintray.com/nenick/maven/" }
 }
 
@@ -106,17 +93,14 @@ dependencies {
     apt "org.androidannotations:androidannotations:4.0.0"
     compile "org.androidannotations:androidannotations-api:4.0.0"
 
-    // Use CountIdlingResource class to avoid flaky espresso tests.
-    // Interface is provided by own dependency but ready to use implementation comes with contrib library.
-    // Looks like contrib library was only intended to be used within test scope.
-    // Exclude transitiv dependencies to avoid conflicts with test support libraries.
+    // Use CountIdlingResource class to avoid flaky espresso tests
     compile('com.android.support.test.espresso:espresso-idling-resource:2.2.2')
-    compile('com.android.support.test.espresso:espresso-contrib:2.2.2') { exclude module: "*" }
 
     // basic unit tests support + mocks + fluent assertions + android assertions
     testCompile 'junit:junit:4.12'
     testCompile('com.squareup.assertj:assertj-android:1.1.0') {
-        exclude module: 'support-annotations' // Avoid Error:Conflict ... Resolved versions for app (X) and test app (Y) differ ...
+        exclude module: 'support-annotations'
+        // Avoid Error:Conflict ... Resolved versions for app (X) and test app (Y) differ ...
     }
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
 
