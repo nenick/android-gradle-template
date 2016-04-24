@@ -7,7 +7,7 @@ android {
     defaultConfig {
         // minimal should be same from app module
         minSdkVersion projectAndroidMinVersion
-        testApplicationId 'com.example.project.test'
+        testApplicationId 'com.example.app.test'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -41,8 +41,10 @@ android {
     }
 }
 
+repositories {
+    maven { url = "https://dl.bintray.com/nenick/maven/" }
+}
+
 dependencies {
-    // espresso support
-    compile 'com.android.support.test.espresso:espresso-core:2.2'
-    compile 'com.android.support.test:runner:0.3'
+    compile 'de.nenick:espresso-macchiato:0.4.0'
 }

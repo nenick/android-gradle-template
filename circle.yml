@@ -59,8 +59,7 @@ test:
 
     # copy test results
     - mv app/build/reports/tests/debug $CIRCLE_TEST_REPORTS/AppUnitTests
-    - mv appCt/build/test-report $CIRCLE_TEST_REPORTS/ComponentTests
-    - mv appIt/build/reports/androidTests/connected $CIRCLE_TEST_REPORTS/AndroidTests
+    - mv apptests/build/reports/androidTests/connected $CIRCLE_TEST_REPORTS/AndroidTests
     - mv build/reports/jacoco/test/html $CIRCLE_TEST_REPORTS/CodeCoverageReport
 
     # copy lint report
