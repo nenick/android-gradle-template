@@ -64,8 +64,8 @@ test:
 
     # copy lint report
     - mkdir $CIRCLE_TEST_REPORTS/Lint
-    - mv app/build/outputs/lint-results_files $CIRCLE_TEST_REPORTS/Lint
-    - mv app/build/outputs/lint-results.html $CIRCLE_TEST_REPORTS/Lint/lint-app-results.html
+    - mkdir -p $CIRCLE_TEST_REPORTS/app/lint
+    - cp -r app/build/outputs/lint* $CIRCLE_TEST_REPORTS/app/lint
 
     # circleCi proper test value feature
     - mkdir $CIRCLE_TEST_REPORTS/junit
