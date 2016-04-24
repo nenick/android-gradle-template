@@ -22,5 +22,6 @@ Tools
 Tests
 
 * espresso-macchiato
+* use idling resource
 * robolectric
 * code coverage for all variants
