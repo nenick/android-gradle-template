@@ -7,7 +7,7 @@ import org.junit.Before;
 
 import de.nenick.espressomacchiato.testbase.EspressoTestCase;
 
-public class ExampleAppTestCase<A extends Activity> extends EspressoTestCase<A> {
+public abstract class ExampleAppTestCase<A extends Activity> extends EspressoTestCase<A> {
 
     @Before
     public void setupBase() {
