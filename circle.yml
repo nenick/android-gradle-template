@@ -19,8 +19,11 @@ dependencies:
 
 test:
   pre:
-  # emulator startup need some minutes that's why start it before first build/test steps for build speed up
-    - emulator -avd circleci-android22 -no-audio -no-window:
+    # create android v23 emulator as latest supported android version with sdcard
+    - echo no | android create avd -n my-android23 -t $(android list targets | grep android-23 | cut -d" " -f2) -c 512M
+
+    # emulator startup need some minutes that's why start it before first build/test steps to speed up build
+    - emulator -avd my-android23 -no-audio -no-window:
         background: true
         parallel: true
 
