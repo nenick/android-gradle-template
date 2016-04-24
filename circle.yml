@@ -30,28 +30,32 @@ test:
   override:
     # Build the code
     - ./gradlew app:assembleDebug
+    - ./gradlew core:assembleDebug
+    - ./gradlew database:assembleDebug
+    - ./gradlew network:assembleDebug
 
     # Execute Unit Tests
-    - ./gradlew app:test
+    - ./gradlew app:testDebug
+    - ./gradlew core:testDebug
+    - ./gradlew database:testDebug
+    - ./gradlew network:testDebug
 
     # Check lint hints
     - ./gradlew app:lint
+    - ./gradlew core:lint
+    - ./gradlew database:lint
+    - ./gradlew network:lint
 
     # Build instrumented test code
-    # fix apk not build https://code.google.com/p/android/issues/detail?id=180689
-    - ./gradlew apptests:assembleDebug
 
     # ensure that the emulator is ready to use
     - circle-android wait-for-boot
-    # the necessary sleep duration may change with time and depends on the pre tasks length.
-    # When all pre tasks are run long enough then waiting will not be necessary anymore.
-    # This sleep should avoid the com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
-    - sleep 60
-    # at least remove the look screen
+
+    # remove the look screen
     - adb shell input keyevent 82
 
     # later we collect the logs from test run
-    - adb logcat -d
+    - adb logcat clear
 
     # execute tests on emulator
     - ./gradlew app:connectedCheck

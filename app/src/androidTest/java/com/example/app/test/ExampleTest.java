@@ -1,4 +1,6 @@
-package com.example.app;
+package com.example.app.test;
+
+import com.example.app.MainActivity_;
 
 import org.junit.Test;
 

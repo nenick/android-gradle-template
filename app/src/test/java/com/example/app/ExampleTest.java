@@ -2,7 +2,7 @@ package com.example.app;
 
 import org.junit.Test;
 
-public class ExampleTest extends ExampleAppTestCase<MainActivity_> {
+public class ExampleTest {
 
     @Test
     public void testSomething() {

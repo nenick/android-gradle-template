@@ -9,7 +9,7 @@ android {
         minSdkVersion 10
         targetSdkVersion 23
 
-        testApplicationId 'com.example.app.apptests.test'
+        testApplicationId 'com.example.app.test'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 

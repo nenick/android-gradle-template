@@ -1,7 +1,9 @@
-package com.example.app;
+package com.example.app.test;
 
 import android.app.Activity;
 import android.support.test.espresso.Espresso;
+
+import com.example.app.ExampleAppIdlingCounter;
 
 import org.junit.Before;
 
