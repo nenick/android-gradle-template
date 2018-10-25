@@ -2,11 +2,12 @@
 
 Start fast without the time consuming project setup effort!
 
-* (TODO) no complex dependency injection (simple to replace when the need of more complex exist)
-* (TODO) ready for MVVM
-* (TODO) ready for architecture components (ViewModel, LiveData)
+* simple dependency handling
+* ready for MVVM
+* ready for architecture components (ViewModel, LiveData)
 * (TODO) ready for local database storing
 * (TODO) ready for REST communication
+* switched to androidx packages
 * (TODO) prepared testing with plane unit tests on a wide range
 * (TODO) prepared testing with robolectric for fast complex tests
 * (TODO) prepared testing with espresso for most realistic
@@ -34,6 +35,8 @@ backups ||| automatically
 
 Most times its enough to use **AndroidAnnotation** instead of more advantage tools like Dagger.
 This library points in simplicity and developing speed.
+
+When necessary, this should be easy replaceable by a more advantage tool.
 
 ### Unhandled topics
 
