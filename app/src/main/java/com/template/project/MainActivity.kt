@@ -1,12 +1,15 @@
 package com.template.project
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+import org.androidannotations.annotations.Bean
+import org.androidannotations.annotations.EActivity
 
+@SuppressLint("Registered")
+@EActivity(R.layout.activity_main)
 class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+    @Bean
+    protected lateinit var anything: AnyUsefulDependency
+
 }

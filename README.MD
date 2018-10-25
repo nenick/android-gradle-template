@@ -2,13 +2,15 @@
 
 Start fast without the time consuming project setup effort!
 
-* (TODO) Structure for View, Presenter, ViewModel
-* (TODO) ready for REST communication
+* (TODO) no complex dependency injection (simple to replace when the need of more complex exist)
+* (TODO) ready for MVVM
+* (TODO) ready for architecture components (ViewModel, LiveData)
 * (TODO) ready for local database storing
+* (TODO) ready for REST communication
 * (TODO) prepared testing with plane unit tests on a wide range
 * (TODO) prepared testing with robolectric for fast complex tests
 * (TODO) prepared testing with espresso for most realistic
-* (TODO OPT) prepared REST mocking
+* (TODO OPT) prepared REST mocking (for testing and independent developing!)
 
 ## Notes
 
@@ -37,3 +39,9 @@ This library points in simplicity and developing speed.
 
 * Compile Warning: App is not indexable by Google Search; ...
 * Compile Warning: On SDK version 23 and up, ... adding \`android:fullBackupContent\`
+
+
+### Used libraries
+
+* Kotlin Android Extensions https://kotlinlang.org/docs/tutorials/android-plugin.html
+* AndroidAnnotations https://github.com/androidannotations/androidannotations/wiki
