@@ -1,14 +1,15 @@
-package com.template.project
+package com.template.project.views.simple_sample
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import com.template.project.AnyUsefulDependency
 import org.androidannotations.annotations.Bean
 import org.androidannotations.annotations.EBean
 
 @EBean
-class MainViewModel : ViewModel() {
+class SimpleSampleViewModel : ViewModel() {
 
     private val lastTextInput = MutableLiveData<String>()
 

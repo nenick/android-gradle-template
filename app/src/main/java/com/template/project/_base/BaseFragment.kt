@@ -1,14 +1,14 @@
 package com.template.project._base
 
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import org.androidannotations.annotations.Bean
-import org.androidannotations.annotations.EActivity
+import org.androidannotations.annotations.EBean
 import kotlin.reflect.KProperty
 
-@EActivity
-abstract class BaseActivity : AppCompatActivity() {
+@EBean
+abstract class BaseFragment : Fragment() {
 
     @Bean
     protected lateinit var viewModelFactory: AndroidAnnotationViewModelFactory
@@ -21,4 +21,5 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
     }
+
 }

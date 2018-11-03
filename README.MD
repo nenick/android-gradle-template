@@ -3,11 +3,12 @@
 Start fast without the time consuming project setup effort!
 
 * simple dependency handling
-* ready for MVVM
+* ready for MVVM, see: [YouTube: Android MVP vs MVVM and the winner is...](https://www.youtube.com/watch?v=ugpC98LcNqA)
 * ready for architecture components (ViewModel, LiveData)
 * (TODO) ready for local database storing
 * (TODO) ready for REST communication
 * switched to androidx packages
+* use single activity architecture, see: [single-Activity app the preferred architecture](https://android-developers.googleblog.com/2018/05/use-android-jetpack-to-accelerate-your.html?m=1#Navigation)
 * (TODO) prepared testing with plane unit tests on a wide range
 * (TODO) prepared testing with robolectric for fast complex tests
 * (TODO) prepared testing with espresso for most realistic
