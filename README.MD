@@ -10,6 +10,7 @@ Start fast without the time consuming project setup effort!
 * AndroidAnnotations reduce boilerplate
  * Generate view event listener
  * Simplified dependency injection
+* Clean architecture (UseCases, Repositories)
 * (TODO) Local database storing
 * (TODO) REST communication
 * (TODO) template testing with plane unit tests on a wide range
