@@ -2,19 +2,36 @@
 
 Start fast without the time consuming project setup effort!
 
-* simple dependency handling
-* ready for MVVM, see: [YouTube: Android MVP vs MVVM and the winner is...](https://www.youtube.com/watch?v=ugpC98LcNqA)
-* ready for architecture components (ViewModel, LiveData)
-* (TODO) ready for local database storing
-* (TODO) ready for REST communication
-* switched to androidx packages
-* use single activity architecture, see: [single-Activity app the preferred architecture](https://android-developers.googleblog.com/2018/05/use-android-jetpack-to-accelerate-your.html?m=1#Navigation)
-* (TODO) prepared testing with plane unit tests on a wide range
-* (TODO) prepared testing with robolectric for fast complex tests
-* (TODO) prepared testing with espresso for most realistic
-* (TODO OPT) prepared REST mocking (for testing and independent developing!)
+* Model-View-ViewModel (MVVM) architecture template
+ * ViewModel (architecture components) to avoid configuration change issues
+ * LiveData (architecture components) to avoid view state issues
+* Single activity architecture template
+ * Navigation (architecture components) for proper navigation handling
+* AndroidAnnotations reduce boilerplate
+ * Generate view event listener
+ * Simplified dependency injection
+* (TODO) Local database storing
+* (TODO) REST communication
+* (TODO) template testing with plane unit tests on a wide range
+* (TODO) template testing with robolectric for fast complex tests
+* (TODO) template testing with espresso for most realistic
+* (TODO OPT) REST mocking (for testing and independent developing!)
 
 ## Notes
+
+### Setup
+
+#### Activate experimental navigation
+
+```
+File > Settings (Android Studio > Preferences on Mac),
+select the Experimental category in the left pane,
+check Enable Navigation Editor, and then restart Android Studio.
+```
+
+### Single activity architecture
+
+The official recommended way to implement apps with navigation component.
 
 ### Minimum version
 
@@ -45,7 +62,7 @@ When necessary, this should be easy replaceable by a more advantage tool.
 * Compile Warning: On SDK version 23 and up, ... adding \`android:fullBackupContent\`
 
 
-### Used libraries
+### Added libraries
 
 * Kotlin Android Extensions https://kotlinlang.org/docs/tutorials/android-plugin.html
 * AndroidAnnotations https://github.com/androidannotations/androidannotations/wiki

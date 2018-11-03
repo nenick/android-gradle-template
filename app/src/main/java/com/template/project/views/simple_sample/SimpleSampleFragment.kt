@@ -7,6 +7,7 @@ import com.template.project.R
 import com.template.project._base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_simple_sample.*
 import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.TextChange
 
@@ -25,5 +26,10 @@ class SimpleSampleFragment : BaseFragment() {
     @TextChange(R.id.textInput)
     fun onInputChanged(tv: TextView, text: CharSequence) {
         model.updateTextInput(text.toString())
+    }
+
+    @Click(R.id.btn_next)
+    fun onNext() {
+        navigate(R.id.action_to_contentSampleFragment)
     }
 }

@@ -1,8 +1,10 @@
 package com.template.project._base
 
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import org.androidannotations.annotations.Bean
 import org.androidannotations.annotations.EBean
 import kotlin.reflect.KProperty
@@ -22,4 +24,7 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
+    protected final fun navigate(@IdRes actionId: Int) {
+        findNavController().navigate(actionId)
+    }
 }
