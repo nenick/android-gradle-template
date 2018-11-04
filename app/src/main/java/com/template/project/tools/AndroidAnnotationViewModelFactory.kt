@@ -5,26 +5,32 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.androidannotations.annotations.EBean
 import org.androidannotations.annotations.RootContext
-import java.lang.reflect.InvocationTargetException
 
+/**
+ * Create instances of enhanced ViewModels with AndroidAnnotations (mainly for dependency injection feature).
+ *
+ * Enhanced classes hasn't default constructor.
+ * That's how most dependency injection tools work when using constructor injection.
+ */
+// The singleton scope force usage of application context instead of activity context.
+// This avoid leaking activity in memory and to the ViewModels dependencies.
 @EBean(scope = EBean.Scope.Singleton)
-class AndroidAnnotationViewModelFactory : ViewModelProvider.NewInstanceFactory() {
+class AndroidAnnotationViewModelFactory : ViewModelProvider.Factory {
 
     @RootContext
     protected lateinit var applicationContext: Context
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        try {
-            @Suppress("UNCHECKED_CAST")
-            return modelClass.getMethod("getInstance_", Context::class.java).invoke(null, applicationContext) as T
-        } catch (e: NoSuchMethodException) {
-            throw RuntimeException("Cannot create an instance of $modelClass", e)
-        } catch (e: IllegalAccessException) {
-            throw RuntimeException("Cannot create an instance of $modelClass", e)
-        } catch (e: InstantiationException) {
-            throw RuntimeException("Cannot create an instance of $modelClass", e)
-        } catch (e: InvocationTargetException) {
-            throw RuntimeException("Cannot create an instance of $modelClass", e)
-        }
+
+        // use the enhanced version of this ViewModel class
+        val enhancedClass = modelClass.classLoader!!.loadClass("${modelClass.name}_")
+
+        // call the factory method to create a new instance
+        val instanceCreator = enhancedClass.getMethod("getInstance_", Context::class.java)
+        val instance = instanceCreator.invoke(null, applicationContext)
+
+        @Suppress("UNCHECKED_CAST")
+        return instance as T
     }
 }
+

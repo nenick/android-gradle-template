@@ -14,7 +14,7 @@ import org.androidannotations.annotations.TextChange
 @EFragment(R.layout.fragment_simple_sample)
 class SimpleSampleFragment : BaseFragment() {
 
-    private val model: SimpleSampleViewModel by provider(SimpleSampleViewModel_::class.java)
+    private val model: SimpleSampleViewModel by provider(SimpleSampleViewModel::class.java)
 
     @AfterViews
     fun connectViewModel() {
