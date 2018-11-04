@@ -1,4 +1,4 @@
-package com.template.project.views.content_sample
+package com.template.project.views.contentsample
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.template.project.R

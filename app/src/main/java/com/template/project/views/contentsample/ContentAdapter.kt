@@ -1,4 +1,4 @@
-package com.template.project.views.content_sample
+package com.template.project.views.contentsample
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

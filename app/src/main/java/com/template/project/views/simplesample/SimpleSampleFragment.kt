@@ -1,4 +1,4 @@
-package com.template.project.views.simple_sample
+package com.template.project.views.simplesample
 
 
 import android.widget.TextView
