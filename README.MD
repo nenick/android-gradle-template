@@ -10,7 +10,8 @@ Start fast without the time consuming project setup effort!
 * AndroidAnnotations reduce boilerplate
  * Generate view event listener
  * Simplified dependency injection
-* Clean architecture (UseCases, Repositories)
+* Clean architecture structure
+ * View -> ViewModel -> UseCase -> Repository -> local/network Data
 * (TODO) Local database storing
 * (TODO) REST communication
 * (TODO) template testing with plane unit tests on a wide range
@@ -42,14 +43,15 @@ Current nothing should really block you to select a lower minimum version.
 
 --todo-- advantages of minimum versions
 
-topic / api | ?? | 21 | 23
----|---|---|---
-material design ||default style|default style
-backups ||| automatically
+topic / api | ?? | 18 | 21 | 23
+---|:-:|:-:|:-:|:-:
+UiAutomator (tests) || available | available | available
+material design ||| default style | default style
+backups |||| automatically
 
 ### Change package and application name
 
---todo--
+*-- TODO: write bash script for it --*
 
 ### Dependency Injection
 
@@ -68,3 +70,5 @@ When necessary, this should be easy replaceable by a more advantage tool.
 
 * Kotlin Android Extensions https://kotlinlang.org/docs/tutorials/android-plugin.html
 * AndroidAnnotations https://github.com/androidannotations/androidannotations/wiki
+
+*-- TODO: list all libraries --*

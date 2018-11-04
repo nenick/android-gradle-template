@@ -1,8 +1,8 @@
-package com.template.project.model.usecases.anydata
+package com.template.project.model.usecases.todo
 
 import com.template.project.tools.AsyncData
 
-class RefreshAnyDataUseCase {
+class RefreshTodosUseCase {
 
     data class RefreshAnyDataResult(val state: String)
 

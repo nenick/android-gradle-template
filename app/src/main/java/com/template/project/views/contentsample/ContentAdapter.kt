@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.template.datalocal.entities.Todo
 import com.template.project.R
 import kotlinx.android.synthetic.main.item_list_entry.view.*
 
-class ContentAdapter(private val myDataset: Array<String>) : RecyclerView.Adapter<ContentAdapter.MyViewHolder>() {
+class ContentAdapter(private val myDataset: Array<Todo>) : RecyclerView.Adapter<ContentAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -31,7 +32,7 @@ class ContentAdapter(private val myDataset: Array<String>) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.root.title.text = myDataset[position]
+        holder.root.title.text = myDataset[position].title
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -30,8 +30,11 @@ dependencies {
     // local libraries when available
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(":data-local")
+
     // kotlin support
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2-eap13"
 
     // backward compatibility
     implementation "androidx.appcompat:appcompat:1.0.0"

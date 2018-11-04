@@ -1,6 +1,6 @@
 package com.template.project.tools
 
-class AsyncData<T : Any>(value: T) {
+class AsyncData<T : Any>(value: T?) {
 
     var observer: (T) -> Unit = {}
 
