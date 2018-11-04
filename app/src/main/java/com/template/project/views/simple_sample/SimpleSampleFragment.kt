@@ -4,7 +4,7 @@ package com.template.project.views.simple_sample
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.template.project.R
-import com.template.project._base.BaseFragment
+import com.template.project.tools.BaseFragment
 import kotlinx.android.synthetic.main.fragment_simple_sample.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click

@@ -2,7 +2,7 @@ package com.template.project
 
 import android.annotation.SuppressLint
 import androidx.navigation.findNavController
-import com.template.project._base.BaseActivity
+import com.template.project.tools.BaseActivity
 import org.androidannotations.annotations.EActivity
 
 @SuppressLint("Registered")

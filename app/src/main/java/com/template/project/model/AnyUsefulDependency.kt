@@ -1,4 +1,4 @@
-package com.template.project
+package com.template.project.model
 
 import org.androidannotations.annotations.EBean
 

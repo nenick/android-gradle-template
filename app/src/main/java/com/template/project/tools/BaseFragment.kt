@@ -1,4 +1,4 @@
-package com.template.project._base
+package com.template.project.tools
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment

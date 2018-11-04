@@ -1,6 +1,6 @@
-package com.template.project.usecases.anydata
+package com.template.project.model.usecases.anydata
 
-import com.template.project._base.AsyncData
+import com.template.project.tools.AsyncData
 
 class RefreshAnyDataUseCase {
 

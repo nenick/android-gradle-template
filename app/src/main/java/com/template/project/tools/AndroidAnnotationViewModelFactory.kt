@@ -1,4 +1,4 @@
-package com.template.project._base
+package com.template.project.tools
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

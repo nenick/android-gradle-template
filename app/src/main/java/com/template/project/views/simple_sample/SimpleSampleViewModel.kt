@@ -4,7 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.template.project.AnyUsefulDependency
+import com.template.project.model.AnyUsefulDependency
 import org.androidannotations.annotations.Bean
 import org.androidannotations.annotations.EBean
 
