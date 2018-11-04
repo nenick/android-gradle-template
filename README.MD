@@ -17,6 +17,7 @@ Start fast without the time consuming project setup effort!
 * (TODO) template testing with robolectric for fast complex tests
 * (TODO) template testing with espresso for most realistic
 * (TODO OPT) REST mocking (for testing and independent developing!)
+* (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data
 
 ## Notes
 
