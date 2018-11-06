@@ -13,4 +13,7 @@ interface TodoDao {
 
     @Insert
     fun insert(data: Todo)
+
+    @Query("DELETE FROM Todo")
+    fun deleteAll()
 }
