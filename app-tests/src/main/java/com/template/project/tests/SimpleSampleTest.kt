@@ -1,4 +1,4 @@
-package com.template.project.it
+package com.template.project.tests
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions
