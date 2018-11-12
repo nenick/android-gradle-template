@@ -35,7 +35,7 @@ dependencies {
 
     // kotlin support
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2-eap13"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
 
     // backward compatibility
     implementation "androidx.appcompat:appcompat:1.0.0"
