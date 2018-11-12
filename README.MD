@@ -12,12 +12,12 @@ Start fast without the time consuming project setup effort!
  * Simplified dependency injection
 * Clean architecture structure
  * View -> ViewModel -> UseCase -> Repository -> local/network Data
-* (TODO) Local database storing
+* Local storing with Room
+ * Fast and device independent tests on JVM with Robolectric
 * (TODO) REST communication
-* (TODO) template testing with plane unit tests on a wide range
-* (TODO) template testing with robolectric for fast complex tests
-* (TODO) template testing with espresso for most realistic
-* (TODO OPT) REST mocking (for testing and independent developing!)
+* (TODO) Template testing with plane unit tests on a wide range
+* (TODO) Template testing with espresso for most realistic
+* (TODO) Wiremock for testing and independent developing! (runs on android environment)
 * (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data
 
 ## Notes

@@ -5,16 +5,11 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
 
-
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        versionName "0.1.0"
     }
 
     buildTypes {
@@ -24,19 +19,32 @@ android {
         }
     }
 
+    // not necessary here, but removes warnings from Robolectric
+    testOptions.unitTests.includeAndroidResources = true
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Kotlin support
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // database wrapper for comfortable usage
     api "androidx.room:room-runtime:2.0.0"
     kapt "android.arch.persistence.room:compiler:2.0.0"
 
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    // support listening for database content changes
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
+
+    // unit test support
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation "com.google.truth:truth:0.42"
+    testImplementation "androidx.test:core:1.0.0"
+    testImplementation "androidx.arch.core:core-testing:2.0.0"
+
+    // emulates android environment for spawning database
+    testImplementation "org.robolectric:robolectric:4.0.2"
+
+    // support for writing easy, clean and readable database query test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
 }
 repositories {
     mavenCentral()
