@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 
 // https://jsonplaceholder.typicode.com/todos/1
-interface StaticDataApi {
+interface TodoApi {
 
     @GET("/todos")
     fun todos(): Call<List<Todo>>

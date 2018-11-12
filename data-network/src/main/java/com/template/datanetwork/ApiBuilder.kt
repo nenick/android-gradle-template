@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiBuilder {
 
-    fun doit(): StaticDataApi {
+    fun todoApi(): TodoApi {
 
         val client = OkHttpClient().newBuilder()
             .addInterceptor(ApiKeyRequestInterceptor("dummy api key"))
@@ -22,6 +22,6 @@ class ApiBuilder {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        return retrofit.create(StaticDataApi::class.java)
+        return retrofit.create(TodoApi::class.java)
     }
 }

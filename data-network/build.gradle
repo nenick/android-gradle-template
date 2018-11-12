@@ -11,9 +11,6 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -26,24 +23,22 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // Kotlin support
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // network communication
     implementation "com.squareup.okhttp3:okhttp:3.10.0"
     implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
-
     api ("com.squareup.retrofit2:retrofit:2.4.0"){
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
         exclude module: 'okhttp'
     }
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
 
-
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    // unit test support
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    testImplementation "com.google.truth:truth:0.42"
 }
 repositories {
     mavenCentral()

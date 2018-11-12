@@ -18,7 +18,7 @@ class TodoRepository {
     protected lateinit var applicationContext: Context
 
     private val database = lazy { ProjectDatabase.getDatabase(applicationContext) }
-    private val network = ApiBuilder().doit()
+    private val network = ApiBuilder().todoApi()
 
     fun getTodos(): AsyncData<List<Todo>> {
         val result = AsyncData<List<Todo>>(null)
