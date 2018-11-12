@@ -2,7 +2,11 @@ package com.template.project
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.activity_main.*
+import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
 
 /**
@@ -15,7 +19,19 @@ import org.androidannotations.annotations.EActivity
 class MainActivity : AppCompatActivity() {
 
     /**
-     * Connect the navigation architecture component.
+     * Connect the navigation architecture component and show the configured start fragment.
      */
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+
+    @AfterViews
+    fun setup() {
+        setSupportActionBar(toolbar)
+
+        // change title on navigation until there is a proper way of doing that
+        // https://issuetracker.google.com/issues/80267266
+        findNavController(R.id.nav_host_fragment).addOnNavigatedListener { _, destination ->
+            this.title = destination.label
+            this.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        }
+    }
 }

@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/simpleSampleFragment_"
         android:name="com.template.project.views.simplesample.SimpleSampleFragment_"
-        android:label="fragment_simple_sample"
-        tools:layout="@layout/fragment_simple_sample" >
+        android:label="Simple Sample"
+        tools:layout="@layout/fragment_simple_sample">
         <action
             android:id="@+id/action_to_contentSampleFragment"
             app:destination="@id/contentSampleFragment" />
@@ -17,5 +17,5 @@
     <fragment
         android:id="@+id/contentSampleFragment"
         android:name="com.template.project.views.contentsample.ContentSampleFragment_"
-        android:label="fragment_content_sample" />
+        android:label="Content Sample" />
 </navigation>

@@ -49,7 +49,7 @@ dependencies {
     // - LiveData, ViewModel, Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
     // - Navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
+    api "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
 
     // AndroidAnnotations
     // - boilerplate code generation, dependency injection

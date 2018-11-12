@@ -13,6 +13,7 @@ class ContentSampleFragment : BaseFragment() {
 
     @AfterViews
     fun connectModel() {
+        showUpNavigation()
         model.observerTodos(this) {
             list.adapter = ContentAdapter(it.toTypedArray())
         }

@@ -1,6 +1,7 @@
 package com.template.project.tools
 
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -22,6 +23,10 @@ abstract class BaseFragment : Fragment() {
                 return ViewModelProviders.of(base, viewModelFactory).get(cls)
             }
         }
+    }
+
+    protected fun showUpNavigation() {
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     protected final fun navigate(@IdRes actionId: Int) {
