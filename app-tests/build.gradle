@@ -1,0 +1,32 @@
+apply plugin: 'com.android.test'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testApplicationId 'com.template.project.tests'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+
+    targetProjectPath ':app'
+}
+
+dependencies {
+    implementation 'androidx.test:runner:1.1.0'
+    implementation 'androidx.test:rules:1.1.0'
+    implementation 'androidx.test.ext:junit:1.0.0'
+    implementation 'androidx.test.espresso:espresso-core:3.1.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+}

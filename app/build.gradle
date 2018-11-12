@@ -27,9 +27,7 @@ android {
 }
 
 dependencies {
-    // local libraries when available
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    // project modules
     implementation project(":data-local")
     implementation project(":data-network")
 
@@ -38,7 +36,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
 
     // backward compatibility
-    implementation "androidx.appcompat:appcompat:1.0.0"
+    api "androidx.appcompat:appcompat:1.0.2"
 
     // design elements
     implementation "androidx.constraintlayout:constraintlayout:1.1.3"
@@ -56,7 +54,7 @@ dependencies {
     // AndroidAnnotations
     // - boilerplate code generation, dependency injection
     kapt "org.androidannotations:androidannotations:4.5.2"
-    implementation "org.androidannotations:androidannotations-api:4.5.2"
+    api "org.androidannotations:androidannotations-api:4.5.2"
 
     // --------------------------------------------------
     // Unit Test (jvm)

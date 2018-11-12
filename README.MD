@@ -3,10 +3,10 @@
 Start fast without the time consuming project setup effort!
 
 * Model-View-ViewModel (MVVM) architecture template
- * ViewModel (architecture components) to avoid configuration change issues
- * LiveData (architecture components) to avoid view state issues
+ * ViewModel (from architecture components) to avoid configuration change issues
+ * LiveData (from architecture components) to avoid view state issues
 * Single activity architecture template
- * Navigation (architecture components) for proper navigation handling
+ * Navigation (from architecture components) for proper navigation handling
 * AndroidAnnotations reduce boilerplate
  * Generate view event listener
  * Simplified dependency injection
@@ -14,11 +14,10 @@ Start fast without the time consuming project setup effort!
  * View -> ViewModel -> UseCase -> Repository -> local/network Data
 * Local storing with Room
  * Fast and device independent tests on JVM with Robolectric
-* REST communication
+* REST communication with Retrofit
  * Fast and device independent tests on JVM
  * (TODO) Pure java library
-* (TODO) Template testing with plane unit tests on a wide range
-* (TODO) Template testing with espresso for most realistic
+* (TODO) Separated app instrumentation tests
 * (TODO) Server Mocking for testing and independent developing! (runs on android environment)
 * (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data
 
