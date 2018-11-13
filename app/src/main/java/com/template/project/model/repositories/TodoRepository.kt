@@ -2,12 +2,12 @@ package com.template.project.model.repositories
 
 
 import android.content.Context
+import android.os.AsyncTask
 import com.template.datalocal.ProjectDatabase
 import com.template.datalocal.entities.Todo
 import com.template.datanetwork.ApiBuilder
 import com.template.project.tools.AsyncData
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.androidannotations.annotations.EBean
 import org.androidannotations.annotations.RootContext
 
@@ -20,10 +20,14 @@ class TodoRepository {
     private val database = lazy { ProjectDatabase.getDatabase(applicationContext) }
     private val network = ApiBuilder().todoApi()
 
+    /** Espresso wait automatically until all AsyncTask.THREAD_POOL_EXECUTOR threads are idle. */
+    private val coroutineDispatcher = AsyncTask.THREAD_POOL_EXECUTOR.asCoroutineDispatcher()
+
     fun getTodos(): AsyncData<List<Todo>> {
         val result = AsyncData<List<Todo>>(null)
 
-        GlobalScope.launch {
+
+        CoroutineScope(coroutineDispatcher).launch {
 
             if (database.value.todo().getAll().isEmpty()) {
                 database.value.todo().insert(Todo(1, 1, "first", false))
