@@ -1,0 +1,29 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.2"
+}
+
+/** Without "includeNoLocationClasses" we would get zero coverage report when using robolectric. */
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+/** We must create our own task to create jacoco reports. */
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = [ '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*' ]
+    def debugTree = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec'
+    ])
+}

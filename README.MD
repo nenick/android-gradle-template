@@ -25,6 +25,9 @@ Start fast without the time consuming project setup effort!
  * (TODO) Permissions interceptor to emulate different grants
 * (TODO) Server Mocking for testing and independent developing! (runs on android environment)
 * (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data
+* (TODO) Coverage report
+ * separated reports for each target
+ * merged reports over all targets
 
 ## Notes
 
@@ -111,3 +114,4 @@ It's kind of separation by concern and lets you run the tests separately without
 
 * Navigation Component https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing
 * Good to know about coroutines https://medium.com/capital-one-tech/kotlin-coroutines-on-android-things-i-wish-i-knew-at-the-beginning-c2f0b1f16cff
+* JaCoCo release notes https://www.jacoco.org/jacoco/trunk/doc/changes.html

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply from: "$project.rootDir/gradle/jacoco-unit-test-report.gradle"
 
 android {
     compileSdkVersion 28
@@ -19,7 +20,7 @@ android {
         }
     }
 
-    // not necessary here, but removes warnings from Robolectric
+    // looks not necessary here, but removes warnings from Robolectric
     testOptions.unitTests.includeAndroidResources = true
 }
 
@@ -45,7 +46,4 @@ dependencies {
 
     // support for writing easy, clean and readable database query test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
-}
-repositories {
-    mavenCentral()
 }
