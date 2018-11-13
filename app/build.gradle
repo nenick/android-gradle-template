@@ -7,6 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
 // kotlin allopen - removes the default final classifier for AndroidAnnotations
 apply plugin: "kotlin-allopen"
+apply from: "$project.rootDir/gradle/jacoco-unit-test-report.gradle"
 
 android {
     compileSdkVersion 28
@@ -59,6 +60,8 @@ dependencies {
     // --------------------------------------------------
     // Unit Test (jvm)
     testImplementation "junit:junit:4.12"
+    testImplementation "com.google.truth:truth:0.42"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
 
     // --------------------------------------------------
     // Tests (instrumentation)
