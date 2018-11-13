@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.template.datalocal.entities.Todo
+import com.template.project.data.local.entities.Todo
 import com.template.project.R
 import kotlinx.android.synthetic.main.item_list_entry.view.*
 

@@ -3,9 +3,9 @@ package com.template.project.model.repositories
 
 import android.content.Context
 import android.os.AsyncTask
-import com.template.datalocal.ProjectDatabase
-import com.template.datalocal.entities.Todo
-import com.template.datanetwork.ApiBuilder
+import com.template.project.data.local.ProjectDatabase
+import com.template.project.data.local.entities.Todo
+import com.template.project.data.network.ApiBuilder
 import com.template.project.tools.AsyncData
 import kotlinx.coroutines.*
 import org.androidannotations.annotations.EBean
@@ -44,7 +44,14 @@ class TodoRepository {
             val content = response.body()!!
             database.value.todo().deleteAll()
             content.forEach {
-                database.value.todo().insert(Todo(it.id, it.userId, it.title, it.completed))
+                database.value.todo().insert(
+                    Todo(
+                        it.id,
+                        it.userId,
+                        it.title,
+                        it.completed
+                    )
+                )
             }
 
             result.value = database.value.todo().getAll()

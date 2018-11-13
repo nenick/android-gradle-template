@@ -1,6 +1,6 @@
-package com.template.datanetwork
+package com.template.project.data.network
 
-import com.template.datanetwork.entities.Todo
+import com.template.project.data.network.entities.Todo
 import retrofit2.Call
 import retrofit2.http.GET
 

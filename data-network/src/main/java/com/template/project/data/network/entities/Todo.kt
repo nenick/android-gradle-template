@@ -1,4 +1,4 @@
-package com.template.datanetwork.entities
+package com.template.project.data.network.entities
 
 data class Todo(
     val id: Int,

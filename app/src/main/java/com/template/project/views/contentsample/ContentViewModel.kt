@@ -4,7 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.template.datalocal.entities.Todo
+import com.template.project.data.local.entities.Todo
 import com.template.project.model.repositories.TodoRepository
 import org.androidannotations.annotations.Bean
 import org.androidannotations.annotations.EBean

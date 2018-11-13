@@ -1,8 +1,8 @@
-package com.template.datalocal
+package com.template.project.data.local
 
 import com.google.common.truth.Truth.assertThat
-import com.template.datalocal.entities.Todo
-import com.template.datalocal.tools.DaoTest
+import com.template.project.data.local.entities.Todo
+import com.template.project.data.local.tools.DaoTest
 import org.junit.Test
 
 

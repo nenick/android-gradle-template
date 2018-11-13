@@ -17,5 +17,6 @@
     <fragment
         android:id="@+id/contentSampleFragment"
         android:name="com.template.project.views.contentsample.ContentSampleFragment_"
-        android:label="Content Sample" />
+        android:label="Content Sample"
+        tools:layout="@layout/fragment_content_sample"/>
 </navigation>

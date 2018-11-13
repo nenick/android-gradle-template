@@ -1,8 +1,8 @@
-package com.template.datalocal.tools
+package com.template.project.data.local.tools
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
-import com.template.datalocal.ProjectDatabase
+import com.template.project.data.local.ProjectDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

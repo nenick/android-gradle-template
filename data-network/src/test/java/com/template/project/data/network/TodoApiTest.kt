@@ -1,8 +1,8 @@
-package com.template.datanetwork
+package com.template.project.data.network
 
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
-import com.template.datanetwork.entities.Todo
+import com.template.project.data.network.entities.Todo
 import org.junit.Test
 
 class TodoApiTest {
@@ -22,7 +22,14 @@ class TodoApiTest {
         """, Todo::class.java
         )
 
-        assertThat(result).isEqualTo(Todo(198, 10, "quis eius est sint explicabo", true))
+        assertThat(result).isEqualTo(
+            Todo(
+                198,
+                10,
+                "quis eius est sint explicabo",
+                true
+            )
+        )
     }
 
     @Test

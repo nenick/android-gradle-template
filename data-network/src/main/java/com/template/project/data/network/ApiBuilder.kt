@@ -1,5 +1,6 @@
-package com.template.datanetwork
+package com.template.project.data.network
 
+import com.template.project.datanetwork.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

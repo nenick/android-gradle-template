@@ -1,4 +1,4 @@
-package com.template.datalocal.entities
+package com.template.project.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

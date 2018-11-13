@@ -1,10 +1,10 @@
-package com.template.datalocal
+package com.template.project.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.template.datalocal.entities.Todo
+import com.template.project.data.local.entities.Todo
 
 @Dao
 interface TodoDao {

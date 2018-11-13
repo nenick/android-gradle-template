@@ -1,10 +1,10 @@
-package com.template.datalocal
+package com.template.project.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.template.datalocal.entities.Todo
+import com.template.project.data.local.entities.Todo
 
 @Database(entities = [Todo::class], version = 1)
 abstract class ProjectDatabase : RoomDatabase() {
