@@ -7,7 +7,10 @@ import com.template.project.tools.BaseViewModel
 class ContentDetailsViewModel : BaseViewModel() {
 
     fun load(itemId: Int) {
-        todoItem.postValue(Todo(itemId, 1, "for testing", false))
+        // TODO load it through repository
+        val item = Todo(itemId, 1, "for testing", false)
+
+        todoItem.postValue(item)
     }
 
     val todoItem = MutableLiveData<Todo>()

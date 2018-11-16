@@ -23,7 +23,21 @@ class TodoRepository: KoinComponent {
     /** Espresso wait automatically until all AsyncTask.THREAD_POOL_EXECUTOR threads are idle. */
     private val coroutineDispatcher = AsyncTask.THREAD_POOL_EXECUTOR.asCoroutineDispatcher()
 
-    fun getTodos(): AsyncData<List<Todo>> {
+    private val getTodo = AsyncData<List<Todo>>(null)
+    private var getTodoIsLoading = false
+
+    fun getTodo(): AsyncData<List<Todo>> {
+        if(!getTodoIsLoading) {
+            getTodoIsLoading = true
+            getTodoInternal().observe {
+                getTodo.value = it
+                getTodoIsLoading = false
+            }
+        }
+        return getTodo
+    }
+
+    private fun getTodoInternal(): AsyncData<List<Todo>> {
         val result = AsyncData<List<Todo>>(null)
 
 
@@ -42,6 +56,7 @@ class TodoRepository: KoinComponent {
             val response = network.todos().execute()
 
             val content = response.body()!!
+            database.value.beginTransaction()
             database.value.todo().deleteAll()
             content.forEach {
                 database.value.todo().insert(
@@ -53,6 +68,7 @@ class TodoRepository: KoinComponent {
                     )
                 )
             }
+            database.value.endTransaction()
 
             result.value = database.value.todo().getAll()
         }

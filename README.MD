@@ -35,7 +35,7 @@ Start now without the time consuming project setup effort!
 * Testing with Espresso
   * Waits automatically until all coroutine tasks are finished to stabilize execution
   * (TODO) Reset application state between test runs
-  * (TODO) Write less how, more what you want to do
+  * (TODO) Less test complexity with Espresso Macchiato
   * (TODO) Permissions interceptor to emulate different grants
 * (TODO) Server Mocking for testing and independent developing! (runs on android environment)
 * (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data

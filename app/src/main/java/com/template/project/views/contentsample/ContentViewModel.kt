@@ -16,7 +16,7 @@ class ContentViewModel : BaseViewModel() {
 
     fun observerTodo(owner: LifecycleOwner, observer: (List<Todo>) -> Unit) {
         todoList.observe(owner, Observer { observer(it) })
-        repository.getTodos().observe {
+        repository.getTodo().observe {
             todoList.postValue(it)
         }
     }
