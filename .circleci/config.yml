@@ -3,22 +3,30 @@ jobs:
   build:
     docker:
       - image: circleci/android:api-28-alpha
+
+    working_directory: ~/workspace
+
     steps:
       - checkout
+
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}
+
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
+
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}
+
       - run:
           name: Build debug APK and test APK
           command: |
             ./gradlew app:assembleDebug
             ./gradlew app:assembleDebugAndroidTest
+
       - run:
           name: Unit tests
           command: |
