@@ -3,13 +3,12 @@ package com.template.project.views.contentsample
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.template.project.data.local.entities.Todo
 import com.template.project.model.repositories.TodoRepository
-import org.koin.standalone.KoinComponent
+import com.template.project.tools.BaseViewModel
 import org.koin.standalone.inject
 
-class ContentViewModel : ViewModel(), KoinComponent {
+class ContentViewModel : BaseViewModel() {
 
     private val repository: TodoRepository by inject()
 

@@ -31,6 +31,6 @@ class SimpleSampleFragment : BaseFragment() {
 
     @Click(R.id.btn_next)
     fun onNext() {
-        navigate(R.id.action_to_contentSampleFragment)
+        navigate.toContentSample(this)
     }
 }

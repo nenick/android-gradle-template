@@ -138,6 +138,18 @@ It's kind of separation by concern and lets you run the tests separately without
 * app-tests
  * main - Full app integration tests with mocked REST API
 
+### Run application and tests
+
+(TODO)
+#### Command Line
+
+#### Android Studio
+
+##### app-tests
+
+You must select a package and run the instrumentation tests, otherwise AndroidStudio think they are pure unit tests.
+Current it's not possible to just select the module or java folder an start run tests.
+
 ## For further details
 
 (TODO)

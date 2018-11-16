@@ -42,6 +42,17 @@ class SimpleSampleFragmentTest : FragmentTest() {
         assertViewModelGotNewInput("Text has changed")
     }
 
+    @Test
+    fun navigate() {
+        whenClickNavigateToNext()
+        verify(navigationMock).toContentSample(any())
+    }
+
+    private fun whenClickNavigateToNext() {
+        Espresso.onView(ViewMatchers.withId(R.id.btn_next))
+            .perform(ViewActions.click())
+    }
+
     private fun assertViewModelGotNewInput(text: String) {
         verify(viewModelMock).updateTextInput(text)
     }
@@ -54,7 +65,7 @@ class SimpleSampleFragmentTest : FragmentTest() {
     private fun whenModelChangeText(text: String) {
         val captor = argumentCaptor<Observer<in String>>()
         verify(viewModelMock).observeTextInput(any(), captor.capture())
-        testActivityRule.activity.runOnUiThread {
+        testActivityRule.runOnUiThread {
             captor.firstValue.onChanged(text)
         }
     }

@@ -1,13 +1,13 @@
 package com.template.project.tools
 
-import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
+import com.template.project.ProjectNavigation
 import org.androidannotations.annotations.Bean
 import org.androidannotations.annotations.EFragment
+import org.koin.android.ext.android.inject
 import kotlin.reflect.KProperty
 
 /** Provides some basic feature for working with Fragments. */
@@ -25,12 +25,10 @@ abstract class BaseFragment : Fragment() {
             }
         }
 
+    protected val navigate: ProjectNavigation by inject()
+
     /** Activate the up navigation button on the Toolbar */
     protected fun showUpNavigation() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-    }
-
-    protected final fun navigate(@IdRes actionId: Int) {
-        findNavController().navigate(actionId)
     }
 }

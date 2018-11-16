@@ -3,9 +3,9 @@ package com.template.project.views.simplesample
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import com.template.project.tools.BaseViewModel
 
-class SimpleSampleViewModel : ViewModel() {
+class SimpleSampleViewModel : BaseViewModel() {
 
     private val lastTextInput = MutableLiveData<String>()
 
