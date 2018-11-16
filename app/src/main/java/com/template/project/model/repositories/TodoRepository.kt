@@ -1,7 +1,7 @@
 package com.template.project.model.repositories
 
 import android.os.AsyncTask
-import com.template.project.data.local.ProjectDatabase
+import com.template.project.data.local.TodoDao
 import com.template.project.data.local.entities.Todo
 import com.template.project.data.network.TodoApi
 import com.template.project.tools.AsyncData
@@ -11,10 +11,10 @@ import kotlinx.coroutines.launch
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
-class TodoRepository: KoinComponent {
+class TodoRepository : KoinComponent {
 
-    private val database: ProjectDatabase by inject()
-    private val network: TodoApi by inject()
+    private val todoDao: TodoDao by inject()
+    private val todoApi: TodoApi by inject()
 
     /** Espresso wait automatically until all AsyncTask.THREAD_POOL_EXECUTOR threads are idle. */
     private val coroutineDispatcher = AsyncTask.THREAD_POOL_EXECUTOR.asCoroutineDispatcher()
@@ -23,7 +23,7 @@ class TodoRepository: KoinComponent {
     private var getTodoIsLoading = false
 
     fun getTodo(): AsyncData<List<Todo>> {
-        if(!getTodoIsLoading) {
+        if (!getTodoIsLoading) {
             getTodoIsLoading = true
             getTodoInternal().observe {
                 getTodo.value = it
@@ -39,34 +39,28 @@ class TodoRepository: KoinComponent {
 
         CoroutineScope(coroutineDispatcher).launch {
 
-            if (database.todo().getAll().isEmpty()) {
-                database.todo().insert(Todo(1, 1, "first", false))
-                database.todo().insert(Todo(2, 1, "second", false))
-                database.todo().insert(Todo(3, 1, "it", false))
-                database.todo().insert(Todo(4, 1, "will", false))
-                database.todo().insert(Todo(5, 1, "happen", false))
+            if (todoDao.getAll().isEmpty()) {
+                todoDao.insert(Todo(1, 1, "first", false))
+                todoDao.insert(Todo(2, 1, "second", false))
+                todoDao.insert(Todo(3, 1, "it", false))
+                todoDao.insert(Todo(4, 1, "will", false))
+                todoDao.insert(Todo(5, 1, "happen", false))
             }
+            result.value = todoDao.getAll()
 
-            result.value = database.todo().getAll()
-
-            val response = network.todos().execute()
-
+            val response = todoApi.todos().execute()
             val content = response.body()!!
-            database.beginTransaction()
-            database.todo().deleteAll()
-            content.forEach {
-                database.todo().insert(
-                    Todo(
-                        it.id,
-                        it.userId,
-                        it.title,
-                        it.completed
-                    )
-                )
-            }
-            database.endTransaction()
 
-            result.value = database.todo().getAll()
+            todoDao.updateAll(content.map {
+                Todo(
+                    it.id,
+                    it.userId,
+                    it.title,
+                    it.completed
+                )
+            })
+
+            result.value = todoDao.getAll()
         }
 
         return result

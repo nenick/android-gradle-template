@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import com.template.project.data.local.entities.Todo
 
 @Dao
@@ -18,6 +19,15 @@ interface TodoDao {
     @Insert
     fun insert(data: Todo)
 
+    @Insert
+    fun insertList(todo: List<Todo>)
+
     @Query("DELETE FROM Todo")
     fun deleteAll()
+
+    @Transaction
+    fun updateAll(list: List<Todo>) {
+        deleteAll()
+        insertList(list)
+    }
 }
