@@ -3,6 +3,7 @@ package com.template.project.data.network
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
 import com.template.project.data.network.entities.Todo
+import com.template.project.data.network.tools.ApiBuilder
 import org.junit.Test
 
 class TodoApiTest {

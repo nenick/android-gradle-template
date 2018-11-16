@@ -37,6 +37,12 @@ dependencies {
     }
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
 
+    // --------------------------------------------------
+    // Dependency injection
+    //
+    // - Koin for Android
+    implementation 'org.koin:koin-android:1.0.2'
+
     // unit test support
     testImplementation 'junit:junit:4.12'
     testImplementation "com.google.truth:truth:0.42"

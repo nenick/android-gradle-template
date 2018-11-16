@@ -5,7 +5,7 @@ import android.content.Context
 import android.os.AsyncTask
 import com.template.project.data.local.ProjectDatabase
 import com.template.project.data.local.entities.Todo
-import com.template.project.data.network.ApiBuilder
+import com.template.project.data.network.TodoApi
 import com.template.project.tools.AsyncData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -18,7 +18,7 @@ class TodoRepository: KoinComponent {
     private val applicationContext: Context by inject()
 
     private val database = lazy { ProjectDatabase.getDatabase(applicationContext) }
-    private val network = ApiBuilder().todoApi()
+    private val network: TodoApi by inject()
 
     /** Espresso wait automatically until all AsyncTask.THREAD_POOL_EXECUTOR threads are idle. */
     private val coroutineDispatcher = AsyncTask.THREAD_POOL_EXECUTOR.asCoroutineDispatcher()
