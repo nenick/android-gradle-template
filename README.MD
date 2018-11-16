@@ -3,39 +3,39 @@
 Start fast without the time consuming project setup effort!
 
 * Model-View-ViewModel (MVVM) architecture template
- * ViewModel (from architecture components) to avoid configuration change issues
- * LiveData (from architecture components) to avoid view state issues
- * (TODO) HowTo: create new view
+  * ViewModel (from architecture components) to avoid configuration change issues
+  * LiveData (from architecture components) to avoid view state issues
+  * (TODO) HowTo: create new view
 * Single activity architecture template
- * Navigation (from architecture components) for proper navigation handling
- * (TODO) Combine Fragments for on large screens
- * (TODO) HowTo: replace activity result
- * (TODO) HowTo: different navigation graphs
+  * Navigation (from architecture components) for proper navigation handling
+  * (TODO) Combine Fragments for on large screens
+  * (TODO) HowTo: replace activity result
+  * (TODO) HowTo: different navigation graphs
 * AndroidAnnotations reduce some ugly boilerplate
 * Dependency injection with Koin
 * Clean architecture structure
- * View -> ViewModel -> UseCase -> Repository -> local/network Data
+  * View -> ViewModel -> UseCase -> Repository -> local/network Data
 * Local storing with Room
- * Fast and device independent tests on JVM with Robolectric
- * (TODO ??) Pure java library
+  * Fast and device independent tests on JVM with Robolectric
+  * (TODO ??) Pure java library
 * REST communication with Retrofit
- * Fast and device independent tests on JVM
- * (TODO ??) Pure java library
- * (TODO) HowTo: enable build in caching
+  * Fast and device independent tests on JVM
+  * (TODO ??) Pure java library
+  * (TODO) HowTo: enable build in caching
 * Separated app instrumentation tests
 * Testing with Espresso
- * Waits automatically until all coroutine tasks are finished to stabilize execution
- * (TODO) Reset application state between test runs
- * (TODO) Write less how, more what you want to do
- * (TODO) Permissions interceptor to emulate different grants
+  * Waits automatically until all coroutine tasks are finished to stabilize execution
+  * (TODO) Reset application state between test runs
+  * (TODO) Write less how, more what you want to do
+  * (TODO) Permissions interceptor to emulate different grants
 * (TODO) Server Mocking for testing and independent developing! (runs on android environment)
 * (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data
 * Coverage report
- * Separated reports for each target at each module
- * Merge reports over all targets and modules
+  * Separated reports for each target at each module
+  * Merge reports over all targets and modules
 * (TODO) Logging concept
- * (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
- * (TODO) HowTo: use configure the logging
+  * (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
+  * (TODO) HowTo: use configure the logging
 
 ## Notes
 
