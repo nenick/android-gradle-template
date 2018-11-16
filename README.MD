@@ -1,6 +1,15 @@
 # Android - Rapid Test Driven Development
 
-Start fast without the time consuming project setup effort!
+* Combine tools for less coding
+* Samples for fast testing different aspects of your code
+* Easy clean architecture your code and packaging
+
+**Feel free to open an issue for wishes, improvements, questions and discussions.**
+
+[![Circle CI](https://img.shields.io/circleci/project/github/nenick/android-gradle-template/rework.svg)](https://circleci.com/gh/nenick/android-gradle-template?branch=rework)
+ [![Coverage Status](https://img.shields.io/coveralls/github/nenick/android-gradle-template/rework.svg)](https://coveralls.io/r/nenick/android-gradle-template?branch=rework)
+
+Start now without the time consuming project setup effort!
 
 * Model-View-ViewModel (MVVM) architecture template
   * ViewModel (from architecture components) to avoid configuration change issues
@@ -167,3 +176,13 @@ Current it's not possible to just select the module or java folder an start run 
 * Navigation Component https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing
 * Good to know about coroutines https://medium.com/capital-one-tech/kotlin-coroutines-on-android-things-i-wish-i-knew-at-the-beginning-c2f0b1f16cff
 * JaCoCo release notes https://www.jacoco.org/jacoco/trunk/doc/changes.html
+
+### Last tested together with
+
+* Android Studio 3.2.1
+* Java 8
+
+### Getting Started
+
+(TODO)
+Import the project into Android Studio and start developing. For more details see [Getting Started](docs/src/main/resources/getting_started.md)
