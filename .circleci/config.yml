@@ -37,3 +37,8 @@ jobs:
             ./gradlew app:testDebugUnitTest
             ./gradlew data-local:testDebugUnitTest
             ./gradlew data-network:testDebugUnitTest
+
+      - run:
+          name: Coverage report
+          command: |
+            ./gradlew data-network:jacocoUnitTestReport
