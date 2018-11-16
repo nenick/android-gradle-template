@@ -45,6 +45,12 @@ Start now without the time consuming project setup effort!
 * (TODO) Logging concept
   * (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
   * (TODO) HowTo: use configure the logging
+* (TODO) Preconfigured for CircleCi
+  * Build sources
+  * Run unit tests
+  * (TODO) Run instrumentation tests with an emulator
+  * (TODO) Collect test and coverage reports
+  * (TODO) Report coverage to a service
 
 (TODO)
 * viewmodel.observe*() {} vs viewmodel.livedata.observer() {} vs viewmodel.get*().observer() {} for easy testing

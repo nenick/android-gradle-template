@@ -24,7 +24,9 @@ jobs:
 
       - run:
          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-         command: sudo chmod +x ./gradlew
+         command: |
+           sudo chmod +x ./gradlew
+           sudo chmod +x ./android-wait-for-boot.sh
 
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}
