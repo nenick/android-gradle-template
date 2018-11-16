@@ -10,7 +10,7 @@ tasks.withType(Test) {
 }
 
 /** We must create our own task to create jacoco reports. */
-task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+task jacocoInstrumentationTestReport(type: JacocoReport, dependsOn: ['connectedCheck']) {
 
     reports {
         xml.enabled = true
@@ -24,6 +24,6 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) 
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
     executionData = fileTree(dir: project.buildDir, includes: [
-            'jacoco/testDebugUnitTest.exec'
+            'outputs/code-coverage/connected/*coverage.ec'
     ])
 }

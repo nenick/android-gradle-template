@@ -128,6 +128,17 @@ For full application integration tests I recommend to use a separated test modul
 And unit tests done with Espresso should stay inside the related modules.
 It's kind of separation by concern and lets you run the tests separately without extra configurations.
 
+### Location of reports
+
+(TODO)
+unit test
+* execution build/reports/tests/testDebugUnitTest/index.html
+* coverage build/reports/jacoco/jacocoUnitTestReport/index.html
+
+instrumentation tests reports
+* execution build/reports/androidTests/connected/index.html
+* coverage build/reports/jacoco/jacocoInstrumentationTestReport/index.html
+
 ### Project structure overview
 
 (TODO)

@@ -8,6 +8,7 @@ apply plugin: "kotlin-kapt"
 // kotlin allopen - removes the default final classifier for AndroidAnnotations
 apply plugin: "kotlin-allopen"
 apply from: "$project.rootDir/gradle/jacoco-unit-test-report.gradle"
+apply from: "$project.rootDir/gradle/jacoco-instrumentation-test-report.gradle"
 
 android {
     compileSdkVersion 28
