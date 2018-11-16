@@ -1,5 +1,6 @@
 apply plugin: 'com.android.test'
 apply plugin: 'kotlin-android'
+apply from: "$project.rootDir/gradle/jacoco-separated-instrumentation-test-report.gradle"
 
 android {
     compileSdkVersion 28
@@ -15,6 +16,11 @@ android {
 
     }
 
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+    }
 
     targetProjectPath ':app'
 }

@@ -31,7 +31,7 @@ Start fast without the time consuming project setup effort!
 * (TODO) Server Mocking for testing and independent developing! (runs on android environment)
 * (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data
 * (TODO) Coverage report
- * (TODO) Separated reports for each target inside single modules
+ * Separated reports for each target at each module
  * (TODO) Merged reports over all targets and modules
 * (TODO) Logging concept
  * (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
