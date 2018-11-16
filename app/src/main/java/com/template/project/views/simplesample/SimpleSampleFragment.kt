@@ -10,11 +10,12 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.TextChange
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @EFragment(R.layout.fragment_simple_sample)
 class SimpleSampleFragment : BaseFragment() {
 
-    private val model: SimpleSampleViewModel by provider(SimpleSampleViewModel::class.java)
+    private val model: SimpleSampleViewModel by viewModel()
 
     @AfterViews
     fun connectViewModel() {

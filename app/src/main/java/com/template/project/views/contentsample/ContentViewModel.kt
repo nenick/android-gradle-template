@@ -6,18 +6,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.template.project.data.local.entities.Todo
 import com.template.project.model.repositories.TodoRepository
-import org.androidannotations.annotations.Bean
-import org.androidannotations.annotations.EBean
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
-@EBean
-class ContentViewModel: ViewModel() {
+class ContentViewModel : ViewModel(), KoinComponent {
 
-    @Bean
-    protected lateinit var repository: TodoRepository
+    private val repository: TodoRepository by inject()
 
     private val todoList = MutableLiveData<List<Todo>>()
 
-    fun observerTodos(owner: LifecycleOwner, observer: (List<Todo>) -> Unit) {
+    fun observerTodo(owner: LifecycleOwner, observer: (List<Todo>) -> Unit) {
         todoList.observe(owner, Observer { observer(it) })
         repository.getTodos().observe {
             todoList.postValue(it)

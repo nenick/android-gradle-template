@@ -17,9 +17,12 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "0.0.1"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.template.project.tools.AndroidJUnitRunnerCustomApplication"
     }
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -28,47 +31,76 @@ android {
 }
 
 dependencies {
-    // project modules
+    // --------------------------------------------------
+    // Project modules
+    //
     implementation project(":data-local")
     implementation project(":data-network")
 
-    // kotlin support
+    // --------------------------------------------------
+    // Kotlin support
+    //
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
 
-    // backward compatibility
+    // --------------------------------------------------
+    // Backward compatibility
+    //
     api "androidx.appcompat:appcompat:1.0.2"
 
-    // design elements
+    // --------------------------------------------------
+    // Design elements
+    //
     implementation "androidx.constraintlayout:constraintlayout:1.1.3"
     implementation "androidx.recyclerview:recyclerview:1.0.0"
 
-    // legacy support until all libraries ported to androidx (e.g. navigation component)
+    // --------------------------------------------------
+    // legacy support
+    // **until all libraries ported to androidx (e.g. navigation component)**
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
-    // Architecture Components
-    // - LiveData, ViewModel, Lifecycle
+    // --------------------------------------------------
+    // Code architecture
+    //
+    // - LiveData
+    // - ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+
     // - Navigation
     api "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
 
-    // AndroidAnnotations
-    // - boilerplate code generation, dependency injection
+    // --------------------------------------------------
+    // Reduce boilerplate code
+    //
+    // - view event handling (and optional many more)
     kapt "org.androidannotations:androidannotations:4.5.2"
     api "org.androidannotations:androidannotations-api:4.5.2"
 
     // --------------------------------------------------
+    // Dependency injection
+    //
+    // - Koin for Android
+    implementation 'org.koin:koin-android:1.0.2'
+    // - Koin for Android Architecture ViewModel
+    implementation 'org.koin:koin-androidx-viewmodel:1.0.2'
+
+    // --------------------------------------------------
     // Unit Test (jvm)
+    //
     testImplementation "junit:junit:4.12"
     testImplementation "com.google.truth:truth:0.42"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
 
     // --------------------------------------------------
     // Tests (instrumentation)
+    //
     androidTestImplementation "androidx.test:runner:1.1.0"
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+    androidTestImplementation "androidx.test.ext:junit:1.0.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0"
-
-
+    androidTestImplementation "com.google.truth:truth:0.42"
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
+    androidTestImplementation 'org.mockito:mockito-android:2.23.0'
 }
 
 allOpen {
