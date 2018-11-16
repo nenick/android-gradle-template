@@ -2,6 +2,7 @@ package com.template.project
 
 import android.app.Application
 import com.template.project.model.repositories.TodoRepository
+import com.template.project.views.contentsample.ContentDetailsViewModel
 import com.template.project.views.contentsample.ContentViewModel
 import com.template.project.views.simplesample.SimpleSampleViewModel
 import org.koin.android.ext.android.startKoin
@@ -20,6 +21,7 @@ open class ProjectApplication: Application() {
     private val appModule = module {
         viewModel { SimpleSampleViewModel() }
         viewModel { ContentViewModel() }
+        viewModel { ContentDetailsViewModel() }
         single { ProjectNavigation() }
         single { TodoRepository() }
     }

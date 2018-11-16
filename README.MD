@@ -17,7 +17,7 @@ Start now without the time consuming project setup effort!
   * (TODO) HowTo: create new view
 * Single activity architecture template
   * Navigation (from architecture components) for proper navigation handling
-  * (TODO) Combine Fragments for on large screens
+  * Combine Fragments for on large screens
   * (TODO) HowTo: replace activity result
   * (TODO) HowTo: different navigation graphs
 * AndroidAnnotations reduce some ugly boilerplate
@@ -45,6 +45,10 @@ Start now without the time consuming project setup effort!
 * (TODO) Logging concept
   * (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
   * (TODO) HowTo: use configure the logging
+
+(TODO)
+* viewmodel.observe*() {} vs viewmodel.livedata.observer() {} vs viewmodel.get*().observer() {} for easy testing
+* Koin everywhere
 
 ## Notes
 

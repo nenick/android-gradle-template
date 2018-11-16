@@ -8,7 +8,10 @@ import com.template.project.data.local.entities.Todo
 import com.template.project.R
 import kotlinx.android.synthetic.main.item_list_entry.view.*
 
-class ContentAdapter(private val myDataset: Array<Todo>) : RecyclerView.Adapter<ContentAdapter.MyViewHolder>() {
+class ContentAdapter(
+    private val myDataset: Array<Todo>,
+    private val clickListener: (id: Todo) -> Unit
+) : RecyclerView.Adapter<ContentAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -33,6 +36,7 @@ class ContentAdapter(private val myDataset: Array<Todo>) : RecyclerView.Adapter<
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.root.title.text = myDataset[position].title
+        holder.itemView.setOnClickListener { clickListener(myDataset[position]) }
     }
 
     // Return the size of your dataset (invoked by the layout manager)

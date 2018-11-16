@@ -2,16 +2,18 @@ package com.template.project
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.template.project.views.contentsample.ContentDetailsFragment_
 import org.androidannotations.api.KotlinOpen
 
 @KotlinOpen
 class ProjectNavigation {
 
     fun toContentSample(root: Fragment) {
-        navigate(root, R.id.action_to_contentSampleFragment)
+        root.findNavController().navigate(R.id.action_to_contentSampleFragment)
     }
 
-    private fun navigate(root: Fragment, target: Int) {
-        root.findNavController().navigate(target)
+    fun toContentDetails(root: Fragment, itemId: Int) {
+        val args = ContentDetailsFragment_.builder().itemId(itemId).args()
+        root.findNavController().navigate(R.id.action_contentSampleFragment_to_contentDetailsFragment_, args)
     }
 }
