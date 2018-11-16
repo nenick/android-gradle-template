@@ -1,5 +1,6 @@
 package com.template.project.tools
 
+/** Works like LiveData without switching to ui thread. */
 class AsyncData<T : Any>(value: T?) {
 
     var observer: (T) -> Unit = {}
