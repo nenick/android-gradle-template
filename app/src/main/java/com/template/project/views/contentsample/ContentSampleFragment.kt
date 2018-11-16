@@ -5,11 +5,12 @@ import com.template.project.tools.BaseFragment
 import kotlinx.android.synthetic.main.fragment_content_sample.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @EFragment(R.layout.fragment_content_sample)
 class ContentSampleFragment : BaseFragment() {
 
-    private val model: ContentViewModel by provider(ContentViewModel::class.java)
+    private val model: ContentViewModel by viewModel()
 
     @AfterViews
     fun connectModel() {

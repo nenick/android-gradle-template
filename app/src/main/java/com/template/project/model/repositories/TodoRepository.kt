@@ -7,15 +7,15 @@ import com.template.project.data.local.ProjectDatabase
 import com.template.project.data.local.entities.Todo
 import com.template.project.data.network.ApiBuilder
 import com.template.project.tools.AsyncData
-import kotlinx.coroutines.*
-import org.androidannotations.annotations.EBean
-import org.androidannotations.annotations.RootContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
-@EBean
-class TodoRepository {
+class TodoRepository: KoinComponent {
 
-    @RootContext
-    protected lateinit var applicationContext: Context
+    private val applicationContext: Context by inject()
 
     private val database = lazy { ProjectDatabase.getDatabase(applicationContext) }
     private val network = ApiBuilder().todoApi()
