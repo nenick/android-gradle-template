@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/android:api-28-alpha
+      - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
 
     working_directory: ~/workspace
 
