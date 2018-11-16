@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 @EFragment(R.layout.fragment_content_sample)
 class ContentSampleFragment : BaseFragment() {
 
-    private val model: ContentViewModel by viewModel()
+    private val model: ContentSampleViewModel by viewModel()
 
     @AfterViews
     fun connectModel() {

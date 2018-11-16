@@ -8,7 +8,7 @@ import com.template.project.model.repositories.TodoRepository
 import com.template.project.tools.BaseViewModel
 import org.koin.standalone.inject
 
-class ContentViewModel : BaseViewModel() {
+class ContentSampleViewModel : BaseViewModel() {
 
     private val repository: TodoRepository by inject()
 

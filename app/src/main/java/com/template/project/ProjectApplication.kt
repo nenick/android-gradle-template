@@ -5,7 +5,7 @@ import com.template.project.data.local.tools.dataLocalModule
 import com.template.project.data.network.tools.dataNetworkModule
 import com.template.project.model.repositories.TodoRepository
 import com.template.project.views.contentsample.ContentDetailsViewModel
-import com.template.project.views.contentsample.ContentViewModel
+import com.template.project.views.contentsample.ContentSampleViewModel
 import com.template.project.views.simplesample.SimpleSampleViewModel
 import org.koin.android.ext.android.startKoin
 import org.koin.androidx.viewmodel.ext.koin.viewModel
@@ -22,7 +22,7 @@ open class ProjectApplication: Application() {
 
     private val appModule = module {
         viewModel { SimpleSampleViewModel() }
-        viewModel { ContentViewModel() }
+        viewModel { ContentSampleViewModel() }
         viewModel { ContentDetailsViewModel() }
         single { ProjectNavigation() }
         single { TodoRepository() }
