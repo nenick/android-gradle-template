@@ -1,6 +1,7 @@
 package com.template.project
 
 import android.app.Application
+import com.template.project.data.local.tools.dataLocalModule
 import com.template.project.data.network.tools.dataNetworkModule
 import com.template.project.model.repositories.TodoRepository
 import com.template.project.views.contentsample.ContentDetailsViewModel
@@ -17,7 +18,7 @@ open class ProjectApplication: Application() {
         startKoin(this, modulesDependencies())
     }
 
-    open fun modulesDependencies() = listOf(appModule, dataNetworkModule)
+    open fun modulesDependencies() = listOf(appModule, dataLocalModule, dataNetworkModule)
 
     private val appModule = module {
         viewModel { SimpleSampleViewModel() }
