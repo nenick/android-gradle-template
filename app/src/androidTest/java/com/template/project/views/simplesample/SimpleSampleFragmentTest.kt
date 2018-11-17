@@ -40,6 +40,10 @@ class SimpleSampleFragmentTest : FragmentTest() {
         if (dialogIsShownWith(stringResourceByName("anr_process", ".*").replace("?", "\\?"))) {
             click(stringResourceByName("wait"))
         }
+        // sometimes a system process does crash on emulator and this must be confirmed
+        if (dialogIsShownWith(stringResourceByName("aerr_application", ".*"))) {
+            click(stringResourceByName("ok"))
+        }
     }
 
     private fun dialogIsShownWith(expectedMessage: String): Boolean {
