@@ -93,11 +93,10 @@ jobs:
             ./gradlew jacocoMergedTestReport
 
       - run:
-          name: Try code coverage at codacy
+          name: Code coverage report at codacy
           command: |
-            curl -k https://www.jpm4j.org/install/script | sudo sh
-            sudo jpm install com.codacy:codacy-coverage-reporter:assembly
-            codacy-coverage-reporter -l Java -r build/reports/jacoco/jacocoMergedTestReport/jacocoMergedTestReport.xml
+            wget https://github.com/codacy/codacy-coverage-reporter/releases/download/4.0.5/codacy-coverage-reporter-4.0.5-assembly.jar
+            java -jar codacy-coverage-reporter-4.0.5-assembly.jar report -l Java -r build/reports/jacoco/jacocoMergedTestReport/jacocoMergedTestReport.xml
 
       - store_artifacts:
           path: app/build/reports/tests/testDebugUnitTest
