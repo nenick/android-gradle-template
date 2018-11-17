@@ -108,7 +108,7 @@ jobs:
           destination: app/instrumentation-tests-coverage
       - store_artifacts:
           path: app/build/reports/lint-results-debug.html
-          destination: app/lint-checks
+          destination: app/lint-checks/lint-results-debug.html
       - store_test_results:
           path: app/build/outputs/androidTest-results/connected
 
@@ -129,7 +129,7 @@ jobs:
           destination: data-local/unit-tests-coverage
       - store_artifacts:
           path: data-local/build/reports/lint-results-debug.html
-          destination: data-local/lint-checks
+          destination: data-local/lint-checks/lint-results-debug.html
       - store_test_results:
           path: data-local/build/test-results/testDebugUnitTest
 
@@ -141,7 +141,7 @@ jobs:
           destination: data-network/unit-tests-coverage
       - store_artifacts:
           path: data-network/build/reports/lint-results-debug.html
-          destination: data-network/lint-checks
+          destination: data-network/lint-checks/lint-results-debug.html
       - store_test_results:
           path: data-network/build/test-results/testDebugUnitTest
 
