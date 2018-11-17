@@ -26,7 +26,7 @@ jobs:
          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
          command: |
            sudo chmod +x ./gradlew
-           sudo chmod +x ./android-wait-for-boot.sh
+           sudo chmod +x .circleci/android-wait-for-boot.sh
 
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}
@@ -60,7 +60,7 @@ jobs:
 
       - run:
           name: Wait for emulator
-          command: ./android-wait-for-boot.sh
+          command: .circleci/android-wait-for-boot.sh
           environment:
             TERM: dumb
 
