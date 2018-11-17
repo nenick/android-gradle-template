@@ -38,17 +38,17 @@ class SimpleSampleFragmentTest : FragmentTest() {
         // TODO use library for stabilizing tests
         // sometimes a system process isn't responding on emulator and this must be confirmed
         if (dialogIsShownWith(stringResourceByName("anr_process", ".*").replace("?", "\\?"))) {
-            click(stringResourceByName("wait"));
+            click(stringResourceByName("wait"))
         }
     }
 
-    protected fun dialogIsShownWith(expectedMessage: String): Boolean {
+    private fun dialogIsShownWith(expectedMessage: String): Boolean {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         val dialog = device.findObject(UiSelector().textMatches(expectedMessage))
         return dialog.exists()
     }
 
-    protected fun click(target: String) {
+    private fun click(target: String) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         val button = device.findObject(UiSelector().text(target))
 
@@ -60,9 +60,9 @@ class SimpleSampleFragmentTest : FragmentTest() {
 
     }
 
-    fun stringResourceByName(name: String, vararg formatArgs: String): String {
+    private fun stringResourceByName(name: String, vararg formatArgs: String): String {
         // for all available strings see Android/sdk/platforms/android-23/data/res/values/strings.xml
-        val resId = InstrumentationRegistry.getInstrumentation().context.getResources().getIdentifier(name, "string", "android")
+        val resId = InstrumentationRegistry.getInstrumentation().context.resources.getIdentifier(name, "string", "android")
         return InstrumentationRegistry.getInstrumentation().context.getString(resId, formatArgs)
     }
 
