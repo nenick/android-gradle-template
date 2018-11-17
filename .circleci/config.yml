@@ -59,6 +59,13 @@ jobs:
             ./gradlew data-network:jacocoUnitTestReport
 
       - run:
+          name: Lint checks
+          command: |
+            ./gradlew app:lintDebug
+            ./gradlew data-local:lintDebug
+            ./gradlew data-network:lintDebug
+
+      - run:
           name: Wait for emulator
           command: .circleci/android-wait-for-boot.sh
           environment:
