@@ -9,19 +9,6 @@ jobs:
     working_directory: ~/workspace
 
     steps:
-      - run:
-          name: Create emulator
-          command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
-          environment:
-            TERM: dumb
-
-      - run:
-          name: Start emulator
-          command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
-          background: true
-          environment:
-            TERM: dumb
-
       - checkout
 
       - run:
@@ -66,6 +53,19 @@ jobs:
             ./gradlew app:lintDebug
             ./gradlew data-local:lintDebug
             ./gradlew data-network:lintDebug
+
+      - run:
+          name: Create emulator
+          command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
+          environment:
+            TERM: dumb
+
+      - run:
+          name: Start emulator
+          command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
+          background: true
+          environment:
+            TERM: dumb
 
       - run:
           name: Wait for emulator
