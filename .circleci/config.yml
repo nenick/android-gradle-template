@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - run:
-          name: Create avd
+          name: Create emulator
           command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
           environment:
             TERM: dumb
@@ -23,7 +23,7 @@ jobs:
       - checkout
 
       - run:
-         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+         name: Chmod permissions #if exec permission missing
          command: |
            sudo chmod +x ./gradlew
            sudo chmod +x .circleci/android-wait-for-boot.sh
@@ -75,3 +75,7 @@ jobs:
           command: ./gradlew app:connectedCheck
           environment:
             TERM: dumb
+
+      - store_test_results:
+          path: app/build/reports/tests/testDebugUnitTest/index.html
+          destination: app-unit-tests
