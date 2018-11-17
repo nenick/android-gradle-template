@@ -44,6 +44,10 @@ class SimpleSampleFragmentTest : FragmentTest() {
         if (dialogIsShownWith(stringResourceByName("aerr_application", ".*"))) {
             click(stringResourceByName("ok"))
         }
+
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        val anyDialogButton = device.findObject(UiSelector().clickable(true))
+        if(anyDialogButton.exists()) anyDialogButton.click()
     }
 
     private fun dialogIsShownWith(expectedMessage: String): Boolean {
