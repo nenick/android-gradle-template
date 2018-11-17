@@ -39,13 +39,8 @@ jobs:
           name: Unit tests
           command: |
             ./gradlew app:testDebugUnitTest
-            ./gradlew data-local:testDebugUnitTest --info --stacktrace
+            ./gradlew data-local:testDebugUnitTest
             ./gradlew data-network:testDebugUnitTest
-
-      - run:
-          name: Coverage report
-          command: |
-            ./gradlew data-network:jacocoUnitTestReport
 
       - run:
           name: Lint checks
@@ -109,7 +104,7 @@ jobs:
           path: app/build/reports/androidTests/connected
           destination: app/instrumentation-tests
       - store_artifacts:
-          path: app/build/reports/jacoco/jacocoInstrumentationTestReport
+          path: app/build/reports/jacoco/jacocoInstrumentationTestReport/html
           destination: app/instrumentation-tests-coverage
       - store_test_results:
           path: app/build/outputs/androidTest-results/connected
@@ -118,7 +113,7 @@ jobs:
           path: app-tests/build/reports/androidTests/connected
           destination: app-tests/instrumentation-tests
       - store_artifacts:
-          path: app-tests/build/reports/jacoco/jacocoInstrumentationTestReport
+          path: app-tests/build/reports/jacoco/jacocoInstrumentationTestReport/html
           destination: app-tests/instrumentation-tests-coverage
       - store_test_results:
           path: app-tests/build/outputs/androidTest-results/connected
@@ -140,3 +135,6 @@ jobs:
           destination: data-network/unit-tests-coverage
       - store_test_results:
           path: data-network/build/test-results/testDebugUnitTest
+      - store_artifacts:
+          path: build/reports/jacoco/jacocoMergesTestReport/html
+          destination: merged-tests-coverage

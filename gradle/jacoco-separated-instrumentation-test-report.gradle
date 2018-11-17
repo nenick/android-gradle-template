@@ -10,7 +10,7 @@ tasks.withType(Test) {
 }
 
 /** We must create our own task to collect all project sources, without we had nothing to cover. */
-task jacocoInstrumentationTestReport(type: JacocoReport, dependsOn: ['connectedCheck']) {
+task jacocoInstrumentationTestReport(type: JacocoReport) {
 
     reports {
         xml.enabled = true
