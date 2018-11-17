@@ -83,6 +83,9 @@ jobs:
           environment:
             TERM: dumb
 
-      - store_test_results:
+      - store_artifacts:
           path: app/build/reports/tests/testDebugUnitTest
           destination: app-unit-tests
+
+      - store_test_results:
+          path: app/build/test-results/tests/testDebugUnitTest
