@@ -85,7 +85,19 @@ jobs:
 
       - store_artifacts:
           path: app/build/reports/tests/testDebugUnitTest
-          destination: app-unit-tests
+          destination: app/unit-tests
+      - store_artifacts:
+          path: app/build/reports/androidTests/connected
+          destination: app/instrumentation-tests
+      - store_artifacts:
+          path: app-tests/build/reports/androidTests/connected
+          destination: app-tests/instrumentation
+      - store_artifacts:
+          path: data-local/build/reports/tests/testDebugUnitTest
+          destination: data-local/unit-tests
+      - store_artifacts:
+          path: data-network/build/reports/tests/testDebugUnitTest
+          destination: data-network/unit-tests
 
       - store_test_results:
-          path: app/build/test-results/tests/testDebugUnitTest
+          path: app/build/test-results/testDebugUnitTest
