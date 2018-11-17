@@ -79,25 +79,62 @@ jobs:
 
       - run:
           name: Instrumentation testing
-          command: ./gradlew app:connectedCheck
+          command: |
+            ./gradlew app:connectedCheck
+            ./gradlew app-tests:connectedCheck
           environment:
             TERM: dumb
+
+      - run:
+          name: Code coverage
+          command: |
+            ./gradlew app:jacocoUnitTestReport
+            ./gradlew app:jacocoInstrumentationTestReport
+            ./gradlew app-tests:jacocoInstrumentationTestReport
+            ./gradlew data-local:jacocoUnitTestReport
+            ./gradlew data-network:jacocoUnitTestReport
+            ./gradlew jacocoMergedTestReport
 
       - store_artifacts:
           path: app/build/reports/tests/testDebugUnitTest
           destination: app/unit-tests
       - store_artifacts:
+          path: app/build/reports/jacoco/jacocoUnitTestReport
+          destination: app/unit-tests-coverage
+      - store_test_results:
+          path: app/build/test-results/testDebugUnitTest
+      - store_artifacts:
           path: app/build/reports/androidTests/connected
           destination: app/instrumentation-tests
       - store_artifacts:
+          path: app/build/reports/jacoco/jacocoInstrumentationTestReport
+          destination: app/instrumentation-tests-coverage
+      - store_test_results:
+          path: app/build/outputs/androidTest-results/connected
+
+      - store_artifacts:
           path: app-tests/build/reports/androidTests/connected
-          destination: app-tests/instrumentation
+          destination: app-tests/instrumentation-tests
+      - store_artifacts:
+          path: app-tests/build/reports/jacoco/jacocoInstrumentationTestReport
+          destination: app-tests/instrumentation-tests-coverage
+      - store_test_results:
+          path: app-tests/build/outputs/androidTest-results/connected
+
       - store_artifacts:
           path: data-local/build/reports/tests/testDebugUnitTest
           destination: data-local/unit-tests
       - store_artifacts:
+          path: data-local/build/reports/jacoco/jacocoUnitTestReport
+          destination: data-local/unit-tests-coverage
+      - store_test_results:
+          path: data-local/build/test-results/testDebugUnitTest
+
+      - store_artifacts:
           path: data-network/build/reports/tests/testDebugUnitTest
           destination: data-network/unit-tests
-
+      - store_artifacts:
+          path: data-network/build/reports/jacoco/jacocoUnitTestReport
+          destination: data-network/unit-tests-coverage
       - store_test_results:
-          path: app/build/test-results/testDebugUnitTest
+          path: data-network/build/test-results/testDebugUnitTest
