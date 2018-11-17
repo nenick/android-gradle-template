@@ -89,6 +89,7 @@ class SimpleSampleFragmentTest : FragmentTest() {
 
     @Test
     fun navigate() {
+        Espresso.closeSoftKeyboard()
         whenClickNavigateToNext()
         verify(navigationMock).toContentSample(any())
     }
