@@ -21,11 +21,12 @@ task jacocoInstrumentationTestReport(type: JacocoReport) {
     def debugTree = fileTree(dir: "$project.rootDir", excludes: fileFilter).matching {
         include "**/build/tmp/kotlin-classes/debug/**"
     }
-    def mainSrc = fileTree(dir: "$project.rootDir", excludes: fileFilter).matching {
-        include "**/src/main/java/**"
+    def mainSrc = []
+    new File("$project.rootDir").eachDirRecurse() { dir ->
+        if(dir.path.matches(/.*main.java/)) mainSrc.add(dir)
     }
 
-    sourceDirectories = files([mainSrc])
+    sourceDirectories = files(mainSrc)
     classDirectories = files([debugTree])
     executionData = fileTree(dir: project.buildDir, includes: [
             'outputs/code-coverage/connected/*coverage.ec'

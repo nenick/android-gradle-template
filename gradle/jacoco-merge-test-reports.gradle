@@ -19,9 +19,12 @@ task jacocoMergedTestReport(type: JacocoReport) {
 
     def fileFilter = [ '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*' ]
     def debugTree = fileTree(dir: project.rootDir, includes: ["**/build/tmp/kotlin-classes/debug/**"], excludes: fileFilter)
-    def mainSrc = fileTree(dir: project.rootDir, includes: ["**/src/main/java/**"], excludes: fileFilter)
+    def mainSrc = []
+    new File("$project.rootDir").eachDirRecurse() { dir ->
+        if(dir.path.matches(/.*main.java/)) mainSrc.add(dir)
+    }
 
-    sourceDirectories = files([mainSrc])
+    sourceDirectories = files(mainSrc)
     classDirectories = files([debugTree])
     executionData = fileTree(dir: project.rootDir, includes: [ '**/build/jacoco/testDebugUnitTest.exec', '**/build/outputs/code-coverage/connected/*coverage.ec'])
 }
