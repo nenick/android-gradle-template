@@ -63,7 +63,7 @@ class SimpleSampleFragmentTest : FragmentTest() {
     private fun stringResourceByName(name: String, vararg formatArgs: String): String {
         // for all available strings see Android/sdk/platforms/android-23/data/res/values/strings.xml
         val resId = InstrumentationRegistry.getInstrumentation().context.resources.getIdentifier(name, "string", "android")
-        return InstrumentationRegistry.getInstrumentation().context.getString(resId, formatArgs)
+        return InstrumentationRegistry.getInstrumentation().context.getString(resId, *formatArgs)
     }
 
     @Test
