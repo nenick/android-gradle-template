@@ -21,9 +21,9 @@ class SimpleSampleTest : AppTest() {
             .check(ViewAssertions.matches(ViewMatchers.withText("Hello World!")))
 
         onView(ViewMatchers.withId(R.id.textInput))
-            .perform(ViewActions.typeText("Change"))
+            .perform(ViewActions.replaceText("Changed"))
 
         onView(ViewMatchers.withId(R.id.textView))
-            .check(ViewAssertions.matches(ViewMatchers.withText("Hello ChangeWorld!")))
+            .check(ViewAssertions.matches(ViewMatchers.withText("Changed")))
     }
 }
