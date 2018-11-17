@@ -135,6 +135,7 @@ jobs:
           destination: data-network/unit-tests-coverage
       - store_test_results:
           path: data-network/build/test-results/testDebugUnitTest
+
       - store_artifacts:
-          path: build/reports/jacoco/jacocoMergesTestReport/html
+          path: build/reports/jacoco/jacocoMergedTestReport/html
           destination: merged-tests-coverage
