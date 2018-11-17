@@ -102,6 +102,7 @@ dependencies {
     androidTestImplementation "com.google.truth:truth:0.42"
     androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
     androidTestImplementation 'org.mockito:mockito-android:2.23.0'
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
 }
 
 allOpen {

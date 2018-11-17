@@ -5,6 +5,9 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiSelector
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.mock
@@ -15,6 +18,10 @@ import org.junit.Before
 import org.junit.Test
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
+import androidx.test.uiautomator.UiObjectNotFoundException
+import androidx.test.uiautomator.UiObject
+
+
 
 class SimpleSampleFragmentTest : FragmentTest() {
 
@@ -27,6 +34,36 @@ class SimpleSampleFragmentTest : FragmentTest() {
     @Before
     fun setUp() {
         start(SimpleSampleFragment_.builder().build())
+
+        // TODO use library for stabilizing tests
+        // sometimes a system process isn't responding on emulator and this must be confirmed
+        if (dialogIsShownWith(stringResourceByName("anr_process", ".*").replace("?", "\\?"))) {
+            click(stringResourceByName("wait"));
+        }
+    }
+
+    protected fun dialogIsShownWith(expectedMessage: String): Boolean {
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        val dialog = device.findObject(UiSelector().textMatches(expectedMessage))
+        return dialog.exists()
+    }
+
+    protected fun click(target: String) {
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        val button = device.findObject(UiSelector().text(target))
+
+        try {
+            button.click()
+        } catch (e: UiObjectNotFoundException) {
+            throw IllegalStateException(e)
+        }
+
+    }
+
+    fun stringResourceByName(name: String, vararg formatArgs: String): String {
+        // for all available strings see Android/sdk/platforms/android-23/data/res/values/strings.xml
+        val resId = InstrumentationRegistry.getInstrumentation().context.getResources().getIdentifier(name, "string", "android")
+        return InstrumentationRegistry.getInstrumentation().context.getString(resId, formatArgs)
     }
 
     @Test
