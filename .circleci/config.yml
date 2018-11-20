@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
     environment:
-      JVM_OPTS: -Xmx3200m
+      _JAVA_OPTIONS: -Xmx3200m
 
     working_directory: ~/workspace
 
