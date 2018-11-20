@@ -39,8 +39,8 @@ jobs:
           name: Unit tests
           command: |
             ./gradlew app:testDebugUnitTest
-            ./gradlew data-local:testDebugUnitTest
             ./gradlew data-network:testDebugUnitTest
+            ./gradlew data-local:testDebugUnitTest
 
       - run:
           name: Lint checks
