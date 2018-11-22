@@ -1,27 +1,37 @@
 package com.template.project.data.local.tools
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.core.app.ApplicationProvider
-import com.template.project.data.local.ProjectDatabase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
+import org.koin.dsl.module.module
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.StandAloneContext
+import org.koin.standalone.inject
 import org.robolectric.RobolectricTestRunner
-import java.lang.reflect.Field
+import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-abstract class DaoTest {
+abstract class DaoTest : KoinComponent {
+
+    @Before
+    fun setupBase() {
+        StandAloneContext.loadKoinModules(dataLocalModule, module { single { RuntimeEnvironment.systemContext } })
+        ignoreMainThread { database.clearAllTables() }
+    }
+
+    val database: ProjectDatabase by inject()
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
     private val asBackgroundTask = Dispatchers.IO
-
-    val database = ProjectDatabase.getDatabase(ApplicationProvider.getApplicationContext())
 
     /**
      * Helper to avoid main thread issues.
@@ -39,22 +49,8 @@ abstract class DaoTest {
     }
 
     @After
-    fun releaseSingletons() {
-        // this step reset the changes you have done to singleton instances
-        // otherwise this changes could effect your next test method execution
-        resetSingleton(ProjectDatabase::class.java, "INSTANCE")
-    }
-
-    /** Nulls the static field on given class. */
-    private fun resetSingleton(clazz: Class<*>, fieldName: String) {
-        val instance: Field
-        try {
-            instance = clazz.getDeclaredField(fieldName)
-            instance.isAccessible = true
-            instance.set(null, null)
-        } catch (e: Exception) {
-            throw RuntimeException()
-        }
-
+    fun cleanUpBase() {
+        asBackgroundTask.cancel()
+        StandAloneContext.stopKoin()
     }
 }
