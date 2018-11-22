@@ -96,7 +96,7 @@ jobs:
           name: Code coverage report at codacy
           command: |
             wget https://github.com/nenick/codacy-coverage-reporter/releases/download/4.1.0-alpha/codacy-coverage-reporter-assembly-4.1.0-alpha.jar
-            java -jar codacy-coverage-reporter-assembly-4.1.0-alpha.jar report -l Java -r build/reports/jacoco/jacocoMergedTestReport/jacocoMergedTestReport.xml --multi-module app/src/main/java,data-local/src/main/java,data-network/src/main/java
+            java -jar codacy-coverage-reporter-assembly-4.1.0-alpha.jar report -r build/reports/jacoco/jacocoMergedTestReport/jacocoMergedTestReport.xml --multi-module app/src/main/java,data-local/src/main/java,data-network/src/main/java
 
       - store_artifacts:
           path: app/build/reports/tests/testDebugUnitTest
