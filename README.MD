@@ -37,6 +37,7 @@ Start now without the time consuming project setup effort!
   * (TODO) Reset application state between test runs
   * (TODO) Less test complexity with Espresso Macchiato
   * (TODO) Permissions interceptor to emulate different grants
+  * (TODO) Reduce common issues with headless emulator testing
 * (TODO) Server Mocking for testing and independent developing! (runs on android environment)
 * (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data
 * Coverage report
@@ -48,13 +49,15 @@ Start now without the time consuming project setup effort!
 * (TODO) Preconfigured for CircleCi
   * Build sources
   * Run unit tests
-  * (TODO) Run instrumentation tests with an emulator
-  * (TODO) Collect test and coverage reports
+  * Run instrumentation tests with an emulator
+  * Collect test and coverage reports
   * (TODO) Report coverage to a service
+* (TODO) Integrated quality checks
+  * (TODO) Kotlin code style with Detekt
+  * (TODO) HowTo: integrate Codacy for quality summarize
 
-(TODO)
+(TODO) choose one style
 * viewmodel.observe*() {} vs viewmodel.livedata.observer() {} vs viewmodel.get*().observer() {} for easy testing
-* Koin everywhere
 
 ## Notes
 
