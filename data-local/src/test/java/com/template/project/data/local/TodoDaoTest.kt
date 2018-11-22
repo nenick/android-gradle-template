@@ -4,11 +4,12 @@ import com.google.common.truth.Truth.assertThat
 import com.template.project.data.local.entities.Todo
 import com.template.project.data.local.tools.DaoTest
 import org.junit.Test
+import org.koin.standalone.inject
 
 
 class TodoDaoTest : DaoTest() {
 
-    private val todoDao = database.todo()
+    private val todoDao: TodoDao by inject()
     private val testData1 = Todo(1, 1, "Clean Up", false)
     private val testData2 = Todo(2, 1, "Homework", true)
 
