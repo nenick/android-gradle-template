@@ -3,6 +3,9 @@ package com.template.project.data.network.tools
 import okhttp3.Interceptor
 import okhttp3.Response
 
+/**
+ * Use an api key for each request.
+ */
 class ApiKeyRequestInterceptor(
 
     private val apiKey: String

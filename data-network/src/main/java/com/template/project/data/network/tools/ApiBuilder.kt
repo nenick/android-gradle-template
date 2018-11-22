@@ -1,25 +1,28 @@
 package com.template.project.data.network.tools
 
 import com.template.project.data.network.TodoApi
-import com.template.project.datanetwork.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.getProperty
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiBuilder {
+class ApiBuilder : KoinComponent {
+
+    private val apiUrl = getProperty<String>("api_url")
+    private val apiKey = getProperty<String>("api_key")
+    private val logLevel = HttpLoggingInterceptor.Level.valueOf(getProperty("api_log_level"))
 
     fun todoApi(): TodoApi {
 
         val client = OkHttpClient().newBuilder()
-            .addInterceptor(ApiKeyRequestInterceptor("dummy api key"))
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-            })
+            .addInterceptor(ApiKeyRequestInterceptor(apiKey))
+            .addInterceptor(HttpLoggingInterceptor().apply { level = logLevel })
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
+            .baseUrl(apiUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

@@ -55,6 +55,7 @@ Start now without the time consuming project setup effort!
 * (TODO) Integrated quality checks
   * (TODO) Kotlin code style with Detekt
   * (TODO) HowTo: integrate Codacy for quality summarize
+* Dynamic property loading
 
 (TODO) choose one style
 * viewmodel.observe*() {} vs viewmodel.livedata.observer() {} vs viewmodel.get*().observer() {} for easy testing

@@ -17,7 +17,7 @@ open class ProjectApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, modulesDependencies())
+        startKoin(this, modulesDependencies(), loadPropertiesFromFile = true)
     }
 
     open fun modulesDependencies() = listOf(appModule, dataLocalModule, dataNetworkModule)
