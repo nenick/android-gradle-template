@@ -3,10 +3,9 @@ package com.template.project.data.network
 import com.google.common.truth.Truth.assertThat
 import com.template.project.data.network.tools.ApiTest
 import org.junit.Test
-import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
-class TodoApiTest : ApiTest(), KoinComponent {
+class TodoApiTest : ApiTest() {
 
     private val api: TodoApi by inject()
 
