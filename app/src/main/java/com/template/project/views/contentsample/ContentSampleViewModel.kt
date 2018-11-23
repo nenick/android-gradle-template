@@ -10,8 +10,8 @@ import org.koin.standalone.inject
 class ContentSampleViewModel : BaseViewModel() {
 
     // A repository can be the single source of truth for accessing application data.
-    // It will hiding the detail if data comes from local or remote storage.
-    // Makes implementation and testing more easy.
+    // It could hide the details whether data comes from local or remote storage.
+    // This would makes implementation and testing more easy.
     private val repository: TodoRepository by inject()
 
     fun todo(): LiveData<List<Todo>> {
