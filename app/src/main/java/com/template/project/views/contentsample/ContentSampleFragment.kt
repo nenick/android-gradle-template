@@ -21,7 +21,7 @@ class ContentSampleFragment : BaseFragment() {
     }
 
     private fun updateListView(todo: List<Todo>) {
-        list.adapter = ContentAdapter(todo.toTypedArray(), ::showDetailsOnItemClick)
+        list.adapter = ContentAdapter(todo, ::showDetailsOnItemClick)
     }
 
     fun showDetailsOnItemClick(item: Todo) {

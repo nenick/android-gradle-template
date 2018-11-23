@@ -9,7 +9,7 @@ import com.template.project.R
 import kotlinx.android.synthetic.main.item_list_entry.view.*
 
 class ContentAdapter(
-    private val myDataset: Array<Todo>,
+    private val content: List<Todo>,
     private val clickListener: (id: Todo) -> Unit
 ) : RecyclerView.Adapter<ContentAdapter.MyViewHolder>() {
 
@@ -35,10 +35,10 @@ class ContentAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.root.title.text = myDataset[position].title
-        holder.itemView.setOnClickListener { clickListener(myDataset[position]) }
+        holder.root.title.text = content[position].title
+        holder.itemView.setOnClickListener { clickListener(content[position]) }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = myDataset.size
+    override fun getItemCount() = content.size
 }
