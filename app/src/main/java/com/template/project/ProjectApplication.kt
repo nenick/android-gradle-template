@@ -28,10 +28,8 @@ open class ProjectApplication: Application() {
         viewModel { ContentDetailsViewModel() }
         single { ProjectNavigation() }
         single { TodoRepository() }
-        single {
-            // Espresso waits automatically until all AsyncTask.THREAD_POOL_EXECUTOR threads are idle.
-            AsyncTask.THREAD_POOL_EXECUTOR.asCoroutineDispatcher()
-        }
+        // Espresso waits automatically until all AsyncTask.THREAD_POOL_EXECUTOR threads are idle.
+        single { AsyncTask.THREAD_POOL_EXECUTOR.asCoroutineDispatcher() }
     }
 
 }

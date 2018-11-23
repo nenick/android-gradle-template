@@ -26,6 +26,7 @@ Start now without the time consuming project setup effort!
   * View -> ViewModel -> UseCase -> Repository -> local/network Data
 * Local storing with Room
   * Fast and device independent tests on JVM with Robolectric
+  * (TODO) Prepared scheme migration process
   * (TODO ??) Pure java library
 * REST communication with Retrofit
   * Fast and device independent tests on JVM

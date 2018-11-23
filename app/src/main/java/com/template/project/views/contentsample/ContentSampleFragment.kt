@@ -3,6 +3,7 @@ package com.template.project.views.contentsample
 import com.template.project.R
 import com.template.project.data.local.entities.Todo
 import com.template.project.tools.BaseFragment
+import com.template.project.tools.observe
 import kotlinx.android.synthetic.main.fragment_content_sample.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EFragment
@@ -16,12 +17,14 @@ class ContentSampleFragment : BaseFragment() {
     @AfterViews
     fun connectModel() {
         showUpNavigation()
-        model.observerTodo(this) {
-            list.adapter = ContentAdapter(it.toTypedArray(), ::showDetails)
-        }
+        observe(model.todo(), ::updateListView)
     }
 
-    fun showDetails(item: Todo) {
+    private fun updateListView(todo: List<Todo>) {
+        list.adapter = ContentAdapter(todo.toTypedArray(), ::showDetailsOnItemClick)
+    }
+
+    fun showDetailsOnItemClick(item: Todo) {
         val detailsFragment = childFragmentManager.findFragmentById(R.id.detailsView)
         if (detailsFragment == null) {
             navigate.toContentDetails(this, item.id)
