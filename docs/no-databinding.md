@@ -107,8 +107,8 @@ fun observeTwoWay(data: MutableLiveData<String>, view: EditText) {
 
 ## Bad code completion
 
-Looks like not fully working inside XML files and creating new methods/variables per shortcut also.
+Looks like not fully working inside XML files and creating new methods/variables per shortcut also not supported.
 
 ## Increased compile time
 
-It should be mentioned that using Kapt increase compile time.
+It should be mentioned that using `kapt` increase compile time.
