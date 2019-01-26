@@ -55,4 +55,9 @@ dependencies {
 
     // support for writing easy, clean and readable database query test
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
+
+    // TODO !! Room 2.1.0-alpha03 !!
+    // New Features
+    // Couroutines: DAO methods can now be suspend functions. To support suspend functions in Room a new artifact has been released, room-coroutines. b/69474692 https://issuetracker.google.com/69474692
+    // DAO methods annotated with @Insert, @Delete or @Update now support ListenableFuture as return type. b/119418331 https://issuetracker.google.com/119418331
 }

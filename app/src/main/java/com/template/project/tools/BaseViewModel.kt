@@ -1,8 +1,13 @@
 package com.template.project.tools
 
-import androidx.lifecycle.ViewModel
+import androidx.arch.core.util.Function
+import androidx.lifecycle.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 import org.androidannotations.api.KotlinOpen
 import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
 /**
  * The ViewModel encapsulates presentation logic and state.
@@ -17,4 +22,11 @@ import org.koin.standalone.KoinComponent
  *
  * @see: https://blogs.msdn.microsoft.com/dphill/2009/01/31/the-viewmodel-pattern/
  */
-abstract class BaseViewModel : ViewModel(), KoinComponent
+abstract class BaseViewModel : ViewModel(), KoinComponent {
+
+    private val background by inject<CoroutineDispatcher>()
+
+    fun async(block: suspend () -> Unit) {
+        CoroutineScope(background).async { block() }
+    }
+}

@@ -1,5 +1,6 @@
 package com.template.project.views.contentsample
 
+import android.widget.Toast
 import com.template.project.R
 import com.template.project.data.local.entities.Todo
 import com.template.project.tools.BaseFragment
@@ -17,7 +18,23 @@ class ContentSampleFragment : BaseFragment() {
     @AfterViews
     fun connectModel() {
         showUpNavigation()
-        observe(model.todo(), ::updateListView)
+        swipe_container.setOnRefreshListener(::requestRefresh)
+
+        observe(model.errorChannel, ::showError)
+        observe(model.todoListIsLoading, ::updateProgressIndicator)
+        observe(model.todoList, ::updateListView)
+    }
+
+    private fun requestRefresh() {
+        model.refreshTodo()
+    }
+
+    private fun showError(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+    }
+
+    private fun updateProgressIndicator(isLoading: Boolean) {
+        swipe_container.isRefreshing = isLoading
     }
 
     private fun updateListView(todo: List<Todo>) {

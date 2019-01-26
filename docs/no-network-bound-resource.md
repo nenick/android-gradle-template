@@ -85,7 +85,7 @@ abstract class NetworkBoundResource<StorageResult, BackendResult>{
 
 ```
 class Resource<Data> private constructor(
-    val isLoading: Boolean,
+    val getTodoListIsLoading: Boolean,
     val data: Data?,
     val error: String?
 ) {

@@ -12,16 +12,23 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 val dataNetworkModule = module {
 
-    single { OkHttpClient().newBuilder()
-        .addInterceptor(ApiKeyRequestInterceptor(getProperty("api_key")))
-        .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.valueOf(getProperty("api_log_level")) })
-        .build() }
+    single {
+        OkHttpClient().newBuilder()
+            .addInterceptor(ApiKeyRequestInterceptor(getProperty("api_key")))
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.valueOf(getProperty("api_log_level"))
+            })
+            .build()
+    }
 
-    single { Retrofit.Builder()
-        .baseUrl(getProperty<String>("api_url"))
-        .client(get())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build() }
+    single {
+        Retrofit.Builder()
+            .baseUrl(getProperty<String>("api_url"))
+            .client(get())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addSuspendCallAdapterFactory(IndependentCallAdapterFactory())
+            .build()
+    }
 
     single { get<Retrofit>().create(TodoApi::class.java) }
 }
