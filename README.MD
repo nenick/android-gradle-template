@@ -1,4 +1,4 @@
-# Android - Rapid Test Driven Development
+# Android - rapid test driven development
 
 * Shows an easy and clean architecture.
 * Combines some tools for less coding.
