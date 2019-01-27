@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
 abstract class BaseRepository : KoinComponent {
 
     private val runningProcesses = ConcurrentHashMap<String, LiveData<*>>()
-    private val backgroundScope: CoroutineDispatcher by inject()
+    private val dispatchers: ProjectDispatchers by inject()
 
     /**
      * Avoid that same action is executed parallel.
@@ -43,46 +43,54 @@ abstract class BaseRepository : KoinComponent {
         return processHolder as LiveData<T>
     }
 
-    protected suspend fun <ResponseType, ApiType : ApiResponse<ResponseType>> fetch(
+    /**
+     * Convenience method for fetching remote data and sync it locally.
+     *
+     * It respects the api response cases:
+     *
+     * a) Success with new data.
+     * b) Success without content.
+     * c) Error with details.
+     */
+    protected suspend fun <DataType, ApiType : ApiResponse<DataType>> fetch(
         response: ApiType,
-        storeData: (data: ResponseType) -> Unit
+        storeData: suspend (data: DataType) -> Unit
     ): SyncResult {
-        return CoroutineScope(backgroundScope).async {
-            if (response.isSuccessful) {
-                storeData(response.body!!)
-                SyncResult.succeeded()
-            } else {
-                SyncResult.failed(response)
-            }
-        }.await()
+        return if (response.isSuccessful) {
+            storeData(response.body!!)
+            SyncResult.succeeded()
+        } else {
+            SyncResult.failed(response)
+        }
     }
 
     /**
-     * Read from database.
+     * Convenience method for reading data synchronously.
      *
-     * Wrapper to call database with coroutines scope.
+     * Wraps forced non main thread loading to Kotlin coroutines.
      *
      * TODO: This could be replaced if Room natively supports coroutines.
      */
-    protected suspend fun <DataType> read(loadData: () -> DataType): DataType {
-        return CoroutineScope(backgroundScope).async { loadData() }.await()
+    protected suspend fun <DataType> read(loadData: suspend () -> DataType): DataType {
+        return runBlocking { loadData() }
     }
 
     /**
-     * Observe database for changes.
+     * Convenience method for observing a data resource for changes.
      *
-     * Wrapper for the Android LiveData to Kotlin coroutine ReceiveChannel.
+     * Wraps the Android LiveData events to Kotlin coroutines ReceiveChannel.
      *
      * TODO: This could be replaced if Room natively supports coroutines.
      */
     @ExperimentalCoroutinesApi
-    protected suspend fun <DataType> observe(loadData: () -> LiveData<DataType>): ReceiveChannel<DataType> {
-        return CoroutineScope(backgroundScope).produce {
-            object : ResourceChannel<DataType>(this) {
-                override suspend fun loadFromStorage() = loadData()
-            }.startProcessing()
+    protected suspend fun <DataType> observe(loadResource: () -> LiveData<DataType>): ReceiveChannel<DataType> {
+        return CoroutineScope(dispatchers.io).produce {
 
-            while (isActive) { delay(1000) }
+            // Create a channel for receiving resource updates.
+            ResourceChannel(this, loadResource).startProcessing()
+
+            // Loop to keep the producer channel alive, or no more data will be received.
+            while (isActive) delay(1000)
         }
     }
 }

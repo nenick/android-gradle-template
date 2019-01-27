@@ -1,11 +1,8 @@
 package com.template.project.tools
 
-import androidx.arch.core.util.Function
-import androidx.lifecycle.*
-import kotlinx.coroutines.CoroutineDispatcher
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
-import org.androidannotations.api.KotlinOpen
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
@@ -24,9 +21,9 @@ import org.koin.standalone.inject
  */
 abstract class BaseViewModel : ViewModel(), KoinComponent {
 
-    private val background by inject<CoroutineDispatcher>()
+    private val dispatchers by inject<ProjectDispatchers>()
 
     fun async(block: suspend () -> Unit) {
-        CoroutineScope(background).async { block() }
+        CoroutineScope(dispatchers.io).async { block() }
     }
 }

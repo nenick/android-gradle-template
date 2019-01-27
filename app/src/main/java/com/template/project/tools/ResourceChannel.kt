@@ -4,20 +4,36 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ProducerScope
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
+/**
+ * Convenience class for mapping LiveData to a consumable coroutine channel.
+ */
 @ExperimentalCoroutinesApi
-abstract class ResourceChannel<DataType>(
-    private val producerScope: ProducerScope<DataType>
-) {
-    protected abstract suspend fun loadFromStorage(): LiveData<DataType>
+class ResourceChannel<DataType>(
+    private val producerScope: ProducerScope<DataType>,
+    private val loadResource: () -> LiveData<DataType>
+) : KoinComponent {
 
-    private val dataObserver = Observer<DataType> {
+    private val dispatchers by inject<ProjectDispatchers>()
+    private val resourceConsumer = Observer<DataType> { sendToChannel(it) }
+
+    fun startProcessing() {
+        val resource = loadResource()
+
+        mainThread { resource.observeForever(resourceConsumer) }
+
+        producerScope.invokeOnClose {
+            mainThread { resource.removeObserver(resourceConsumer) }
+        }
+    }
+
+    private fun sendToChannel(it: DataType) {
         CoroutineScope(producerScope.coroutineContext).async { producerScope.send(it) }
     }
 
-    suspend fun startProcessing() {
-        val storedData = loadFromStorage()
-        CoroutineScope(Dispatchers.Main).launch { storedData.observeForever(dataObserver) }
-        producerScope.invokeOnClose { storedData.removeObserver(dataObserver) }
+    private fun mainThread(block: () -> Unit) {
+        CoroutineScope(dispatchers.main).launch { block() }
     }
 }

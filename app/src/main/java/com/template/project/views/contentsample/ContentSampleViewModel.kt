@@ -19,13 +19,13 @@ class ContentSampleViewModel : BaseViewModel() {
 
     init {
         async { repository.observeTodoList().consumeEach { todoList.postValue(it) } }
-        refreshTodo()
+        refreshTodo(false)
     }
 
-    fun refreshTodo() {
+    fun refreshTodo(forced: Boolean = true) {
         async {
             todoListIsLoading.postValue(true)
-            repository.fetchTodoList().apply {
+            repository.fetchTodoList(forced).apply {
                 if (!isSuccess) errorChannel.postValue(errorDetail)
             }
             todoListIsLoading.postValue(false)
