@@ -10,4 +10,4 @@
 [![Circle CI](https://img.shields.io/circleci/project/github/nenick/android-gradle-template/rework.svg)](https://circleci.com/gh/nenick/android-gradle-template?branch=rework)
  [![Coverage Status](https://img.shields.io/coveralls/github/nenick/android-gradle-template/rework.svg)](https://coveralls.io/r/nenick/android-gradle-template?branch=rework)
 
-Start now without the time consuming project setup effort and use some modern Android app coding! <br><br>[See "Getting Started" for some hints to use this template.](docs/project-getting-started.md)
+Start now without the time consuming project setup effort and use some modern Android app coding style! <br><br>[See "Getting Started" for some hints.](docs/project-getting-started.md)
