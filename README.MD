@@ -3,8 +3,7 @@
 * Shows an easy and clean architecture.
 * Combines some tools for less coding.
 * Has samples for fast and easy testing.
-
-[See the full feature overview for more information!](docs/project-features.md)
+* [See the full feature overview for more information!](docs/project-features.md)
 
 **Feel free to open an issue for wishes, improvements, questions and discussions.**
 
