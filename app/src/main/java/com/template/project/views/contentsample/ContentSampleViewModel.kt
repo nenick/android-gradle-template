@@ -22,13 +22,11 @@ class ContentSampleViewModel : BaseViewModel() {
         refreshTodo(false)
     }
 
-    fun refreshTodo(forced: Boolean = true) {
-        async {
-            todoListIsLoading.postValue(true)
-            repository.fetchTodoList(forced).apply {
-                if (!isSuccess) errorChannel.postValue(errorDetail)
-            }
-            todoListIsLoading.postValue(false)
+    fun refreshTodo(forced: Boolean = true) = async {
+        todoListIsLoading.postValue(true)
+        repository.fetchTodoList(forced).apply {
+            if (!isSuccess) errorChannel.postValue(errorDetail)
         }
+        todoListIsLoading.postValue(false)
     }
 }
