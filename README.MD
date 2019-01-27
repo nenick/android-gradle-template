@@ -20,6 +20,7 @@ Start now without the time consuming project setup effort!
   * Combine Fragments for on large screens
   * (TODO) HowTo: replace activity result
   * (TODO) HowTo: different navigation graphs
+* Coroutines instead of RX or LiveData from ViewModel to data logic.
 * AndroidAnnotations reduce some ugly boilerplate
 * Dependency injection with Koin
 * Clean architecture structure
