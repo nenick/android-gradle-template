@@ -1,8 +1,8 @@
 # Android - Rapid Test Driven Development
 
-* Combine tools for less coding.
-* Easy and clean architecture for the code.
-* Samples for fast testing different aspects of your code.
+* Shows an easy and clean architecture.
+* Combines some tools for less coding.
+* Has samples for fast and easy testing.
 
 **Feel free to open an issue for wishes, improvements, questions and discussions.**
 
