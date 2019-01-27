@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Download temp Retrofit adjustements
           command: |
-            wget https://github.com/nenick/retrofit/releases/download/2.5.1-coroutines/retrofit-2.5.1-coroutines.jar data-network/libs/
+            wget https://github.com/nenick/retrofit/releases/download/2.5.1-coroutines/retrofit-2.5.1-coroutines.jar -P data-network/libs/
 
       - run:
           name: Build debug APK and test APK
