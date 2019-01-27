@@ -1,204 +1,22 @@
 # Android - Rapid Test Driven Development
 
-* Combine tools for less coding
-* Samples for fast testing different aspects of your code
-* Easy clean architecture your code and packaging
+* Combine tools for less coding.
+* Easy and clean architecture for the code.
+* Samples for fast testing different aspects of your code.
 
 **Feel free to open an issue for wishes, improvements, questions and discussions.**
 
 [![Circle CI](https://img.shields.io/circleci/project/github/nenick/android-gradle-template/rework.svg)](https://circleci.com/gh/nenick/android-gradle-template?branch=rework)
  [![Coverage Status](https://img.shields.io/coveralls/github/nenick/android-gradle-template/rework.svg)](https://coveralls.io/r/nenick/android-gradle-template?branch=rework)
 
-Start now without the time consuming project setup effort!
+Start now without the time consuming project setup effort and modern Android app coding!
 
-* Model-View-ViewModel (MVVM) architecture template
-  * ViewModel (from architecture components) to avoid configuration change issues
-  * LiveData (from architecture components) to avoid view state issues
-  * (TODO) HowTo: create new view
-* Single activity architecture template
-  * Navigation (from architecture components) for proper navigation handling
-  * Combine Fragments for on large screens
-  * (TODO) HowTo: replace activity result
-  * (TODO) HowTo: different navigation graphs
-* Coroutines instead of RX or LiveData from ViewModel to data logic.
-* AndroidAnnotations reduce some ugly boilerplate
-* Dependency injection with Koin
-* Clean architecture structure
-  * View -> ViewModel -> UseCase -> Repository -> local/network Data
-* Local storing with Room
-  * Fast and device independent tests on JVM with Robolectric
-  * (TODO) Prepared scheme migration process
-  * (TODO ??) Pure java library
-* REST communication with Retrofit
-  * Fast and device independent tests on JVM
-  * (TODO ??) Pure java library
-  * (TODO) HowTo: enable build in caching
-* Separated app instrumentation tests
-* Testing with Espresso
-  * Waits automatically until all coroutine tasks are finished to stabilize execution
-  * (TODO) Reset application state between test runs
-  * (TODO) Less test complexity with Espresso Macchiato
-  * (TODO) Permissions interceptor to emulate different grants
-  * (TODO) Reduce common issues with headless emulator testing
-* (TODO) Server Mocking for testing and independent developing! (runs on android environment)
-* (TODO) Full sample: load data through network, cache it at local database, populate list view with stored data
-* Coverage report
-  * Separated reports for each target at each module
-  * Merge reports over all targets and modules
-* (TODO) Logging concept
-  * (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
-  * (TODO) HowTo: use configure the logging
-* (TODO) Preconfigured for CircleCi
-  * Build sources
-  * Run unit tests
-  * Run instrumentation tests with an emulator
-  * Collect test and coverage reports
-  * (TODO) Report coverage to a service
-* (TODO) Integrated quality checks
-  * (TODO) Kotlin code style with Detekt
-  * (TODO) HowTo: integrate Codacy for quality summarize
-* Dynamic property loading
+* Architecture components
+    * ViewModel (MVVM)
+    * Navigation
+* Kotlin coroutines
+* Testing samples
 
-(TODO) choose one style
-* viewmodel.observe*() {} vs viewmodel.livedata.observer() {} vs viewmodel.get*().observer() {} for easy testing
+[See the full feature overview for more information!](docs/project-features.md)
 
-## Notes
-
-### Setup
-
-#### Activate experimental navigation
-
-(TODO)
-```
-File > Settings (Android Studio > Preferences on Mac),
-select the Experimental category in the left pane,
-check Enable Navigation Editor, and then restart Android Studio.
-```
-
-### Single activity architecture
-
-(TODO)
-The official recommended way to implement apps with navigation component.
-
-### Minimum version
-
-(TODO)
-Current we use **Android Version 21** which is enough for 85% of the users and gives some nice defaults.
-Current nothing should really block you to select a lower minimum version.
-
---todo-- advantages of minimum versions
-
-topic / api | ?? | 18 | 21 | 23
----|:-:|:-:|:-:|:-:
-UiAutomator (tests) || available | available | available
-material design ||| default style | default style
-backups |||| automatically
-
-### Dependency Injection
-
-(TODO)
-Most times its enough to use **AndroidAnnotation** instead of more advantage tools like Dagger.
-This library points in simplicity and developing speed.
-
-When necessary, this should be easy replaceable by a more advantage tool.
-
-### Unhandled topics
-
-(TODO)
-* Compile Warning: App is not indexable by Google Search; ...
-* Compile Warning: On SDK version 23 and up, ... adding \`android:fullBackupContent\`
-
-
-### Added libraries
-
-
-(TODO)
-* Kotlin Android Extensions https://kotlinlang.org/docs/tutorials/android-plugin.html
-* AndroidAnnotations https://github.com/androidannotations/androidannotations/wiki
-
-*-- TODO: list all libraries --*
-
-## Work with this template
-
-### Configure your needs
-
-(TODO)
-* remove data-network module when not necessary
-* remove data-local module when not necessary
-* change package and application name
- * TODO: write bash script for it
-
-### Add new view
-
-(TODO)
-* create new Fragment class enhanced with AndroidAnnotation
-* create related ViewModel class
-* tip: now you can start designing with static mock data before implementing a Repository or any UseCases
-
-### Switch start view
-
-(TODO)
-* open src/main/res/navigation/nav_graph_main.xml and switch to design view
-* click "Add destination" and choose the generated enhanced class (*Fragment_)
-* hit "Set Start Destination"
-
-### Espresso tests
-
-(TODO)
-Basically you can write them in every module with each kind of abstraction.
-For database and network operations its rare that you will need a real device for testing.
-Most of the issues will already show up when testing on pure JVM. More independent and faster execution.
-
-For full application integration tests I recommend to use a separated test module.
-And unit tests done with Espresso should stay inside the related modules.
-It's kind of separation by concern and lets you run the tests separately without extra configurations.
-
-### Location of reports
-
-(TODO)
-unit test
-* execution build/reports/tests/testDebugUnitTest/index.html
-* coverage build/reports/jacoco/jacocoUnitTestReport/index.html
-
-instrumentation tests reports
-* execution build/reports/androidTests/connected/index.html
-* coverage build/reports/jacoco/jacocoInstrumentationTestReport/index.html
-
-### Project structure overview
-
-(TODO)
-* app
- * androidTest - Mainly for isolated unit tests when device/emulator is necessary
- * test - Unit tests when possible
- * main - For views, business logic and connecting the data options
-* app-tests
- * main - Full app integration tests with mocked REST API
-
-### Run application and tests
-
-(TODO)
-#### Command Line
-
-#### Android Studio
-
-##### app-tests
-
-You must select a package and run the instrumentation tests, otherwise AndroidStudio think they are pure unit tests.
-Current it's not possible to just select the module or java folder an start run tests.
-
-## For further details
-
-(TODO)
-* Navigation Component https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing
-* Good to know about coroutines https://medium.com/capital-one-tech/kotlin-coroutines-on-android-things-i-wish-i-knew-at-the-beginning-c2f0b1f16cff
-* JaCoCo release notes https://www.jacoco.org/jacoco/trunk/doc/changes.html
-
-### Last tested together with
-
-* Android Studio 3.2.1
-* Java 8
-
-### Getting Started
-
-(TODO)
-Import the project into Android Studio and start developing. For more details see [Getting Started](docs/src/main/resources/getting_started.md)
+[See "Getting Started" some hints to use this template.](docs/project-getting-started.md)
