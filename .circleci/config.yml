@@ -208,7 +208,7 @@ jobs:
 
   app-android-tests:
     docker:
-    - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
+    - image: circleci/android:api-28-alpha
     environment:
       _JAVA_OPTIONS: -Xmx3200m
 
@@ -222,37 +222,30 @@ jobs:
         - v1-jars-{{ checksum "build.gradle" }}
 
     - run:
-        name: Create emulator
-        command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
-        environment:
-          TERM: dumb
-
+        name: Store Google Service Account
+        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
     - run:
-        name: Start emulator
-        command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
-        background: true
-        environment:
-          TERM: dumb
-
-    - run:
-        name: Wait for emulator
-        command: .circleci/android-wait-for-boot.sh
-        environment:
-          TERM: dumb
-
-    - run:
-        name: Remove lock screen
-        command: adb shell input keyevent 82
-        environment:
-          TERM: dumb
-
-    - run:
-        name: Instrumentation testing
+        name: Authorize gcloud and set config defaults
         command: |
-          ./gradlew app:connectedCheck
-          ./gradlew app-tests:connectedCheck
-        environment:
-          TERM: dumb
+          sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+          sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+    - run:
+        name: Test with Firebase Test Lab
+        command: >
+          sudo gcloud firebase test android run \
+            --type instrumentation \
+            --app app/build/outputs/apk/debug/app-debug.apk \
+            --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+            --device model=Pixel2,version=28,locale=en,orientation=portrait \
+            --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec \
+            --directories-to-pull=/sdcard/tmp
+    - run:
+        name: Install gsutil dependency and copy test results data
+        command: |
+          sudo pip install -U crcmod
+          sudo gsutil -m cp -r -U `sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1` ${CIRCLE_ARTIFACTS}/ | true
+
+        #TODO add app-tests run
 
     - run:
         name: Code coverage
