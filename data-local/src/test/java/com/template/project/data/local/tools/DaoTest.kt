@@ -1,6 +1,8 @@
 package com.template.project.data.local.tools
 
+import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -22,7 +24,7 @@ abstract class DaoTest : KoinComponent {
 
     @Before
     fun setupBase() {
-        StandAloneContext.loadKoinModules(dataLocalModule, module { single { RuntimeEnvironment.systemContext } })
+        StandAloneContext.startKoin(listOf(dataLocalModule, module { single { ApplicationProvider.getApplicationContext() as Context} }))
         ignoreMainThread { database.clearAllTables() }
     }
 
