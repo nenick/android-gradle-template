@@ -24,11 +24,6 @@ jobs:
           name: Download Dependencies
           command: ./gradlew androidDependencies
 
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}
-
       - run:
           name: Download temp Retrofit adjustements
           command: |
@@ -39,6 +34,11 @@ jobs:
           command: |
             ./gradlew app:assembleDebug
             ./gradlew app:assembleDebugAndroidTest
+
+      - save_cache:
+          paths:
+          - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}
 
       # cache to share build artifacts with next build steps
       - save_cache:
@@ -59,6 +59,10 @@ jobs:
       - restore_cache:
           keys:
             - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+
+      - restore_cache:
+          keys:
+            - jars-{{ checksum "build.gradle" }}
 
       - run:
           name: Unit tests
