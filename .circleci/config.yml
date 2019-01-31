@@ -337,7 +337,7 @@ workflows:
     - data-local-unit-tests:
         requires:
         - build
-    - data-network-tests:
+    - data-network-unit-tests:
         requires:
         - build
     - app-android-tests:
