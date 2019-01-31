@@ -77,7 +77,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
 
     // - Navigation
-    api "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha11"
+    api "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha7"
 
     // --------------------------------------------------
     // Reduce boilerplate code
