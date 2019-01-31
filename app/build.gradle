@@ -12,6 +12,7 @@ apply from: "$project.rootDir/gradle/jacoco-instrumentation-test-report.gradle"
 
 android {
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "com.template.project"
         minSdkVersion 21
@@ -20,6 +21,7 @@ android {
         versionName "0.0.1"
         testInstrumentationRunner "com.template.project.tools.AndroidJUnitRunnerCustomApplication"
     }
+
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -29,6 +31,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    
     kotlin {
         experimental {
             // Could be removed after Channel support is not anymore experimental.
