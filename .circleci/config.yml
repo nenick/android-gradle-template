@@ -40,6 +40,26 @@ jobs:
             ./gradlew app:assembleDebug
             ./gradlew app:assembleDebugAndroidTest
 
+      # cache to share build artifacts with next build steps
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/workspace
+
+  test:
+    docker:
+      - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
+    environment:
+      _JAVA_OPTIONS: -Xmx3200m
+
+    working_directory: ~/workspace
+
+    steps:
+      # get cached build artifacts
+      - restore_cache:
+          keys:
+            - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+
       - run:
           name: Unit tests
           command: |
