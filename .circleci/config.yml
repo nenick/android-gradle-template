@@ -1,231 +1,244 @@
 version: 2
 jobs:
+
+  ##############################################################################################################
+  ##############################################################################################################
+
   build:
     docker:
-      - image: circleci/android:api-28-alpha
+    - image: circleci/android:api-28-alpha
     working_directory: ~/workspace
 
     steps:
-      - checkout
+    - checkout
 
-      - run:
-         name: Chmod permissions #if exec permission missing
-         command: |
-           sudo chmod +x ./gradlew
-           sudo chmod +x .circleci/android-wait-for-boot.sh
+    - run:
+        name: Chmod permissions #if exec permission missing
+        command: |
+          sudo chmod +x ./gradlew
+          sudo chmod +x .circleci/android-wait-for-boot.sh
 
-      - restore_cache:
-          key: v1-jars-{{ checksum "build.gradle" }}
+    - restore_cache:
+        key: v1-jars-{{ checksum "build.gradle" }}
 
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
+    - run:
+        name: Download Dependencies
+        command: ./gradlew androidDependencies
 
-      - run:
-          name: Download temp Retrofit adjustements
-          command: |
-            wget https://github.com/nenick/retrofit/releases/download/2.5.1-coroutines/retrofit-2.5.1-coroutines.jar -P data-network/libs/
+    - run:
+        name: Download temp Retrofit adjustements
+        command: |
+          wget https://github.com/nenick/retrofit/releases/download/2.5.1-coroutines/retrofit-2.5.1-coroutines.jar -P data-network/libs/
 
-      - run:
-          name: Build debug APK and test APK
-          command: |
-            ./gradlew app:assembleDebug
-            ./gradlew app:assembleDebugAndroidTest
+    - run:
+        name: Build debug APK and test APK
+        command: |
+          ./gradlew app:assembleDebug
+          ./gradlew app:assembleDebugAndroidTest
 
-      - save_cache:
-          paths:
-          - ~/.gradle
-          key: v1-jars-{{ checksum "build.gradle" }}
+    - save_cache:
+        paths:
+        - ~/.gradle
+        key: v1-jars-{{ checksum "build.gradle" }}
 
-      # cache workspace to share build artifacts with next steps
-      - save_cache:
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/workspace
+    # cache workspace to share build artifacts with next steps
+    - save_cache:
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+        - ~/workspace
+
+  ##############################################################################################################
+  ##############################################################################################################
 
   app-unit-tests:
     docker:
-      - image: circleci/android:api-28-alpha
+    - image: circleci/android:api-28-alpha
     working_directory: ~/workspace
 
     steps:
-      # get cached build artifacts and dependencies
-      - restore_cache:
-          keys:
-          - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          - v1-jars-{{ checksum "build.gradle" }}
+    # get cached build artifacts and dependencies
+    - restore_cache:
+        keys:
+        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+        - v1-jars-{{ checksum "build.gradle" }}
 
-      - run:
-          name: Unit tests
-          command: ./gradlew app:testDebugUnitTest
+    - run:
+        name: Unit tests
+        command: ./gradlew app:testDebugUnitTest
 
-      - run:
-          name: Code coverage
-          command: ./gradlew app:jacocoUnitTestReport
+    - run:
+        name: Code coverage
+        command: ./gradlew app:jacocoUnitTestReport
 
-      - run:
-          name: Lint checks
-          command: ./gradlew app:lintDebug
+    - run:
+        name: Lint checks
+        command: ./gradlew app:lintDebug
 
-      # store test result for CircleCi to show test statistics
-      - store_test_results:
-          path: app/build/test-results/testDebugUnitTest
+    # store test result for CircleCi to show test statistics
+    - store_test_results:
+        path: app/build/test-results/testDebugUnitTest
 
-      # store test result to watch it later
-      - store_artifacts:
-          path: app/build/reports/tests/testDebugUnitTest
-          destination: app/unit-tests
+    # store test result to watch it later
+    - store_artifacts:
+        path: app/build/reports/tests/testDebugUnitTest
+        destination: app/unit-tests
 
-      # store test coverage to watch it later
-      - store_artifacts:
-          path: app/build/reports/jacoco/jacocoUnitTestReport/html
-          destination: app/unit-tests-coverage
+    # store test coverage to watch it later
+    - store_artifacts:
+        path: app/build/reports/jacoco/jacocoUnitTestReport/html
+        destination: app/unit-tests-coverage
 
-      # store lint report to watch it later
-      - store_artifacts:
-          path: app/build/reports/lint-results-debug.html
-          destination: app/lint-checks/lint-results-debug.html
+    # store lint report to watch it later
+    - store_artifacts:
+        path: app/build/reports/lint-results-debug.html
+        destination: app/lint-checks/lint-results-debug.html
 
-      # cache unit test coverage to share it with next build steps
-      - save_cache:
-          key: v1-app-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - app/build/jacoco
+    # cache unit test coverage to share it with next build steps
+    - save_cache:
+        key: v1-app-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+        - app/build/jacoco
+
+  ##############################################################################################################
+  ##############################################################################################################
 
   test:
     docker:
-      - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
+    - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
     environment:
       _JAVA_OPTIONS: -Xmx3200m
 
     working_directory: /home/circleci/workspace
 
     steps:
-      # get cached build artifacts and dependencies
-      - restore_cache:
-          keys:
-          - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          - v1-jars-{{ checksum "build.gradle" }}
+    # get cached build artifacts and dependencies
+    - restore_cache:
+        keys:
+        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+        - v1-jars-{{ checksum "build.gradle" }}
 
-      - run:
-          name: Unit tests
-          command: |
-            ./gradlew app:testDebugUnitTest
-            ./gradlew data-network:testDebugUnitTest
-            ./gradlew data-local:testDebugUnitTest
+    - run:
+        name: Unit tests
+        command: |
+          ./gradlew app:testDebugUnitTest
+          ./gradlew data-network:testDebugUnitTest
+          ./gradlew data-local:testDebugUnitTest
 
-      - run:
-          name: Lint checks
-          command: |
-            ./gradlew app:lintDebug
-            ./gradlew data-local:lintDebug
-            ./gradlew data-network:lintDebug
+    - run:
+        name: Lint checks
+        command: |
+          ./gradlew app:lintDebug
+          ./gradlew data-local:lintDebug
+          ./gradlew data-network:lintDebug
 
-      - run:
-          name: Create emulator
-          command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
-          environment:
-            TERM: dumb
+    - run:
+        name: Create emulator
+        command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
+        environment:
+          TERM: dumb
 
-      - run:
-          name: Start emulator
-          command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
-          background: true
-          environment:
-            TERM: dumb
+    - run:
+        name: Start emulator
+        command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
+        background: true
+        environment:
+          TERM: dumb
 
-      - run:
-          name: Wait for emulator
-          command: .circleci/android-wait-for-boot.sh
-          environment:
-            TERM: dumb
+    - run:
+        name: Wait for emulator
+        command: .circleci/android-wait-for-boot.sh
+        environment:
+          TERM: dumb
 
-      - run:
-          name: Remove lock screen
-          command: adb shell input keyevent 82
-          environment:
-            TERM: dumb
+    - run:
+        name: Remove lock screen
+        command: adb shell input keyevent 82
+        environment:
+          TERM: dumb
 
-      - run:
-          name: Instrumentation testing
-          command: |
-            ./gradlew app:connectedCheck
-            ./gradlew app-tests:connectedCheck
-          environment:
-            TERM: dumb
+    - run:
+        name: Instrumentation testing
+        command: |
+          ./gradlew app:connectedCheck
+          ./gradlew app-tests:connectedCheck
+        environment:
+          TERM: dumb
 
-      - run:
-          name: Code coverage
-          command: |
-            ./gradlew app:jacocoUnitTestReport
-            ./gradlew app:jacocoInstrumentationTestReport
-            ./gradlew app-tests:jacocoInstrumentationTestReport
-            ./gradlew data-local:jacocoUnitTestReport
-            ./gradlew data-network:jacocoUnitTestReport
-            ./gradlew jacocoMergedTestReport
+    - run:
+        name: Code coverage
+        command: |
+          ./gradlew app:jacocoUnitTestReport
+          ./gradlew app:jacocoInstrumentationTestReport
+          ./gradlew app-tests:jacocoInstrumentationTestReport
+          ./gradlew data-local:jacocoUnitTestReport
+          ./gradlew data-network:jacocoUnitTestReport
+          ./gradlew jacocoMergedTestReport
 
-      - run:
-          name: Code coverage report at codacy
-          command: |
-            wget https://github.com/nenick/codacy-coverage-reporter/releases/download/4.1.0-alpha/codacy-coverage-reporter-assembly-4.1.0-alpha.jar
-            java -jar codacy-coverage-reporter-assembly-4.1.0-alpha.jar report -l Kotlin -r build/reports/jacoco/jacocoMergedTestReport/jacocoMergedTestReport.xml --multi-module app/src/main/java,data-local/src/main/java,data-network/src/main/java
+    - run:
+        name: Code coverage report at codacy
+        command: |
+          wget https://github.com/nenick/codacy-coverage-reporter/releases/download/4.1.0-alpha/codacy-coverage-reporter-assembly-4.1.0-alpha.jar
+          java -jar codacy-coverage-reporter-assembly-4.1.0-alpha.jar report -l Kotlin -r build/reports/jacoco/jacocoMergedTestReport/jacocoMergedTestReport.xml --multi-module app/src/main/java,data-local/src/main/java,data-network/src/main/java
 
-      - store_artifacts:
-          path: app/build/reports/tests/testDebugUnitTest
-          destination: app/unit-tests
-      - store_artifacts:
-          path: app/build/reports/jacoco/jacocoUnitTestReport
-          destination: app/unit-tests-coverage
-      - store_test_results:
-          path: app/build/test-results/testDebugUnitTest
-      - store_artifacts:
-          path: app/build/reports/androidTests/connected
-          destination: app/instrumentation-tests
-      - store_artifacts:
-          path: app/build/reports/jacoco/jacocoInstrumentationTestReport/html
-          destination: app/instrumentation-tests-coverage
-      - store_artifacts:
-          path: app/build/reports/lint-results-debug.html
-          destination: app/lint-checks/lint-results-debug.html
-      - store_test_results:
-          path: app/build/outputs/androidTest-results/connected
+    - store_artifacts:
+        path: app/build/reports/tests/testDebugUnitTest
+        destination: app/unit-tests
+    - store_artifacts:
+        path: app/build/reports/jacoco/jacocoUnitTestReport
+        destination: app/unit-tests-coverage
+    - store_test_results:
+        path: app/build/test-results/testDebugUnitTest
+    - store_artifacts:
+        path: app/build/reports/androidTests/connected
+        destination: app/instrumentation-tests
+    - store_artifacts:
+        path: app/build/reports/jacoco/jacocoInstrumentationTestReport/html
+        destination: app/instrumentation-tests-coverage
+    - store_artifacts:
+        path: app/build/reports/lint-results-debug.html
+        destination: app/lint-checks/lint-results-debug.html
+    - store_test_results:
+        path: app/build/outputs/androidTest-results/connected
 
-      - store_artifacts:
-          path: app-tests/build/reports/androidTests/connected
-          destination: app-tests/instrumentation-tests
-      - store_artifacts:
-          path: app-tests/build/reports/jacoco/jacocoInstrumentationTestReport/html
-          destination: app-tests/instrumentation-tests-coverage
-      - store_test_results:
-          path: app-tests/build/outputs/androidTest-results/connected
+    - store_artifacts:
+        path: app-tests/build/reports/androidTests/connected
+        destination: app-tests/instrumentation-tests
+    - store_artifacts:
+        path: app-tests/build/reports/jacoco/jacocoInstrumentationTestReport/html
+        destination: app-tests/instrumentation-tests-coverage
+    - store_test_results:
+        path: app-tests/build/outputs/androidTest-results/connected
 
-      - store_artifacts:
-          path: data-local/build/reports/tests/testDebugUnitTest
-          destination: data-local/unit-tests
-      - store_artifacts:
-          path: data-local/build/reports/jacoco/jacocoUnitTestReport
-          destination: data-local/unit-tests-coverage
-      - store_artifacts:
-          path: data-local/build/reports/lint-results-debug.html
-          destination: data-local/lint-checks/lint-results-debug.html
-      - store_test_results:
-          path: data-local/build/test-results/testDebugUnitTest
+    - store_artifacts:
+        path: data-local/build/reports/tests/testDebugUnitTest
+        destination: data-local/unit-tests
+    - store_artifacts:
+        path: data-local/build/reports/jacoco/jacocoUnitTestReport
+        destination: data-local/unit-tests-coverage
+    - store_artifacts:
+        path: data-local/build/reports/lint-results-debug.html
+        destination: data-local/lint-checks/lint-results-debug.html
+    - store_test_results:
+        path: data-local/build/test-results/testDebugUnitTest
 
-      - store_artifacts:
-          path: data-network/build/reports/tests/testDebugUnitTest
-          destination: data-network/unit-tests
-      - store_artifacts:
-          path: data-network/build/reports/jacoco/jacocoUnitTestReport
-          destination: data-network/unit-tests-coverage
-      - store_artifacts:
-          path: data-network/build/reports/lint-results-debug.html
-          destination: data-network/lint-checks/lint-results-debug.html
-      - store_test_results:
-          path: data-network/build/test-results/testDebugUnitTest
+    - store_artifacts:
+        path: data-network/build/reports/tests/testDebugUnitTest
+        destination: data-network/unit-tests
+    - store_artifacts:
+        path: data-network/build/reports/jacoco/jacocoUnitTestReport
+        destination: data-network/unit-tests-coverage
+    - store_artifacts:
+        path: data-network/build/reports/lint-results-debug.html
+        destination: data-network/lint-checks/lint-results-debug.html
+    - store_test_results:
+        path: data-network/build/test-results/testDebugUnitTest
 
-      - store_artifacts:
-          path: build/reports/jacoco/jacocoMergedTestReport/html
-          destination: merged-tests-coverage
+    - store_artifacts:
+        path: build/reports/jacoco/jacocoMergedTestReport/html
+        destination: merged-tests-coverage
+
+  ##############################################################################################################
+  ##############################################################################################################
 
   test-coverage-report:
     docker:
@@ -233,37 +246,39 @@ jobs:
     working_directory: ~/workspace
 
     steps:
-      # get cached build artifacts and dependencies
-      - restore_cache:
-          keys:
-          - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          - v1-jars-{{ checksum "build.gradle" }}
-          - v1-app-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
+    # get cached build artifacts and dependencies
+    - restore_cache:
+        keys:
+        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+        - v1-jars-{{ checksum "build.gradle" }}
+        - v1-app-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
 
-      - run:
-          name: Code coverage
-          command: |
-            ./gradlew jacocoMergedTestReport
+    - run:
+        name: Code coverage
+        command: |
+          ./gradlew jacocoMergedTestReport
 
-      - run:
-          name: Code coverage report at codacy
-          command: |
-            wget https://github.com/nenick/codacy-coverage-reporter/releases/download/4.1.0-alpha/codacy-coverage-reporter-assembly-4.1.0-alpha.jar
-            java -jar codacy-coverage-reporter-assembly-4.1.0-alpha.jar report -l Kotlin -r build/reports/jacoco/jacocoMergedTestReport/jacocoMergedTestReport.xml --multi-module app/src/main/java,data-local/src/main/java,data-network/src/main/java
+    - run:
+        name: Code coverage report at codacy
+        command: |
+          wget https://github.com/nenick/codacy-coverage-reporter/releases/download/4.1.0-alpha/codacy-coverage-reporter-assembly-4.1.0-alpha.jar
+          java -jar codacy-coverage-reporter-assembly-4.1.0-alpha.jar report -l Kotlin -r build/reports/jacoco/jacocoMergedTestReport/jacocoMergedTestReport.xml --multi-module app/src/main/java,data-local/src/main/java,data-network/src/main/java
 
+  ##############################################################################################################
+  ##############################################################################################################
 
 workflows:
   version: 2
   build-and-test:
     jobs:
-      - build
-      - app-unit-tests:
-          requires:
-            - build
-      - test:
-          requires:
-            - build
-      - test-coverage-report:
-          requires:
-            - app-unit-tests
-            - test
+    - build
+    - app-unit-tests:
+        requires:
+        - build
+    - test:
+        requires:
+        - build
+    - test-coverage-report:
+        requires:
+        - app-unit-tests
+        - test
