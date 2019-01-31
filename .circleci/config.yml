@@ -46,6 +46,24 @@ jobs:
           paths:
             - ~/workspace
 
+  app-unit-tests:
+    docker:
+      - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
+
+    working_directory: ~/workspace
+
+    steps:
+      # get cached build artifacts
+      - restore_cache:
+          keys:
+          - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          - jars-{{ checksum "build.gradle" }}
+
+      - run:
+          name: Unit tests
+          command: ./gradlew app:testDebugUnitTest
+
+
   test:
     docker:
       - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
@@ -189,6 +207,9 @@ workflows:
   build-and-test:
     jobs:
       - build
+      - app-unit-tests:
+          requires:
+            - build
       - test:
           requires:
             - build
