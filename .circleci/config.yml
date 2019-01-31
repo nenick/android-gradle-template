@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
+      - image: circleci/android:api-28-alpha
     working_directory: ~/workspace
 
     steps:
@@ -45,20 +45,15 @@ jobs:
 
   app-unit-tests:
     docker:
-      - image: bitriseio/docker-android:v2018_11_11-10_19-b1334
+      - image: circleci/android:api-28-alpha
     working_directory: ~/workspace
 
     steps:
-      # get cached build artifacts
+      # get cached build artifacts and dependencies
       - restore_cache:
           keys:
           - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           - v1-jars-{{ checksum "build.gradle" }}
-
-      # get cached dependencies
-      - restore_cache:
-          keys:
-          - jars-{{ checksum "build.gradle" }}
 
       - run:
           name: Unit tests
