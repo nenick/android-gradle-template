@@ -16,6 +16,7 @@ class SimpleSampleFragment : BaseFragment() {
     @AfterViews
     fun connectViewModel() {
         observeTwoWay(model.textInput, textInput)
+        observe(model.textInput) { textView.text = it }
     }
 
     @Click(R.id.btn_next)

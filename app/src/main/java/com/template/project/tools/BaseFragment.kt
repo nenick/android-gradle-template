@@ -29,11 +29,19 @@ abstract class BaseFragment : Fragment() {
 
         // update LiveData
         view.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) { /* no need */ }
+            override fun afterTextChanged(s: Editable?) { /* no need */
+            }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (data.value != s.toString() /* avoid loops */) data.value = s.toString()
             }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { /* no need */ }
         })
+    }
+
+    protected fun <T> observe(data: MutableLiveData<T>, block: (result: T) -> Unit) {
+        data.observe(this, Observer { block(it) })
     }
 }
