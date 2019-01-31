@@ -65,11 +65,6 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.0.0"
 
     // --------------------------------------------------
-    // legacy support
-    // **until all libraries ported to androidx (e.g. navigation component)**
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
-
-    // --------------------------------------------------
     // Code architecture
     //
     // - LiveData

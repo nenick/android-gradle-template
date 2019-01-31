@@ -12,7 +12,7 @@ import org.junit.Test
 
 class ContentSampleTest : AppTest() {
 
-    private val todoItemFromServer = "delectus aut autem modified"
+    private val todoItemFromServer = "delectus aut autem"
 
     @Test
     fun showsTodosFromServer() {
