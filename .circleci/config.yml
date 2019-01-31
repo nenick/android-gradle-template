@@ -347,5 +347,5 @@ workflows:
         requires:
         - app-unit-tests
         - data-local-unit-tests
-        - data-network-tests
+        - data-network-unit-tests
         - app-android-tests
