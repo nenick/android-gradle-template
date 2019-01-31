@@ -20,9 +20,10 @@ import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import androidx.test.uiautomator.UiObjectNotFoundException
 import androidx.test.uiautomator.UiObject
+import org.junit.Ignore
 
 
-
+@Ignore
 class SimpleSampleFragmentTest : FragmentTest() {
 
     private val viewModelMock = mock<SimpleSampleViewModel>()
