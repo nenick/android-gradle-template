@@ -248,7 +248,7 @@ jobs:
         name: Install gsutil dependency and copy test results data
         command: |
           sudo pip install -U crcmod
-          sudo gsutil -m cp -r -U `sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1`*" firebase/
+          sudo gsutil -m cp -r -U "`sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1`*" firebase/
 
         #TODO add app-tests run
 
