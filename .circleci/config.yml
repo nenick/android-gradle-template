@@ -13,11 +13,11 @@ jobs:
     steps:
     - checkout
 
+    # fix if exec permission is missing
     - run:
-        name: Chmod permissions #if exec permission missing
+        name: Chmod permissions
         command: |
           sudo chmod +x ./gradlew
-          sudo chmod +x .circleci/android-wait-for-boot.sh
 
     - restore_cache:
         key: v1-jars-{{ checksum "build.gradle" }}
