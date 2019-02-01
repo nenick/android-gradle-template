@@ -1,0 +1,9 @@
+plugins {
+    // Support to run npm based tools for code quality checks.
+    // - remark-lint
+    id "com.moowork.node" version "1.2.0"
+}
+
+task markdownStyleCheck(type: NpmTask) {
+    npmCommand 'run', 'lint-md'
+}

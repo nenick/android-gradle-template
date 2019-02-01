@@ -1,0 +1,17 @@
+{
+  "name": "node-tools",
+  "version": "0.0.1",
+  "devDependencies": {
+    "remark-lint": "6.0.4",
+    "remark-cli": "6.0.1",
+    "remark-preset-lint-recommended": "3.0.2"
+  },
+  "scripts": {
+    "lint-md": "remark --rc-path package.json .."
+  },
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-lint-recommended"
+    ]
+  }
+}
