@@ -37,16 +37,10 @@
 * (TODO) Logging concept
   * (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
   * (TODO) HowTo: use configure the logging
-* (TODO) Preconfigured for CircleCi
-  * Build sources
-  * Run unit tests
-  * Run instrumentation tests with an emulator
-  * Collect test and coverage reports
-  * (TODO) Report coverage to a service
-* (TODO) Integrated quality checks
-  * (TODO) Kotlin code style with Detekt
-  * (TODO) HowTo: integrate Codacy for quality summarize
+* Preconfigured for CircleCi and Codacy
+  * Workflow for parallelizing
+  * Run instrumentation tests with Firebase TestLab
+  * Merged Coverage Report
+  * Static code analysis
+  * (TODO) use project files for quality tools settings
 * Dynamic property loading
-
-(TODO) choose one style
-* viewmodel.observe*() {} vs viewmodel.livedata.observer() {} vs viewmodel.get*().observer() {} for easy testing
