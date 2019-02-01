@@ -2,6 +2,7 @@ version: 2
 jobs:
 
   ##############################################################################################################
+  # Build project code
   ##############################################################################################################
 
   build:
@@ -48,6 +49,7 @@ jobs:
         - ~/workspace
 
   ##############################################################################################################
+  # App module unit tests and code checks
   ##############################################################################################################
 
   app-unit-tests:
@@ -58,9 +60,9 @@ jobs:
     steps:
     # get cached build artifacts and dependencies
     - restore_cache:
-        keys:
-        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-        - v1-jars-{{ checksum "build.gradle" }}
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-jars-{{ checksum "build.gradle" }}
 
     - run:
         name: Unit tests
@@ -100,6 +102,7 @@ jobs:
         - app/build/jacoco
 
   ##############################################################################################################
+  # Data local module unit tests and code checks
   ##############################################################################################################
 
   data-local-unit-tests:
@@ -110,9 +113,9 @@ jobs:
     steps:
     # get cached build artifacts and dependencies
     - restore_cache:
-        keys:
-        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-        - v1-jars-{{ checksum "build.gradle" }}
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-jars-{{ checksum "build.gradle" }}
 
     - run:
         name: Unit tests
@@ -152,6 +155,7 @@ jobs:
         - data-local/build/jacoco
 
   ##############################################################################################################
+  # Data network module unit tests and code checks
   ##############################################################################################################
 
   data-network-unit-tests:
@@ -162,9 +166,9 @@ jobs:
     steps:
     # get cached build artifacts and dependencies
     - restore_cache:
-        keys:
-        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-        - v1-jars-{{ checksum "build.gradle" }}
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-jars-{{ checksum "build.gradle" }}
 
     - run:
         name: Unit tests
@@ -204,6 +208,7 @@ jobs:
         - data-network/build/jacoco
 
   ##############################################################################################################
+  # App android tests
   ##############################################################################################################
 
   app-android-tests:
@@ -217,9 +222,9 @@ jobs:
     steps:
     # get cached build artifacts and dependencies
     - restore_cache:
-        keys:
-        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-        - v1-jars-{{ checksum "build.gradle" }}
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-jars-{{ checksum "build.gradle" }}
 
     - run:
         name: Store Google Service Account
@@ -282,6 +287,7 @@ jobs:
         - app-tests/build/outputs/code-coverage/connected
 
   ##############################################################################################################
+  # Merged coverage report
   ##############################################################################################################
 
   test-coverage-report:
@@ -292,13 +298,19 @@ jobs:
     steps:
     # get cached build artifacts and dependencies
     - restore_cache:
-        keys:
-        - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-        - v1-jars-{{ checksum "build.gradle" }}
-        - v1-app-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
-        - v1-app-android-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
-        - v1-dats-local-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
-        - v1-data-remote-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-jars-{{ checksum "build.gradle" }}
+
+    # get cached coverage data
+    - restore_cache:
+        key: v1-app-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-app-android-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-dats-local-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-data-remote-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
 
     - run:
         name: Code coverage
@@ -317,6 +329,7 @@ jobs:
 
 
   ##############################################################################################################
+  # Workflow orchestration
   ##############################################################################################################
 
 workflows:
