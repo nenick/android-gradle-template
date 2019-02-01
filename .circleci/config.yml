@@ -245,6 +245,9 @@ jobs:
             --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec \
             --directories-to-pull=/sdcard/tmp
     - run:
+        name: Create directory to store test results
+        command: mkdir firebase
+    - run:
         name: Install gsutil dependency and copy test results data
         command: |
           sudo pip install -U crcmod
