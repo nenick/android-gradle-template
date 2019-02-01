@@ -9,6 +9,7 @@
 
 [![CircleCI](https://img.shields.io/circleci/project/github/nenick/android-gradle-template/rework.svg)](https://circleci.com/gh/nenick/android-gradle-template?branch=rework)
  [![CircleCI](https://circleci.com/gh/nenick/android-gradle-template/tree/rework.svg?style=svg)](https://circleci.com/gh/nenick/android-gradle-template/tree/rework)
- [![Coverage Status](https://img.shields.io/coveralls/github/nenick/android-gradle-template/rework.svg)](https://coveralls.io/r/nenick/android-gradle-template?branch=rework)
+ [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d87e815ffe96434ebedff9ee51606c82?branch=rework)](https://www.codacy.com/app/nico_kuechler/android-gradle-template?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nenick/android-gradle-template&amp;utm_campaign=Badge_Grade)
+ [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/d87e815ffe96434ebedff9ee51606c82?branch=rework)](https://www.codacy.com/app/nico_kuechler/android-gradle-template?utm_source=github.com&utm_medium=referral&utm_content=nenick/android-gradle-template&utm_campaign=Badge_Coverage)
 
 Start now without the time consuming project setup effort and use some modern Android app coding style! <br><br>[See "Getting Started" for some hints.](docs/project-getting-started.md)
