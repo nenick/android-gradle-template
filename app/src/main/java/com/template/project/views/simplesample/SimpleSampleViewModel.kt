@@ -3,7 +3,7 @@ package com.template.project.views.simplesample
 import androidx.lifecycle.MutableLiveData
 import com.template.project.tools.BaseViewModel
 
-class SimpleSampleViewModel : BaseViewModel() {
+open class SimpleSampleViewModel : BaseViewModel() {
 
-    val textInput = MutableLiveData<String>()
+    open val textInput = MutableLiveData<String>()
 }
