@@ -9,6 +9,7 @@ Just a few steps for free stable emulators with Firebase TestLab.
 * Create a project https://console.firebase.google.com/u/1/
 * Enable the **Google Cloud Testing API** and the **Cloud Tool Results API** by typing their names into the search box at the top of the console and clicking Enable API. https://console.developers.google.com/apis/library
 * Create a service account by following Steps 1-3 of [Google’s instructions](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account). Remember to download the JSON-formatted key file.
+  * Hint: Click on "All" and select your project
 
 ## CircleCi project environment variables
 
