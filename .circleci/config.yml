@@ -248,7 +248,7 @@ jobs:
         name: Install gsutil dependency and copy test results data
         command: |
           sudo pip install -U crcmod
-          sudo gsutil -m cp -r -U `sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1` ${CIRCLE_ARTIFACTS}/ | true
+          sudo gsutil -m cp -r -U `sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1` firebase
 
         #TODO add app-tests run
 
@@ -257,6 +257,10 @@ jobs:
         command: |
           ./gradlew app:jacocoInstrumentationTestReport
           ./gradlew app-tests:jacocoInstrumentationTestReport
+
+    - store_artifacts:
+        path: firebase/
+        destination: /firebase/
 
     - store_artifacts:
         path: app/build/reports/androidTests/connected
