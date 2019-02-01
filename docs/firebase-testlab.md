@@ -31,6 +31,12 @@ Use this identifiers https://cloud.google.com/compute/docs/regions-zones/
 It's tricky. First run a manuel test by uploading your apk to Firebase TestLab.
 Equal whether tests are success or not, open the test results "VIEW SOURCE FILES" and use the `test-lab-*` part from the URL.
 
+## Cleanup firebase test result storage
+
+The CircleCi script tries to downloads the latest test results but the latest is determined on datetime in directory name.
+This strategy has a conflict with the manuel executed test runs which is listed as latest.
+Delete this folders without timestamps to have related test results. https://console.cloud.google.com/storage/browser/test-lab-YOUR-STORAGE
+
 ## More details
 
 * https://medium.com/@ayltai/all-you-need-to-know-about-circleci-2-0-with-firebase-test-lab-2a66785ff3c2

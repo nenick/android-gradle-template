@@ -242,8 +242,8 @@ jobs:
             --app app/build/outputs/apk/debug/app-debug.apk \
             --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
             --device model=Pixel2,version=28,locale=en,orientation=portrait \
-            --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec \
-            --directories-to-pull=/sdcard/tmp
+            --environment-variables coverage=true,coverageFile=/sdcard/coverage.ec \
+            --directories-to-pull=/sdcard
     - run:
         name: Create directory to store test results
         command: mkdir firebase
@@ -251,7 +251,7 @@ jobs:
         name: Install gsutil dependency and copy test results data
         command: |
           sudo pip install -U crcmod
-          sudo gsutil -m cp -r -U "`sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1`**/*" firebase/
+          sudo gsutil -m cp -r -U "`sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1`*" firebase/
 
         #TODO add app-tests run
 
