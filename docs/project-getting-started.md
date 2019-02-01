@@ -37,22 +37,22 @@ backups |||| automatically
 
 (TODO)
 unit test
-* execution build/reports/tests/testDebugUnitTest/index.html
-* coverage build/reports/jacoco/jacocoUnitTestReport/index.html
+*   execution build/reports/tests/testDebugUnitTest/index.html
+*   coverage build/reports/jacoco/jacocoUnitTestReport/index.html
 
 instrumentation tests reports
-* execution build/reports/androidTests/connected/index.html
-* coverage build/reports/jacoco/jacocoInstrumentationTestReport/index.html
+*   execution build/reports/androidTests/connected/index.html
+*   coverage build/reports/jacoco/jacocoInstrumentationTestReport/index.html
 
 ### Project structure overview
 
 (TODO)
-* app
- * androidTest - Mainly for isolated unit tests when device/emulator is necessary
- * test - Unit tests when possible
- * main - For views, business logic and connecting the data options
-* app-tests
- * main - Full app integration tests with mocked REST API
+*   app
+    *   androidTest - Mainly for isolated unit tests when device/emulator is necessary
+    *   test - Unit tests when possible
+    *   main - For views, business logic and connecting the data options
+*   app-tests
+    *   main - Full app integration tests with mocked REST API
 
 ### Run application and tests
 
@@ -71,24 +71,24 @@ Current it's not possible to just select the module or java folder an start run 
 ### Configure your needs
 
 (TODO)
-* remove data-network module when not necessary
-* remove data-local module when not necessary
-* change package and application name
- * TODO: write bash script for it
+*   remove data-network module when not necessary
+*   remove data-local module when not necessary
+*   change package and application name
+    *   TODO: write bash script for it
 
 ### Add new view
 
 (TODO)
-* create new Fragment class enhanced with AndroidAnnotation
-* create related ViewModel class
-* tip: now you can start designing with static mock data before implementing a Repository or any UseCases
+*   create new Fragment class enhanced with AndroidAnnotation
+*   create related ViewModel class
+*   tip: now you can start designing with static mock data before implementing a Repository or any UseCases
 
 ### Switch start view
 
 (TODO)
-* open src/main/res/navigation/nav_graph_main.xml and switch to design view
-* click "Add destination" and choose the generated enhanced class (*Fragment_)
-* hit "Set Start Destination"
+*   open src/main/res/navigation/nav_graph_main.xml and switch to design view
+*   click "Add destination" and choose the generated enhanced class (*Fragment_)
+*   hit "Set Start Destination"
 
 ### Espresso tests
 

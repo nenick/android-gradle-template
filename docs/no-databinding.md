@@ -15,9 +15,9 @@ It comes the time when compilation will fail and you must find the error.
 
 The missing part is printed but not easy to find.
 
-* no jump location info where it is missing or you could fix it
-* miss leading jump location a general generated `DataBindingMapper` class
-* wrong line info (prints linenumber above the real issue) for XML file
+*   no jump location info where it is missing or you could fix it
+*   miss leading jump location a general generated `DataBindingMapper` class
+*   wrong line info (prints linenumber above the real issue) for XML file
 
 ```
 * What went wrong:
@@ -40,8 +40,8 @@ How would you solve it when your view wants to show a Dialog (e.g. DatePicker)?
 
 ### Pure ViewModel binding solution:
 
-* XML observes ViewModels LiveData
-* Fragment observes ViewModels LiveData
+*   XML observes ViewModels LiveData
+*   Fragment observes ViewModels LiveData
 
 ```
 Click on date text
@@ -57,8 +57,8 @@ I guess you will agree that the view details shouldn't bother the ViewModel and 
 
 ### Binding with ViewModel und Fragment
 
-* XML observes ViewModels LiveData
-* Fragment observes ViewModels LiveData
+*   XML observes ViewModels LiveData
+*   Fragment observes ViewModels LiveData
 
 ```
 Click on date text
@@ -71,13 +71,13 @@ Click on date text
 
 Still a mix up of responsibilities
 
-* who will observe this LiveData?
-* who will update this LiveData?
-* who must be called (ViewModel/Fragment)?
+*   who will observe this LiveData?
+*   who will update this LiveData?
+*   who must be called (ViewModel/Fragment)?
 
 ### Without data binding
 
-* Fragment observes ViewModels LiveData and updates View components
+*   Fragment observes ViewModels LiveData and updates View components
 
 ```
 Click on date text

@@ -1,9 +1,10 @@
 # Android - rapid test driven development
 
-* Shows an easy and clean architecture.
-* Combines some tools for less coding.
-* Has samples for fast and easy testing.
-* [See the full feature overview for more!](docs/project-features.md)
+*   Shows an easy and clean architecture.
+*   Combines some tools for less coding.
+*   Has samples for fast and easy testing.
+*   Prepared tools for code quality checks.
+*   [See the full feature overview for more!](docs/project-features.md)
 
 **Feel free to open an issue for wishes, improvements, questions and discussions.**
 

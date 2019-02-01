@@ -10,8 +10,8 @@ This resource implementation always follow this logic:
 
 But what when you want to
 
-* just call a remote resource and perform action based on it?
-* just read local data and perform action based on it?
+*   just call a remote resource and perform action based on it?
+*   just read local data and perform action based on it?
 
 Instead of just doing it, you will implement workarounds, use complex async tools and must think about how it must be done.
 
