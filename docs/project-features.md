@@ -1,5 +1,7 @@
 # Project Features
 
+### Architecture
+
 *   Model-View-ViewModel (MVVM) architecture template
     *   ViewModel (from architecture components) to avoid configuration change issues
     *   LiveData (from architecture components) to avoid view state issues
@@ -10,10 +12,13 @@
     *   (TODO) HowTo: replace activity result
     *   (TODO) HowTo: different navigation graphs
 *   Coroutines instead of RX or LiveData from ViewModel to data logic.
-*   AndroidAnnotations reduce some ugly boilerplate
-*   Dependency injection with Koin
 *   Clean architecture structure
     *   View -> ViewModel -> UseCase -> Repository -> local/network Data
+
+### Tools
+
+*   AndroidAnnotations reduce some ugly boilerplate
+*   Dependency injection with Koin
 *   Local storing with Room
     *   Fast and device independent tests on JVM with Robolectric
     *   (TODO) Prepared scheme migration process
@@ -22,6 +27,13 @@
     *   Fast and device independent tests on JVM
     *   (TODO ??) Pure java library
     *   (TODO) HowTo: enable build in caching
+*   Dynamic property loading
+*   (TODO) Logging concept
+    *   (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
+    *   (TODO) HowTo: use configure the logging
+
+### Quality
+
 *   Separated app instrumentation tests
 *   Testing with Espresso
     *   Waits automatically until all coroutine tasks are finished to stabilize execution
@@ -34,15 +46,12 @@
 *   Coverage report
     *   Separated reports for each target at each module
     *   Merge reports over all targets and modules
-*   (TODO) Logging concept
-    *   (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
-    *   (TODO) HowTo: use configure the logging
 *   Preconfigured for CircleCi and Codacy
     *   Workflow for parallelizing
     *   Run instrumentation tests with Firebase TestLab
     *   Merged Coverage Report
     *   Static code analysis
     *   (TODO) use project files for quality tools settings
-*   Dynamic property loading
 *   Included quality tools
-    *   [Remark Lint](https://github.com/remarkjs/remark-lint) - Markdown style checks
+    *   [Remark Lint](https://github.com/remarkjs/remark-lint) for markdown style checks
+    *   [Detekt](https://github.com/arturbosch/detekt) for kotlin code style
