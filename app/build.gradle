@@ -78,8 +78,8 @@ dependencies {
     // Reduce boilerplate code
     //
     // - view event handling (and optional many more)
-    kapt "org.androidannotations:androidannotations:4.5.2"
-    api "org.androidannotations:androidannotations-api:4.5.2"
+    kapt "org.androidannotations:androidannotations:4.6.0"
+    api "org.androidannotations:androidannotations-api:4.6.0"
 
     // --------------------------------------------------
     // Dependency injection
