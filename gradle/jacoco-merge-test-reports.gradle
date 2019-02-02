@@ -26,5 +26,5 @@ task jacocoMergedTestReport(type: JacocoReport) {
 
     sourceDirectories = files(mainSrc)
     classDirectories = files([debugTree])
-    executionData = fileTree(dir: project.rootDir, includes: [ '**/build/jacoco/testDebugUnitTest.exec', '**/build/outputs/code-coverage/connected/*coverage.ec'])
+    executionData = fileTree(dir: project.rootDir, includes: [ '**/build/jacoco/testDebugUnitTest.exec', '**/build/outputs/code_coverage/debugAndroidTest/connected/*coverage.ec'])
 }
