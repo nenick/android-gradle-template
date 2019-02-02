@@ -252,6 +252,8 @@ jobs:
         command: |
           sudo pip install -U crcmod
           sudo gsutil -m cp -r -U "`sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1`*" firebase/
+          cp firebase/Pixel2-28-en-portrait/artifacts/coverage.ec app/build/outputs/code_coverage/debugAndroidTest/connected/
+          cp firebase/Pixel2-28-en-portrait/test_result* app/build/outputs/androidTest-results/connected/
 
         #TODO add app-tests run
 
@@ -271,9 +273,6 @@ jobs:
     - store_artifacts:
         path: app/build/reports/jacoco/jacocoInstrumentationTestReport/html
         destination: app/instrumentation-tests-coverage
-    - store_artifacts:
-        path: app/build/reports/lint-results-debug.html
-        destination: app/lint-checks/lint-results-debug.html
     - store_test_results:
         path: app/build/outputs/androidTest-results/connected
 
@@ -290,8 +289,8 @@ jobs:
     - save_cache:
         key: v1-app-android-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
         paths:
-        - app/build/outputs/code-coverage/connected
-        - app-tests/build/outputs/code-coverage/connected
+        - app/build/outputs/code_coverage/debugAndroidTest/connected
+        - app-tests/build/outputs/code_coverage/debugAndroidTest/connected
 
   ##############################################################################################################
   # Merged coverage report
