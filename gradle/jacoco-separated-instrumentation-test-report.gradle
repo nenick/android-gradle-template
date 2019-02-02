@@ -29,6 +29,6 @@ task jacocoInstrumentationTestReport(type: JacocoReport) {
     sourceDirectories = files(mainSrc)
     classDirectories = files([debugTree])
     executionData = fileTree(dir: project.buildDir, includes: [
-            'outputs/code-coverage/connected/*coverage.ec'
+            'outputs/code_coverage/debugAndroidTest/connected/*coverage.ec'
     ])
 }
