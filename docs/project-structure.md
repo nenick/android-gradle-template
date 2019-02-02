@@ -11,6 +11,7 @@ Path | Details
 `data-network` | App network implementation details (e.g. Retrofit).
 `docs` | Hints for this project template.
 `gradle` | Additional gradle scripts for build processes and gradle wrapper details.
+`quality-tools` | Additional tools for code style checks.
 
 #### ... App module
 
