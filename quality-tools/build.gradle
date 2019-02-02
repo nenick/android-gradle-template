@@ -2,8 +2,17 @@ plugins {
     // Support to run npm based tools for code quality checks.
     // - remark-lint
     id "com.moowork.node" version "1.2.0"
+
+    id "io.gitlab.arturbosch.detekt" version "1.0.0-RC12"
 }
 
 task markdownStyleCheck(type: NpmTask) {
     npmCommand 'run', 'lint-md'
+}
+
+detekt {
+    toolVersion = "1.0.0-RC12"
+    input = files("..")
+    // TODO adjust and document applied filter (current just copied)
+    filters = ".*/resources/.*,.*/build/.*"
 }
