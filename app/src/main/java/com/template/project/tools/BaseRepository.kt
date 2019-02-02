@@ -3,14 +3,22 @@ package com.template.project.tools
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations.map
 import com.template.project.data.network.tools.ApiResponse
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.runBlocking
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 import java.util.concurrent.ConcurrentHashMap
 
 abstract class BaseRepository : KoinComponent {
+
+    companion object {
+        private const val keepRunningCancelDelay = 1000L
+    }
 
     private val runningProcesses = ConcurrentHashMap<String, LiveData<*>>()
     private val dispatchers: ProjectDispatchers by inject()
@@ -90,7 +98,9 @@ abstract class BaseRepository : KoinComponent {
             ResourceChannel(this, loadResource).startProcessing()
 
             // Loop to keep the producer channel alive, or no more data will be received.
-            while (isActive) delay(1000)
+            while (isActive) {
+                delay(keepRunningCancelDelay)
+            }
         }
     }
 }

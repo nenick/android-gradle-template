@@ -4,7 +4,6 @@ import android.widget.Toast
 import com.template.project.R
 import com.template.project.data.local.entities.Todo
 import com.template.project.tools.BaseFragment
-import com.template.project.tools.observe
 import kotlinx.android.synthetic.main.fragment_content_sample.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EFragment

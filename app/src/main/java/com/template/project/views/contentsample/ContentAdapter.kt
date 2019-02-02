@@ -23,7 +23,9 @@ class ContentAdapter(
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentAdapter.MyViewHolder {
         // create a new view
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_list_entry, parent, false) as LinearLayout
+        val itemView = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.item_list_entry, parent, false) as LinearLayout
 
         // set the view's size, margins, paddings and layout parameters
         // ...
