@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.template.project">
+
+    <!-- WRITE_EXTERNAL_STORAGE needed to write code coverage file to sdcard. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application />
+
+</manifest>

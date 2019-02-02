@@ -242,8 +242,8 @@ jobs:
             --app app/build/outputs/apk/debug/app-debug.apk \
             --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
             --device model=Pixel2,version=28,locale=en,orientation=portrait \
-            --environment-variables coverage=true,coverageFile=/sdcard/coverage.ec \
-            --directories-to-pull=/sdcard
+            --environment-variables coverage=true,coverageFile=/sdcard/tmp/coverage.ec \
+            --directories-to-pull=/sdcard/tmp
     - run:
         name: Create directory to store test results
         command: mkdir firebase
@@ -353,12 +353,12 @@ workflows:
     - data-network-unit-tests:
         requires:
         - build
-#    - app-android-tests:
-#        requires:
-#        - build
+    - app-android-tests:
+        requires:
+        - build
     - test-coverage-report:
         requires:
         - app-unit-tests
         - data-local-unit-tests
         - data-network-unit-tests
-#        - app-android-tests
+        - app-android-tests
