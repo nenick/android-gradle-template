@@ -32,7 +32,7 @@
     *   (TODO) Configurable for interesting parts (e.g. Network calls, Database operations, Application execution, ...)
     *   (TODO) HowTo: use configure the logging
 
-### Quality
+### Testing
 
 *   Separated app instrumentation tests
 *   Testing with Espresso
@@ -46,12 +46,17 @@
 *   Coverage report
     *   Separated reports for each target at each module
     *   Merge reports over all targets and modules
-*   Preconfigured for CircleCi and Codacy
+
+### Quality
+
+*   Continous interation with CircleCi
     *   Workflow for parallelizing
     *   Run instrumentation tests with Firebase TestLab
+*   Code quality report with Codacy
     *   Merged Coverage Report
     *   Static code analysis
     *   (TODO) use project files for quality tools settings
 *   Included quality tools
     *   [Remark Lint](https://github.com/remarkjs/remark-lint) for markdown style checks
     *   [Detekt](https://github.com/arturbosch/detekt) for kotlin code style
+    *   ...
