@@ -252,8 +252,10 @@ jobs:
         command: |
           sudo pip install -U crcmod
           sudo gsutil -m cp -r -U "`sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1`*" firebase/
-          cp --parents firebase/Pixel2-28-en-portrait/artifacts/coverage.ec app/build/outputs/code_coverage/debugAndroidTest/connected/
-          cp --parents firebase/Pixel2-28-en-portrait/test_result* app/build/outputs/androidTest-results/connected/
+          mkdir -p app/build/outputs/code_coverage/debugAndroidTest/connected/
+          cp firebase/Pixel2-28-en-portrait/artifacts/coverage.ec app/build/outputs/code_coverage/debugAndroidTest/connected/
+          mkdir -p app/build/outputs/androidTest-results/connected/
+          cp firebase/Pixel2-28-en-portrait/test_result* app/build/outputs/androidTest-results/connected/
 
         #TODO add app-tests run
 
