@@ -17,7 +17,7 @@ task jacocoInstrumentationTestReport(type: JacocoReport) {
         html.enabled = true
     }
 
-    def fileFilter = [ '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/*\$*']
+    def fileFilter = [ '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Spec*.*', 'android/**/*.*', '**/*\$*']
     def debugTree = fileTree(dir: "$project.rootDir", excludes: fileFilter).matching {
         include "**/build/tmp/kotlin-classes/debug/**"
     }
