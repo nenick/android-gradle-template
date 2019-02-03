@@ -1,4 +1,4 @@
-package com.template.project.tests.tools
+package com.template.project.specs.tools
 
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
@@ -12,7 +12,7 @@ import org.junit.runner.RunWith
 
 /** Base for running instrumentation with ready application. */
 @RunWith(AndroidJUnit4::class)
-abstract class AppTest {
+abstract class AppSpecDefaults {
 
     @get:Rule
     var activityRule = ActivityTestRule(MainActivity_::class.java)

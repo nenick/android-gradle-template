@@ -44,27 +44,12 @@ instrumentation tests reports
 *   execution build/reports/androidTests/connected/index.html
 *   coverage build/reports/jacoco/jacocoInstrumentationTestReport/index.html
 
-### Project structure overview
-
-(TODO)
-*   app
-    *   androidTest - Mainly for isolated unit tests when device/emulator is necessary
-    *   test - Unit tests when possible
-    *   main - For views, business logic and connecting the data options
-*   app-tests
-    *   main - Full app integration tests with mocked REST API
-
 ### Run application and tests
 
 (TODO)
 #### Command Line
 
 #### Android Studio
-
-##### app-tests
-
-You must select a package and run the instrumentation tests, otherwise AndroidStudio think they are pure unit tests.
-Current it's not possible to just select the module or java folder an start run tests.
 
 ## Work with this template
 

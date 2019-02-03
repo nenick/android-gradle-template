@@ -1,4 +1,4 @@
-package com.template.project.tests
+package com.template.project.specs
 
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
@@ -7,10 +7,10 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import com.google.common.truth.Truth.assertThat
 import com.template.project.R
-import com.template.project.tests.tools.AppTest
+import com.template.project.specs.tools.AppSpecDefaults
 import org.junit.Test
 
-class ContentSampleTest : AppTest() {
+class ContentSampleTest : AppSpecDefaults() {
 
     private val todoItemFromServer = "delectus aut autem"
 

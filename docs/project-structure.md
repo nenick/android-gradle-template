@@ -6,7 +6,7 @@ Path | Details
 ---|---
 `.circleci` | All what belongs to the continuous integration process (e.g. config, scripts).
 `app` | App implementation details (e.g. View, ViewModel, Repository).
-`app-tests` | Android tests integrating the whole application.
+`app-specs` | Android tests integrating the whole application.
 `data-local` | App local storage implementation details (e.g. Room).
 `data-network` | App network implementation details (e.g. Retrofit).
 `docs` | Hints for this project template.
