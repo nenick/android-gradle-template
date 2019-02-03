@@ -49,7 +49,7 @@
 
 ### Quality
 
-*   Continous interation with CircleCi
+*   Continuous integration with CircleCi
     *   Workflow for parallelizing
     *   Run instrumentation tests with Firebase TestLab
 *   Code quality report with Codacy
