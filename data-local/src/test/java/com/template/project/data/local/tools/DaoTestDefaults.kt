@@ -17,10 +17,9 @@ import org.koin.standalone.KoinComponent
 import org.koin.standalone.StandAloneContext
 import org.koin.standalone.inject
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 
 @RunWith(RobolectricTestRunner::class)
-abstract class DaoTest : KoinComponent {
+abstract class DaoTestDefaults : KoinComponent {
 
     @Before
     fun setupBase() {
