@@ -278,7 +278,8 @@ jobs:
     # cache test coverage to share it with next build steps
     - save_cache:
         key: v1-app-android-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
-        path: app/build/outputs/code_coverage/debugAndroidTest/connected
+        paths:
+        - app/build/outputs/code_coverage/debugAndroidTest/connected
 
   ##############################################################################################################
   # App android specs
@@ -350,7 +351,8 @@ jobs:
     # cache test coverage to share it with next build steps
     - save_cache:
         key: v1-app-android-spec-coverage-{{ .Environment.CIRCLE_SHA1 }}
-        path: app-specs/build/outputs/code_coverage/debug/connected
+        paths:
+        - app-specs/build/outputs/code_coverage/debug/connected
 
   ##############################################################################################################
   # Merged coverage report
