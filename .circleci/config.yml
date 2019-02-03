@@ -36,6 +36,7 @@ jobs:
         command: |
           ./gradlew app:assembleDebug
           ./gradlew app:assembleDebugAndroidTest
+          ./gradlew app-specs:assembleAndroidTest
 
     - save_cache:
         paths:
@@ -214,9 +215,6 @@ jobs:
   app-android-tests:
     docker:
     - image: circleci/android:api-28-alpha
-    environment:
-      _JAVA_OPTIONS: -Xmx3200m
-
     working_directory: /home/circleci/workspace
 
     steps:
@@ -260,13 +258,9 @@ jobs:
           mkdir -p app/build/outputs/androidTest-results/connected/
           cp -v firebase/Pixel2-28-en-portrait/test_result* app/build/outputs/androidTest-results/connected/
 
-        #TODO add app-tests run
-
     - run:
         name: Code coverage
-        command: |
-          ./gradlew app:jacocoInstrumentationTestReport
-          ./gradlew app-tests:jacocoInstrumentationTestReport
+        command: ./gradlew app:jacocoInstrumentationTestReport
 
     - store_artifacts:
         path: firebase/
@@ -281,21 +275,82 @@ jobs:
     - store_test_results:
         path: app/build/outputs/androidTest-results/connected
 
-    - store_artifacts:
-        path: app-tests/build/reports/androidTests/connected
-        destination: app-tests/instrumentation-tests
-    - store_artifacts:
-        path: app-tests/build/reports/jacoco/jacocoInstrumentationTestReport/html
-        destination: app-tests/instrumentation-tests-coverage
-    - store_test_results:
-        path: app-tests/build/outputs/androidTest-results/connected
-
     # cache test coverage to share it with next build steps
     - save_cache:
         key: v1-app-android-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-        - app/build/outputs/code_coverage/debugAndroidTest/connected
-        - app-tests/build/outputs/code_coverage/debugAndroidTest/connected
+        path: app/build/outputs/code_coverage/debugAndroidTest/connected
+
+  ##############################################################################################################
+  # App android specs
+  ##############################################################################################################
+
+  app-android-specs:
+    docker:
+    - image: circleci/android:api-28-alpha
+    working_directory: /home/circleci/workspace
+
+    steps:
+    # get cached build artifacts and dependencies
+    - restore_cache:
+        key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-jars-{{ checksum "build.gradle" }}
+
+    - run:
+        name: Store Google Service Account
+        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+    - run:
+        name: Authorize gcloud and set config defaults
+        command: |
+          sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+          sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+    - run:
+        name: Test with Firebase Test Lab
+        command: >
+          sudo gcloud firebase test android run \
+            --type instrumentation \
+            --app app/build/outputs/apk/debug/app-debug.apk \
+            --test app/build/outputs/apk/androidTest/debug/app-specs-debug.apk \
+            --device model=Pixel2,version=28,locale=en,orientation=portrait \
+            --environment-variables coverage=true,coverageFile=/sdcard/coverage.ec \
+            --directories-to-pull=/sdcard
+    - run:
+        name: Create directory to store test results
+        command: mkdir firebase
+    - run:
+        name: Install gsutil dependency and copy test results data
+        command: |
+          sudo pip install -U crcmod
+          sudo gsutil -m cp -r -U "`sudo gsutil ls gs://${GOOGLE_TESTLAB_RESULTS} | tail -1`*" firebase/
+    - run:
+        name: Copy results to default report locations
+        command: |
+          mkdir -p app-specs/build/outputs/code_coverage/debug/connected/
+          cp -v firebase/Pixel2-28-en-portrait/artifacts/coverage.ec app-specs/build/outputs/code_coverage/debug/connected/
+          mkdir -p app-specs/build/outputs/androidTest-results/connected/
+          cp -v firebase/Pixel2-28-en-portrait/test_result* app-specs/build/outputs/androidTest-results/connected/
+
+    - run:
+        name: Code coverage
+        command: ./gradlew app-specs:jacocoInstrumentationTestReport
+
+    - store_artifacts:
+        path: firebase/
+        destination: /firebase/
+
+    - store_artifacts:
+        path: app-specs/build/reports/androidTests/connected
+        destination: app-specs/instrumentation-tests
+    - store_artifacts:
+        path: app-specs/build/reports/jacoco/jacocoInstrumentationTestReport/html
+        destination: app-specs/instrumentation-tests-coverage
+    - store_test_results:
+        path: app-specs/build/outputs/androidTest-results/connected
+
+    # cache test coverage to share it with next build steps
+    - save_cache:
+        key: v1-app-android-spec-coverage-{{ .Environment.CIRCLE_SHA1 }}
+        path: app-specs/build/outputs/code_coverage/debug/connected
 
   ##############################################################################################################
   # Merged coverage report
@@ -318,6 +373,8 @@ jobs:
         key: v1-app-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
     - restore_cache:
         key: v1-app-android-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
+    - restore_cache:
+        key: v1-app-android-specs-coverage-{{ .Environment.CIRCLE_SHA1 }}
     - restore_cache:
         key: v1-data-local-unit-test-coverage-{{ .Environment.CIRCLE_SHA1 }}
     - restore_cache:
@@ -359,10 +416,12 @@ workflows:
         - build
     - app-android-tests:
         requires:
-        - build
-    - test-coverage-report:
-        requires:
         - app-unit-tests
         - data-local-unit-tests
         - data-network-unit-tests
+    - app-android-specs:
+        requires:
         - app-android-tests
+    - test-coverage-report:
+        requires:
+        - app-android-specs
