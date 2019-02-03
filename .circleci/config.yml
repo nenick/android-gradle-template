@@ -311,7 +311,7 @@ jobs:
           sudo gcloud firebase test android run \
             --type instrumentation \
             --app app/build/outputs/apk/debug/app-debug.apk \
-            --test app/build/outputs/apk/androidTest/debug/app-specs-debug.apk \
+            --test app-specs/build/outputs/apk/androidTest/debug/app-specs-debug.apk \
             --device model=Pixel2,version=28,locale=en,orientation=portrait \
             --environment-variables coverage=true,coverageFile=/sdcard/coverage.ec \
             --directories-to-pull=/sdcard
@@ -400,6 +400,8 @@ jobs:
 
   ##############################################################################################################
   # Workflow orchestration
+  #
+  # Adjust it to your needs. Current it is designed for low Firebase Teslab quota usage on early failures.
   ##############################################################################################################
 
 workflows:
