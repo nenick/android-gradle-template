@@ -104,6 +104,18 @@ class TodoDaoTest : DaoTestDefaults() {
      */
     @Test
     fun `update all`() = ignoreMainThread {
+        todoDao.updateAll(listOf(testData1, testData2))
+
+        val storedData = todoDao.getAll()
+        assertThat(storedData).containsExactly(testData1, testData2)
+    }
+
+    /**
+     * This test has no real value, because it's mostly testing the Room framework functionality.
+     * This is more an example how this code will work and could be skipped.
+     */
+    @Test
+    fun `update all - override existing`() = ignoreMainThread {
         todoDao.insert(testData1)
 
         todoDao.updateAll(listOf(testData1, testData2))
