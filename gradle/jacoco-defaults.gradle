@@ -1,7 +1,7 @@
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = "0.8.2"
+    toolVersion = "0.8.3"
 }
 
 /** Without "includeNoLocationClasses" we would get zero coverage report when using robolectric. */
