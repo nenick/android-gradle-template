@@ -1,8 +1,13 @@
 package com.template.project.tools
 
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlin.coroutines.CoroutineContext
 
+/**
+ * Imitate the Dispatchers class to support replaceable contexts for testing.
+ *
+ * @see kotlinx.coroutines.Dispatchers
+ */
 class ProjectDispatchers (
-    val main: CoroutineDispatcher,
-    val io: CoroutineDispatcher
+    val main: CoroutineContext,
+    val io: CoroutineContext
 )
