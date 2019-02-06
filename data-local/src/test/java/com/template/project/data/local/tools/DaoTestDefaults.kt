@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -21,37 +19,50 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 abstract class DaoTestDefaults : KoinComponent {
 
-    @Before
-    fun setupBase() {
-        StandAloneContext.startKoin(listOf(dataLocalModule, module { single { ApplicationProvider.getApplicationContext() as Context} }))
-        ignoreMainThread { database.clearAllTables() }
-    }
-
-    val database: ProjectDatabase by inject()
-
+    /**
+     * Avoid the RuntimeException: Method getMainLooper in android.os.Looper not mocked.
+     */
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    private val asBackgroundTask = Dispatchers.IO
+    init {
+        StandAloneContext.startKoin(listOf(
+
+            // Use the real Room database dependencies/configuration with use of robolectric support.
+            dataLocalModule,
+
+            module {
+
+                // Since androidx supports robolectric we can used it for accessing a "real" application context.
+                single { ApplicationProvider.getApplicationContext() as Context}
+            }
+        ))
+    }
+
+    private val database: ProjectDatabase by inject()
+
+    @Before
+    fun setupBase() {
+
+        // Ensure a clean testing base by clearing all table contents.
+        ignoreMainThread { database.clearAllTables() }
+    }
 
     /**
-     * Helper to avoid main thread issues.
+     * Run test code in non main thread and wait for execution result.
      *
      * <pre>
      * @Test fun myTest() = ignoreMainThread { /* write test code here */ }
      * </pre>
      */
     fun ignoreMainThread(block: () -> Unit) {
-        // runBlocking - waits automatically until async tasks are finished
-        return runBlocking(asBackgroundTask) {
-            // launch - runs the block async in a non main thread scope
-            launch(asBackgroundTask) { block() }.join()
-        }
+        return runBlocking(Dispatchers.IO) { block() }
     }
 
     @After
     fun cleanUpBase() {
-        asBackgroundTask.cancel()
+
+        // Stop dependency injection framework to clean up stuff like singletons.
         StandAloneContext.stopKoin()
     }
 }
