@@ -22,7 +22,7 @@ class TodoRepository : BaseRepository() {
 
     /** Sync remote resources to local database. */
     suspend fun fetchTodoList(forced: Boolean = false): SyncResult {
-        return if (readTodoList().isEmpty() or forced) {
+        return if (forced || readTodoList().isEmpty()) {
             fetch(todoApi.allTodo()) { response: List<TodoJson> ->
                 todoDao.updateAll(response.map { Todo(it.id, it.userId, it.title, it.completed) })
             }

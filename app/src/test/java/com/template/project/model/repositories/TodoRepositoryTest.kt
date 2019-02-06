@@ -115,6 +115,20 @@ class TodoRepositoryTest : RepositoryTestDefaults() {
     }
 
     /**
+     * Supporting conditional fetch logic.
+     */
+    @Test
+    fun `fetch remote todo list - forced`() = runBlocking {
+        whenever(todoApi.allTodo()).thenReturn(apiResponseSomeData)
+
+        val result = repository.fetchTodoList(true)
+
+        verify(todoDao, never()).getAll()
+        verify(todoDao).updateAll(someLocalData)
+        assertThat(result).isEqualTo(SyncResult.succeeded())
+    }
+
+    /**
      * The under laying fetch {] logic is tested separately.
      *
      * This test has no real value, because it's mostly testing that another method is called.
