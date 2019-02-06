@@ -1,13 +1,4 @@
-apply plugin: 'jacoco'
-
-jacoco {
-    toolVersion = "0.8.2"
-}
-
-/** Without "includeNoLocationClasses" we would get zero coverage report when using robolectric. */
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-}
+apply from: "$project.rootDir/gradle/jacoco-defaults.gradle"
 
 /** We must create our own task to create jacoco reports. */
 task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
