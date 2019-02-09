@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/contentDetailsFragment"
-        android:name="com.template.project.views.contentsample.ContentDetailsFragment_"
+        android:name="com.template.project.views.contenteditsample.ContentEditSampleFragment_"
         android:label="Details Content" >
     </fragment>
 </navigation>

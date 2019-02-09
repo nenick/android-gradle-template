@@ -4,6 +4,7 @@ import android.widget.Toast
 import com.template.project.R
 import com.template.project.data.local.entities.Todo
 import com.template.project.tools.BaseFragment
+import com.template.project.views.contenteditsample.ContentEditSampleFragment
 import kotlinx.android.synthetic.main.fragment_content_sample.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EFragment
@@ -37,7 +38,7 @@ class ContentSampleFragment : BaseFragment() {
     }
 
     private fun updateListView(todo: List<Todo>) {
-        list.adapter = ContentAdapter(todo, ::showDetailsOnItemClick)
+        list.adapter = ContentSampleAdapter(todo, ::showDetailsOnItemClick)
     }
 
     fun showDetailsOnItemClick(item: Todo) {
@@ -45,7 +46,7 @@ class ContentSampleFragment : BaseFragment() {
         if (detailsFragment == null) {
             navigate.toContentDetails(this, item.id)
         } else {
-            (detailsFragment as ContentDetailsFragment).show(item.id)
+            (detailsFragment as ContentEditSampleFragment).show(item.id)
         }
     }
 }

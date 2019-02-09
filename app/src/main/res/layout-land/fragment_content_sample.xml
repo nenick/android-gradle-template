@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/detailsView"
-        android:name="com.template.project.views.contentsample.ContentDetailsFragment_"
+        android:name="com.template.project.views.contenteditsample.ContentEditSampleFragment_"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"

@@ -3,7 +3,7 @@ package com.template.project.tools
 import android.os.AsyncTask
 import com.template.project.ProjectNavigation
 import com.template.project.model.repositories.TodoRepository
-import com.template.project.views.contentsample.ContentDetailsViewModel
+import com.template.project.views.contenteditsample.ContentEditSsampleViewModel
 import com.template.project.views.contentsample.ContentSampleViewModel
 import com.template.project.views.simplesample.SimpleSampleViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +15,7 @@ val appModule = module {
 
     viewModel { SimpleSampleViewModel() }
     viewModel { ContentSampleViewModel() }
-    viewModel { ContentDetailsViewModel() }
+    viewModel { ContentEditSsampleViewModel() }
 
     single { ProjectNavigation() }
 

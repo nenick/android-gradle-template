@@ -1,4 +1,4 @@
-package com.template.project.views.contentsample
+package com.template.project.views.contenteditsample
 
 import androidx.lifecycle.Observer
 import com.template.project.R
@@ -10,13 +10,13 @@ import org.androidannotations.annotations.FragmentArg
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @EFragment(R.layout.fragment_content_details)
-class ContentDetailsFragment : BaseFragment() {
+class ContentEditSampleFragment : BaseFragment() {
 
     @FragmentArg
     @JvmField
     final var itemId: Int = 0
 
-    val viewModel: ContentDetailsViewModel by viewModel()
+    val viewModel: ContentEditSsampleViewModel by viewModel()
 
     @AfterViews
     fun setup() {

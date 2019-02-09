@@ -8,10 +8,10 @@ import com.template.project.data.local.entities.Todo
 import com.template.project.R
 import kotlinx.android.synthetic.main.item_list_entry.view.*
 
-class ContentAdapter(
+class ContentSampleAdapter(
     private val content: List<Todo>,
     private val clickListener: (id: Todo) -> Unit
-) : RecyclerView.Adapter<ContentAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<ContentSampleAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -21,7 +21,7 @@ class ContentAdapter(
 
 
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentSampleAdapter.MyViewHolder {
         // create a new view
         val itemView = LayoutInflater
             .from(parent.context)
