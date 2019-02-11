@@ -50,7 +50,9 @@ dependencies {
     // --------------------------------------------------
     // Kotlin support
     //
+    // - for standard Kotlin support
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // - for async execution with coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
 
     // --------------------------------------------------
@@ -61,32 +63,34 @@ dependencies {
     // --------------------------------------------------
     // Design elements
     //
+    // - for ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+    // - for RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.0.0"
+    // - for TextInputLayout
+    implementation "com.google.android.material:material:1.0.0"
 
     // --------------------------------------------------
     // Code architecture
     //
-    // - LiveData
-    // - ViewModel
+    // - for LiveData, ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
-
-    // - Navigation
+    // - for Navigation components
     api "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
 
     // --------------------------------------------------
     // Reduce boilerplate code
     //
-    // - view event handling (and optional many more)
+    // - for view enhancement (and optional many more)
     kapt "org.androidannotations:androidannotations:4.6.0"
     api "org.androidannotations:androidannotations-api:4.6.0"
 
     // --------------------------------------------------
     // Dependency injection
     //
-    // - Koin for Android
+    // - for Koin on Android
     implementation 'org.koin:koin-android:1.0.2'
-    // - Koin for Android Architecture ViewModel
+    // - for Koin Android ViewModel support
     implementation 'org.koin:koin-androidx-viewmodel:1.0.2'
 
     // --------------------------------------------------

@@ -46,7 +46,7 @@ class ContentSampleFragment : BaseFragment() {
         if (detailsFragment == null) {
             navigate.toContentDetails(this, item.id)
         } else {
-            (detailsFragment as ContentEditSampleFragment).show(item.id)
+            (detailsFragment as ContentEditSampleFragment).load(item.id)
         }
     }
 }

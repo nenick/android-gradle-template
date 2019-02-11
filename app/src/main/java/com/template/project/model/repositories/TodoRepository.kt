@@ -24,7 +24,7 @@ class TodoRepository : BaseRepository() {
     suspend fun fetchTodoList(forced: Boolean = false): SyncResult {
         return if (forced || readTodoList().isEmpty()) {
             fetch(todoApi.allTodo()) { response: List<TodoJson> ->
-                todoDao.updateAll(response.map { Todo(it.id, it.userId, it.title, it.completed) })
+                todoDao.updateAll(response.map { Todo(it.id, it.userId, it.title, "TODO", it.completed) })
             }
         } else {
             SyncResult.succeeded()
