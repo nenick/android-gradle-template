@@ -11,9 +11,9 @@ import org.koin.standalone.inject
 class TodoDaoTest : DaoTestDefaults() {
 
     private val todoDao: TodoDao by inject()
-    private val testData1 = Todo(1, 1, "Clean Up", false)
-    private val testData2 = Todo(2, 1, "Homework", true)
-    private val testData3 = Todo(3, 1, "Relax", false)
+    private val testData1 = Todo(1, 1, "Clean Up", "list", false)
+    private val testData2 = Todo(2, 1, "Homework", "tasks", true)
+    private val testData3 = Todo(3, 1, "Relax", "location", false)
 
     /**
      * This test has no real value, because it's mostly testing the Room framework functionality.
