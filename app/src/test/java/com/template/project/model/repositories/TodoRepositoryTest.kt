@@ -21,7 +21,7 @@ class TodoRepositoryTest : RepositoryTestDefaults() {
 
     // Some common test data.
     private val emptyLocalData = emptyList<Todo>()
-    private val someLocalData = listOf(Todo(1, 1, "TestTodo", true))
+    private val someLocalData = listOf(Todo(1, 1, "TestTodo", "", true))
 
     private val someRemoteData = listOf(TodoJson(1, 1, "TestTodo", true))
 
