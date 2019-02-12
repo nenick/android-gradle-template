@@ -65,7 +65,7 @@ class ContentSampleViewModelTest : ViewModelTestDefaults() {
         repositoryObserveTodoChannels.send(emptyList())
         assertThat(model.todoList.value).isEmpty()
 
-        repositoryObserveTodoChannels.send(listOf(Todo(1, 1, "TestTodo", "", true)))
+        repositoryObserveTodoChannels.send(listOf(Todo(1, 1, "TestTodo", "TODO", true)))
         assertThat(model.todoList.value).isNotEmpty()
     }
 }
