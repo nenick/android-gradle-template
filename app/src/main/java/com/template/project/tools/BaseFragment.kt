@@ -15,37 +15,40 @@ import org.koin.android.ext.android.inject
 @EFragment
 abstract class BaseFragment : Fragment() {
 
+    private val textChangeListener = mutableMapOf<EditText, NewValueTextWatcher>()
+
     protected val navigate: ProjectNavigation by inject()
 
-    /** Activate the up navigation button on the Toolbar */
+    /** Activate the up navigation button at the Toolbar. */
     protected fun showUpNavigation() {
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    /** Read and update EditText component. */
+    /** Convenience method for two way data binding with LiveData and EditText. */
     protected fun observeTwoWay(data: MutableLiveData<String>, view: EditText) {
-        // update View component
-        data.observe(this, Observer { if (view.text.toString() != it /* avoid loops */) view.setText(it) })
+        // update View from LiveData changes
+        observe(data) { if (view.text.toString() != it /* avoid loops */) view.setText(it) }
 
-        // update LiveData
+        // update LiveData from View changes
         observeTextChanges(view) { data.value = it }
     }
 
+    /** Convenience method for observing LiveData. */
     protected fun <T> observe(data: MutableLiveData<T>, block: (result: T) -> Unit) {
         data.observe(this, Observer { block(it) })
     }
 
-    private val textChangeListener = mutableMapOf<EditText, NewValueTextWatcher>()
-
     /**
      * Convenience method for observing EditText.
      *
-     * Avoid adding multiple listener for each EditText.
+     * Avoids having multiple TextWatcher. Only the last receiver will be called.
+     * So it's secure to call it multiple times for the same EditText.
+     *
      * The receiver will only be called when the value has changed to avoid loops.
      */
     protected fun observeTextChanges(view: EditText, receiver: (String) -> Unit) {
-        // Only update receiver logic when we have added a TextWatcher already.
-        textChangeListener[view]?.apply { this.receiver = receiver }
+        // Just replace receiver callback when we have added a TextWatcher already.
+        textChangeListener[view]?.let { it.receiver = receiver }
         // Else create and register a new TextWatcher.
             ?: NewValueTextWatcher(receiver).also {
                 view.addTextChangedListener(it)
@@ -54,7 +57,18 @@ abstract class BaseFragment : Fragment() {
     }
 
     /**
-     * TextWatcher only notify on text changes.
+     * Convenience method for observing EditText.
+     *
+     * Also set the text at the EditText.
+     */
+    protected fun observeTextChanges(view: EditText, text: String, receiver: (String) -> Unit) {
+        observeTextChanges(view, receiver)
+
+        if (view.text.toString() != text /* avoid loops */) view.setText(text)
+    }
+
+    /**
+     * TextWatcher which only notify at text changes.
      *
      * New values are compared with previous value and if not match it gets reported to receiver.
      */

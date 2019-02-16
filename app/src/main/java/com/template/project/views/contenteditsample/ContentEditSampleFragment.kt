@@ -26,13 +26,10 @@ class ContentEditSampleFragment : BaseFragment() {
 
     @AfterViews
     fun setup() {
-
         load(itemId)
-
         observe(model.todoItem) {
-            updateItemViews(it)
+            bindItemViews(it)
             updateValidationHints(it)
-            updateDataOnValueChange(it)
         }
     }
 
@@ -53,13 +50,8 @@ class ContentEditSampleFragment : BaseFragment() {
         }
     }
 
-    private fun updateItemViews(item: Todo) {
-        title.setText(item.title)
-        subtitle.setText(item.description)
-    }
-
-    private fun updateDataOnValueChange(item: Todo) {
-        observeTextChanges(title) { item.copy(title = it) }
-        observeTextChanges(subtitle) { item.copy(description = it) }
+    private fun bindItemViews(item: Todo) {
+        observeTextChanges(title, item.title) { item.copy(title = it) }
+        observeTextChanges(subtitle, item.description) { item.copy(description = it) }
     }
 }
