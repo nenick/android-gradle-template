@@ -76,7 +76,7 @@ dependencies {
     // - for LiveData, ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
     // - for Navigation components
-    api "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
+    api "android.arch.navigation:navigation-fragment-ktx:1.0.0-beta02"
 
     // --------------------------------------------------
     // Reduce boilerplate code

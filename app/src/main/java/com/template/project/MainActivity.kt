@@ -16,21 +16,25 @@ import org.androidannotations.annotations.EActivity
 @EActivity(R.layout.activity_main)
 class MainActivity : AppCompatActivity() {
 
-    /**
-     * Connect the navigation architecture component and show the configured start fragment.
-     */
-    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+    private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
     @AfterViews
     fun setup() {
         setSupportActionBar(toolbar)
 
-        findNavController(R.id.nav_host_fragment).addOnNavigatedListener { _, destination ->
-            // change title on navigation until there is a proper way of doing that
-            // https://issuetracker.google.com/issues/80267266
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            // Change title at navigation.
+            // Until there is a proper way of doing that https://issuetracker.google.com/issues/80267266
+            // NavigationUi does mostly the same at setupWithNavController(Toolbar, NavController) and could replace this.
             this.title = destination.label
-            // as default hide the up button
+
+            // As default we hide the menu/up button.
+            // NavigationUi does this handling with setupWithNavController(Toolbar, NavController) and could replace this.
             this.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         }
+
+        // Use the navigation architecture component configuration for the up navigation.
+        // NavigationUi does mostly the same at setupWithNavController(Toolbar, NavController) and could replace this.
+        toolbar.setNavigationOnClickListener { navController.navigateUp() }
     }
 }
