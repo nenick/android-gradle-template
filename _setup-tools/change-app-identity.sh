@@ -24,7 +24,7 @@ function renamePackage {
 
     for FILE in `grep -rl --exclude-dir={.git,.gradle,.idea,_setup-tools} "$ORIGIN" .`
     do
-        sed -i -e "s/$ORIGIN/$TARGET/g" $FILE
+        perl -i -pe "s/$ORIGIN/$TARGET/g" $FILE
     done
 }
 
