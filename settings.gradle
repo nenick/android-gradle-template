@@ -1,2 +1,0 @@
-include 'app', 'appCt', 'appIt'
-include 'wiremock', 'docs', 'tools'

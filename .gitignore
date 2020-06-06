@@ -1,8 +1,0 @@
-.DS_Store
-.idea
-.gradle
-*~
-*.iml
-**/build
-GenerateJsonRestModel/gen/*
-local.properties
