@@ -20,6 +20,6 @@ See also
 TODO keep warnings for all newer available versions e.g. buildScript classpath dependencies, plugins versions
 perhaps this can help https://github.com/ben-manes/gradle-versions-plugin
 
-## custom tasks
+## Custom Tasks
 
 * **clean** all modules is located in the cleanup group.
