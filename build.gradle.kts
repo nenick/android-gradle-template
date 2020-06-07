@@ -4,14 +4,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
 }
 
-dependencyManagement {
-    dependencies {
-        dependency("org.jetbrains.kotlin:kotlin-stdlib:1.3.72")
-    }
-}
-
 buildscript {
-
     repositories {
         google()
         jcenter()
@@ -27,13 +20,24 @@ buildscript {
 }
 
 allprojects {
+    apply(plugin = "io.spring.dependency-management")
+
     repositories {
         google()
         jcenter()
     }
+
+    // Share common library versions, sub modules don't need to specify the version anymore.
+    dependencyManagement {
+        dependencies {
+            dependency("junit:junit:4.13")
+            dependency("io.strikt:strikt-core:0.26.1")
+        }
+    }
 }
 
 tasks {
+    // Create a task to clean the whole project and puts it into to a sensible group.
     register("clean", Delete::class) {
         group = "cleanup"
         delete = setOf(buildDir)
