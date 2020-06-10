@@ -25,7 +25,6 @@ class TodoApiTest {
     @Test
     fun `todoById successful`() = runBlockingUnit {
         givenThat(TodoApiMockResponses.todoById)
-
         val result = api.todoById(todoId)
         expectThat(result).isA<ApiResponse.Success<TodoJson, String>>()
     }
