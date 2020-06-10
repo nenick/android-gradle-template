@@ -20,19 +20,19 @@ class TodoApiTest {
 
     private val baseUrl = "http://localhost:8080"
     private val api = TodoApi(baseUrl)
-    private val todoId = 1234
+    private val dummyId = 1234
 
     @Test
     fun `todoById successful`() = runBlockingUnit {
         givenThat(TodoApiMockResponses.todoById)
-        val result = api.todoById(todoId)
+        val result = api.todoById(dummyId)
         expectThat(result).isA<ApiResponse.Success<TodoJson, String>>()
     }
 
     @Test
     fun `todoById not found`() = runBlockingUnit {
         givenThat(TodoApiMockResponses.todoByIdNotFound)
-        val result = api.todoById(todoId)
+        val result = api.todoById(dummyId)
         expectThat(result).isA<ApiResponse.Error<TodoJson, String>>()
     }
 
