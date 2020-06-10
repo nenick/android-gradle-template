@@ -21,5 +21,7 @@ TODO keep warnings for all newer available versions e.g. buildScript classpath d
 perhaps this can help https://github.com/ben-manes/gradle-versions-plugin
 
 ## Custom Tasks
-
 * **clean** all modules is located in the cleanup group.
+
+## Java Libraries
+* Big goal is to keep as much as possible modules in plain java
