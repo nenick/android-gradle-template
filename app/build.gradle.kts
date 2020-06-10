@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+    id("com.vanniktech.android.junit.jacoco") version "0.16.0"
 }
 
 android {
@@ -25,6 +26,9 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        getByName("debug") {
+            isTestCoverageEnabled = true
+        }
     }
 }
 
@@ -35,7 +39,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
 
     testImplementation("junit:junit")
-    
+
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }
