@@ -40,6 +40,6 @@ tasks {
     // Create a task to clean the whole project and puts it into to a sensible group.
     register("clean", Delete::class) {
         group = "cleanup"
-        delete = setOf(buildDir)
+        delete = setOf(buildDir, "buildSrc/build")
     }
 }
