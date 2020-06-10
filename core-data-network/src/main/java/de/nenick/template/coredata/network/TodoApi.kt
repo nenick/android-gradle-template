@@ -1,6 +1,5 @@
 package de.nenick.template.coredata.network
 
-import de.nenick.template.coredata.network.base.ApiCallResult
 import de.nenick.template.coredata.network.base.ApiResponse
 import de.nenick.template.coredata.network.models.TodoJson
 import io.ktor.client.HttpClient
@@ -11,7 +10,16 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 
-class TodoApi {
+class TodoApi(
+
+    private val baseUrl: String
+) {
+
+    internal object Endpoint {
+        //var baseUrl =
+        fun todoList() = "todos"
+        fun todoById(id: Int) = "todos/$id"
+    }
 
     private val client = HttpClient {
         // When expectSuccess=true it turns to exception controlled flow when non 2XX result code.
@@ -22,20 +30,18 @@ class TodoApi {
         }
     }
 
-    suspend fun todoList(): ApiResponse<List<TodoJson>> {
-        val response = client.get<HttpResponse>("https://jsonplaceholder.typicode.com/todos")
+    suspend fun todoList(): ApiResponse<List<TodoJson>, String> {
+        val response = client.get<HttpResponse>("$baseUrl/${Endpoint.todoList()}")
         val content = response.receive<List<TodoJson>>()
-        return ApiResponse(content, ApiCallResult.Success)
+        return ApiResponse.Success(content)
     }
 
-    suspend fun todo(id: Int): ApiResponse<TodoJson> {
-        val response = client.get<HttpResponse>("https://jsonplaceholder.typicode.com/todos/$id")
-        return if(response.status == HttpStatusCode.OK) {
-            val content = response.receive<TodoJson>()
-            ApiResponse(content, ApiCallResult.Success)
+    suspend fun todoById(id: Int): ApiResponse<TodoJson, String> {
+        val response = client.get<HttpResponse>("$baseUrl/${Endpoint.todoById(id)}")
+        return if (response.status == HttpStatusCode.OK) {
+            ApiResponse.Success(response.receive())
         } else {
-            val content = response.receive<TodoJson>()
-            ApiResponse(content, ApiCallResult.Error)
+            ApiResponse.Error(response.receive())
         }
     }
 }
