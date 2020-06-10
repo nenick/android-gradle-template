@@ -13,7 +13,7 @@ function renameFolder {
     ORIGIN=$1
     TARGET=$2
 
-    find . -type d -iname $ORIGIN -depth -exec bash -c "
+    find . -type d -name $ORIGIN -depth -exec bash -c "
         git mv \"\$1\" \"\${1//$ORIGIN/$TARGET}\"
     " -- {} \;
 }
