@@ -1,0 +1,89 @@
+steps:
+  - task: Bash@3
+    displayName: Install Emulator
+    inputs:
+      filePath: 'pipelines/templates/android-emulator-install.sh'
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Build Debug APK
+    inputs:
+      tasks: 'assembleDebug'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Build Test APK
+    inputs:
+      tasks: 'assembleAndroidTest'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Run Unit Tests
+    inputs:
+      tasks: 'testDebug'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: true
+      testResultsFiles: '**/TEST-*.xml'
+      testRunTitle: 'Unit Tests'
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Check Android Issues
+    continueOnError: true
+    inputs:
+      tasks: 'lintDebug'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Check Code Style
+    inputs:
+      tasks: 'ktLintDebugCheck'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: Bash@3
+    displayName: Wait for Emulator
+    inputs:
+      filePath: 'pipelines/templates/android-emulator-wait.sh'
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Run Android Tests
+    inputs:
+      tasks: 'connectedCheck'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: true
+      testResultsFiles: '**/TEST-*-.xml'
+      testRunTitle: 'Android Tests'
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Create Coverage Report
+    inputs:
+      tasks: 'jacocoTestReport'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: PublishCodeCoverageResults@1
+    displayName: Report Coverage
+    inputs:
+      codeCoverageTool: 'JaCoCo'
+      summaryFileLocation: 'app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+      pathToSources: '$(System.DefaultWorkingDirectory)/app/src/main/java/'
+      failIfCoverageEmpty: true
+    condition: succeededOrFailed()
+
+  - task: PublishPipelineArtifact@1
+    displayName: Publish Test Reports
+    inputs:
+      targetPath: 'app/build/reports'
+      artifactName: 'Test Reports'
+    condition: succeededOrFailed()

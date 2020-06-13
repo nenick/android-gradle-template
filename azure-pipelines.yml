@@ -1,0 +1,12 @@
+pool:
+  vmImage: 'macOS-10.15'
+
+schedules:
+  - cron: "0 0 * * *"
+    displayName: Daily Midnight Build
+    branches:
+      include:
+        - master
+
+steps:
+  - template: templates/debug-build-and-test.yml
