@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
-    id("com.vanniktech.android.junit.jacoco") version "0.16.0"
+    jacoco
 }
 
 android {
@@ -42,4 +42,74 @@ dependencies {
 
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+}
+
+afterEvaluate {
+
+    // running unit tests in release variant brings no value yet, so it gets the same behaviour like java lib modules
+    tasks.findByName("testReleaseUnitTest")!!.enabled = false
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+tasks.register("jacocoTestReport", JacocoReport::class) {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
+
+    // The lines below make sure we can report against Kotlin and exclude some Android Stuff
+    val fileFilter = arrayOf(
+            "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
+            "**/*Test*.*", "android/**/*.*"
+    )
+    val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
+    val kotlinClasses = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
+    val mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories.setFrom(files(mainSrc))
+    classDirectories.setFrom(debugTree, kotlinClasses)
+    executionData.setFrom(fileTree(buildDir) { include("**/*.exec", "**/*coverage.ec") })
+}
+
+tasks.register("jacocoAndroidTestReport", JacocoReport::class) {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
+
+    // The lines below make sure we can report against Kotlin and exclude some Android Stuff
+    val fileFilter = arrayOf(
+        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
+        "**/*Test*.*", "android/**/*.*"
+    )
+    val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
+    val kotlinClasses = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
+    val mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories.setFrom(files(mainSrc))
+    classDirectories.setFrom(debugTree, kotlinClasses)
+    executionData.setFrom(fileTree(buildDir) { include("**/*coverage.ec") })
+}
+
+tasks.register("jacocoUnitTestReport", JacocoReport::class) {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
+
+    // The lines below make sure we can report against Kotlin and exclude some Android Stuff
+    val fileFilter = arrayOf(
+        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
+        "**/*Test*.*", "android/**/*.*"
+    )
+    val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
+    val kotlinClasses = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
+    val mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories.setFrom(files(mainSrc))
+    classDirectories.setFrom(debugTree, kotlinClasses)
+    executionData.setFrom(fileTree(buildDir) { include("**/*.exec") })
 }

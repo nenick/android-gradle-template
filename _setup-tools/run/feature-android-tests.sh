@@ -2,7 +2,7 @@
 source `dirname "$0"`/_functions.sh
 
 task "Android Tests"
-gradle connectedCheck
+gradle connectedDebugAndroidTest
 
 [ $? -eq 0 ]
 
