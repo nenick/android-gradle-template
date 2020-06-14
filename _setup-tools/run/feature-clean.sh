@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # import some helper functions
-source `dirname "$0"`/_functions.sh
+source `dirname "$0"`/_feature-functions.sh
 
 task "Clean Project"
 gradle clean
