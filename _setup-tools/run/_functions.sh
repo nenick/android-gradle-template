@@ -3,7 +3,7 @@ function task() {
 }
 
 function gradle() {
-    ./gradlew $* > /dev/null
+    ./gradlew $* > /dev/null 2>&1
 }
 
 function result() {

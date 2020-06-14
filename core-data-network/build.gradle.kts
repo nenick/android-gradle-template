@@ -4,6 +4,21 @@ plugins {
     id("java-library")
     id("kotlin")
     jacoco
+    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
+}
+
+ktlint {
+    enableExperimentalRules.set(true)
+    ignoreFailures.set(true)
+    android.set(false)
+    reporters {
+        customReporters {
+            create("html") {
+                fileExtension = "html"
+                dependency = "com.pinterest.ktlint:ktlint-reporter-html:0.36.0"
+            }
+        }
+    }
 }
 
 dependencies {
@@ -16,7 +31,7 @@ dependencies {
     testImplementation("io.strikt:strikt-core")
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
 }
-afterEvaluate { tasks.forEach { println(it) } }
+
 tasks.jacocoTestReport {
     // tests are required to run before generating the report
     dependsOn(tasks.test)

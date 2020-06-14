@@ -10,3 +10,5 @@ run unit-tests
 run unit-tests-code-coverage
 run android-tests
 run android-tests-code-coverage
+run android-lint
+run kotlin-lint

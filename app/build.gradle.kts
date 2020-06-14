@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     jacoco
+    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
 }
 
 android {
@@ -28,6 +29,25 @@ android {
         }
         getByName("debug") {
             isTestCoverageEnabled = true
+        }
+    }
+
+    lintOptions {
+        isWarningsAsErrors = true
+        isAbortOnError = false
+    }
+}
+
+ktlint {
+    enableExperimentalRules.set(true)
+    ignoreFailures.set(true)
+    android.set(true)
+    reporters {
+        customReporters {
+            create("html") {
+                fileExtension = "html"
+                dependency = "com.pinterest.ktlint:ktlint-reporter-html:0.36.0"
+            }
         }
     }
 }
