@@ -87,3 +87,12 @@ steps:
       targetPath: 'app/build/reports'
       artifactName: 'Test Reports'
     condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Clean Project
+    continueOnError: true
+    inputs:
+      tasks: 'clean-check'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()

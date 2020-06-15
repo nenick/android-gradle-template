@@ -2,6 +2,7 @@
 
 plugins {
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
+    id("de.nenick.project-tasks")
 }
 
 buildscript {
@@ -33,13 +34,5 @@ allprojects {
             dependency("junit:junit:4.13")
             dependency("io.strikt:strikt-core:0.26.1")
         }
-    }
-}
-
-tasks {
-    // Create a task to clean the whole project and puts it into to a sensible group.
-    register("clean", Delete::class) {
-        group = "cleanup"
-        delete = setOf(buildDir, "buildSrc/build")
     }
 }
