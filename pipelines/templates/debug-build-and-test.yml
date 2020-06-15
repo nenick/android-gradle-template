@@ -6,6 +6,24 @@ steps:
     condition: succeededOrFailed()
 
   - task: Gradle@2
+    displayName: Compile BuildSrc
+    inputs:
+      tasks: 'assemble'
+      cwd: 'buildSrc'
+      gradleWrapperFile: '../gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Run BuildSrc Tests
+    inputs:
+      tasks: 'test'
+      cwd: 'buildSrc'
+      gradleWrapperFile: '../gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
     displayName: Build Debug APK
     inputs:
       tasks: 'assembleDebug'
