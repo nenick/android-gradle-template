@@ -80,7 +80,7 @@ steps:
       publishJUnitResults: false
     condition: succeededOrFailed()
 
-  - template: templates/lint-kotlin.yml
+  - template: lint-kotlin.yml
 
   - task: Bash@3
     displayName: Wait for Emulator
