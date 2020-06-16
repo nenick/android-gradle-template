@@ -10,6 +10,6 @@ steps:
   - task: PublishPipelineArtifact@1
     displayName: Publish Test Reports
     inputs:
-      targetPath: 'app/build/reports/ktlintMainSourceSetCheck.html'
+      targetPath: 'app/build/reports/ktlint/ktlintMainSourceSetCheck.html'
       artifactName: 'Lint Kotlin'
     condition: succeededOrFailed()
