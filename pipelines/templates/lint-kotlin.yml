@@ -1,5 +1,5 @@
-stages:
-- task: Gradle@2
+steps:
+  - task: Gradle@2
     displayName: Check Code Style
     inputs:
       tasks: 'ktLintDebugCheck'
