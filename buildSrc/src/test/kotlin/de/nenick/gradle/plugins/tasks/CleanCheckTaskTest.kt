@@ -1,11 +1,10 @@
 package de.nenick.gradle.plugins.tasks
 
-import de.nenick.gradle.plugins.basics.AbstractTaskTest
+import de.nenick.gradle.plugins.basics.TaskTest
 import de.nenick.gradle.plugins.basics.taskDependenciesAsStrings
 import de.nenick.gradle.plugins.basics.withDirectory
 import de.nenick.gradle.plugins.basics.withJavaModule
 import org.gradle.api.GradleException
-import org.junit.Ignore
 import org.junit.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
@@ -14,7 +13,7 @@ import strikt.assertions.hasSize
 import strikt.assertions.isEqualTo
 import strikt.assertions.message
 
-class CleanCheckTaskTest : AbstractTaskTest<CleanCheckTask>(CleanCheckTask::class) {
+class CleanCheckTaskTest : TaskTest<CleanCheckTask>(CleanCheckTask::class) {
 
     @Test
     fun `success when no build directories exists`() {

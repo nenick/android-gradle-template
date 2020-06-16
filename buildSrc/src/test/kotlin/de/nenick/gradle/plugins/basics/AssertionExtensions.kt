@@ -2,6 +2,7 @@ package de.nenick.gradle.plugins.basics
 
 import org.gradle.api.Task
 import strikt.api.Assertion
+import java.io.File
 
 fun Assertion.Builder<Task?>.hasName(expected: String): Assertion.Builder<Task?> =
     assert("has name %s", expected) {
@@ -18,5 +19,13 @@ fun Assertion.Builder<Task?>.hasGroup(expected: String): Assertion.Builder<Task?
             null -> fail(actual = null)
             expected -> pass()
             else -> fail(actual = it.group)
+        }
+    }
+
+fun Assertion.Builder<File>.doesNotExists(): Assertion.Builder<File> =
+    assert("does exists is %s", false) {
+        when (it.exists()) {
+            false -> pass()
+            else -> fail(actual = it.exists())
         }
     }

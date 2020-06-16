@@ -5,6 +5,7 @@ import de.nenick.gradle.plugins.basics.hasName
 import de.nenick.gradle.plugins.tasks.CleanCheckTask
 import org.gradle.api.tasks.Delete
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.Ignore
 import org.junit.Test
 import strikt.api.expectThat
 

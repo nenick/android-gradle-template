@@ -6,9 +6,10 @@ import org.gradle.kotlin.dsl.register
 import org.gradle.testfixtures.ProjectBuilder
 import kotlin.reflect.KClass
 
-abstract class AbstractTaskTest<T : Task>(
+abstract class TaskTest<T : Task>(
     private val taskClass: KClass<T>
 ) {
+    lateinit var project: Project
     lateinit var task: T
 
     fun whenRunTask() {
@@ -19,7 +20,7 @@ abstract class AbstractTaskTest<T : Task>(
     }
 
     fun givenProject(setup: Project.() -> Unit = {}) {
-        val project = ProjectBuilder.builder().build()
+        project = ProjectBuilder.builder().build()
         setup(project)
         task = project.tasks.register("task", taskClass).get()
     }
