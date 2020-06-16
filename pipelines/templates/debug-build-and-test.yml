@@ -10,7 +10,7 @@ steps:
     inputs:
       tasks: 'assemble'
       cwd: 'buildSrc'
-      gradleWrapperFile: '../gradlew'
+      gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()
 
@@ -19,7 +19,7 @@ steps:
     inputs:
       tasks: 'test'
       cwd: 'buildSrc'
-      gradleWrapperFile: '../gradlew'
+      gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()
 
