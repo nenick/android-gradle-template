@@ -5,7 +5,7 @@ function run() {
   ./$SCRIPT_FOLDER/run/feature-$1.sh
 }
 
-run clean
+./gradlew clean-check
 run unit-tests
 run unit-tests-code-coverage
 run android-tests

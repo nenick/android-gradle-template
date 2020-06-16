@@ -107,6 +107,7 @@ steps:
     condition: succeededOrFailed()
 
   - task: Gradle@2
+    # This task is not necessary, just to test that it really works like intended
     displayName: Clean Project
     continueOnError: true
     inputs:
