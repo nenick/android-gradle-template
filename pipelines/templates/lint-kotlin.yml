@@ -1,0 +1,15 @@
+stages:
+- task: Gradle@2
+    displayName: Check Code Style
+    inputs:
+      tasks: 'ktLintDebugCheck'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: PublishPipelineArtifact@1
+    displayName: Publish Test Reports
+    inputs:
+      targetPath: 'app/build/reports/ktlintMainSourceSetCheck.html'
+      artifactName: 'Lint Kotlin'
+    condition: succeededOrFailed()

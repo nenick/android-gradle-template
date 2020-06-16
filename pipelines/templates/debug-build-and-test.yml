@@ -11,7 +11,9 @@ steps:
       tasks: 'test'
       cwd: 'buildSrc'
       gradleWrapperFile: 'gradlew'
-      publishJUnitResults: false
+      publishJUnitResults: true
+        testResultsFiles: 'buildSrc/**/TEST-*.xml'
+        testRunTitle: 'buildSrc Tests'
     condition: succeededOrFailed()
 
   - task: Gradle@2
@@ -50,13 +52,23 @@ steps:
     condition: succeededOrFailed()
 
   - task: Gradle@2
-    displayName: Run Unit Tests
+    displayName: Run app Unit Tests
     inputs:
-      tasks: 'testDebug'
+      tasks: ':app:testDebug'
       gradleWrapperFile: 'gradlew'
       publishJUnitResults: true
-      testResultsFiles: '**/TEST-*.xml'
-      testRunTitle: 'Unit Tests'
+      testResultsFiles: 'app/**/TEST-*.xml'
+      testRunTitle: 'Unit Tests - app'
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: Run core-data-network Unit Tests
+    inputs:
+      tasks: ':app:testDebug'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: true
+      testResultsFiles: 'core-data-network/**/TEST-*.xml'
+      testRunTitle: 'Unit Tests - core-data-network'
     condition: succeededOrFailed()
 
   - task: Gradle@2
@@ -68,13 +80,7 @@ steps:
       publishJUnitResults: false
     condition: succeededOrFailed()
 
-  - task: Gradle@2
-    displayName: Check Code Style
-    inputs:
-      tasks: 'ktLintDebugCheck'
-      gradleWrapperFile: 'gradlew'
-      publishJUnitResults: false
-    condition: succeededOrFailed()
+  - template: templates/lint-kotlin.yml
 
   - task: Bash@3
     displayName: Wait for Emulator
