@@ -6,19 +6,29 @@ steps:
     condition: succeededOrFailed()
 
   - task: Gradle@2
-    displayName: Compile BuildSrc
+    displayName: Run buildSrc Tests
     inputs:
-      tasks: 'assemble'
+      tasks: 'test'
       cwd: 'buildSrc'
       gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()
 
   - task: Gradle@2
-    displayName: Run BuildSrc Tests
+    displayName: Build buildSrc
     inputs:
-      tasks: 'test'
+      tasks: 'build'
       cwd: 'buildSrc'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    # This task is not necessary, just to test that it really works like intended
+    displayName: Clean Project
+    continueOnError: true
+    inputs:
+      tasks: 'clean-check'
       gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()
@@ -104,14 +114,4 @@ steps:
     inputs:
       targetPath: 'app/build/reports'
       artifactName: 'Test Reports'
-    condition: succeededOrFailed()
-
-  - task: Gradle@2
-    # This task is not necessary, just to test that it really works like intended
-    displayName: Clean Project
-    continueOnError: true
-    inputs:
-      tasks: 'clean-check'
-      gradleWrapperFile: 'gradlew'
-      publishJUnitResults: false
     condition: succeededOrFailed()
