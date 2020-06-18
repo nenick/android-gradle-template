@@ -1,6 +1,6 @@
 steps:
   - task: Gradle@2
-    displayName: Check Code Style
+    displayName: Code Checks
     inputs:
       tasks: 'ktLintDebugCheck'
       gradleWrapperFile: 'gradlew'
@@ -8,8 +8,15 @@ steps:
     condition: succeededOrFailed()
 
   - task: PublishPipelineArtifact@1
-    displayName: Publish Test Reports
+    displayName: Code Checks Report - app
     inputs:
-      targetPath: 'app/build/reports/ktlint/ktlintMainSourceSetCheck.html'
-      artifactName: 'Lint Kotlin'
+      targetPath: 'app/build/reports/ktlint'
+      artifactName: 'Code Checks - app'
+    condition: succeededOrFailed()
+
+  - task: PublishPipelineArtifact@1
+    displayName: Code Checks Report - core-data-network
+    inputs:
+      targetPath: 'core-data-network/build/reports/ktlint'
+      artifactName: 'Code Checks - core-data-network'
     condition: succeededOrFailed()
