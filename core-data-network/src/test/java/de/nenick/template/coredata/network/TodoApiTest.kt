@@ -12,7 +12,6 @@ import org.junit.Test
 import strikt.api.expectThat
 import strikt.assertions.isA
 
-
 class TodoApiTest {
 
     @get:Rule

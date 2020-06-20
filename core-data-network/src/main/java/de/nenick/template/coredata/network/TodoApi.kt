@@ -16,7 +16,6 @@ class TodoApi(
 ) {
 
     internal object Endpoint {
-        //var baseUrl =
         fun todoList() = "todos"
         fun todoById(id: Int) = "todos/$id"
     }
