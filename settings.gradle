@@ -1,4 +1,2 @@
-rootProject.name = "Nenick Template"
-
 include ':app'
 include ':core-data-network'
