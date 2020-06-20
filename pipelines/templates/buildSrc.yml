@@ -14,7 +14,7 @@ steps:
     displayName: buildSrc ktlint
     inputs:
       cwd: 'buildSrc'
-      tasks: 'ktLintCheck'
+      tasks: 'ktlintCheck'
       gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()
