@@ -5,25 +5,7 @@ steps:
       filePath: 'pipelines/templates/android-emulator-install.sh'
     condition: succeededOrFailed()
 
-  - task: Gradle@2
-    displayName: Run buildSrc Tests
-    inputs:
-      tasks: 'test'
-      cwd: 'buildSrc'
-      gradleWrapperFile: 'gradlew'
-      publishJUnitResults: true
-      testResultsFiles: 'buildSrc/**/TEST-*.xml'
-      testRunTitle: 'buildSrc Tests'
-    condition: succeededOrFailed()
-
-  - task: Gradle@2
-    displayName: Build buildSrc
-    inputs:
-      tasks: 'build'
-      cwd: 'buildSrc'
-      gradleWrapperFile: 'gradlew'
-      publishJUnitResults: false
-    condition: succeededOrFailed()
+  - template: buildSrc.yml
 
   - task: Gradle@2
     # This task is not necessary, just to test that it really works like intended
@@ -80,7 +62,7 @@ steps:
       publishJUnitResults: false
     condition: succeededOrFailed()
 
-  - template: lint-kotlin.yml
+  - template: ktlint.yml
 
   - task: Bash@3
     displayName: Wait for Emulator

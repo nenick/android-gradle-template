@@ -1,0 +1,36 @@
+steps:
+  - task: Gradle@2
+    displayName: buildSrc tests
+    inputs:
+      cwd: 'buildSrc'
+      tasks: 'test'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: true
+      testResultsFiles: 'buildSrc/**/TEST-*.xml'
+      testRunTitle: 'buildSrc Tests'
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: buildSrc code checks
+    inputs:
+      cwd: 'buildSrc'
+      tasks: 'ktLintDebugCheck'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: PublishPipelineArtifact@1
+    displayName: buildSrc code checks artefact
+    inputs:
+      targetPath: 'buildSrc/build/reports/ktlint'
+      artifactName: 'code checks - buildSrc'
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: buildSrc build
+    inputs:
+      cwd: 'buildSrc'
+      tasks: 'build'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
