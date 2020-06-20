@@ -4,6 +4,6 @@ import org.gradle.api.tasks.Delete
 
 open class CleanTask : Delete() {
     init {
-        delete = setOf("build")
+        delete = setOf(project.buildDir)
     }
 }

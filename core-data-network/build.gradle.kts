@@ -4,21 +4,7 @@ plugins {
     id("java-library")
     id("kotlin")
     jacoco
-    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
-}
-
-ktlint {
-    enableExperimentalRules.set(true)
-    ignoreFailures.set(true)
-    android.set(false)
-    reporters {
-        customReporters {
-            create("html") {
-                fileExtension = "html"
-                dependency = "com.pinterest.ktlint:ktlint-reporter-html:0.36.0"
-            }
-        }
-    }
+    id("nenick-kotlin-module")
 }
 
 dependencies {

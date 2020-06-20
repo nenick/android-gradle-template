@@ -1,9 +1,9 @@
 plugins {
     id("com.android.application")
-    kotlin("android")
-    kotlin("android.extensions")
-    jacoco
-    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("jacoco")
+    id("nenick-kotlin-module")
 }
 
 android {
@@ -37,7 +37,7 @@ android {
         isAbortOnError = false
     }
 }
-
+/*
 ktlint {
     enableExperimentalRules.set(true)
     ignoreFailures.set(true)
@@ -51,7 +51,7 @@ ktlint {
         }
     }
 }
-
+*/
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("androidx.core:core-ktx:1.3.0")
@@ -82,11 +82,11 @@ tasks.register("jacocoTestReport", JacocoReport::class) {
 
     // The lines below make sure we can report against Kotlin and exclude some Android Stuff
     val fileFilter = arrayOf(
-            "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
-            "**/*Test*.*", "android/**/*.*"
+        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
+        "**/*Test*.*", "android/**/*.*"
     )
     val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
-    val kotlinClasses = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
+    val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
     val mainSrc = "$project.projectDir/src/main/java"
 
     sourceDirectories.setFrom(files(mainSrc))
@@ -106,7 +106,7 @@ tasks.register("jacocoAndroidTestReport", JacocoReport::class) {
         "**/*Test*.*", "android/**/*.*"
     )
     val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
-    val kotlinClasses = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
+    val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
     val mainSrc = "$project.projectDir/src/main/java"
 
     sourceDirectories.setFrom(files(mainSrc))
@@ -126,7 +126,7 @@ tasks.register("jacocoUnitTestReport", JacocoReport::class) {
         "**/*Test*.*", "android/**/*.*"
     )
     val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
-    val kotlinClasses = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
+    val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
     val mainSrc = "$project.projectDir/src/main/java"
 
     sourceDirectories.setFrom(files(mainSrc))

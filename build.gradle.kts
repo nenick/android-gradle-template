@@ -2,7 +2,7 @@
 
 plugins {
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    id("de.nenick.project-tasks")
+    id("nenick-android-project")
 }
 
 buildscript {

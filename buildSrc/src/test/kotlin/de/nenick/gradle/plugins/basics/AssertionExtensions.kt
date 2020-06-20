@@ -1,8 +1,8 @@
 package de.nenick.gradle.plugins.basics
 
+import java.io.File
 import org.gradle.api.Task
 import strikt.api.Assertion
-import java.io.File
 
 fun Assertion.Builder<Task?>.hasName(expected: String): Assertion.Builder<Task?> =
     assert("has name %s", expected) {

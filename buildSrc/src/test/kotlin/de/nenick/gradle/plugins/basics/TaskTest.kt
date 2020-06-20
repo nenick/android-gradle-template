@@ -1,34 +1,31 @@
 package de.nenick.gradle.plugins.basics
 
+import kotlin.reflect.KClass
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.kotlin.dsl.register
 import org.gradle.testfixtures.ProjectBuilder
-import kotlin.reflect.KClass
 
 abstract class TaskTest<T : Task>(
     private val taskClass: KClass<T>
 ) {
     lateinit var project: Project
-    lateinit var task: T
+    lateinit var taskUnderTest: T
 
     fun whenRunTask() {
-        task.taskDependencies.getDependencies(task).forEach { dependency ->
-            dependency.actions.forEach { it.execute(dependency) }
-        }
-        task.actions.forEach { it.execute(task) }
+        taskUnderTest.actions.forEach { it.execute(taskUnderTest) }
     }
 
-    fun givenProject(setup: Project.() -> Unit = {}) {
+    fun givenEmptyProject(setup: Project.() -> Unit = {}) {
         project = ProjectBuilder.builder().build()
         setup(project)
-        task = project.tasks.register("task", taskClass).get()
+        taskUnderTest = project.tasks.register("task", taskClass).get()
     }
 
-    fun givenJavaProject(setup: Project.() -> Unit) {
-        givenProject {
+    fun givenKotlinProject(setup: Project.() -> Unit = {}) {
+        givenEmptyProject {
+            plugins.apply("kotlin")
             setup(this)
-            plugins.apply("java")
         }
     }
 }
