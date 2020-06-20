@@ -8,16 +8,6 @@ steps:
   - template: buildSrc.yml
 
   - task: Gradle@2
-    # This task is not necessary, just to test that it really works like intended
-    displayName: Clean Project
-    continueOnError: true
-    inputs:
-      tasks: 'clean-check'
-      gradleWrapperFile: 'gradlew'
-      publishJUnitResults: false
-    condition: succeededOrFailed()
-
-  - task: Gradle@2
     displayName: Build Debug APK
     inputs:
       tasks: 'assembleDebug'
