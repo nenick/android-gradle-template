@@ -1,6 +1,6 @@
 steps:
   - task: Gradle@2
-    displayName: buildSrc tests
+    displayName: Test buildSrc
     inputs:
       cwd: 'buildSrc'
       tasks: 'test'
@@ -11,7 +11,7 @@ steps:
     condition: succeededOrFailed()
 
   - task: Gradle@2
-    displayName: buildSrc code checks
+    displayName: Ktlint buildSrc
     inputs:
       cwd: 'buildSrc'
       tasks: 'ktLintCheck'
@@ -20,14 +20,14 @@ steps:
     condition: succeededOrFailed()
 
   - task: PublishPipelineArtifact@1
-    displayName: buildSrc code checks artefact
+    displayName: Publish ktlint buildSrc
     inputs:
       targetPath: 'buildSrc/build/reports/ktlint'
-      artifactName: 'code checks - buildSrc'
+      artifactName: 'ktlint - buildSrc'
     condition: succeededOrFailed()
 
   - task: Gradle@2
-    displayName: buildSrc build
+    displayName: Build buildSrc
     inputs:
       cwd: 'buildSrc'
       tasks: 'build'
