@@ -10,7 +10,7 @@ import strikt.assertions.message
 
 class KtlintOutputTestTaskTest : TaskTest<KtlintOutputTestTask>(KtlintOutputTestTask::class) {
 
-    private val errorMessage = "found modules where ktLint reports are missing"
+    private val errorMessage = "found modules where ktlint reports are missing"
 
     @Test
     fun `succeed when non kotlin project`() {

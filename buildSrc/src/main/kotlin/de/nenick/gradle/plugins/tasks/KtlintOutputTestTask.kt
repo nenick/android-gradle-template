@@ -9,13 +9,13 @@ open class KtlintOutputTestTask : DefaultTask() {
 
     @TaskAction
     fun check() {
-        val missingKtLintReports = findMissingKtLintReports()
-        if (missingKtLintReports.isNotEmpty()) {
-            throw GradleException("found modules where ktLint reports are missing\n$missingKtLintReports")
+        val missingKtlintReports = findMissingKtlintReports()
+        if (missingKtlintReports.isNotEmpty()) {
+            throw GradleException("found modules where ktlint reports are missing\n$missingKtlintReports")
         }
     }
 
-    private fun findMissingKtLintReports() = listOf(*allProjectReportDir(), *buildSrcReportDir())
+    private fun findMissingKtlintReports() = listOf(*allProjectReportDir(), *buildSrcReportDir())
         .filter { it.listFiles().isNullOrEmpty() }
         .map { it.relativeTo(project.projectDir) }
 
