@@ -83,7 +83,7 @@ steps:
     inputs:
       codeCoverageTool: 'JaCoCo'
       summaryFileLocation: 'app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
-      pathToSources: '$(System.DefaultWorkingDirectory)/app/src/main/java/'
+      pathToSources: '**/src/main/*'
       failIfCoverageEmpty: true
     condition: succeededOrFailed()
 
