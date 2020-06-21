@@ -5,10 +5,14 @@ function run() {
   ./$SCRIPT_FOLDER/run/feature-$1.sh
 }
 
-./gradlew clean-check
+./gradlew clean
+./gradlew clean-test
+
 run unit-tests
 run unit-tests-code-coverage
 run android-tests
 run android-tests-code-coverage
 run android-lint
-run kotlin-lint
+
+./gradlew ktlintCheck
+./gradlew ktlint-test
