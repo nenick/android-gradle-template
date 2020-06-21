@@ -2,7 +2,7 @@ steps:
   - task: Gradle@2
     displayName: Code Checks
     inputs:
-      tasks: 'ktLintDebugCheck'
+      tasks: 'ktlintCheck'
       gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()
