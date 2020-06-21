@@ -15,19 +15,20 @@ open class KtlintOutputTestTask : DefaultTask() {
         }
     }
 
-    private fun findMissingKtLintReports() = listOf(*allProjectsReportDir(), *buildSrcReportDir())
+    private fun findMissingKtLintReports() = listOf(*allProjectReportDir(), *buildSrcReportDir())
         .filter { it.listFiles().isNullOrEmpty() }
         .map { it.relativeTo(project.projectDir) }
 
-    private fun allProjectsReportDir() = project.allprojects
+    private fun allProjectReportDir() = project.allprojects
         .filter { it.plugins.hasPlugin("kotlin") || it.plugins.hasPlugin("kotlin-android") }
         .map { File(it.projectDir, "build/reports/ktlint") }
         .toTypedArray()
 
-    private fun buildSrcReportDir() = mutableListOf<File>().apply {
-        val buildSrcDir = File("${project.projectDir}/buildSrc")
-        if (buildSrcDir.exists()) {
-            add(File(buildSrcDir, "build/reports/ktlint"))
-        }
-    }.toTypedArray()
+    private fun buildSrcReportDir() = mutableListOf<File>()
+        .apply {
+            val buildSrcDir = File("${project.projectDir}/buildSrc")
+            if (buildSrcDir.exists()) {
+                add(File(buildSrcDir, "build/reports/ktlint"))
+            }
+        }.toTypedArray()
 }

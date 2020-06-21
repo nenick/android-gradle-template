@@ -21,8 +21,9 @@ class KotlinModulePluginTest {
         expectThat(project.extensions.getByType<KtlintExtension>()) {
             assertThat("experimental checks enabled") { it.enableExperimentalRules.get() }
             assertThat("android specific checks enabled") { it.android.get() }
-            assertThat("rule no-wildcards-import is disabled") { it.disabledRules.get().contains("no-wildcard-imports") }
-            assertThat("rule no-wildcards-import is disabled") { it.disabledRules.get().contains("no-wildcard-imports") }
+            assertThat("rule no-wildcard-imports is disabled") { it.disabledRules.get().contains("no-wildcard-imports") }
+            // TODO How to test that?
+            // assertThat("html reporter is enabled") {  }
         }
     }
 }
