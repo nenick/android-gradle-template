@@ -82,7 +82,7 @@ steps:
     displayName: Report Coverage
     inputs:
       codeCoverageTool: 'JaCoCo'
-      summaryFileLocation: 'core-data-network/build/reports/jacoco/test/xml/jacocoTestReport.xml'
+      summaryFileLocation: 'core-data-network/build/reports/jacoco/test/jacocoTestReport.xml'
       #pathToSources: 'build/coverage/sources'
       failIfCoverageEmpty: true
     condition: succeededOrFailed()
