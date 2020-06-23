@@ -78,12 +78,18 @@ steps:
       publishJUnitResults: false
     condition: succeededOrFailed()
 
+  - task: Bash@3
+    displayName: Collect Sources
+    inputs:
+      filePath: 'pipelines/templates/collect-sources.sh'
+    condition: succeededOrFailed()
+
   - task: PublishCodeCoverageResults@1
     displayName: Report Coverage
     inputs:
       codeCoverageTool: 'JaCoCo'
       summaryFileLocation: 'core-data-network/build/reports/jacoco/test/jacocoTestReport.xml'
-      pathToSources: 'core-data-network/src/main/java'
+      pathToSources: 'build/coverage/sources'
       failIfCoverageEmpty: true
     condition: succeededOrFailed()
 
