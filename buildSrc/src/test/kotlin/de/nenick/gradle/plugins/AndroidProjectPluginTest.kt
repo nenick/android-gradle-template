@@ -2,9 +2,10 @@ package de.nenick.gradle.plugins
 
 import de.nenick.gradle.plugins.basics.hasGroup
 import de.nenick.gradle.plugins.basics.hasName
-import de.nenick.gradle.plugins.tasks.CleanOutputTestTask
+import de.nenick.gradle.plugins.tasks.output.CleanOutputTask
 import de.nenick.gradle.plugins.tasks.CleanTask
-import de.nenick.gradle.plugins.tasks.KtlintOutputTestTask
+import de.nenick.gradle.plugins.tasks.output.JacocoOutputTask
+import de.nenick.gradle.plugins.tasks.output.KtlintOutputTask
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 import strikt.api.expectThat
@@ -32,19 +33,28 @@ class AndroidProjectPluginTest {
     }
 
     @Test
-    fun `adds clean-check tasks`() {
+    fun `adds clean-test tasks`() {
         expectThat(project.tasks).one {
-            isA<CleanOutputTestTask>()
+            isA<CleanOutputTask>()
             hasName("clean-test")
             hasGroup("output tests")
         }
     }
 
     @Test
-    fun `adds ktLint-check tasks`() {
+    fun `adds ktLint-test tasks`() {
         expectThat(project.tasks).one {
-            isA<KtlintOutputTestTask>()
+            isA<KtlintOutputTask>()
             hasName("ktlint-test")
+            hasGroup("output tests")
+        }
+    }
+
+    @Test
+    fun `adds jacoco-test tasks`() {
+        expectThat(project.tasks).one {
+            isA<JacocoOutputTask>()
+            hasName("jacoco-test")
             hasGroup("output tests")
         }
     }

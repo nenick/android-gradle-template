@@ -1,11 +1,17 @@
-package de.nenick.gradle.plugins.tasks
+package de.nenick.gradle.plugins.tasks.output
 
 import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
 
-open class CleanOutputTestTask : DefaultTask() {
+open class CleanOutputTask : DefaultTask() {
+
+    init {
+        dependsOn(project.getTasksByName("clean", true))
+    }
+
+    final override fun dependsOn(vararg paths: Any) = super.dependsOn(*paths)
 
     @TaskAction
     fun checkAllBuildFoldersDeleted() {

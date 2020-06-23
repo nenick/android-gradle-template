@@ -1,16 +1,36 @@
-package de.nenick.gradle.plugins.tasks
+package de.nenick.gradle.plugins.tasks.output
 
 import de.nenick.gradle.plugins.basics.*
+import de.nenick.gradle.plugins.basics.extensions.withDirectory
 import de.nenick.gradle.plugins.basics.extensions.withFile
 import org.gradle.api.GradleException
+import org.jlleitschuh.gradle.ktlint.KtlintPlugin
 import org.junit.Test
+import strikt.api.expectThat
 import strikt.api.expectThrows
+import strikt.assertions.contains
+import strikt.assertions.hasSize
 import strikt.assertions.isEqualTo
 import strikt.assertions.message
 
-class KtlintOutputTestTaskTest : TaskTest<KtlintOutputTestTask>(KtlintOutputTestTask::class) {
+class KtlintOutputTaskTest : TaskTest<KtlintOutputTask>(KtlintOutputTask::class) {
 
     private val errorMessage = "found modules where ktlint reports are missing"
+
+    @Test
+    fun `depends on all project and modules ktlintCheck tasks`() {
+        givenKotlinProject {
+            plugins.apply(KtlintPlugin::class.java)
+            withKotlinModule("module-alpha") { plugins.apply(KtlintPlugin::class.java) }
+            withKotlinModule("module-beta") { plugins.apply(KtlintPlugin::class.java) }
+        }
+        expectThat(taskUnderTest.taskDependenciesAsStrings) {
+            hasSize(3)
+            contains("task ':ktlintCheck'")
+            contains("task ':module-alpha:ktlintCheck'")
+            contains("task ':module-beta:ktlintCheck'")
+        }
+    }
 
     @Test
     fun `succeed when non kotlin project`() {
@@ -22,7 +42,7 @@ class KtlintOutputTestTaskTest : TaskTest<KtlintOutputTestTask>(KtlintOutputTest
     @Test
     fun `success if reports exists`() {
         givenKotlinProject {
-            withDirectory("build/reports/ktlint") { withFile("any-ktlint-report.txt") }
+            projectDir.withDirectory("build/reports/ktlint") { withFile("any-ktlint-report.txt") }
         }
         whenRunTask()
     }
@@ -36,7 +56,7 @@ class KtlintOutputTestTaskTest : TaskTest<KtlintOutputTestTask>(KtlintOutputTest
 
     @Test
     fun `fails when buildSrc has no report`() {
-        givenEmptyProject() { withDirectory("buildSrc") }
+        givenEmptyProject() { projectDir.withDirectory("buildSrc") }
         expectThrows<GradleException> { whenRunTask() }
             .message.isEqualTo("$errorMessage\n[buildSrc/build/reports/ktlint]")
     }

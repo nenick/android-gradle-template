@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("java-library")
     id("kotlin")
-    jacoco
     id("nenick-kotlin-module")
 }
 
@@ -19,8 +18,14 @@ dependencies {
 }
 
 tasks.jacocoTestReport {
-    // tests are required to run before generating the report
     dependsOn(tasks.test)
+    classDirectories.setFrom(
+        classDirectories.files.map {
+            fileTree(it) {
+                exclude("**/*\$\$inlined*")
+            }
+        }
+    )
 }
 
 tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }

@@ -1,7 +1,8 @@
 package de.nenick.gradle.plugins.basics
 
-import java.io.File
+import com.android.build.gradle.AppExtension
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder
 
 fun Project.withEmptyModule(name: String, setup: Project.() -> Unit = {}) {
@@ -26,17 +27,14 @@ fun Project.withAndroidModule(name: String, setup: Project.() -> Unit = {}) {
         .withName(name)
         .withParent(this)
         .build()
-    project.plugins.apply("android")
-    project.plugins.apply("kotlin-android")
+    project.applyAndroidApplication()
     setup(project)
 }
 
-fun Project.withDirectory(name: String, setup: File.() -> Unit = {}) {
-    val directory = File(projectDir, name)
-    directory.mkdirs()
-    setup(directory)
-}
-
-fun Project.withDirectories(vararg names: String, setup: File.() -> Unit = {}) {
-    names.forEach { withDirectory(it, setup) }
+fun Project.applyAndroidApplication() {
+    plugins.apply("com.android.application")
+    plugins.apply("kotlin-android")
+    extensions.getByType<AppExtension>().run {
+        compileSdkVersion(29)
+    }
 }

@@ -28,4 +28,18 @@ abstract class TaskTest<T : Task>(
             setup(this)
         }
     }
+
+    fun givenJavaProject(setup: Project.() -> Unit = {}) {
+        givenEmptyProject {
+            plugins.apply("java")
+            setup(this)
+        }
+    }
+
+    fun givenAndroidKotlinProject(setup: Project.() -> Unit = {}) {
+        givenEmptyProject {
+            applyAndroidApplication()
+            setup(this)
+        }
+    }
 }

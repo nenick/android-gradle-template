@@ -2,8 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
-    id("jacoco")
-    id("nenick-kotlin-module")
+    id("nenick-android-module")
 }
 
 android {
@@ -37,21 +36,7 @@ android {
         isAbortOnError = false
     }
 }
-/*
-ktlint {
-    enableExperimentalRules.set(true)
-    ignoreFailures.set(true)
-    android.set(true)
-    reporters {
-        customReporters {
-            create("html") {
-                fileExtension = "html"
-                dependency = "com.pinterest.ktlint:ktlint-reporter-html:0.36.0"
-            }
-        }
-    }
-}
-*/
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("androidx.core:core-ktx:1.3.0")
@@ -65,71 +50,60 @@ dependencies {
 }
 
 afterEvaluate {
-
-    // running unit tests in release variant brings no value yet, so it gets the same behaviour like java lib modules
+    // Running unit tests in release variant brings no value yet.
+    // Java library modules also run only for "debug" by default.
     tasks.findByName("testReleaseUnitTest")!!.enabled = false
 }
 
-jacoco {
-    toolVersion = "0.8.5"
-}
+// One task to run all variant jacocoTestReport tasks.
+val jacocoTestReport = tasks.register("jacocoTestReport").get()
 
-tasks.register("jacocoTestReport", JacocoReport::class) {
-    reports {
-        xml.isEnabled = true
-        html.isEnabled = true
+android.applicationVariants.all {
+    val variantName = name.capitalize()
+
+    if (!variantName.contains("release", true)) {
+        tasks.register("jacoco${variantName}UnitTestReport", JacocoReport::class) {
+            group = "Verification"
+            description = "Generate Jacoco unit test coverage reports for the $variantName build."
+            dependsOn("test${variantName}UnitTest")
+
+            reports.html.apply {
+                isEnabled = true
+                destination = project.reporting.file("jacoco/test$variantName/html")
+            }
+
+            val mainSrc = sourceSets.map { it.javaDirectories }
+            val execFiles = "$buildDir/jacoco/test${variantName}UnitTest.exec"
+            val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
+            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName")
+
+            sourceDirectories.setFrom(files(mainSrc))
+            classDirectories.setFrom(javaClasses, kotlinClasses)
+            executionData.setFrom(execFiles)
+        }.also {
+            jacocoTestReport.dependsOn(it)
+        }
+
+        tasks.register("jacoco${variantName}ConnectedTestReport", JacocoReport::class) {
+            group = "Verification"
+            description = "Generate Jacoco connected test coverage reports for the $variantName build."
+            dependsOn("connected${variantName}AndroidTest")
+
+            reports.html.apply {
+                isEnabled = true
+                destination = project.reporting.file("jacoco/connected$variantName/html")
+            }
+
+            val mainSrc = sourceSets.map { it.javaDirectories }
+            val execFiles = fileTree("$buildDir/outputs/code_coverage/${this@all.name}AndroidTest/connected/") { include("*-coverage.ec") }
+            val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
+            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName")
+
+            sourceDirectories.setFrom(files(mainSrc))
+            classDirectories.setFrom(javaClasses, kotlinClasses)
+            executionData.setFrom(execFiles)
+        }.also {
+            jacocoTestReport.dependsOn(it)
+        }
     }
-
-    // The lines below make sure we can report against Kotlin and exclude some Android Stuff
-    val fileFilter = arrayOf(
-        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
-        "**/*Test*.*", "android/**/*.*"
-    )
-    val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
-    val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
-    val mainSrc = "$project.projectDir/src/main/java"
-
-    sourceDirectories.setFrom(files(mainSrc))
-    classDirectories.setFrom(debugTree, kotlinClasses)
-    executionData.setFrom(fileTree(buildDir) { include("**/*.exec", "**/*coverage.ec") })
-}
-
-tasks.register("jacocoAndroidTestReport", JacocoReport::class) {
-    reports {
-        xml.isEnabled = true
-        html.isEnabled = true
-    }
-
-    // The lines below make sure we can report against Kotlin and exclude some Android Stuff
-    val fileFilter = arrayOf(
-        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
-        "**/*Test*.*", "android/**/*.*"
-    )
-    val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
-    val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
-    val mainSrc = "$project.projectDir/src/main/java"
-
-    sourceDirectories.setFrom(files(mainSrc))
-    classDirectories.setFrom(debugTree, kotlinClasses)
-    executionData.setFrom(fileTree(buildDir) { include("**/*coverage.ec") })
-}
-
-tasks.register("jacocoUnitTestReport", JacocoReport::class) {
-    reports {
-        xml.isEnabled = true
-        html.isEnabled = true
-    }
-
-    // The lines below make sure we can report against Kotlin and exclude some Android Stuff
-    val fileFilter = arrayOf(
-        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
-        "**/*Test*.*", "android/**/*.*"
-    )
-    val debugTree = fileTree("$project.buildDir/intermediates/javac/debug/compileDebugJavaWithJavac/classes/") { exclude(*fileFilter) }
-    val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/debug") { exclude(*fileFilter) }
-    val mainSrc = "$project.projectDir/src/main/java"
-
-    sourceDirectories.setFrom(files(mainSrc))
-    classDirectories.setFrom(debugTree, kotlinClasses)
-    executionData.setFrom(fileTree(buildDir) { include("**/*.exec") })
 }
