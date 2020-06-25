@@ -2,6 +2,6 @@ parameters:
   param : []
 
 steps:
-  - ${{each module in parameters.param}}
-    - script: "echo hallo"
+  - ${{each filename in parameters.param}}
+      - scripts: 'echo ${{ filename  }}'
       
