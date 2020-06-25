@@ -43,6 +43,14 @@ steps:
       testRunTitle: 'Unit Tests - core-data-network'
     condition: succeededOrFailed()
 
+#  - template: unit-tests-android.yaml
+#      parameters:
+#        param: ["app"]
+
+  - template: unit-tests-kotlin.yaml
+      parameters:
+        param: ["core-data-network"]
+
   - task: Gradle@2
     displayName: Check Android Issues
     continueOnError: true
