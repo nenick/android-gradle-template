@@ -3,7 +3,7 @@ parameters:
 
 steps:
   - ${{each module in parameters.param}}
-    - task: Gradle@2
+    - Gradle@2
       displayName: Run ${{module}} Unit Tests
       inputs:
         tasks: ':${{module}}:test'
