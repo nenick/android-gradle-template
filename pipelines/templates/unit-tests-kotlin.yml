@@ -2,5 +2,13 @@ parameters:
   param : []
 
 steps:
-  - ${{ each filename in parameters.param }}
-      - scripts: 'echo ${{ filename  }}'
+  - ${{each module in parameters.param}}:
+    - task: Gradle@2
+      displayName: Run ${{module}} Unit Tests
+      inputs:
+        tasks: ':${{module}}:test'
+        gradleWrapperFile: 'gradlew'
+        publishJUnitResults: true
+        testResultsFiles: '${{module}}/**/TEST-*.xml'
+        testRunTitle: 'Unit Tests - ${{module}}'
+      condition: succeededOrFailed()
