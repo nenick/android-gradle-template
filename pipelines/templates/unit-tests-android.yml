@@ -4,9 +4,9 @@ parameters:
 steps:
   - ${{each module in parameters.param}}:
     - task: Gradle@2
-      displayName: Unit tests ${{module}}
+      displayName: Unit test ${{module}}
       inputs:
-        tasks: ':${{module}}:test'
+        tasks: ':${{module}}:testDebug'
         gradleWrapperFile: 'gradlew'
         publishJUnitResults: true
         testResultsFiles: '${{module}}/**/TEST-*.xml'
