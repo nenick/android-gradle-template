@@ -44,12 +44,12 @@ steps:
     condition: succeededOrFailed()
 
 #  - template: unit-tests-android.yaml
-#      parameters:
-#        param: ["app"]
+#    parameters:
+#      param: ["app"]
 
   - template: unit-tests-kotlin.yaml
-      parameters:
-        param: ["core-data-network"]
+    parameters:
+      param: ["core-data-network"]
 
   - task: Gradle@2
     displayName: Check Android Issues
