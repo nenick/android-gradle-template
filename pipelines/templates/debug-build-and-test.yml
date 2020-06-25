@@ -43,11 +43,11 @@ steps:
       testRunTitle: 'Unit Tests - core-data-network'
     condition: succeededOrFailed()
 
-#  - template: unit-tests-android.yaml
+#  - template: unit-tests-android.yml
 #    parameters:
 #      param: ["app"]
 
-  - template: unit-tests-kotlin.yaml
+  - template: unit-tests-kotlin.yml
     parameters:
       param: ["core-data-network"]
 
