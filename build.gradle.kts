@@ -71,12 +71,12 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
 
         classDirectories.setFrom(classDirectories.from.plus(kotlinClasses))
 
-
-        tasks.findByName("jacocoDebugConnectedTestReport")?.run {
-            executionData(fileTree("${buildDir}/outputs/code_coverage/debugAndroidTest/connected/*"))
+        val subproject = this
+        subproject.tasks.findByName("jacocoDebugConnectedTestReport")?.run {
+            executionData(fileTree("${subproject.buildDir}/outputs/code_coverage/debugAndroidTest/connected/*"))
         }
 
-        tasks.matching({ it.extensions.findByType<JacocoTaskExtension>() != null }).configureEach {
+        subproject.tasks.matching({ it.extensions.findByType<JacocoTaskExtension>() != null }).configureEach {
             if (!name.contains("release", true)) {
                 executionData(this)
             }
@@ -86,7 +86,7 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
         // you may want to set up a task dependency between them as shown below.
         // Note that this requires the `test` tasks to be resolved eagerly (see `forEach`) which
         // may have a negative effect on the configuration time of your build.
-        tasks.withType<JacocoReport>().forEach {
+        subproject.tasks.withType<JacocoReport>().forEach {
             rootProject.tasks["jacocoTestReportMerge"].dependsOn(it)
         }
 
@@ -97,5 +97,14 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
                 }
             }
         )
+
+        //val mainSrc = sourceSets.map { it.javaDirectories }
+        //val execFiles = "$buildDir/jacoco/test${variantName}UnitTest.exec"
+//    val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
+//    val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName")
+//
+//    sourceDirectories.setFrom(files(mainSrc))
+//    classDirectories.setFrom(javaClasses, kotlinClasses)
+//    executionData.setFrom(execFiles)
     }
 }
