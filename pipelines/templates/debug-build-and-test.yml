@@ -15,6 +15,12 @@ steps:
       publishJUnitResults: false
     condition: succeededOrFailed()
 
+  - task: Bash@3
+    displayName: Start Emulator
+    inputs:
+      filePath: 'pipelines/templates/android-emulator-start.sh'
+    condition: succeededOrFailed()
+
   - task: Gradle@2
     displayName: Build Test APK
     inputs:
