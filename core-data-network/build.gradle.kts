@@ -19,11 +19,6 @@ dependencies {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
-    reports {
-        xml.apply {
-            isEnabled = true
-        }
-    }
     classDirectories.setFrom(
         classDirectories.files.map {
             fileTree(it) {

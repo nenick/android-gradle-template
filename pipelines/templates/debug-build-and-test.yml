@@ -73,7 +73,7 @@ steps:
   - task: Gradle@2
     displayName: Create Coverage Report
     inputs:
-      tasks: 'jacocoTestReport'
+      tasks: 'jacocoTestReportMerge'
       gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()
@@ -88,7 +88,7 @@ steps:
     displayName: Report Coverage
     inputs:
       codeCoverageTool: 'JaCoCo'
-      summaryFileLocation: 'core-data-network/build/reports/jacoco/test/jacocoTestReport.xml'
+      summaryFileLocation: 'build/reports/jacoco/merged/jacocoTestReport.xml'
       pathToSources: 'build/coverage/sources'
       failIfCoverageEmpty: true
     condition: succeededOrFailed()

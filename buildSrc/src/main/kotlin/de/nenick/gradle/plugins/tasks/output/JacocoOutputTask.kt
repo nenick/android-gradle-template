@@ -9,6 +9,7 @@ open class JacocoOutputTask : DefaultTask() {
 
     init {
         dependsOn(project.getTasksByName("jacocoTestReport", true))
+        dependsOn(project.getTasksByName("jacocoTestReportMerge", false))
     }
 
     final override fun dependsOn(vararg paths: Any) = super.dependsOn(*paths)
@@ -92,7 +93,9 @@ open class JacocoOutputTask : DefaultTask() {
         *allKotlinUnitReportDirs(),
         *allAndroidUnitReportDirs(),
         *allAndroidConnectedReportDirs(),
-        *buildSrcReportDir())
+        *buildSrcReportDir(),
+        *mergedReportDir()
+    )
 
     private fun allKotlinUnitReportDirs() = project.allprojects
         .filter { it.plugins.hasPlugin("kotlin") }
@@ -116,4 +119,6 @@ open class JacocoOutputTask : DefaultTask() {
                 add(File(buildSrcDir, "build/reports/jacoco/test/html"))
             }
         }.toTypedArray()
+
+    private fun mergedReportDir() = arrayOf(File(project.buildDir, "reports/jacoco/merged/html"))
 }

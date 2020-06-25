@@ -5,6 +5,7 @@ import de.nenick.gradle.plugins.basics.*
 import de.nenick.gradle.plugins.basics.extensions.withDirectory
 import de.nenick.gradle.plugins.basics.extensions.withFile
 import org.gradle.api.GradleException
+import org.gradle.api.Project
 import org.gradle.testing.jacoco.plugins.JacocoPlugin
 import org.junit.Test
 import strikt.api.expectThat
@@ -26,6 +27,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     fun `depends on all project and modules jacocoTestReport tasks`() {
         givenKotlinProject {
             plugins.apply(JacocoPlugin::class.java)
+            tasks.create("jacocoTestReportMerge", JacocoReportTask::class.java)
             withAndroidModule("module-alpha") {
                 plugins.apply(JacocoPlugin::class.java)
                 tasks.create("jacocoTestReport", JacocoReportTask::class.java)
@@ -33,16 +35,17 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
             withKotlinModule("module-beta") { plugins.apply(JacocoPlugin::class.java) }
         }
         expectThat(taskUnderTest.taskDependenciesAsStrings) {
-            hasSize(3)
+            hasSize(4)
             contains("task ':jacocoTestReport'")
             contains("task ':module-alpha:jacocoTestReport'")
             contains("task ':module-beta:jacocoTestReport'")
+            contains("task ':jacocoTestReportMerge'")
         }
     }
 
     @Test
     fun `succeed when non kotlin project`() {
-        givenEmptyProject()
+        givenEmptyProject { withValidMergedReport() }
         whenRunTask()
         // expect that no error is thrown
     }
@@ -50,6 +53,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `success if reports exists for kotlin`() {
         givenKotlinProject {
+            withValidMergedReport()
             projectDir.withDirectory("build/reports/jacoco/test/html") { withValidIndexHtml() }
         }
         whenRunTask()
@@ -58,6 +62,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `success if reports exists for android unit and connected test`() {
         givenAndroidKotlinProject {
+            withValidMergedReport()
             projectDir.withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
             projectDir.withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
         }
@@ -67,6 +72,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `fail when reports missing for android unit test`() {
         givenAndroidKotlinProject {
+            withValidMergedReport()
             projectDir.withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
         }
         expectThrows<GradleException> { whenRunTask() }
@@ -76,6 +82,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `fail when reports missing for android connected test`() {
         givenAndroidKotlinProject {
+            withValidMergedReport()
             projectDir.withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
         }
         expectThrows<GradleException> { whenRunTask() }
@@ -84,14 +91,28 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
 
     @Test
     fun `fails when no report was found`() {
-        givenKotlinProject()
+        givenKotlinProject {
+            withValidMergedReport()
+        }
         expectThrows<GradleException> { whenRunTask() }
             .message.isEqualTo("$errorMessageNoReport\n[build/reports/jacoco/test/html]")
     }
 
     @Test
+    fun `fails when no merged report was found`() {
+        givenKotlinProject {
+            projectDir.withDirectory("build/reports/jacoco/test/html") { withValidIndexHtml() }
+        }
+        expectThrows<GradleException> { whenRunTask() }
+            .message.isEqualTo("$errorMessageNoReport\n[build/reports/jacoco/merged/html]")
+    }
+
+    @Test
     fun `fails when buildSrc has no report`() {
-        givenEmptyProject() { projectDir.withDirectory("buildSrc") }
+        givenEmptyProject {
+            withValidMergedReport()
+            projectDir.withDirectory("buildSrc")
+        }
         expectThrows<GradleException> { whenRunTask() }
             .message.isEqualTo("$errorMessageNoReport\n[buildSrc/build/reports/jacoco/test/html]")
     }
@@ -99,6 +120,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `fails when multiple modules have no reports`() {
         givenEmptyProject {
+            withValidMergedReport()
             withAndroidModule("module-alpha")
             withKotlinModule("module-beta")
         }
@@ -114,6 +136,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `fails when nested sub modules has no reports`() {
         givenEmptyProject {
+            withValidMergedReport()
             withEmptyModule("nested") { withKotlinModule("subModule") }
         }
         expectThrows<GradleException> { whenRunTask() }
@@ -123,6 +146,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `fails when any covered source file wasn't found`() {
         givenKotlinProject {
+            withValidMergedReport()
             projectDir.withDirectory("build/reports/jacoco/test/html") {
                 withValidIndexHtml()
                 withDirectory("my.project") {
@@ -139,6 +163,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `fails when used unexpected jacoco version`() {
         givenKotlinProject {
+            withValidMergedReport()
             projectDir.withDirectory("build/reports/jacoco/test/html") {
                 withFile("index.html") {
                     writeText(">Created with <a href=\"http://www.jacoco.org/jacoco\">JaCoCo</a> 0.7.5.201910111838<")
@@ -152,6 +177,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `fails if no classes are specified`() {
         givenKotlinProject {
+            withValidMergedReport()
             projectDir.withDirectory("build/reports/jacoco/test/html") {
                 withValidIndexHtml {
                     appendText(">No class files specified.<")
@@ -165,10 +191,15 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
     @Test
     fun `fail if reports don't contain index html`() {
         givenKotlinProject {
+            withValidMergedReport()
             projectDir.withDirectory("build/reports/jacoco/test/html") { withFile("any-jacoco-report.html") }
         }
         expectThrows<GradleException> { whenRunTask() }
             .message.isEqualTo("unexpected missing index.html")
+    }
+
+    private fun Project.withValidMergedReport() {
+        projectDir.withDirectory("build/reports/jacoco/merged/html") { withValidIndexHtml() }
     }
 
     private fun File.withValidIndexHtml(setup: File.() -> Unit = {}) {
