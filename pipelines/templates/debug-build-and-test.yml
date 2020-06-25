@@ -23,29 +23,9 @@ steps:
       publishJUnitResults: false
     condition: succeededOrFailed()
 
-  - task: Gradle@2
-    displayName: Run app Unit Tests
-    inputs:
-      tasks: ':app:testDebug'
-      gradleWrapperFile: 'gradlew'
-      publishJUnitResults: true
-      testResultsFiles: 'app/**/TEST-*.xml'
-      testRunTitle: 'Unit Tests - app'
-    condition: succeededOrFailed()
-
-  - task: Gradle@2
-    displayName: Run core-data-network Unit Tests
-    inputs:
-      tasks: ':app:testDebug'
-      gradleWrapperFile: 'gradlew'
-      publishJUnitResults: true
-      testResultsFiles: 'core-data-network/**/TEST-*.xml'
-      testRunTitle: 'Unit Tests - core-data-network'
-    condition: succeededOrFailed()
-
-#  - template: unit-tests-android.yml
-#    parameters:
-#      param: ["app"]
+  - template: unit-tests-android.yml
+    parameters:
+      param: ["app"]
 
   - template: unit-tests-kotlin.yml
     parameters:
