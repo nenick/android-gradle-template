@@ -66,10 +66,12 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
             fileTree("${buildDir}/tmp/kotlin-classes/debug")
         } else {
             sourceDirectories.setFrom(sourceDirectories.from.plus(kotlin!!.sourceSets.findByName("main")!!.kotlin.sourceDirectories))
-            fileTree("${buildDir}/classes/kotlin/main")
+            fileTree("${buildDir}/classes/kotlin/main") {
+                exclude("**/*\$\$inlined*")
+            }
         }
 
-        classDirectories.setFrom(classDirectories.from.plus(kotlinClasses))
+        additionalClassDirs(kotlinClasses)
 
         val subproject = this
         subproject.tasks.findByName("jacocoDebugConnectedTestReport")?.run {
@@ -89,22 +91,5 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
         subproject.tasks.withType<JacocoReport>().forEach {
             rootProject.tasks["jacocoTestReportMerge"].dependsOn(it)
         }
-
-        classDirectories.setFrom(
-            classDirectories.files.map {
-                fileTree(it) {
-                    exclude("**/*\$\$inlined*")
-                }
-            }
-        )
-
-        //val mainSrc = sourceSets.map { it.javaDirectories }
-        //val execFiles = "$buildDir/jacoco/test${variantName}UnitTest.exec"
-//    val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
-//    val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName")
-//
-//    sourceDirectories.setFrom(files(mainSrc))
-//    classDirectories.setFrom(javaClasses, kotlinClasses)
-//    executionData.setFrom(execFiles)
     }
 }
