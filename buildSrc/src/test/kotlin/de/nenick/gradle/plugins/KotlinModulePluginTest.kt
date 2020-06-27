@@ -1,38 +1,51 @@
 package de.nenick.gradle.plugins
 
-import org.gradle.kotlin.dsl.getByType
+import de.nenick.gradle.plugins.base.BaseKotlinModulePluginTest
+import de.nenick.gradle.test.tools.extensions.withDirectory
+import de.nenick.gradle.test.tools.extensions.withFile
+import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPlugin
+import org.gradle.kotlin.dsl.getByName
 import org.gradle.testfixtures.ProjectBuilder
-import org.gradle.testing.jacoco.plugins.JacocoPlugin
-import org.gradle.testing.jacoco.plugins.JacocoPluginExtension
-import org.jlleitschuh.gradle.ktlint.KtlintExtension
-import org.jlleitschuh.gradle.ktlint.KtlintPlugin
+import org.gradle.testing.jacoco.tasks.JacocoReport
 import org.junit.Test
 import strikt.api.expectThat
+import strikt.assertions.contains
 import strikt.assertions.isA
 import strikt.assertions.one
 
-class KotlinModulePluginTest {
+class KotlinModulePluginTest : BaseKotlinModulePluginTest() {
 
-    private val project = ProjectBuilder.builder().build().also {
+    override val project = ProjectBuilder.builder().build().also {
         it.plugins.apply("nenick-kotlin-module")
-    }
+    }!!
 
     @Test
-    fun `adds ktlint plugin`() {
-        expectThat(project.plugins).one { isA<KtlintPlugin>() }
-        expectThat(project.extensions.getByType<KtlintExtension>()) {
-            assertThat("experimental checks enabled") { it.enableExperimentalRules.get() }
-            assertThat("rule no-wildcard-imports is disabled") { it.disabledRules.get().contains("no-wildcard-imports") }
-            // TODO How to test that?
-            // assertThat("html reporter is enabled") {  }
+    fun `adds base kotlin project plugins`() {
+        expectThat(project.plugins) {
+            one { isA<JavaPlugin>() }
+            one { isA<KotlinModulePlugin>() }
         }
     }
 
     @Test
-    fun `adds jacoco plugin`() {
-        expectThat(project.plugins).one { isA<JacocoPlugin>() }
-        expectThat(project.extensions.getByType<JacocoPluginExtension>()) {
-            assertThat("use specific version") { it.toolVersion == "0.8.5" }
+    fun `adjust jacoco plugin to depend on test`() {
+        expectThat(project.tasks.getByName<JacocoReport>("jacocoTestReport")).get {
+            expectThat(dependsOn.map { it.toString() }).contains("task ':test'")
         }
     }
+
+    @Test
+    fun `adjust jacoco plugin to filter $$inlined from class directories`() {
+        project.projectDir.withDirectory("build/classes/kotlin/main") {
+            withFile("UseInlined.class")
+            withFile("UseInlined\$\$inlined.class")
+        }
+        expectThat(project.tasks.getByName<JacocoReport>("jacocoTestReport")).get {
+            expectThat(classDirectories.files.toString()).contains("UseInlined.class")
+            expectThat(classDirectories.files.toString()).not { contains("UseInlined\$\$inlined.class") }
+        }
+    }
+
+
 }

@@ -1,11 +1,11 @@
 package de.nenick.gradle.plugins.tasks.output
 
-import de.nenick.gradle.plugins.basics.TaskTest
-import de.nenick.gradle.plugins.basics.extensions.withDirectory
-import de.nenick.gradle.plugins.basics.extensions.withFile
-import de.nenick.gradle.plugins.basics.taskDependenciesAsStrings
-import de.nenick.gradle.plugins.basics.withAndroidModule
-import de.nenick.gradle.plugins.basics.withKotlinModule
+import de.nenick.gradle.test.tools.TaskTest
+import de.nenick.gradle.test.tools.extensions.withDirectory
+import de.nenick.gradle.test.tools.extensions.withFile
+import de.nenick.gradle.test.tools.taskDependenciesAsStrings
+import de.nenick.gradle.test.tools.withAndroidModule
+import de.nenick.gradle.test.tools.withKotlinModule
 import org.gradle.api.GradleException
 import org.junit.Test
 import strikt.api.expectThat

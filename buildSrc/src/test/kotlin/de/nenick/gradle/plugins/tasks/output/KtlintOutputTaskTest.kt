@@ -1,8 +1,8 @@
 package de.nenick.gradle.plugins.tasks.output
 
-import de.nenick.gradle.plugins.basics.*
-import de.nenick.gradle.plugins.basics.extensions.withDirectory
-import de.nenick.gradle.plugins.basics.extensions.withFile
+import de.nenick.gradle.test.tools.*
+import de.nenick.gradle.test.tools.extensions.withDirectory
+import de.nenick.gradle.test.tools.extensions.withFile
 import org.gradle.api.GradleException
 import org.jlleitschuh.gradle.ktlint.KtlintPlugin
 import org.junit.Test

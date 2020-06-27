@@ -1,4 +1,4 @@
-package de.nenick.gradle.plugins.basics
+package de.nenick.gradle.test.tools
 
 import com.android.build.gradle.AppExtension
 import org.gradle.api.Project

@@ -1,9 +1,9 @@
 package de.nenick.gradle.plugins.tasks.output
 
 import com.android.build.gradle.internal.coverage.JacocoReportTask
-import de.nenick.gradle.plugins.basics.*
-import de.nenick.gradle.plugins.basics.extensions.withDirectory
-import de.nenick.gradle.plugins.basics.extensions.withFile
+import de.nenick.gradle.test.tools.*
+import de.nenick.gradle.test.tools.extensions.withDirectory
+import de.nenick.gradle.test.tools.extensions.withFile
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testing.jacoco.plugins.JacocoPlugin

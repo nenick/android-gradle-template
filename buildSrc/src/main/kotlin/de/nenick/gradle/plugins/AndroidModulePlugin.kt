@@ -1,9 +1,10 @@
 package de.nenick.gradle.plugins
 
+import de.nenick.gradle.plugins.base.BaseKotlinModulePlugin
 import org.gradle.api.Project
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
-class AndroidModulePlugin : KotlinModulePlugin() {
+class AndroidModulePlugin : BaseKotlinModulePlugin() {
 
     override fun apply(target: Project) {
         super.apply(target)

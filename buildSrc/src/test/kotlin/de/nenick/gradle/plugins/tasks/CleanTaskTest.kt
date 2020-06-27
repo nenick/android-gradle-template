@@ -1,7 +1,7 @@
 package de.nenick.gradle.plugins.tasks
 
-import de.nenick.gradle.plugins.basics.TaskTest
-import de.nenick.gradle.plugins.basics.doesNotExists
+import de.nenick.gradle.test.tools.TaskTest
+import de.nenick.gradle.test.tools.doesNotExists
 import org.junit.Test
 import strikt.api.expectThat
 

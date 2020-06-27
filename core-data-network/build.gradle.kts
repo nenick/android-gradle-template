@@ -1,8 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("java-library")
-    id("kotlin")
     id("nenick-kotlin-module")
 }
 
@@ -15,17 +13,6 @@ dependencies {
     testImplementation("junit:junit")
     testImplementation("io.strikt:strikt-core")
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
-}
-
-tasks.jacocoTestReport {
-    dependsOn(tasks.test)
-    classDirectories.setFrom(
-        classDirectories.files.map {
-            fileTree(it) {
-                exclude("**/*\$\$inlined*")
-            }
-        }
-    )
 }
 
 tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }

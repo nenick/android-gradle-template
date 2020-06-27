@@ -1,4 +1,4 @@
-package de.nenick.gradle.plugins.basics
+package de.nenick.gradle.test.tools
 
 import java.io.File
 import org.gradle.api.Task

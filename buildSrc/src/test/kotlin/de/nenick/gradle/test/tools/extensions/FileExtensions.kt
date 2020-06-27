@@ -1,4 +1,4 @@
-package de.nenick.gradle.plugins.basics.extensions
+package de.nenick.gradle.test.tools.extensions
 
 import java.io.File
 

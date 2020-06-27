@@ -1,7 +1,7 @@
 package de.nenick.gradle.plugins
 
-import de.nenick.gradle.plugins.basics.hasGroup
-import de.nenick.gradle.plugins.basics.hasName
+import de.nenick.gradle.test.tools.hasGroup
+import de.nenick.gradle.test.tools.hasName
 import de.nenick.gradle.plugins.tasks.output.CleanOutputTask
 import de.nenick.gradle.plugins.tasks.CleanTask
 import de.nenick.gradle.plugins.tasks.output.JacocoOutputTask
