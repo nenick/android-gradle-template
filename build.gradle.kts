@@ -56,39 +56,41 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
     subprojects {
         val android = extensions.findByType<BaseAppModuleExtension>()
         val kotlin = extensions.findByType<org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension>()
+        println(name)
+        println(android)
+        println(kotlin)
 
-
-        val kotlinClasses = if (android != null) {
+        if (android != null) {
             val variant = extensions.getByType<BaseAppModuleExtension>().applicationVariants.findLast { it.name == "debug" }!!
             val sourceFiles = files(variant.sourceSets.map { it.javaDirectories })
-            sourceDirectories.setFrom(sourceDirectories.from.plus(sourceFiles))
+            additionalSourceDirs(sourceFiles)
 
-            fileTree("${buildDir}/tmp/kotlin-classes/debug")
-        } else {
-            sourceDirectories.setFrom(sourceDirectories.from.plus(kotlin!!.sourceSets.findByName("main")!!.kotlin.sourceDirectories))
-            fileTree("${buildDir}/classes/kotlin/main") {
-                exclude("**/*\$\$inlined*")
+            tasks.getByName("jacocoDebugConnectedTestReport").run {
+                executionData(fileTree("${buildDir}/outputs/code_coverage/debugAndroidTest/connected/*"))
             }
-        }
 
-        additionalClassDirs(kotlinClasses)
+            tasks.matching{ it.extensions.findByType<JacocoTaskExtension>() != null }.configureEach {
+                if (!name.contains("release", true)) {
+                    executionData(this)
+                }
+            }
+            additionalClassDirs(fileTree("${buildDir}/tmp/kotlin-classes/debug"))
+        } else {
+            additionalSourceDirs(kotlin!!.sourceSets.findByName("main")!!.kotlin.sourceDirectories)
 
-        val subproject = this
-        subproject.tasks.findByName("jacocoDebugConnectedTestReport")?.run {
-            executionData(fileTree("${subproject.buildDir}/outputs/code_coverage/debugAndroidTest/connected/*"))
-        }
-
-        subproject.tasks.matching({ it.extensions.findByType<JacocoTaskExtension>() != null }).configureEach {
-            if (!name.contains("release", true)) {
+            tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.configureEach {
                 executionData(this)
             }
+            additionalClassDirs(fileTree("${buildDir}/classes/kotlin/main") {
+                exclude("**/*\$\$inlined*")
+            })
         }
 
         // To automatically run `test` every time `./gradlew codeCoverageReport` is called,
         // you may want to set up a task dependency between them as shown below.
         // Note that this requires the `test` tasks to be resolved eagerly (see `forEach`) which
         // may have a negative effect on the configuration time of your build.
-        subproject.tasks.withType<JacocoReport>().forEach {
+        tasks.withType<JacocoReport>().forEach {
             rootProject.tasks["jacocoTestReportMerge"].dependsOn(it)
         }
     }
