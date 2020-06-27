@@ -48,8 +48,17 @@ class KtlintOutputTaskTest : TaskTest<KtlintOutputTask>(KtlintOutputTask::class)
     }
 
     @Test
-    fun `fails when no report was found`() {
+    fun `fails when no report directory was found`() {
         givenKotlinProject()
+        expectThrows<GradleException> { whenRunTask() }
+            .message.isEqualTo("$errorMessage\n[build/reports/ktlint]")
+    }
+
+    @Test
+    fun `fails when no reports where found`() {
+        givenKotlinProject() {
+            projectDir.withDirectory("build/reports/ktlint")
+        }
         expectThrows<GradleException> { whenRunTask() }
             .message.isEqualTo("$errorMessage\n[build/reports/ktlint]")
     }
