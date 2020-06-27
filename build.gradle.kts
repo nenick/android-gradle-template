@@ -94,4 +94,12 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
             rootProject.tasks["jacocoTestReportMerge"].dependsOn(it)
         }
     }
+
+
+    val buildSrcDir = File("buildSrc")
+    if(buildSrcDir.exists()) {
+        additionalSourceDirs(File(buildSrcDir, "src/main/kotlin"))
+        additionalClassDirs(File(buildSrcDir, "build/classes/kotlin/main"))
+        executionData(File(buildSrcDir, "build/jacoco/test.exec"))
+    }
 }
