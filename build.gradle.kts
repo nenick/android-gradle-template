@@ -56,9 +56,6 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
     subprojects {
         val android = extensions.findByType<BaseAppModuleExtension>()
         val kotlin = extensions.findByType<org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension>()
-        println(name)
-        println(android)
-        println(kotlin)
 
         if (android != null) {
             val variant = extensions.getByType<BaseAppModuleExtension>().applicationVariants.findLast { it.name == "debug" }!!
