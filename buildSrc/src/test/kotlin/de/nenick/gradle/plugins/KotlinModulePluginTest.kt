@@ -3,17 +3,19 @@ package de.nenick.gradle.plugins
 import de.nenick.gradle.plugins.base.KotlinBasedModulePluginTest
 import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
+import org.gradle.api.internal.file.collections.DefaultConfigurableFileTree
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.tasks.SourceSetOutput
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testing.jacoco.tasks.JacocoReport
 import org.junit.Test
 import strikt.api.expectThat
-import strikt.assertions.contains
-import strikt.assertions.isA
-import strikt.assertions.one
+import strikt.assertions.*
 
 class KotlinModulePluginTest : KotlinBasedModulePluginTest() {
+
+    private val kotlinClassDirectory = "build/classes/kotlin/main"
 
     override val project = ProjectBuilder.builder().build().also {
         it.plugins.apply("nenick-kotlin-module")
@@ -29,22 +31,37 @@ class KotlinModulePluginTest : KotlinBasedModulePluginTest() {
 
     @Test
     fun `adjust jacoco plugin to depend on test`() {
-        expectThat(project.tasks.getByName<JacocoReport>("jacocoTestReport")).get {
-            expectThat(dependsOn.map { it.toString() }).contains("task ':test'")
+        expectThat(jacocoReportTask().dependsOn.map { it.toString() }) {
+            contains("task ':test'")
+        }
+    }
+
+    @Test
+    fun `replace class directory sourceSets with filtered fileTree`() {
+        expectThat(jacocoReportClassDirectories().from) {
+            one {
+                isA<DefaultConfigurableFileTree>().and {
+                    get { dir.path }.isEqualTo("${project.projectDir}/${kotlinClassDirectory}")
+                }
+            }
+            none { isA<SourceSetOutput>() }
         }
     }
 
     @Test
     fun `adjust jacoco plugin to filter $$inlined from class directories`() {
-        project.projectDir.withDirectory("build/classes/kotlin/main") {
+        project.projectDir.withDirectory(kotlinClassDirectory) {
             withFile("UseInlined.class")
             withFile("UseInlined\$\$inlined.class")
         }
-        expectThat(project.tasks.getByName<JacocoReport>("jacocoTestReport")).get {
-            expectThat(classDirectories.files.toString()).contains("UseInlined.class")
-            expectThat(classDirectories.files.toString()).not { contains("UseInlined\$\$inlined.class") }
+        expectThat(jacocoReportClassDirectories().files.map { it.name }) {
+            hasSize(1)
+            contains("UseInlined.class")
+            doesNotContain("UseInlined\$\$inlined.class")
         }
     }
 
+    private fun jacocoReportClassDirectories() = jacocoReportTask().classDirectories
 
+    private fun jacocoReportTask() = project.tasks.getByName<JacocoReport>("jacocoTestReport")
 }
