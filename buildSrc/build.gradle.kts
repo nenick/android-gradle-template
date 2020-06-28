@@ -14,6 +14,17 @@ ktlint {
     )
 }
 
+tasks.test {
+
+    // Starting with version 4.6, Gradle provides native support for executing tests on the JUnit Platform.
+    useJUnitPlatform()
+
+    // Print failed test to console to help when gradle import failed.
+    testLogging {
+        events("failed")
+    }
+}
+
 repositories {
     jcenter()
     google()
@@ -31,6 +42,7 @@ dependencies {
     implementation("com.pinterest:ktlint:0.37.2") // to get the latest improvements from ktlint itself
 
     // Basic tools to test the custom plugins and tasks.
-    testImplementation("junit:junit:4.13")
+    //testImplementation("junit:junit:4.13")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
     testImplementation("io.strikt:strikt-core:0.26.1")
 }

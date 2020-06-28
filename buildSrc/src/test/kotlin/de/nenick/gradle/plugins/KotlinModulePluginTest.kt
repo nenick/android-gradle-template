@@ -9,7 +9,7 @@ import org.gradle.api.tasks.SourceSetOutput
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testing.jacoco.tasks.JacocoReport
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.*
 

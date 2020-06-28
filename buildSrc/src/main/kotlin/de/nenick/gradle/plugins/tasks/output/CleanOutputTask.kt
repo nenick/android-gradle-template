@@ -17,7 +17,7 @@ open class CleanOutputTask : DefaultTask() {
     fun checkAllBuildFoldersDeleted() {
         val buildDirectories = findNonEmptyBuildDirectories()
         if (buildDirectories.isNotEmpty()) {
-            throw GradleException("not all contents of build folders have been deleted\n$buildDirectories")
+            throw GradleException("Build folders were found in which not all of the content was cleaned.\n$buildDirectories")
         }
     }
 

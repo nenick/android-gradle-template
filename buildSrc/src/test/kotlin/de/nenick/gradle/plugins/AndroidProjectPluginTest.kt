@@ -7,7 +7,7 @@ import de.nenick.gradle.plugins.tasks.CleanTask
 import de.nenick.gradle.plugins.tasks.output.JacocoOutputTask
 import de.nenick.gradle.plugins.tasks.output.KtlintOutputTask
 import org.gradle.testfixtures.ProjectBuilder
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.one

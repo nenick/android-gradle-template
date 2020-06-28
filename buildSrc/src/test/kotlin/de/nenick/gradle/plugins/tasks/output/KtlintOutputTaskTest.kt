@@ -5,7 +5,8 @@ import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
 import org.gradle.api.GradleException
 import org.jlleitschuh.gradle.ktlint.KtlintPlugin
-import org.junit.Test
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
 import strikt.assertions.contains
@@ -17,18 +18,22 @@ class KtlintOutputTaskTest : TaskTest<KtlintOutputTask>(KtlintOutputTask::class)
 
     private val errorMessage = "found modules where ktlint reports are missing"
 
-    @Test
-    fun `depends on all project and modules ktlintCheck tasks`() {
-        givenKotlinProject {
-            plugins.apply(KtlintPlugin::class.java)
-            withKotlinModule("module-alpha") { plugins.apply(KtlintPlugin::class.java) }
-            withKotlinModule("module-beta") { plugins.apply(KtlintPlugin::class.java) }
-        }
-        expectThat(taskUnderTest.taskDependenciesAsStrings) {
-            hasSize(3)
-            contains("task ':ktlintCheck'")
-            contains("task ':module-alpha:ktlintCheck'")
-            contains("task ':module-beta:ktlintCheck'")
+    @Nested
+    inner class Dependencies {
+
+        @Test
+        fun `depends on all project and modules ktlintCheck tasks`() {
+            givenKotlinProject {
+                plugins.apply(KtlintPlugin::class.java)
+                withKotlinModule("module-alpha") { plugins.apply(KtlintPlugin::class.java) }
+                withKotlinModule("module-beta") { plugins.apply(KtlintPlugin::class.java) }
+            }
+            expectThat(taskUnderTest.taskDependenciesAsStrings) {
+                hasSize(3)
+                contains("task ':ktlintCheck'")
+                contains("task ':module-alpha:ktlintCheck'")
+                contains("task ':module-beta:ktlintCheck'")
+            }
         }
     }
 

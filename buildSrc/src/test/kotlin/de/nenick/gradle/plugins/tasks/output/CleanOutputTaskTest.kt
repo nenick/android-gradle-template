@@ -7,7 +7,8 @@ import de.nenick.gradle.test.tools.taskDependenciesAsStrings
 import de.nenick.gradle.test.tools.withAndroidModule
 import de.nenick.gradle.test.tools.withKotlinModule
 import org.gradle.api.GradleException
-import org.junit.Test
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.api.expectThrows
 import strikt.assertions.contains
@@ -15,68 +16,75 @@ import strikt.assertions.hasSize
 import strikt.assertions.isEqualTo
 import strikt.assertions.message
 
-class CleanOutputTaskTest : TaskTest<CleanOutputTask>(
-    CleanOutputTask::class) {
+class CleanOutputTaskTest : TaskTest<CleanOutputTask>(CleanOutputTask::class) {
 
-    private val errorMessage = "not all contents of build folders have been deleted"
+    private val errorMessage = "Build folders were found in which not all of the content was cleaned."
 
-    @Test
-    fun `depends on all project and modules clean tasks`() {
-        givenKotlinProject {
-            withKotlinModule("module-alpha")
-            withKotlinModule("module-beta")
+    @Nested
+    inner class Dependencies {
+
+        @Test
+        fun `depends on all project and modules clean tasks`() {
+            givenKotlinProject {
+                withKotlinModule("module-alpha")
+                withKotlinModule("module-beta")
+            }
+            expectThat(taskUnderTest.taskDependenciesAsStrings) {
+                hasSize(3)
+                contains("task ':clean'")
+                contains("task ':module-alpha:clean'")
+                contains("task ':module-beta:clean'")
+            }
         }
-        expectThat(taskUnderTest.taskDependenciesAsStrings) {
-            hasSize(3)
-            contains("task ':clean'")
-            contains("task ':module-alpha:clean'")
-            contains("task ':module-beta:clean'")
+    }
+
+    @Nested
+    inner class Success {
+
+        @Test
+        fun `build directory don't exists`() {
+            givenKotlinProject()
+            whenRunTask()
+        }
+
+        @Test
+        fun `build directory is empty`() {
+            givenKotlinProject() { projectDir.withDirectory("build") }
+            whenRunTask()
+        }
+
+        @Test
+        fun `ignores the buildSrc build directory content`() {
+            givenEmptyProject { projectDir.withDirectory("buildSrc/build") { withFile("example.content") } }
+            whenRunTask()
         }
     }
 
-    @Test
-    fun `succeed when no build directories exists`() {
-        givenKotlinProject()
-        whenRunTask()
-        // expect that no error is thrown
-    }
+    @Nested
+    inner class Fail {
 
-    @Test
-    fun `succeed when no build directory is empty`() {
-        givenKotlinProject() { projectDir.withDirectory("build") }
-        whenRunTask()
-        // expect that no error is thrown
-    }
-
-    @Test
-    fun `succeed when buildSrc module is used`() {
-        givenEmptyProject { projectDir.withDirectory("buildSrc/build") { withFile("example.content") } }
-        whenRunTask()
-        // expect that no error is thrown
-    }
-
-    @Test
-    fun `fails when project build directory exists`() {
-        givenEmptyProject { projectDir.withDirectory("build") { withFile("example.content") } }
-
-        expectThrows<GradleException> { whenRunTask() }
-            .message.isEqualTo("$errorMessage\n[build]")
-    }
-
-    @Test
-    fun `fails when module build directory exists`() {
-        givenEmptyProject { withKotlinModule("module") { projectDir.withDirectory("build") { withFile("example.content") } } }
-        expectThrows<GradleException> { whenRunTask() }
-            .message.isEqualTo("$errorMessage\n[module/build]")
-    }
-
-    @Test
-    fun `fails when multiple build directories exists`() {
-        givenEmptyProject {
-            withAndroidModule("module-alpha") { projectDir.withDirectory("build") { withFile("example.content") } }
-            withKotlinModule("module-beta") { projectDir.withDirectory("build") { withFile("example.content") } }
+        @Test
+        fun `project build directory has content`() {
+            givenEmptyProject { projectDir.withDirectory("build") { withFile("example.content") } }
+            expectThrows<GradleException> { whenRunTask() }
+                .message.isEqualTo("$errorMessage\n[build]")
         }
-        expectThrows<GradleException> { whenRunTask() }
-            .message.isEqualTo("$errorMessage\n[module-alpha/build, module-beta/build]")
+
+        @Test
+        fun `module build directory has content`() {
+            givenEmptyProject { withKotlinModule("module") { projectDir.withDirectory("build") { withFile("example.content") } } }
+            expectThrows<GradleException> { whenRunTask() }
+                .message.isEqualTo("$errorMessage\n[module/build]")
+        }
+
+        @Test
+        fun `multiple build directories has content`() {
+            givenEmptyProject {
+                withAndroidModule("module-alpha") { projectDir.withDirectory("build") { withFile("example.content") } }
+                withKotlinModule("module-beta") { projectDir.withDirectory("build") { withFile("example.content") } }
+            }
+            expectThrows<GradleException> { whenRunTask() }
+                .message.isEqualTo("$errorMessage\n[module-alpha/build, module-beta/build]")
+        }
     }
 }
