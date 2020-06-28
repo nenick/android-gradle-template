@@ -7,7 +7,13 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import org.jlleitschuh.gradle.ktlint.KtlintPlugin
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
-abstract class BaseKotlinModulePlugin : Plugin<Project> {
+/**
+ * Useful configurations for each kotlin based module.
+ *
+ * - Ktlint for for static code analyses.
+ * - Jacoco for code coverage.
+ */
+abstract class KotlinBasedModulePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         addPluginKtlint(target)
@@ -17,7 +23,12 @@ abstract class BaseKotlinModulePlugin : Plugin<Project> {
     private fun addPluginKtlint(target: Project) {
         target.plugins.apply(KtlintPlugin::class.java)
         target.extensions.getByType(KtlintExtension::class.java).apply {
+
+            // Enable all checks by default and if something is annoying then disable it explicit.
             enableExperimentalRules.set(true)
+
+            // Disable annoying rules which makes no sense for us.
+            // Disable no-wildcards-imports because with modern IDEs there are rare cases when this rule could be useful.
             disabledRules.addAll("no-wildcard-imports")
             reporters { reporter(ReporterType.HTML) }
         }

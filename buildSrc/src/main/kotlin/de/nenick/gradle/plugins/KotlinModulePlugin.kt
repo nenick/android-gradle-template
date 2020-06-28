@@ -1,19 +1,18 @@
 package de.nenick.gradle.plugins
 
-import de.nenick.gradle.plugins.base.BaseKotlinModulePlugin
+import de.nenick.gradle.plugins.base.KotlinBasedModulePlugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.testing.jacoco.tasks.JacocoReport
 
 /**
- * Plugin which applies useful configurations to start with a pure kotlin module.
+ * Applies useful configurations to start with a pure kotlin module.
  *
- * - Base plugins you need for a pure kotlin module.
- * - Jacoco for code coverage.
+ * - Base plugins for a pure kotlin module.
  *
- * @see BaseKotlinModulePlugin for more configured stuff.
+ * @see KotlinBasedModulePlugin for more configured stuff.
  */
-open class KotlinModulePlugin : BaseKotlinModulePlugin() {
+open class KotlinModulePlugin : KotlinBasedModulePlugin() {
 
     override fun apply(target: Project) {
         super.apply(target)

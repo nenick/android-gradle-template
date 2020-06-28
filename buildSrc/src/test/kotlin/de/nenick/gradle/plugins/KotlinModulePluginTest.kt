@@ -1,9 +1,8 @@
 package de.nenick.gradle.plugins
 
-import de.nenick.gradle.plugins.base.BaseKotlinModulePluginTest
+import de.nenick.gradle.plugins.base.KotlinBasedModulePluginTest
 import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
-import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.testfixtures.ProjectBuilder
@@ -14,7 +13,7 @@ import strikt.assertions.contains
 import strikt.assertions.isA
 import strikt.assertions.one
 
-class KotlinModulePluginTest : BaseKotlinModulePluginTest() {
+class KotlinModulePluginTest : KotlinBasedModulePluginTest() {
 
     override val project = ProjectBuilder.builder().build().also {
         it.plugins.apply("nenick-kotlin-module")

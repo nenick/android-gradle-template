@@ -1,14 +1,14 @@
 package de.nenick.gradle.plugins
 
 import com.android.build.gradle.AppExtension
-import de.nenick.gradle.plugins.base.BaseKotlinModulePluginTest
+import de.nenick.gradle.plugins.base.KotlinBasedModulePluginTest
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import org.junit.Test
 import strikt.api.expectThat
 
-class AndroidModulePluginTest : BaseKotlinModulePluginTest() {
+class AndroidModulePluginTest : KotlinBasedModulePluginTest() {
 
     override val project = ProjectBuilder.builder().build().also {
         it.plugins.apply("com.android.application")

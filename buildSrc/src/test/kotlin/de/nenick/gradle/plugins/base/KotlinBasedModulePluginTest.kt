@@ -12,7 +12,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.one
 
-abstract class BaseKotlinModulePluginTest {
+abstract class KotlinBasedModulePluginTest {
 
     protected abstract val project : Project
 
