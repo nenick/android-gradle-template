@@ -1,6 +1,6 @@
 package de.nenick.gradle.plugins
 
-import de.nenick.gradle.plugins.base.KotlinBasedModulePlugin
+import de.nenick.gradle.plugins.base.KotlinBase
 import de.nenick.gradle.plugins.tasks.output.CleanOutputTask
 import de.nenick.gradle.plugins.tasks.CleanTask
 import de.nenick.gradle.plugins.tasks.output.JacocoOutputTask
@@ -15,7 +15,7 @@ import org.gradle.kotlin.dsl.register
  * - The always missing clean task.
  * - Tasks to run and test the output of other common tasks.
  *
- * @see KotlinBasedModulePlugin for more configured stuff.
+ * @see KotlinBase for more configured stuff.
  */
 class AndroidProjectPlugin : Plugin<Project> {
     override fun apply(target: Project) {

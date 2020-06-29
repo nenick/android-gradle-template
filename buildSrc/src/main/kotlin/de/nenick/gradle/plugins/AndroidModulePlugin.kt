@@ -1,6 +1,6 @@
 package de.nenick.gradle.plugins
 
-import de.nenick.gradle.plugins.base.KotlinBasedModulePlugin
+import de.nenick.gradle.plugins.base.KotlinBase
 import org.gradle.api.Project
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
@@ -10,9 +10,9 @@ import org.jlleitschuh.gradle.ktlint.KtlintExtension
  * - Base plugins you need for a pure kotlin module.
  * - Jacoco for code coverage.
  *
- * @see KotlinBasedModulePlugin for more configured stuff.
+ * @see KotlinBase for more configured stuff.
  */
-class AndroidModulePlugin : KotlinBasedModulePlugin() {
+class AndroidModulePlugin : KotlinBase() {
 
     override fun apply(target: Project) {
         super.apply(target)
