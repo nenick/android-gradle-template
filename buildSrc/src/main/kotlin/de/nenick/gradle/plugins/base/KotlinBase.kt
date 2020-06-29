@@ -13,7 +13,7 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
  * - Ktlint for for static code analyses.
  * - Jacoco for code coverage.
  */
-abstract class KotlinBasedModulePlugin : Plugin<Project> {
+abstract class KotlinBase : Plugin<Project> {
 
     override fun apply(target: Project) {
         addPluginKtlint(target)

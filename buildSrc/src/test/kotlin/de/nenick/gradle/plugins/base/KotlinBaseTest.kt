@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.*
 
-abstract class KotlinBasedModulePluginTest {
+abstract class KotlinBaseTest {
 
     protected abstract val project: Project
 
     @Nested
-    inner class KotlinBasedModulePluginTest {
+    inner class KotlinBaseTest {
 
         @Test
         fun `adds ktlint plugin`() {

@@ -1,6 +1,6 @@
 package de.nenick.gradle.plugins
 
-import de.nenick.gradle.plugins.base.KotlinBasedModulePluginTest
+import de.nenick.gradle.plugins.base.KotlinBaseTest
 import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
 import org.gradle.api.internal.file.collections.DefaultConfigurableFileTree
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.*
 
-class KotlinModulePluginTest : KotlinBasedModulePluginTest() {
+class KotlinModulePluginTest : KotlinBaseTest() {
 
     private val kotlinClassDirectory = "build/classes/kotlin/main"
 

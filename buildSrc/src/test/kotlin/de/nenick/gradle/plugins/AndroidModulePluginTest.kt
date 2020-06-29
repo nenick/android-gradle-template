@@ -1,7 +1,7 @@
 package de.nenick.gradle.plugins
 
 import com.android.build.gradle.AppExtension
-import de.nenick.gradle.plugins.base.KotlinBasedModulePluginTest
+import de.nenick.gradle.plugins.base.KotlinBaseTest
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isTrue
 
-class AndroidModulePluginTest : KotlinBasedModulePluginTest() {
+class AndroidModulePluginTest : KotlinBaseTest() {
 
     override val project = ProjectBuilder.builder().build().also {
         it.plugins.apply("com.android.application")
