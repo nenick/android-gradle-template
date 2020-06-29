@@ -37,60 +37,68 @@ class KtlintOutputTaskTest : TaskTest<KtlintOutputTask>(KtlintOutputTask::class)
         }
     }
 
-    @Test
-    fun `succeed when non kotlin project`() {
-        givenEmptyProject()
-        whenRunTask()
-        // expect that no error is thrown
-    }
+    @Nested
+    inner class Success {
 
-    @Test
-    fun `success if reports exists`() {
-        givenKotlinProject {
-            projectDir.withDirectory("build/reports/ktlint") { withFile("any-ktlint-report.txt") }
+        @Test
+        fun `non kotlin project`() {
+            givenEmptyProject()
+            whenRunTask()
         }
-        whenRunTask()
-    }
 
-    @Test
-    fun `fails when no report directory was found`() {
-        givenKotlinProject()
-        expectThrows<GradleException> { whenRunTask() }
-            .message.isEqualTo("$errorMessage\n[build/reports/ktlint]")
-    }
-
-    @Test
-    fun `fails when no reports where found`() {
-        givenKotlinProject() {
-            projectDir.withDirectory("build/reports/ktlint")
+        @Test
+        fun `reports exists`() {
+            givenKotlinProject {
+                projectDir.withDirectory("build/reports/ktlint") { withFile("any-ktlint-report.txt") }
+            }
+            whenRunTask()
         }
-        expectThrows<GradleException> { whenRunTask() }
-            .message.isEqualTo("$errorMessage\n[build/reports/ktlint]")
     }
 
-    @Test
-    fun `fails when buildSrc has no report`() {
-        givenEmptyProject() { projectDir.withDirectory("buildSrc") }
-        expectThrows<GradleException> { whenRunTask() }
-            .message.isEqualTo("$errorMessage\n[buildSrc/build/reports/ktlint]")
-    }
 
-    @Test
-    fun `fails when multiple modules have no reports`() {
-        givenEmptyProject {
-            withAndroidModule("module-alpha")
-            withKotlinModule("module-beta")
+    @Nested
+    inner class Fail {
+
+        @Test
+        fun `no report directory was found`() {
+            givenKotlinProject()
+            expectThrows<GradleException> { whenRunTask() }
+                .message.isEqualTo("$errorMessage\n[build/reports/ktlint]")
         }
-        expectThrows<GradleException> { whenRunTask() }
-            .message.isEqualTo("$errorMessage\n[module-alpha/build/reports/ktlint, module-beta/build/reports/ktlint]")
-    }
 
-    @Test
-    fun `fails when nested sub modules has no reports`() {
-        givenEmptyProject {
-            withEmptyModule("nested") { withKotlinModule("subModule") }
+        @Test
+        fun `no reports where found`() {
+            givenKotlinProject() {
+                projectDir.withDirectory("build/reports/ktlint")
+            }
+            expectThrows<GradleException> { whenRunTask() }
+                .message.isEqualTo("$errorMessage\n[build/reports/ktlint]")
         }
-        expectThrows<GradleException> { whenRunTask() }
-            .message.isEqualTo("$errorMessage\n[nested/subModule/build/reports/ktlint]")
+
+        @Test
+        fun `buildSrc has no report`() {
+            givenEmptyProject() { projectDir.withDirectory("buildSrc") }
+            expectThrows<GradleException> { whenRunTask() }
+                .message.isEqualTo("$errorMessage\n[buildSrc/build/reports/ktlint]")
+        }
+
+        @Test
+        fun `report multiple modules have no reports`() {
+            givenEmptyProject {
+                withAndroidModule("module-alpha")
+                withKotlinModule("module-beta")
+            }
+            expectThrows<GradleException> { whenRunTask() }
+                .message.isEqualTo("$errorMessage\n[module-alpha/build/reports/ktlint, module-beta/build/reports/ktlint]")
+        }
+
+        @Test
+        fun `report nested sub modules has no reports`() {
+            givenEmptyProject {
+                withEmptyModule("nested") { withKotlinModule("subModule") }
+            }
+            expectThrows<GradleException> { whenRunTask() }
+                .message.isEqualTo("$errorMessage\n[nested/subModule/build/reports/ktlint]")
+        }
     }
 }
