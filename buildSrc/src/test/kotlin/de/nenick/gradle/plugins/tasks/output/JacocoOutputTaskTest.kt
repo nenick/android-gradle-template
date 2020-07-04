@@ -1,6 +1,7 @@
 package de.nenick.gradle.plugins.tasks.output
 
 import com.android.build.gradle.internal.coverage.JacocoReportTask
+import de.nenick.gradle.plugins.tasks.JacocoMergeTask
 import de.nenick.gradle.test.tools.*
 import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
@@ -31,7 +32,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
         fun `depends on all project and modules jacocoTestReport tasks`() {
             givenKotlinProject {
                 plugins.apply(JacocoPlugin::class.java)
-                tasks.create("jacocoTestReportMerge", JacocoReportTask::class.java)
+                tasks.create("jacocoTestReportMerge", JacocoMergeTask::class.java)
                 withAndroidModule("module-alpha") {
                     plugins.apply(JacocoPlugin::class.java)
                     tasks.create("jacocoTestReport", JacocoReportTask::class.java)
