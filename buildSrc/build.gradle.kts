@@ -42,7 +42,6 @@ dependencies {
     implementation("com.pinterest:ktlint:0.37.2") // to get the latest improvements from ktlint itself
 
     // Basic tools to test the custom plugins and tasks.
-    //testImplementation("junit:junit:4.13")
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
     testImplementation("io.strikt:strikt-core:0.26.1")
 }

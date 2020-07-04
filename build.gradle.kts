@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import de.nenick.gradle.plugins.tasks.JacocoMergeTask
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -40,18 +41,9 @@ allprojects {
     }
 }
 
-tasks.register("jacocoTestReportMerge", JacocoReport::class) {
+tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
     group = "Verification"
     description = "Generate merged Jacoco coverage reports."
-
-    reports.html.apply {
-        isEnabled = true
-        destination = project.reporting.file("jacoco/merged/html")
-    }
-    reports.xml.apply {
-        isEnabled = true
-        destination = project.reporting.file("jacoco/merged/jacocoTestReport.xml")
-    }
 
     subprojects {
         val android = extensions.findByType<BaseAppModuleExtension>()
@@ -82,21 +74,5 @@ tasks.register("jacocoTestReportMerge", JacocoReport::class) {
                 exclude("**/*\$\$inlined*")
             })
         }
-
-        // To automatically run `test` every time `./gradlew codeCoverageReport` is called,
-        // you may want to set up a task dependency between them as shown below.
-        // Note that this requires the `test` tasks to be resolved eagerly (see `forEach`) which
-        // may have a negative effect on the configuration time of your build.
-        tasks.withType<JacocoReport>().forEach {
-            rootProject.tasks["jacocoTestReportMerge"].dependsOn(it)
-        }
-    }
-
-
-    val buildSrcDir = File("buildSrc")
-    if(buildSrcDir.exists()) {
-        additionalSourceDirs(File(buildSrcDir, "src/main/kotlin"))
-        additionalClassDirs(File(buildSrcDir, "build/classes/kotlin/main"))
-        executionData(File(buildSrcDir, "build/jacoco/test.exec"))
     }
 }

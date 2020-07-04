@@ -24,8 +24,10 @@ open class JacocoOutputTask : DefaultTask() {
             throw GradleException("found modules where jacoco reports are missing\n$missingReports")
         }
 
+        val indexFiles = allExpectedIndexFiles(reportDirs)
+
         // Ensure that some classes are covered.
-        val missingClassFiles = locateMissingClassFiles(reportDirs)
+        val missingClassFiles = locateMissingClassFiles(indexFiles)
         if (missingClassFiles.isNotEmpty()) {
             throw GradleException("found modules where no class files are specified\n$missingClassFiles")
         }
@@ -37,17 +39,23 @@ open class JacocoOutputTask : DefaultTask() {
         }
 
         // Ensure reports are generated with the same jacoco version.
-        val unexpectedVersion = locateUnexpectedVersion(reportDirs, "0.8.5")
+        val unexpectedVersion = locateUnexpectedVersion(indexFiles, "0.8.5")
         if (unexpectedVersion.isNotEmpty()) {
             throw GradleException("found modules where don't use jacoco version 0.8.5\n$unexpectedVersion")
         }
     }
 
+    private fun allExpectedIndexFiles(reportDirs: List<File>) = reportDirs.map { root ->
+        val reportRootContent = root.listFiles()!! // A previous test is asserting that content exists already.
+        reportRootContent.find { it.name == "index.html" }
+            ?: throw GradleException("unexpected missing index.html")
+    }
+
     private fun locateMissingReports(reportDirs: List<File>) = reportDirs
-        .filter { it.listFiles().isNullOrEmpty() }
+        .filter { it.listFiles() == null }
         .map { it.relativeTo(project.projectDir) }
 
-    private fun locateMissingClassFiles(reportDirs: List<File>) = reportDirs
+    private fun locateMissingClassFiles(indexHtmlFiles: List<File>) = indexHtmlFiles
         .filter { hasMissingClassFiles(it) }
         .map { it.relativeTo(project.projectDir) }
 
@@ -55,15 +63,15 @@ open class JacocoOutputTask : DefaultTask() {
         .filter { hasAnyMissingSourceFileReports(it) }
         .map { it.relativeTo(project.projectDir) }
 
-    private fun locateUnexpectedVersion(reportDirs: List<File>, expectedVersion: String) = reportDirs
+    private fun locateUnexpectedVersion(indexHtmlFiles: List<File>, expectedVersion: String) = indexHtmlFiles
         .filter { hasUnexpectedVersionReport(it, expectedVersion) }
         .map { it.relativeTo(project.projectDir) }
 
     private fun hasAnyMissingSourceFileReports(current: File): Boolean {
-        if(current.isDirectory) {
+        if (current.isDirectory) {
             // Always we expect that any report directory contains some files.
             current.listFiles()!!.forEach {
-                if(hasAnyMissingSourceFileReports(it)) return true
+                if (hasAnyMissingSourceFileReports(it)) return true
             }
         } else {
             return current.readText().matches(Regex(".*Source file .* was not found during generation of report.*"))
@@ -71,21 +79,11 @@ open class JacocoOutputTask : DefaultTask() {
         return false
     }
 
-    private fun hasMissingClassFiles(root: File): Boolean {
-        val reportRootContent = root.listFiles()!! // A previous test is asserting that content exists already.
-
-        val indexHtmlFile = reportRootContent.find { it.name == "index.html" }
-            ?: throw GradleException("unexpected missing index.html")
-
+    private fun hasMissingClassFiles(indexHtmlFile: File): Boolean {
         return indexHtmlFile.readText().matches(Regex(".*No class files specified.*"))
     }
 
-    private fun hasUnexpectedVersionReport(root: File, expectedVersion: String): Boolean {
-        val reportRootContent = root.listFiles()!! // A previous test is asserting that content exists already.
-
-        val indexHtmlFile = reportRootContent.find { it.name == "index.html" }
-            ?: throw GradleException("unexpected missing index.html")
-
+    private fun hasUnexpectedVersionReport(indexHtmlFile: File, expectedVersion: String): Boolean {
         return !indexHtmlFile.readText().matches(Regex(".*Created with.*${expectedVersion}.*"))
     }
 

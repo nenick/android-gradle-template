@@ -219,13 +219,14 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
                 givenKotlinProject {
                     withValidMergedReport()
                     projectDir.withDirectory("build/reports/jacoco/test/html") {
+                        withFile("any-other.html")
                         withFile("index.html") {
                             writeText(">Created with <a href=\"http://www.jacoco.org/jacoco\">JaCoCo</a> 0.7.5.201910111838<")
                         }
                     }
                 }
                 expectThrows<GradleException> { whenRunTask() }
-                    .message.isEqualTo("found modules where don't use jacoco version 0.8.5\n[build/reports/jacoco/test/html]")
+                    .message.isEqualTo("found modules where don't use jacoco version 0.8.5\n[build/reports/jacoco/test/html/index.html]")
             }
 
             @Test
@@ -239,7 +240,7 @@ class JacocoOutputTaskTest : TaskTest<JacocoOutputTask>(
                     }
                 }
                 expectThrows<GradleException> { whenRunTask() }
-                    .message.isEqualTo("found modules where no class files are specified\n[build/reports/jacoco/test/html]")
+                    .message.isEqualTo("found modules where no class files are specified\n[build/reports/jacoco/test/html/index.html]")
             }
         }
     }

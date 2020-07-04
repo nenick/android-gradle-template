@@ -1,5 +1,6 @@
 package de.nenick.gradle.plugins.tasks.output
 
+import de.nenick.gradle.plugins.base.whenBuildSrcExist
 import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
@@ -33,9 +34,8 @@ open class KtlintOutputTask : DefaultTask() {
 
     private fun buildSrcReportDir() = mutableListOf<File>()
         .apply {
-            val buildSrcDir = File("${project.projectDir}/buildSrc")
-            if (buildSrcDir.exists()) {
-                add(File(buildSrcDir, "build/reports/ktlint"))
+            whenBuildSrcExist {
+                add(File(it, "build/reports/ktlint"))
             }
         }.toTypedArray()
 }
