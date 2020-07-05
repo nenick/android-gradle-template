@@ -1,7 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("nenick-kotlin-module")
+    id("de.nenick.kotlin-module")
+    id("de.nenick.ktlint-config")
+    id("de.nenick.jacoco-kotlin-config")
 }
 
 dependencies {

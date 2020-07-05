@@ -22,10 +22,14 @@ fun Assertion.Builder<Task?>.hasGroup(expected: String): Assertion.Builder<Task?
         }
     }
 
-fun Assertion.Builder<File>.doesNotExists(): Assertion.Builder<File> =
-    assert("does exists is %s", false) {
-        when (it.exists()) {
-            false -> pass()
-            else -> fail(actual = it.exists())
+fun Assertion.Builder<File>.exists(expected: Boolean = true): Assertion.Builder<File> =
+    assert("does exists is %s", expected) {
+        if (it.exists() == expected) {
+            pass()
+        } else {
+            fail(actual = it.exists())
         }
+
     }
+
+fun Assertion.Builder<File>.doesNotExists(): Assertion.Builder<File> = exists(false)

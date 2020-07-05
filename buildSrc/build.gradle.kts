@@ -15,11 +15,10 @@ ktlint {
 }
 
 tasks.test {
-
     // Starting with version 4.6, Gradle provides native support for executing tests on the JUnit Platform.
     useJUnitPlatform()
 
-    // Print failed test to console to help when gradle import failed.
+    // Print failed test to console to show hints for the reason when gradle import failed.
     testLogging {
         events("failed")
     }
@@ -32,14 +31,13 @@ repositories {
 }
 
 dependencies {
-
     // Default android/kotlin related build plugins.
     implementation("com.android.tools.build:gradle:4.0.0")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
 
     // Plugins we want to provide with common pre configurations for this project.
     implementation("org.jlleitschuh.gradle:ktlint-gradle:9.2.1")
-    implementation("com.pinterest:ktlint:0.37.2") // to get the latest improvements from ktlint itself
+    // Note: Jacoco dependency is already available through the gradle android build dependency.
 
     // Basic tools to test the custom plugins and tasks.
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")

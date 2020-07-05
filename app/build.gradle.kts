@@ -1,8 +1,7 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
-    id("nenick-android-module")
+    id("de.nenick.android-application-module")
+    id("de.nenick.ktlint-config")
+    id("jacoco")
 }
 
 android {

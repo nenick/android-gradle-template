@@ -1,45 +1,27 @@
 package de.nenick.gradle.test.tools
 
-import kotlin.reflect.KClass
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.kotlin.dsl.register
-import org.gradle.testfixtures.ProjectBuilder
+import kotlin.reflect.KClass
 
 abstract class TaskTest<T : Task>(
     private val taskClass: KClass<T>
-) {
-    lateinit var project: Project
+) : ProjectExtensions {
+    override lateinit var project: Project
     lateinit var taskUnderTest: T
 
-    fun whenRunTask() {
+    fun whenRunTaskActions() {
         taskUnderTest.actions.forEach { it.execute(taskUnderTest) }
     }
 
-    fun givenEmptyProject(setup: Project.() -> Unit = {}) {
-        project = ProjectBuilder.builder().build()
-        setup(project)
-        taskUnderTest = project.tasks.register("task", taskClass).get()
-    }
-
-    fun givenKotlinProject(setup: Project.() -> Unit = {}) {
-        givenEmptyProject {
-            plugins.apply("kotlin")
-            setup(this)
+    override fun givenEmptyProject(setup: Project.() -> Unit): Project {
+        return super.givenEmptyProject(setup).also {
+            it.withTaskUnderTest()
         }
     }
 
-    fun givenJavaProject(setup: Project.() -> Unit = {}) {
-        givenEmptyProject {
-            plugins.apply("java")
-            setup(this)
-        }
-    }
-
-    fun givenAndroidKotlinProject(setup: Project.() -> Unit = {}) {
-        givenEmptyProject {
-            applyAndroidApplication()
-            setup(this)
-        }
+    private fun Project.withTaskUnderTest() {
+        taskUnderTest = tasks.register("task", taskClass).get()
     }
 }

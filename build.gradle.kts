@@ -1,12 +1,13 @@
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import de.nenick.gradle.plugins.tasks.JacocoMergeTask
+import de.nenick.gradle.plugins.jacoco.merge.JacocoMergeTask
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 plugins {
+    id("de.nenick.android-project")
+    id("de.nenick.jacoco-merge")
+    id("de.nenick.check-tasks")
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    id("nenick-android-project")
-    id("jacoco")
 }
 
 buildscript {
