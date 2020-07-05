@@ -24,6 +24,20 @@ tasks.test {
     }
 }
 
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    val filteredClassDirectories = classDirectories.files.map {
+        fileTree(it) {
+            exclude("**/*\$\$inlined*")
+        }
+    }
+    classDirectories.setFrom(*filteredClassDirectories.toTypedArray())
+}
+
+tasks.check {
+    dependsOn(tasks.jacocoTestReport)
+}
+
 repositories {
     jcenter()
     google()
