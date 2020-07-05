@@ -12,6 +12,7 @@ import strikt.assertions.contains
 import strikt.assertions.hasSize
 import strikt.assertions.isEqualTo
 import strikt.assertions.message
+import java.lang.IllegalStateException
 
 class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask>(KtlintOutputCheckTask::class) {
     private val errorMessage = "found modules where ktlint reports are missing"
@@ -43,15 +44,61 @@ class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask>(KtlintOutputCh
         }
 
         @Test
-        fun `reports exists`() {
-            givenKotlinProject { withDirectory("build/reports/ktlint") { withFile("any-ktlint-report.txt") } }
+        fun `reports exists as html`() {
+            givenKotlinProject {
+                withDirectory("build/reports/ktlint") {
+                    withFile("any-ktlint-report.html") { writeText(">Congratulations, no issues found!<") }
+                }
+            }
+            whenRunTaskActions()
+        }
+
+        @Test
+        fun `reports exists as txt`() {
+            givenKotlinProject {
+                withDirectory("build/reports/ktlint") {
+                    withFile("any-ktlint-report.txt")
+                }
+            }
             whenRunTaskActions()
         }
     }
 
-
     @Nested
     inner class Fail {
+        @Test
+        fun `html report contains violations`() {
+            givenKotlinProject {
+                withDirectory("build/reports/ktlint") {
+                    withFile("any-ktlint-report.html") { writeText("some violations") }
+                }
+            }
+            expectThrows<GradleException> { whenRunTaskActions() }
+                .message.isEqualTo("found modules with ktlint violations\n[build/reports/ktlint]")
+        }
+
+        @Test
+        fun `txt report contains violations`() {
+            givenKotlinProject {
+                withDirectory("build/reports/ktlint") {
+                    withFile("any-ktlint-report.txt") { writeText("some violations") }
+                }
+            }
+            expectThrows<GradleException> { whenRunTaskActions() }
+                .message.isEqualTo("found modules with ktlint violations\n[build/reports/ktlint]")
+        }
+
+        @Test
+        fun `report extensions is unknown`() {
+            givenKotlinProject {
+                withDirectory("build/reports/ktlint") {
+                    withFile("any-ktlint-report.any")
+                }
+            }
+            expectThrows<IllegalStateException> { whenRunTaskActions() }
+                .message.isEqualTo("extension not supported yet: any")
+        }
+
         @Test
         fun `no report directory was found`() {
             givenKotlinProject()

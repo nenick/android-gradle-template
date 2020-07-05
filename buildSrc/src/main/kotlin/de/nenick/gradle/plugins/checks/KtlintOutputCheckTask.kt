@@ -5,6 +5,7 @@ import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
+import java.lang.IllegalStateException
 
 open class KtlintOutputCheckTask : DefaultTask() {
     init {
@@ -15,14 +16,32 @@ open class KtlintOutputCheckTask : DefaultTask() {
 
     @TaskAction
     fun check() {
-        val missingKtlintReports = findMissingKtlintReports()
+        val ktlintReportDirs = listOf(*allProjectReportDir(), *buildSrcReportDir())
+
+        val missingKtlintReports = findMissingKtlintReports(ktlintReportDirs)
         if (missingKtlintReports.isNotEmpty()) {
             throw GradleException("found modules where ktlint reports are missing\n$missingKtlintReports")
         }
-        //TODO fail when reports have content
+
+        val violations = findViolationReports(ktlintReportDirs)
+        if (violations.isNotEmpty()) {
+            throw GradleException("found modules with ktlint violations\n$violations")
+        }
     }
 
-    private fun findMissingKtlintReports() = listOf(*allProjectReportDir(), *buildSrcReportDir())
+    private fun findViolationReports(ktlintReportDirs: List<File>) = ktlintReportDirs
+        .filter {
+            it.listFiles()!!.any {
+                when (it.extension) {
+                    "txt" -> it.readText().isNotEmpty()
+                    "html" -> !it.readText().contains("Congratulations, no issues found!")
+                    else -> throw IllegalStateException("extension not supported yet: ${it.extension}")
+                }
+            }
+        }
+        .map { it.relativeTo(project.projectDir) }
+
+    private fun findMissingKtlintReports(ktlintReportDirs: List<File>) = ktlintReportDirs
         .filter { it.listFiles().isNullOrEmpty() }
         .map { it.relativeTo(project.projectDir) }
 

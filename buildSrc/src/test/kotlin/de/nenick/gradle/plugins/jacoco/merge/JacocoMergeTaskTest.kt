@@ -1,7 +1,6 @@
 package de.nenick.gradle.plugins.jacoco.merge
 
 import de.nenick.gradle.test.tools.TaskTest
-import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
 import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.FileCollection
