@@ -1,8 +1,16 @@
 steps:
   - task: Gradle@2
-    displayName: output test ktlint
+    displayName: ktlint task check
     inputs:
-      tasks: 'ktlint-test'
+      tasks: 'ktlint-check'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
+  - task: Gradle@2
+    displayName: jacoco task check
+    inputs:
+      tasks: 'jacoco-check'
       gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()
