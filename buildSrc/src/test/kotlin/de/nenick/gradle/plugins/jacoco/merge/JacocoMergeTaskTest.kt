@@ -11,6 +11,12 @@ import strikt.assertions.*
 
 class JacocoMergeTaskTest : TaskTest<JacocoMergeTask>(JacocoMergeTask::class) {
     @Nested
+    inner class KotlinModules
+
+    @Nested
+    inner class AndroidModules
+
+    @Nested
     inner class BuildSrc {
         @Test
         fun `ignore when not exist`() {

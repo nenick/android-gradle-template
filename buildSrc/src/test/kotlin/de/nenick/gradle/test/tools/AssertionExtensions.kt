@@ -29,7 +29,6 @@ fun Assertion.Builder<File>.exists(expected: Boolean = true): Assertion.Builder<
         } else {
             fail(actual = it.exists())
         }
-
     }
 
 fun Assertion.Builder<File>.doesNotExists(): Assertion.Builder<File> = exists(false)

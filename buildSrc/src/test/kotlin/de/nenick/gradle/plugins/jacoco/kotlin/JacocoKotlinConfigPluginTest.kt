@@ -46,7 +46,7 @@ class JacocoKotlinConfigPluginTest : PluginTest() {
         expectThat(jacocoReportClassDirectories().from) {
             one {
                 isA<DefaultConfigurableFileTree>().and {
-                    get { dir.path }.isEqualTo("${project.projectDir}/${kotlinClassDirectory}")
+                    get { dir.path }.isEqualTo("${project.projectDir}/$kotlinClassDirectory")
                 }
             }
             none { isA<SourceSetOutput>() }

@@ -9,7 +9,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.one
 
-class CheckTasksPluginTest: PluginTest() {
+class CheckTasksPluginTest : PluginTest() {
     private val pluginId = "de.nenick.check-tasks"
 
     @Test

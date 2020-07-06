@@ -83,7 +83,7 @@ open class JacocoOutputCheckTask : DefaultTask() {
     }
 
     private fun hasUnexpectedVersionReport(indexHtmlFile: File, expectedVersion: String): Boolean {
-        return !indexHtmlFile.readText().matches(Regex(".*Created with.*${expectedVersion}.*"))
+        return !indexHtmlFile.readText().matches(Regex(".*Created with.*$expectedVersion.*"))
     }
 
     private fun allExpectedReportDirs() = listOf(

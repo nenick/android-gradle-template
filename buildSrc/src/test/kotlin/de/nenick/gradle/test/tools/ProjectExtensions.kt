@@ -15,7 +15,7 @@ interface ProjectExtensions {
         return project
     }
 
-    fun givenKotlinProject(setup: Project.() -> Unit = {}) : Project {
+    fun givenKotlinProject(setup: Project.() -> Unit = {}): Project {
         return givenEmptyProject {
             plugins.apply("kotlin")
             setup(this)
@@ -81,4 +81,3 @@ fun Project.applyAndroidApplication() {
         compileSdkVersion(29)
     }
 }
-

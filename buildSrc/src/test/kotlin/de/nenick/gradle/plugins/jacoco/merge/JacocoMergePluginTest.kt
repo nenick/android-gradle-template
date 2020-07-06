@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.*
 
-
 class JacocoMergePluginTest : PluginTest() {
     private val pluginId = "de.nenick.jacoco-merge"
     private val mergeTaskName = "jacocoTestReportMerge"
@@ -60,7 +59,7 @@ class JacocoMergePluginTest : PluginTest() {
             givenEmptyProjectWithPluginApplied()
             expectThat(jacocoMergeTask().reports.html) {
                 get { isEnabled }.isTrue()
-                get { destination.path }.isEqualTo("${project.buildDir}/${htmlReportDir}")
+                get { destination.path }.isEqualTo("${project.buildDir}/$htmlReportDir")
             }
         }
 
@@ -69,7 +68,7 @@ class JacocoMergePluginTest : PluginTest() {
             givenEmptyProjectWithPluginApplied()
             expectThat(jacocoMergeTask().reports.xml) {
                 get { isEnabled }.isTrue()
-                get { destination.path }.isEqualTo("${project.buildDir}/${xmlReportDir}")
+                get { destination.path }.isEqualTo("${project.buildDir}/$xmlReportDir")
             }
         }
     }

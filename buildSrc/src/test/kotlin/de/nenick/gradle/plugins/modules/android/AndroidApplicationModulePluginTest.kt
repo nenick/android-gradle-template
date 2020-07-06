@@ -33,5 +33,4 @@ class AndroidApplicationModulePluginTest : PluginTest() {
     override fun givenEmptyProjectWithPluginApplied(setup: Project.() -> Unit) {
         givenEmptyProject { plugins.apply(AndroidApplicationModulePlugin::class.java) }
     }
-
 }
