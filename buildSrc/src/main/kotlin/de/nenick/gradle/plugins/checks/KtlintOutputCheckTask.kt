@@ -20,7 +20,10 @@ open class KtlintOutputCheckTask : DefaultTask() {
 
         val missingKtlintReports = findMissingKtlintReports(ktlintReportDirs)
         if (missingKtlintReports.isNotEmpty()) {
-            throw GradleException("found modules where ktlint reports are missing\n$missingKtlintReports")
+            val errorMessage = "Found modules where ktlint reports are missing. " +
+                    "Did you forgot to add id(\"de.nenick.ktlint-config\") or id(\"de.nenick.ktlint-android-config\")?" +
+                    "\n$missingKtlintReports"
+            throw GradleException(errorMessage)
         }
 
         val violations = findViolationReports(ktlintReportDirs)

@@ -33,6 +33,7 @@ class KtlintConfigPluginTest : PluginTest() {
         expectThat(project.extensions.getByType<KtlintExtension>()) {
             get { enableExperimentalRules.get() }.isTrue()
             get { disabledRules.get() }.contains("no-wildcard-imports")
+            get { disabledRules.get() }.contains("import-ordering")
         }
     }
 

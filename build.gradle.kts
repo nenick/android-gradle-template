@@ -59,14 +59,14 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                 executionData(fileTree("${buildDir}/outputs/code_coverage/debugAndroidTest/connected/*"))
             }
 
-            tasks.matching{ it.extensions.findByType<JacocoTaskExtension>() != null }.configureEach {
+            tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.configureEach {
                 if (!name.contains("release", true)) {
                     executionData(this)
                 }
             }
             additionalClassDirs(fileTree("${buildDir}/tmp/kotlin-classes/debug"))
-        } else {
-            additionalSourceDirs(kotlin!!.sourceSets.findByName("main")!!.kotlin.sourceDirectories)
+        } else if (kotlin != null) {
+            additionalSourceDirs(kotlin.sourceSets.findByName("main")!!.kotlin.sourceDirectories)
 
             tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.configureEach {
                 executionData(this)
@@ -74,6 +74,10 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
             additionalClassDirs(fileTree("${buildDir}/classes/kotlin/main") {
                 exclude("**/*\$\$inlined*")
             })
+        } else {
+            if(!projectDir.listFiles { file, _ -> !file.isDirectory }.isNullOrEmpty()) {
+                throw java.lang.IllegalStateException("found no android nor kotlin extension but module looks like it has project files")
+            }
         }
     }
 }

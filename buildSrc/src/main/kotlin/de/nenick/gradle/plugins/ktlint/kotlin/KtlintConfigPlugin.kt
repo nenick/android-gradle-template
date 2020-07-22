@@ -22,7 +22,9 @@ open class KtlintConfigPlugin : KtlintPlugin() {
             // Disable annoying rules which makes no sense for us.
             disabledRules.addAll(
                 // Disable no-wildcards-imports because with modern IDEs and build tools there are rare cases when this rule could be useful.
-                "no-wildcard-imports"
+                "no-wildcard-imports",
+                // TODO Enable again when fixed https://github.com/pinterest/ktlint/issues/527
+                "import-ordering"
             )
 
             // Html reports are more beautiful to read.

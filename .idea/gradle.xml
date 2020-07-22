@@ -14,6 +14,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core-data-network" />
+            <option value="$PROJECT_DIR$/tools" />
+            <option value="$PROJECT_DIR$/tools/wiremock-android" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

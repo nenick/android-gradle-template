@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.nenick.wiremock">
+
+    <!-- With WireMock we use android internet tools and we need the permission for that. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <!--
+        With android 28 the http tool changed but for WireMock we still need the origin one.
+
+        Without the origin tool we get this exception:
+            java.lang.NoClassDefFoundError: Failed resolution of: Lorg/apache/http/protocol/HttpRequestExecutor;
+            Caused by: java.lang.ClassNotFoundException: Didn't find class "org.apache.http.protocol.HttpRequestExecutor" on path: DexPathList[...]
+        -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+</manifest>

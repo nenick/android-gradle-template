@@ -1,2 +1,3 @@
 include ':app'
 include ':core-data-network'
+include ':tools:wiremock-android'

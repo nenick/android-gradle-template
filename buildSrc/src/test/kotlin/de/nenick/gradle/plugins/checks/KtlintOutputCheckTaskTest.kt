@@ -15,7 +15,8 @@ import strikt.assertions.message
 import java.lang.IllegalStateException
 
 class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask>(KtlintOutputCheckTask::class) {
-    private val errorMessage = "found modules where ktlint reports are missing"
+    private val errorMessage = "Found modules where ktlint reports are missing. " +
+            "Did you forgot to add id(\"de.nenick.ktlint-config\") or id(\"de.nenick.ktlint-android-config\")?"
 
     @Nested
     inner class Dependencies {
