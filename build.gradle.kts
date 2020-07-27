@@ -38,6 +38,8 @@ allprojects {
         dependencies {
             dependency("junit:junit:4.13")
             dependency("io.strikt:strikt-core:0.26.1")
+            dependency("org.koin:koin-core:2.1.6")
+            dependency("org.koin:koin-android:2.1.6")
         }
     }
 }
