@@ -8,5 +8,14 @@ schedules:
       include:
         - master
 
+variables:
+  - variants:
+      - "GroupOne"
+        variantName: "any"
+        apkName: "anything"
+      - "GroupTwo"
+        variantName: "any2"
+        apkName: "anything2"
+
 steps:
   - template: templates/debug-build-and-test.yml
