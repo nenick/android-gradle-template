@@ -9,7 +9,7 @@ schedules:
         - master
 
 variables:
-  variants: ["one", "two"]
+  variants: "one", "two"
 
 steps:
   - script: echo $(variants)
