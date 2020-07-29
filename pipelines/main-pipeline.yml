@@ -10,7 +10,8 @@ schedules:
 
 variables:
   - name: variants
-    value: ["One", "Two"]
+    value:
+      - one: two
 
 steps:
   - script: echo $(variants)
