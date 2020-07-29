@@ -18,4 +18,7 @@ variables:
         apk: "anything2"
 
 steps:
+  - script: echo $(variants)
+  - script: echo $(variants[0])
+  - script: echo $(variants[0].variant)
   - template: templates/debug-build-and-test.yml
