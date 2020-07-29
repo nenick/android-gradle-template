@@ -9,14 +9,7 @@ schedules:
         - master
 
 variables:
-  variants: [
-    "Group One":
-      variant: "any"
-      apk: "anything"
-    "Group Two":
-      variant: "any2"
-      apk: "anything2"
-  ]
+  variants: [{}]
 
 steps:
   - script: echo $(variants)
