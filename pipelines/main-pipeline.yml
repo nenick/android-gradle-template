@@ -10,12 +10,12 @@ schedules:
 
 variables:
   - variants:
-      - "GroupOne"
-        variantName: "any"
-        apkName: "anything"
-      - "GroupTwo"
-        variantName: "any2"
-        apkName: "anything2"
+      - "Group One":
+        variant: "any"
+        apk: "anything"
+      - "Group Two":
+        variant: "any2"
+        apk: "anything2"
 
 steps:
   - template: templates/debug-build-and-test.yml
