@@ -12,7 +12,6 @@ class HttpClientFactory : KoinComponent {
     private val androidEngineConfig by inject<AndroidEngineConfigDelegate>()
 
     fun createClient() = HttpClient(Android) {
-
         // When expectSuccess=true it would turn into exception controlled flow when result code is >= 400.
         expectSuccess = false
 
