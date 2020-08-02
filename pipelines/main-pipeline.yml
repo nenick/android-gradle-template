@@ -2,8 +2,12 @@ parameters:
   - name: 'modules'
     type: object
     default:
+      - buildSrc
       - app
+      - core-data-network
+      - core-data-network-mock
       - tools/wiremock-android
+      - tools/wiremock-kotlindsl
 
 schedules:
   - cron: "0 0 * * *"
@@ -20,6 +24,7 @@ jobs:
     steps:
       - bash: |
           MODULES_EXISTS=$(cat settings.gradle | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
+          MODULES_EXISTS="buildSrc\n$MODULES_EXISTS"
           MODULES_LISTED=$(echo ${{join(' ', parameters.modules)}} | sed $'s/ /\\\n/g')
           echo ""
           echo "== MODULES_EXISTS =="
@@ -29,7 +34,7 @@ jobs:
           echo "$MODULES_LISTED"
           echo ""
           if [ "$MODULES_EXISTS" != "$MODULES_LISTED" ]; then
-            echo "listed modules does not match settings.gradle"
+            >&2 echo "Error: listed modules does not match settings.gradle"
             exit 1
           fi
 
