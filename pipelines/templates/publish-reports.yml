@@ -1,5 +1,6 @@
 parameters:
-  modules : object
+  - name: 'modules'
+    type: object
 
 - ${{each module in parameters.modules}}:
   - task: PublishPipelineArtifact@1
