@@ -2,8 +2,8 @@ parameters:
   - name: 'modules'
     type: object
     default:
-      - app
-      - wiremock-android
+      - "app"
+      - "wiremock-android"
 
 schedules:
   - cron: "0 0 * * *"
