@@ -3,7 +3,7 @@ parameters:
     type: object
     default:
       - app
-      - wiremock-android
+      - tools/wiremock-android
 
 schedules:
   - cron: "0 0 * * *"
