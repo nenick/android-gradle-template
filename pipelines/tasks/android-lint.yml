@@ -1,0 +1,8 @@
+steps:
+  - task: Gradle@2
+    displayName: Android lint
+    inputs:
+      tasks: 'lintDebug'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()

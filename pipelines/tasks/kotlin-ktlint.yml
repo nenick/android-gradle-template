@@ -1,0 +1,8 @@
+steps:
+  - task: Gradle@2
+    displayName: Kotlin ktlint
+    inputs:
+      tasks: 'ktlintCheck'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
