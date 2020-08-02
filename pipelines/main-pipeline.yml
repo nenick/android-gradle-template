@@ -20,11 +20,14 @@ jobs:
     steps:
       - bash: |
           MODULES_EXISTS=$(cat settings.gradle | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
-          MODULES_LISTED=${{join('\\n', parameters.modules)}}
+          MODULES_LISTED=$( echo ${{join(' ', parameters.modules)}} | sed s/ /\n/g)
+          echo ""
           echo "== MODULES_EXISTS =="
-          echo "$MODULES_EXISTS\n"
+          echo "$MODULES_EXISTS"
+          echo ""
           echo "== MODULES_LISTED =="
-          echo "$MODULES_LISTED\n"
+          echo "$MODULES_LISTED"
+          echo ""
           if [ "$MODULES_EXISTS" != "$MODULES_LISTED" ] then
             echo "listed modules does not match settings.gradle"
             exit 1
