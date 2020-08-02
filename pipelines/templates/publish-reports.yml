@@ -2,7 +2,7 @@ parameters:
   - name: 'modules'
     type: object
 
-- steps:
+steps:
   - ${{each module in parameters.modules}}:
     - task: PublishPipelineArtifact@1
       displayName: Report $(module)
