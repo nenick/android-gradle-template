@@ -2,10 +2,11 @@ parameters:
   - name: 'modules'
     type: object
 
-- ${{each module in parameters.modules}}:
-  - task: PublishPipelineArtifact@1
-    displayName: Report $(module)
-    inputs:
-      targetPath: '$(module)/build/reports'
-      artifactName: 'reports/$(module)'
-    condition: succeededOrFailed()
+- steps:
+  - ${{each module in parameters.modules}}:
+    - task: PublishPipelineArtifact@1
+      displayName: Report $(module)
+      inputs:
+        targetPath: '$(module)/build/reports'
+        artifactName: 'reports/$(module)'
+      condition: succeededOrFailed()
