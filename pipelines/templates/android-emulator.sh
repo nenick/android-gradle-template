@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-./android-emulator-install.sh
-./android-emulator-start.sh
-./android-emulator-wait.sh
+./templates/android-emulator-install.sh
+./templates/android-emulator-start.sh
+./templates/android-emulator-wait.sh
