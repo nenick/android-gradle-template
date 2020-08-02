@@ -18,6 +18,12 @@ jobs:
     pool:
       vmImage: 'macOS-10.15'
     steps:
+      - task: Bash@3
+        displayName: Start Emulator
+        inputs:
+          filePath: 'pipelines/templates/android-emulator.sh'
+        condition: succeededOrFailed()
+
       - task: Gradle@2
         displayName: Ktlint
         inputs:
