@@ -6,7 +6,7 @@ schedules:
         - master
 
 variables:
-  - modules: ["app", "tools:wiremock-android", "tools:wiremock-kotlindsl"]
+  modules: ["app", "tools:wiremock-android", "tools:wiremock-kotlindsl"]
 
 jobs:
   - job:
