@@ -1,12 +1,10 @@
 parameters:
-  - name: 'modules'
+  - name: 'param'
     type: object
     default:
-      - app
-      - wiremock
-      - tools
-
-
+      - FOO
+      - BAR
+      - ZOO
 
 schedules:
   - cron: "0 0 * * *"
@@ -28,10 +26,10 @@ jobs:
     pool:
       vmImage: 'macOS-10.15'
     steps:
+      - ${{ each p in parameters.param }}:
+        - script: echo ${{ p }}
       - template: templates/ktlint.yml
-      - template: templates/publish-reports.yml
-        parameters:
-          modules: $(parameters.modules)
+
 
   - job:
     displayName: Project tasks output checks
