@@ -14,6 +14,16 @@ schedules:
 
 jobs:
   - job:
+    displayName: Ensure all modules are listed
+    pool:
+      vmImage: 'macOS-10.15'
+    steps:
+      - bash: |
+          MODULES=$(cat settings.gradle | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
+          echo "$MODULES"
+          echo "${{parameters.modules}}"
+
+  - job:
     displayName: Tests and checks
     pool:
       vmImage: 'macOS-10.15'
@@ -25,8 +35,9 @@ jobs:
     pool:
       vmImage: 'macOS-10.15'
     steps:
-      - template: templates/ktlint.yml
-      - template: templates/publish-reports.yml
+      - template: tasks/android-lint.yml
+      - template: tasks/kotlin-ktlint.yml
+      - template: tasks/publish-reports.yml
         parameters:
           modules: ${{parameters.modules}}
 
