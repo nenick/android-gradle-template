@@ -46,8 +46,6 @@ steps:
       publishJUnitResults: false
     condition: succeededOrFailed()
 
-  - template: ktlint.yml
-
   - task: Bash@3
     displayName: Wait for Emulator
     inputs:

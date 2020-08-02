@@ -1,12 +1,17 @@
+parameters:
+  - name: 'modules'
+    type: object
+    default:
+      - app
+      - tools/wiremock-android
+      - tools/wiremock-kotlindsl
+
 schedules:
   - cron: "0 0 * * *"
     displayName: Daily Midnight Build
     branches:
       include:
         - master
-
-variables:
-  modules: ["app", "tools:wiremock-android", "tools:wiremock-kotlindsl"]
 
 jobs:
   - job:
@@ -22,8 +27,9 @@ jobs:
       vmImage: 'macOS-10.15'
     steps:
       - template: templates/ktlint.yml
+      - template: templates/publish-reports.yml
         parameters:
-          modules: ["app", "tools:wiremock-android"]
+          modules: $(parameters.modules)
 
   - job:
     displayName: Project tasks output checks
