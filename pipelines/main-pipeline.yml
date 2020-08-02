@@ -8,11 +8,6 @@ schedules:
       include:
         - master
 
-variables:
-  - name: variants
-    value:
-      - one: two
-
 steps:
   - script: echo $(variants)
   - script: echo $(variants[0])
