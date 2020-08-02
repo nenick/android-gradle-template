@@ -49,12 +49,10 @@ class WireMockService : Service(), KoinComponent {
     private val channelId = javaClass.simpleName
     private val notificationId = channelId.hashCode()
 
-    override fun onCreate() {
-
-    }
+    override fun onCreate() {}
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int) = super.onStartCommand(intent, flags, startId).also {
-        if (foregroundServiceType != ServiceInfo.FOREGROUND_SERVICE_TYPE_NONE) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && foregroundServiceType != ServiceInfo.FOREGROUND_SERVICE_TYPE_NONE) {
             startForeground(notificationId, buildNotification())
         }
         mockServer.start(applicationContext, intent.getIntExtra(EXTRA_SSL_PORT, -1))
