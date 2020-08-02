@@ -80,7 +80,8 @@ val jacocoTestReport = tasks.register("jacocoTestReport").get()
 android.applicationVariants.all {
     val variantName = name.capitalize()
 
-    if (!variantName.contains("release", true)) {
+    val mainVariantForAndroidTests = "debug"
+    if (variantName.contains(mainVariantForAndroidTests, true)) {
         tasks.register("jacoco${variantName}UnitTestReport", JacocoReport::class) {
             group = "Verification"
             description = "Generate Jacoco unit test coverage reports for the $variantName build."

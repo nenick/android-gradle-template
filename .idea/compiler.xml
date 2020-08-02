@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="core-data-network-mock" target="1.7" />
+      <module name="wiremock-android-jvm" target="1.7" />
+      <module name="wiremock-kotlindsl" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
