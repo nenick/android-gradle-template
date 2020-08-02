@@ -5,6 +5,9 @@ schedules:
       include:
         - master
 
+variables:
+  - modules: ["app", "tools:wiremock-android", "tools:wiremock-kotlindsl"]
+
 jobs:
   - job:
     displayName: Tests and checks
@@ -14,7 +17,16 @@ jobs:
       - template: templates/debug-build-and-test.yml
 
   - job:
-    displayName: Project tasks output check
+    displayName: Static code quality checks
+    pool:
+      vmImage: 'macOS-10.15'
+    steps:
+      - template: templates/ktlint.yml
+        parameters:
+          modules: ["app", "tools:wiremock-android"]
+
+  - job:
+    displayName: Project tasks output checks
     pool:
       vmImage: 'macOS-10.15'
     steps:
