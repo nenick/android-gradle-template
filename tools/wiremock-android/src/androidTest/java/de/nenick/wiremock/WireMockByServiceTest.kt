@@ -1,10 +1,8 @@
 package de.nenick.wiremock
 
-import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ServiceTestRule
 import com.github.tomakehurst.wiremock.client.WireMock.*
-import de.nenick.wiremock.internal.WireMockServerController
 import de.nenick.wiremock.testextensions.WithAndroidContext
 import de.nenick.wiremock.testextensions.WithAndroidContextExt
 import de.nenick.wiremock.testextensions.WithHttpClient
@@ -14,11 +12,9 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import strikt.api.expectThat
@@ -51,8 +47,7 @@ class WireMockByServiceTest :
         val response = client.get<HttpResponse>("https://$serverHostname:$serverSslPort/$testEndpoint")
 
         // Expect call was successful mocked.
-        expectThat(response)
-        {
+        expectThat(response) {
             get { status }.isEqualTo(HttpStatusCode.OK)
             getBlocking { receive<String>() }.isEqualTo(
                 """{

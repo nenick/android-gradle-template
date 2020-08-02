@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm")
+    id("de.nenick.ktlint-config")
+    id("de.nenick.jacoco-kotlin-config")
 }
 
 dependencies {

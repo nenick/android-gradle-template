@@ -3,7 +3,7 @@ package de.nenick.wiremock.kotlindsl.scopes
 import com.github.tomakehurst.wiremock.client.MappingBuilder
 import de.nenick.wiremock.kotlindsl.WireMockStub
 
-class StubScope {
+class StubForScope {
 
     fun get(init: MappingScope.() -> Unit) = add(WireMockStub.get(init))
     fun post(init: MappingScope.() -> Unit) = add(WireMockStub.post(init))

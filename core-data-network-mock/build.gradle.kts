@@ -1,7 +1,8 @@
-plugins { 
+plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("de.nenick.ktlint-android-config")
 }
 
 android {

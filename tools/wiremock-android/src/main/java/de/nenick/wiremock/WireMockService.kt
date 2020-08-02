@@ -3,7 +3,6 @@ package de.nenick.wiremock
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
@@ -16,7 +15,6 @@ import de.nenick.wiremock.internal.WireMockServerController
 import de.nenick.wiremock.internal.load
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-
 
 /**
  * Provides a mock server with configurable behavior.
@@ -70,11 +68,9 @@ class WireMockService : Service(), KoinComponent {
     private fun buildNotification() = NotificationCompat.Builder(applicationContext, createNotificationChannel()).build()
 
     private fun createNotificationChannel(): String {
-
         // Notification channel creation has still to be guarded manually because this is not downward compatible.
         // https://developer.android.com/training/notify-user/channels#CreateChannel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
             // With IMPORTANCE_NONE the notification is not shown at all. No need to show it yet.
             val channel = NotificationChannel(channelId, "WireMock Server", NotificationManager.IMPORTANCE_NONE)
             val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

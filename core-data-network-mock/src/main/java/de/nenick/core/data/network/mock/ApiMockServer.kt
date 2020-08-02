@@ -10,16 +10,18 @@ import org.koin.dsl.module
 
 object ApiMockServer {
     fun start(appContext: Context) {
-        loadKoinModules(module {
-            factory<AndroidEngineConfigDelegate>(override = true) { TrustMockServerConfig() }
-            factory {
-                WireMockInitialStubbing(
-                    TodoApiStubs.list,
-                    TodoApiStubs.byId,
-                    TodoApiStubs.byIdNotFound
-                )
+        loadKoinModules(
+            module {
+                factory<AndroidEngineConfigDelegate>(override = true) { TrustMockServerConfig() }
+                factory {
+                    WireMockInitialStubbing(
+                        TodoApiStubs.list,
+                        TodoApiStubs.byId,
+                        TodoApiStubs.byIdNotFound
+                    )
+                }
             }
-        })
+        )
         WireMockService.start(appContext, 9999)
     }
 }
