@@ -3,8 +3,10 @@ parameters:
     type: object
     default:
       - app
-      - tools/wiremock-android
-      - tools/wiremock-kotlindsl
+      - wiremock-android
+      - tools
+
+
 
 schedules:
   - cron: "0 0 * * *"
