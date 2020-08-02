@@ -19,7 +19,7 @@ jobs:
       vmImage: 'macOS-10.15'
     steps:
       - bash: |
-          MODULES_EXISTS=$(cat settings.gradle | sed '/include \'://g' | sed 's/:/\//g' | sed 's/\'//g')
+          MODULES_EXISTS=$(cat settings.gradle | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
           MODULES_LISTED=$(echo ${{join(' ', parameters.modules)}} | sed 's/ /\n/g')
           echo ""
           echo "== MODULES_EXISTS =="
