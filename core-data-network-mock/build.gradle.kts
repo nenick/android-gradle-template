@@ -13,6 +13,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    packagingOptions {
+        // avoids e.g. More than one file was found with OS independent path "META-INF/ktor-client-json.kotlin_module".
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
