@@ -3,10 +3,17 @@
 
     <!-- With WireMock we use android internet tools and we need the permission for that. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Necessary since Android 26 that service need to be started in foreground. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application>
+        <service
+            android:name=".WireMockService"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="false" />
         <!--
-        With android 28 the http tool changed but for WireMock we still need the origin one.
+        With Android 28 the http tools changed but for WireMock we still need the origin.
 
         Without the origin tool we get this exception:
             java.lang.NoClassDefFoundError: Failed resolution of: Lorg/apache/http/protocol/HttpRequestExecutor;

@@ -3,12 +3,16 @@ package de.nenick.template.coredata.network
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.junit.WireMockRule
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
-import de.nenick.template.coredata.network.base.ApiResponse
+import de.nenick.template.coredata.network.models.ApiResponse
 import de.nenick.template.coredata.network.models.TodoJson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import strikt.api.expectThat
 import strikt.assertions.isA
 
@@ -20,6 +24,16 @@ class TodoApiTest {
     private val baseUrl = "http://localhost:8080"
     private val api = TodoApi(baseUrl)
     private val dummyId = 1234
+
+    @Before
+    fun setup() {
+        startKoin { modules(CoreDateNetworkModule) }
+    }
+
+    @After
+    fun cleanup() {
+        stopKoin()
+    }
 
     @Test
     fun `todoById successful`() = runBlockingUnit {

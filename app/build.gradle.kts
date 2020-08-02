@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "de.nenick.template"
 
-        minSdkVersion(14)
+        minSdkVersion(21) // The minSdk could be below 21 but then we have to handle multidex by self.
         targetSdkVersion(29)
 
         versionCode = 1
@@ -28,25 +28,45 @@ android {
         getByName("debug") {
             isTestCoverageEnabled = true
         }
+        create("onDeviceServer") {
+            initWith(getByName("debug"))
+            matchingFallbacks = listOf("debug")
+        }
     }
 
     lintOptions {
         isWarningsAsErrors = true
         isAbortOnError = false
     }
+
+    packagingOptions {
+        // avoids e.g. More than one file was found with OS independent path "META-INF/ktor-client-json.kotlin_module".
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
+    val onDeviceServerImplementation by configurations
+
+    implementation(project(":core-data-network"))
+    onDeviceServerImplementation(project(":core-data-network-mock"))
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation("androidx.core:core-ktx:1.3.0")
-    implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation("org.koin:koin-android")
+
+    implementation("androidx.core:core-ktx")
+    implementation("androidx.activity:activity-ktx")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx")
+    implementation("androidx.appcompat:appcompat")
+    implementation("androidx.constraintlayout:constraintlayout")
 
     testImplementation("junit:junit")
 
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation("androidx.test.ext:junit")
+    androidTestImplementation("androidx.test.espresso:espresso-core")
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }
 
 afterEvaluate {
     // Running unit tests in release variant brings no value yet.

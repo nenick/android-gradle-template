@@ -8,13 +8,16 @@ plugins {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
-    implementation("io.ktor:ktor-client-android:1.3.2")
-    implementation("io.ktor:ktor-client-json:1.3.2")
-    implementation("io.ktor:ktor-client-gson:1.3.2")
+
+    implementation("io.ktor:ktor-client-android")
+    implementation("io.ktor:ktor-client-json")
+    implementation("io.ktor:ktor-client-gson")
+
+    implementation("org.koin:koin-core")
 
     testImplementation("junit:junit")
     testImplementation("io.strikt:strikt-core")
-    testImplementation("com.github.tomakehurst:wiremock-jre8:2.26.3")
+    testImplementation("com.github.tomakehurst:wiremock-jre8")
 }
 
 tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }

@@ -1,3 +1,5 @@
 include ':app'
 include ':core-data-network'
+include ':core-data-network-mock'
 include ':tools:wiremock-android'
+include ':tools:wiremock-kotlindsl'

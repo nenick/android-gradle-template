@@ -1,4 +1,4 @@
-package de.nenick.template.coredata.network.base
+package de.nenick.template.coredata.network.models
 
 sealed class ApiResponse<CONTENT, ERROR> {
 

@@ -38,8 +38,27 @@ allprojects {
         dependencies {
             dependency("junit:junit:4.13")
             dependency("io.strikt:strikt-core:0.26.1")
+            dependency("com.github.tomakehurst:wiremock:2.26.3")
+            dependency("com.github.tomakehurst:wiremock-jre8:2.26.3")
+
             dependency("org.koin:koin-core:2.1.6")
             dependency("org.koin:koin-android:2.1.6")
+
+            dependency("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
+            dependency("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
+
+            dependency("androidx.core:core-ktx:1.3.1")
+            dependency("androidx.activity:activity-ktx:1.1.0")
+            dependency("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+            dependency("androidx.appcompat:appcompat:1.1.0")
+            dependency("androidx.constraintlayout:constraintlayout:1.1.3")
+
+            dependency("androidx.test.ext:junit:1.1.1")
+            dependency("androidx.test.espresso:espresso-core:3.2.0")
+
+            dependency("io.ktor:ktor-client-android:1.3.2")
+            dependency("io.ktor:ktor-client-json:1.3.2")
+            dependency("io.ktor:ktor-client-gson:1.3.2")
         }
     }
 }
