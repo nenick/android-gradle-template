@@ -93,5 +93,3 @@ steps:
       targetPath: 'app/build/reports'
       artifactName: 'Test Reports'
     condition: succeededOrFailed()
-
-  - template: output-tests.yml

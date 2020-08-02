@@ -1,6 +1,3 @@
-pool:
-  vmImage: 'macOS-10.15'
-
 schedules:
   - cron: "0 0 * * *"
     displayName: Daily Midnight Build
@@ -8,5 +5,39 @@ schedules:
       include:
         - master
 
-steps:
-  - template: templates/debug-build-and-test.yml
+jobs:
+  - job:
+    displayName: Tests and checks
+    pool:
+      vmImage: 'macOS-10.15'
+    steps:
+      - template: templates/debug-build-and-test.yml
+
+  - job:
+    displayName: Project tasks output check
+    pool:
+      vmImage: 'macOS-10.15'
+    steps:
+      - task: Gradle@2
+        displayName: Ktlint
+        inputs:
+          tasks: 'ktlint-check'
+          gradleWrapperFile: 'gradlew'
+          publishJUnitResults: false
+        condition: succeededOrFailed()
+
+      - task: Gradle@2
+        displayName: Jacoco
+        inputs:
+          tasks: 'jacoco-check'
+          gradleWrapperFile: 'gradlew'
+          publishJUnitResults: false
+        condition: succeededOrFailed()
+
+      - task: Gradle@2
+        displayName: Clean
+        inputs:
+          tasks: 'clean-check'
+          gradleWrapperFile: 'gradlew'
+          publishJUnitResults: false
+        condition: succeededOrFailed()
