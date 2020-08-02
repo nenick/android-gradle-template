@@ -24,7 +24,7 @@ jobs:
     steps:
       - bash: |
           MODULES_EXISTS=$(cat settings.gradle | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
-          MODULES_EXISTS=$(echo "buildSrc\\n$MODULES_EXISTS")
+          MODULES_EXISTS=$(echo "buildSrc\n$MODULES_EXISTS")
           MODULES_LISTED=$(echo ${{join(' ', parameters.modules)}} | sed $'s/ /\\\n/g')
           echo ""
           echo "== MODULES_EXISTS =="
