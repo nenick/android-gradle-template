@@ -29,7 +29,9 @@ jobs:
       - ${{ each p in parameters.param }}:
         - script: echo ${{ p }}
       - template: templates/ktlint.yml
-
+      - template: templates/publish-reports.yml
+        parameters:
+          modules: $(parameters.param)
 
   - job:
     displayName: Project tasks output checks
