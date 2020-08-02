@@ -1,5 +1,5 @@
 parameters:
-  modules : []
+  modules : object
 
 - ${{each module in parameters.modules}}:
   - task: PublishPipelineArtifact@1
