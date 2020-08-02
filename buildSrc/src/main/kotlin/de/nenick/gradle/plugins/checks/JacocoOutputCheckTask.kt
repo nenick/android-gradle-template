@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
 import java.io.File
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport
 
 open class JacocoOutputCheckTask : DefaultTask() {
     init {
@@ -101,11 +102,13 @@ open class JacocoOutputCheckTask : DefaultTask() {
 
     private fun allAndroidUnitReportDirs() = project.allprojects
         .filter { it.plugins.hasPlugin("kotlin-android") }
+        .filter { it.tasks.withType(JacocoAndroidReport::class.java).none { it.skipUnitTest } }
         .map { File(it.projectDir, "build/reports/jacoco/testDebug/html") }
         .toTypedArray()
 
     private fun allAndroidConnectedReportDirs() = project.allprojects
         .filter { it.plugins.hasPlugin("kotlin-android") }
+        .filter { it.tasks.withType(JacocoAndroidReport::class.java).none { it.skipAndroidTest } }
         .map { File(it.projectDir, "build/reports/jacoco/connectedDebug/html") }
         .toTypedArray()
 

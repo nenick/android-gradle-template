@@ -1,6 +1,7 @@
 package de.nenick.gradle.plugins.checks
 
 import com.android.build.gradle.internal.coverage.JacocoReportTask
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport
 import de.nenick.gradle.plugins.jacoco.merge.JacocoMergeTask
 import de.nenick.gradle.test.tools.*
 import de.nenick.gradle.test.tools.extensions.withDirectory
@@ -57,7 +58,7 @@ class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask>(JacocoOutputCh
         fun `reports exists for kotlin`() {
             givenKotlinProject {
                 withValidMergedReport()
-                projectDir.withDirectory("build/reports/jacoco/test/html") { withValidIndexHtml() }
+                withDirectory("build/reports/jacoco/test/html") { withValidIndexHtml() }
             }
             whenRunTaskActions()
         }
@@ -66,8 +67,8 @@ class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask>(JacocoOutputCh
         fun `reports exists for android`() {
             givenAndroidKotlinProject {
                 withValidMergedReport()
-                projectDir.withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
-                projectDir.withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
+                withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
+                withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
             }
             whenRunTaskActions()
         }
@@ -76,10 +77,33 @@ class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask>(JacocoOutputCh
         fun `reports exists for buildSrc`() {
             givenEmptyProject {
                 withValidMergedReport()
-                projectDir.withDirectory("buildSrc/build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
+                withDirectory("buildSrc/build/reports/jacoco/test/html") { withValidIndexHtml() }
             }
-            expectThrows<GradleException> { whenRunTaskActions() }
-                .message.isEqualTo("$errorMessageNoReport\n[buildSrc/build/reports/jacoco/test/html]")
+            whenRunTaskActions()
+        }
+
+        @Test
+        fun `skip missing unit tests reports`() {
+            givenAndroidKotlinProject {
+                withValidMergedReport()
+                withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
+                tasks.register("anyJacocoReport", JacocoAndroidReport::class.java).get().apply {
+                    skipUnitTest = true
+                }
+            }
+            whenRunTaskActions()
+        }
+
+        @Test
+        fun `skip missing android tests reports`() {
+            givenAndroidKotlinProject {
+                withValidMergedReport()
+                withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
+                tasks.register("anyJacocoReport", JacocoAndroidReport::class.java).get().apply {
+                    skipAndroidTest = true
+                }
+            }
+            whenRunTaskActions()
         }
     }
 

@@ -68,11 +68,14 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
     description = "Generate merged Jacoco coverage reports."
 
     subprojects {
-        val android = extensions.findByType<BaseAppModuleExtension>()
+        val androidApp = extensions.findByType<com.android.build.gradle.AppExtension>()
+        val androidLibrary = extensions.findByType<com.android.build.gradle.LibraryExtension>()
         val kotlin = extensions.findByType<org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension>()
 
-        if (android != null) {
-            val variant = extensions.getByType<BaseAppModuleExtension>().applicationVariants.findLast { it.name == "debug" }!!
+        if (androidApp != null || androidLibrary != null) {
+            val variant =
+                extensions.findByType<com.android.build.gradle.AppExtension>()?.applicationVariants?.findLast { it.name == "debug" }
+                    ?: extensions.getByType<com.android.build.gradle.LibraryExtension>().libraryVariants.findLast { it.name == "debug" }!!
             val sourceFiles = files(variant.sourceSets.map { it.javaDirectories })
             additionalSourceDirs(sourceFiles)
 
@@ -80,12 +83,33 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                 executionData(fileTree("${buildDir}/outputs/code_coverage/debugAndroidTest/connected/*"))
             }
 
-            tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.configureEach {
+            tasks.matching {
+                val hasJacoco = it is JacocoReport
+                val skipUnitTests =
+                    it is de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport && it.name.contains("UnitTest") && it.skipUnitTest
+                val skipAndroidTests =
+                    it is de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport && it.name.contains("ConnectedTest") && it.skipAndroidTest
+
+                if(it is JacocoReport && it.name.contains("ConnectedTest") && !skipAndroidTests) {
+                    androidApp?.let {extension ->
+                        if (!extension.buildTypes.getByName("debug").isTestCoverageEnabled)
+                            throw IllegalStateException("test coverage has to be enabled for $name ${it.name}")
+                    }
+                    androidLibrary?.let {extension ->
+                        if (!extension.buildTypes.getByName("debug").isTestCoverageEnabled)
+                            throw IllegalStateException("test coverage has to be enabled for $name ${it.name}")
+                    }
+                }
+
+                hasJacoco && !skipUnitTests && !skipAndroidTests
+            }.configureEach {
                 if (!name.contains("release", true)) {
-                    executionData(this)
+                    executionData((this as JacocoReport).executionData)
                 }
             }
-            additionalClassDirs(fileTree("${buildDir}/tmp/kotlin-classes/debug"))
+            additionalClassDirs(fileTree("${buildDir}/tmp/kotlin-classes/debug") {
+                exclude("**/*\$\$inlined*")
+            })
         } else if (kotlin != null) {
             additionalSourceDirs(kotlin.sourceSets.findByName("main")!!.kotlin.sourceDirectories)
 
@@ -96,7 +120,7 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                 exclude("**/*\$\$inlined*")
             })
         } else {
-            if(!projectDir.listFiles { file, _ -> !file.isDirectory }.isNullOrEmpty()) {
+            if (!projectDir.listFiles { file, _ -> !file.isDirectory }.isNullOrEmpty()) {
                 throw java.lang.IllegalStateException("found no android nor kotlin extension but module looks like it has project files")
             }
         }

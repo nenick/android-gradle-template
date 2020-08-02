@@ -8,4 +8,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("com.github.tomakehurst:wiremock") { isTransitive = false }
+
+    testImplementation("junit:junit")
+    testImplementation("io.strikt:strikt-core")
+    testImplementation("com.github.tomakehurst:wiremock")
 }

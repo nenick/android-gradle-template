@@ -95,7 +95,9 @@ android.applicationVariants.all {
             val mainSrc = sourceSets.map { it.javaDirectories }
             val execFiles = "$buildDir/jacoco/test${variantName}UnitTest.exec"
             val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
-            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName")
+            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName") {
+                exclude("**/*\$\$inlined*")
+            }
 
             sourceDirectories.setFrom(files(mainSrc))
             classDirectories.setFrom(javaClasses, kotlinClasses)
@@ -117,7 +119,9 @@ android.applicationVariants.all {
             val mainSrc = sourceSets.map { it.javaDirectories }
             val execFiles = fileTree("$buildDir/outputs/code_coverage/${this@all.name}AndroidTest/connected/") { include("*-coverage.ec") }
             val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
-            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName")
+            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName") {
+                exclude("**/*\$\$inlined*")
+            }
 
             sourceDirectories.setFrom(files(mainSrc))
             classDirectories.setFrom(javaClasses, kotlinClasses)
