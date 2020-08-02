@@ -21,7 +21,9 @@ jobs:
       - bash: |
           MODULES=$(cat settings.gradle | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
           echo "$MODULES"
-          echo ${{parameters.modules}}
+          ${{ech module in parameters.modules}}
+            MODULES_LISTED="$MODULES_LISTED\n${{module}}"
+          echo $MODULES_LISTED 
 
   - job:
     displayName: Tests and checks
