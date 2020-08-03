@@ -10,5 +10,5 @@ steps:
       displayName: Report ${{module}}
       inputs:
         targetPath: '${{module}}/build/reports'
-        artifactName: "${{prefix}}reports-${{replace(module, '/', '-')}}"
+        artifactName: "${{parameters.prefix}}reports-${{replace(module, '/', '-')}}"
       condition: succeededOrFailed()
