@@ -27,13 +27,14 @@ jobs:
           modules: ${{parameters.modules}}
 
   - job:
-    displayName: Unit and Android tests
+    displayName: Unit and Android test coverage
     pool:
       vmImage: 'macOS-10.15'
     steps:
       - template: templates/debug-build-and-test.yml
       - template: tasks/publish-reports.yml
         parameters:
+          prefix: 'test-coverage-'
           modules: ${{parameters.modules}}
 
   - job:
@@ -45,6 +46,7 @@ jobs:
       - template: tasks/kotlin-ktlint.yml
       - template: tasks/publish-reports.yml
         parameters:
+          prefix: 'quality-check-'
           modules: ${{parameters.modules}}
 
   - job:
