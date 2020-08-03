@@ -27,11 +27,14 @@ jobs:
           modules: ${{parameters.modules}}
 
   - job:
-    displayName: Tests and checks
+    displayName: Unit and Android tests
     pool:
       vmImage: 'macOS-10.15'
     steps:
       - template: templates/debug-build-and-test.yml
+      - template: tasks/publish-reports.yml
+        parameters:
+          modules: ${{parameters.modules}}
 
   - job:
     displayName: Static code quality checks
