@@ -18,7 +18,7 @@ schedules:
 
 jobs:
   - job:
-    displayName: Ensure all modules are listed
+    displayName: Check all modules are listed
     pool:
       vmImage: 'macOS-10.15'
     steps:
