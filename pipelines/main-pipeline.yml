@@ -4,8 +4,8 @@ parameters:
     default:
       - buildSrc
       - app
-      - core-data-network
-      - core-data-network-mock
+      - core/todo-api
+      - core/todo-api-mock
       - tools/wiremock-android
       - tools/wiremock-kotlindsl
 

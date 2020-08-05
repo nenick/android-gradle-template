@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core-data-network"))
+    implementation(project(":core:todo-api"))
     implementation(project(":tools:wiremock-android"))
     implementation(project(":tools:wiremock-kotlindsl"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib")

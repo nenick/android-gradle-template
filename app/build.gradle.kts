@@ -48,8 +48,8 @@ android {
 dependencies {
     val onDeviceServerImplementation by configurations
 
-    implementation(project(":core-data-network"))
-    onDeviceServerImplementation(project(":core-data-network-mock"))
+    implementation(project(":core:todo-api"))
+    onDeviceServerImplementation(project(":core:todo-api-mock"))
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.koin:koin-android")
