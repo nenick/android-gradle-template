@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-echo "input $1"
 MODULES_LISTED=$(echo $1 | sed $'s/ /\\\n/g')
 
 MODULES_EXISTS=$(cat settings.gradle | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
