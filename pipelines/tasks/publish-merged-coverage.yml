@@ -1,0 +1,22 @@
+parameters:
+  - name: 'modules'
+    type: object
+
+steps:
+  - bash: mkdir -p build/coverage/sources
+    displayName: Collection directory
+    condition: succeededOrFailed()
+
+  - ${{each module in parameters.modules}}:
+      - bash: cp ${{module}}/src/main/java/* build/coverage/sources
+        displayName: Collect sources ${{module}}
+        condition: succeededOrFailed()
+
+  - task: PublishCodeCoverageResults@1
+    displayName: Report Coverage
+    inputs:
+      codeCoverageTool: 'JaCoCo'
+      summaryFileLocation: 'build/reports/jacoco/merged/jacocoTestReport.xml'
+      pathToSources: 'build/coverage/sources'
+      failIfCoverageEmpty: true
+    condition: succeededOrFailed()
