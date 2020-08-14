@@ -16,7 +16,7 @@ steps:
     condition: succeededOrFailed()
 
   - ${{each module in parameters.modules}}:
-      - bash: cp ${{module}}/src/main/java/* build/coverage/sources
+      - bash: cp -r ${{module}}/src/main/java/* build/coverage/sources
         displayName: Collect sources ${{module}}
         condition: succeededOrFailed()
 
