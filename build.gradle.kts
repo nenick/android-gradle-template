@@ -61,6 +61,10 @@ allprojects {
             dependency("io.ktor:ktor-client-gson:1.3.2")
         }
     }
+
+    // Running unit tests in release variant brings no value yet.
+    // Java library modules also run only for "debug" by default.
+    tasks.findByName("testReleaseUnitTest")?.enabled = false
 }
 
 tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
@@ -90,12 +94,12 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                 val skipAndroidTests =
                     it is de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport && it.name.contains("ConnectedTest") && it.skipAndroidTest
 
-                if(it is JacocoReport && it.name.contains("ConnectedTest") && !skipAndroidTests) {
-                    androidApp?.let {extension ->
+                if (it is JacocoReport && it.name.contains("ConnectedTest") && !skipAndroidTests) {
+                    androidApp?.let { extension ->
                         if (!extension.buildTypes.getByName("debug").isTestCoverageEnabled)
                             throw IllegalStateException("test coverage has to be enabled for $name ${it.name}")
                     }
-                    androidLibrary?.let {extension ->
+                    androidLibrary?.let { extension ->
                         if (!extension.buildTypes.getByName("debug").isTestCoverageEnabled)
                             throw IllegalStateException("test coverage has to be enabled for $name ${it.name}")
                     }

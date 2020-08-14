@@ -32,6 +32,10 @@ jobs:
       vmImage: 'macOS-10.15'
     steps:
       - template: templates/debug-build-and-test.yml
+      - template: tasks/unit-tests.yml
+        parameters:
+          modules: ${{parameters.modules}}
+      - template: templates/debug-build-and-test-part2.yml
       - template: tasks/publish-merged-coverage.yml
         parameters:
           modules: ${{parameters.modules}}

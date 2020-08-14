@@ -1,0 +1,15 @@
+parameters:
+  - name: 'modules'
+    type: object
+
+steps:
+  - ${{each module in parameters.modules}}:
+      - task: Gradle@2
+        displayName: Unit tests ${{module}}
+        inputs:
+          tasks: ':${{module}}:test'
+          gradleWrapperFile: 'gradlew'
+          publishJUnitResults: true
+          testResultsFiles: '${{module}}/**/TEST-*.xml'
+          testRunTitle: 'Unit Tests - ${{module}}'
+        condition: succeededOrFailed()

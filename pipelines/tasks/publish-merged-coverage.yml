@@ -3,6 +3,14 @@ parameters:
     type: object
 
 steps:
+  - task: Gradle@2
+    displayName: Create Coverage Report
+    inputs:
+      tasks: 'jacocoTestReportMerge'
+      gradleWrapperFile: 'gradlew'
+      publishJUnitResults: false
+    condition: succeededOrFailed()
+
   - bash: mkdir -p build/coverage/sources
     displayName: Collection directory
     condition: succeededOrFailed()

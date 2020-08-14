@@ -68,12 +68,6 @@ dependencies {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }
 
-afterEvaluate {
-    // Running unit tests in release variant brings no value yet.
-    // Java library modules also run only for "debug" by default.
-    tasks.findByName("testReleaseUnitTest")!!.enabled = false
-}
-
 // One task to run all variant jacocoTestReport tasks.
 val jacocoTestReport = tasks.register("jacocoTestReport").get()
 
