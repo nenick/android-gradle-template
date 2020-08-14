@@ -3,9 +3,9 @@ parameters:
     type: object
 
 steps:
-  - bash: |
-    echo "${{parameters.modules}}"
-    echo "${{join(' ', parameters.modules)}}"
+  - script: |
+      echo "${{parameters.modules}}"
+      echo "${{join(' ', parameters.modules)}}"
   - task: Bash@3
     displayName: Moule list check
     inputs:
