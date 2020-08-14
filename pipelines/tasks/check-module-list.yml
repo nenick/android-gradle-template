@@ -3,11 +3,9 @@ parameters:
     type: object
 
 steps:
-  - script: |
-      echo "${{join(' ', parameters.modules)}}"
   - task: Bash@3
     displayName: Moule list check
     inputs:
       filePath: 'pipelines/tasks/check-module-list.sh'
-      arguments: ${{join(' ', parameters.modules)}}
+      arguments: "${{join(' ', parameters.modules)}}"
     condition: succeededOrFailed()
