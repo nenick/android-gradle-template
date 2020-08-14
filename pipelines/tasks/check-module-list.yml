@@ -6,6 +6,6 @@ steps:
   - task: Bash@3
     displayName: Moule list check
     inputs:
-      filePath: 'pipelines/templates/check-module-list.sh'
+      filePath: 'pipelines/tasks/check-module-list.sh'
       arguments: ${{join(' ', parameters.modules)}}
     condition: succeededOrFailed()
