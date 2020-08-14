@@ -3,7 +3,7 @@ parameters:
     type: object
 
 steps:
-  - script: |
+  - bash: |
     echo "${{parameters.modules}}"
     echo "${{join(' ', parameters.modules)}}"
   - task: Bash@3
