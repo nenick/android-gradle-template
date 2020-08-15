@@ -8,7 +8,7 @@ import java.io.File
  * Task to merge the jacoco reports for a multi module project.
  */
 open class JacocoMergeTask : JacocoReport() {
-    private val buildSrcSourceDir = "src/main/kotlin"
+    private val buildSrcSourceDir = "src/main/java"
     private val buildSrcBuildDir = "/build/classes/kotlin/main"
     private val buildSrcCoverageDataFile = "build/jacoco/test.exec"
     private val excludeMissingSources = listOf(

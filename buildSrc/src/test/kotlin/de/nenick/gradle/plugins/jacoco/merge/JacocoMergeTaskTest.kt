@@ -28,7 +28,7 @@ class JacocoMergeTaskTest : TaskTest<JacocoMergeTask>(JacocoMergeTask::class) {
         fun `include when exist`() {
             givenKotlinProject { withDirectory("buildSrc") }
             expectThat(taskUnderTest.additionalSourceDirs.from).one {
-                isA<FileCollection>().get { asPath }.isEqualTo("${project.projectDir}/buildSrc/src/main/kotlin")
+                isA<FileCollection>().get { asPath }.isEqualTo("${project.projectDir}/buildSrc/src/main/java")
             }
             expectThat(taskUnderTest.additionalClassDirs.from).one {
                 isA<ConfigurableFileTree>().get { dir.path }.isEqualTo("${project.projectDir}/buildSrc/build/classes/kotlin/main")
