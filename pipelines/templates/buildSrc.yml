@@ -19,13 +19,6 @@ steps:
       publishJUnitResults: false
     condition: succeededOrFailed()
 
-  - task: PublishPipelineArtifact@1
-    displayName: buildSrc ktlint publish
-    inputs:
-      targetPath: 'buildSrc/build/reports/ktlint'
-      artifactName: 'ktlint - buildSrc'
-    condition: succeededOrFailed()
-
   - task: Gradle@2
     displayName: buildSrc build
     inputs:

@@ -41,7 +41,7 @@ jobs:
           modules: ${{parameters.modules}}
       - template: tasks/publish-reports.yml
         parameters:
-          prefix: 'test-coverage-'
+          prefix: 'test & coverage '
           modules: ${{parameters.modules}}
 
   - job:
@@ -53,7 +53,7 @@ jobs:
       - template: tasks/kotlin-ktlint.yml
       - template: tasks/publish-reports.yml
         parameters:
-          prefix: 'quality-check-'
+          prefix: 'quality '
           modules: ${{parameters.modules}}
 
   - job:
