@@ -1,3 +1,4 @@
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
 import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
 
 plugins {
@@ -52,7 +53,7 @@ android.libraryVariants.all {
 
     val mainVariantForAndroidTests = "debug"
     if (variantName.contains(mainVariantForAndroidTests, true)) {
-        tasks.register("jacoco${variantName}UnitTestReport", JacocoConnectedAndroidTestReport::class) {
+        tasks.register("jacoco${variantName}UnitTestReport", JacocoAndroidUnitTestReport::class) {
             group = "Verification"
             description = "Generate Jacoco unit test coverage reports for the $variantName build."
             skipCoverageReport = true
