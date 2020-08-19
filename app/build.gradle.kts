@@ -32,7 +32,7 @@ android {
             isTestCoverageEnabled = true
         }
 
-        //================================================================================ #onDeviceServer
+        // ================================================================================ #onDeviceServer
         // Support for providing an on device mock server for stable demos and testing.
         //
         // Change the testBuildType if you want to target a different server for automated

@@ -6,7 +6,7 @@ import io.ktor.client.features.json.GsonSerializer
 import io.ktor.client.features.json.JsonFeature
 
 object DefaultAndroidClientEngineConfig {
-    fun apply(target : HttpClientConfig<AndroidEngineConfig>) {
+    fun apply(target: HttpClientConfig<AndroidEngineConfig>) {
         // When expectSuccess=true it would turn into exception controlled flow when result code is >= 400.
         target.expectSuccess = false
 

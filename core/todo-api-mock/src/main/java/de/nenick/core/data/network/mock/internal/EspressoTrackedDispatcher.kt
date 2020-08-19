@@ -23,13 +23,14 @@ class EspressoTrackedDispatcher<T : CoroutineDispatcher>(
     }
 
     override fun dispatch(context: CoroutineContext, block: Runnable) {
-        coroutineDispatcher.dispatch(context, kotlinx.coroutines.Runnable {
+        val countingBlockExecution = Runnable {
             counter.increment()
             try {
                 block.run()
             } finally {
                 counter.decrement()
             }
-        })
+        }
+        coroutineDispatcher.dispatch(context, countingBlockExecution)
     }
 }
