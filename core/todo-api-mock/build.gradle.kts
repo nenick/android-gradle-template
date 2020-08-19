@@ -17,8 +17,8 @@ android {
     }
 
     packagingOptions {
-        // avoids e.g. More than one file was found with OS independent path "META-INF/ktor-client-json.kotlin_module".
-        exclude("META-INF/*.kotlin_module")
+        // Avoid conflicts like "More than one file was found with OS independent path ..."
+        exclude("META-INF/*")
     }
 }
 
@@ -29,6 +29,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("io.ktor:ktor-client-android")
     implementation("org.koin:koin-android")
+    implementation("androidx.test.espresso:espresso-idling-resource:3.2.0")
 }
 
 //

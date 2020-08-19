@@ -1,9 +1,9 @@
-package de.nenick.core.data.network.mock
+package de.nenick.core.data.network.mock.stubdata
 
-import de.nenick.core.data.network.mock.TodoTestData.task1NotCompleted
-import de.nenick.core.data.network.mock.TodoTestData.task2NotCompleted
-import de.nenick.core.data.network.mock.TodoTestData.task3Completed
-import de.nenick.core.data.network.mock.TodoTestData.task4Completed
+import de.nenick.core.data.network.mock.stubdata.TodoTestData.task1NotCompleted
+import de.nenick.core.data.network.mock.stubdata.TodoTestData.task2NotCompleted
+import de.nenick.core.data.network.mock.stubdata.TodoTestData.task3Completed
+import de.nenick.core.data.network.mock.stubdata.TodoTestData.task4Completed
 import de.nenick.template.coredata.network.endpoints.TodoEndpoint
 import de.nenick.wiremock.kotlindsl.WireMockStub.get
 

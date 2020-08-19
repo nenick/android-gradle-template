@@ -1,4 +1,4 @@
-package de.nenick.core.data.network.mock
+package de.nenick.core.data.network.mock.stubdata
 
 import de.nenick.template.coredata.network.models.TodoJson
 
