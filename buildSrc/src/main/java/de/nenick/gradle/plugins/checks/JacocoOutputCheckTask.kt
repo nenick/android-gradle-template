@@ -131,7 +131,7 @@ open class JacocoOutputCheckTask : DefaultTask() {
     }
 
     private fun <T : BaseJacocoAndroidTestReport> Project.variantName(type: Class<T>): String {
-        return tasks.expectSingle(type, "Debug"){ it.variantForCoverage.capitalize() }
+        return tasks.expectSingle(type, "Debug") { it.variantForCoverage.capitalize() }
     }
 
     private fun <T : BaseJacocoAndroidTestReport, RESULT> TaskContainer.expectSingle(
