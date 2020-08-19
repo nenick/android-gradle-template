@@ -50,9 +50,7 @@ class WireMockService : Service(), KoinComponent {
     override fun onCreate() {}
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int) = super.onStartCommand(intent, flags, startId).also {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && foregroundServiceType != ServiceInfo.FOREGROUND_SERVICE_TYPE_NONE) {
-            startForeground(notificationId, buildNotification())
-        }
+        startForeground(notificationId, buildNotification())
         mockServer.start(applicationContext, intent.getIntExtra(EXTRA_SSL_PORT, -1))
         initialStubbing.load()
     }
@@ -65,7 +63,10 @@ class WireMockService : Service(), KoinComponent {
         return Binder() // No binding features necessary yet.
     }
 
-    private fun buildNotification() = NotificationCompat.Builder(applicationContext, createNotificationChannel()).build()
+    private fun buildNotification() = NotificationCompat.Builder(applicationContext, createNotificationChannel())
+        .setContentTitle("WireMock is running")
+        .setSmallIcon(android.R.drawable.ic_dialog_info)
+        .build()
 
     private fun createNotificationChannel(): String {
         // Notification channel creation has still to be guarded manually because this is not downward compatible.
