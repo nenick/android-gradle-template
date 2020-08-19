@@ -154,6 +154,8 @@ android.applicationVariants.all {
                 exclude("**/*\$\$inlined*")
             }
 
+            // TODO check idea to include coverage for all used sub modules
+
             sourceDirectories.setFrom(files(mainSrc))
             classDirectories.setFrom(javaClasses, kotlinClasses)
             executionData.setFrom(execFiles)

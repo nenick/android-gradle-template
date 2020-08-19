@@ -100,7 +100,7 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                 val skipAndroidTests =
                     it is de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport && it.skipCoverageReport
 
-                if (it is de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport && !skipAndroidTests) {
+                if (it is de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport) {
                     androidApp?.let { extension ->
                         if (!extension.buildTypes.getByName(variantName).isTestCoverageEnabled)
                             throw IllegalStateException("test coverage has to be enabled for $name ${it.name}")

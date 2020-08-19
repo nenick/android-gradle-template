@@ -19,6 +19,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildTypes.getByName("debug").isTestCoverageEnabled = true
+
     packagingOptions {
         // Avoid conflicts like "More than one file was found with OS independent path ..."
         exclude("META-INF/*")
