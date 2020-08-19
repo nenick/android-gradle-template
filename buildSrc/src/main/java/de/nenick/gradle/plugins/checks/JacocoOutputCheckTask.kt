@@ -8,6 +8,7 @@ import de.nenick.gradle.plugins.jacoco.android.BaseJacocoAndroidTestReport
 import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
 import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
 import org.gradle.api.Project
+import org.gradle.api.tasks.TaskContainer
 
 open class JacocoOutputCheckTask : DefaultTask() {
     init {
@@ -126,22 +127,26 @@ open class JacocoOutputCheckTask : DefaultTask() {
     private fun mergedReportDir() = arrayOf(File(project.buildDir, "reports/jacoco/merged/html"))
 
     private fun <T : BaseJacocoAndroidTestReport> Project.shouldBeSkipped(type: Class<T>): Boolean {
-        val jacocoAndroidReports = tasks.withType(type)
-        return when (jacocoAndroidReports.size) {
-            0 -> false
-            1 -> jacocoAndroidReports.first().skipCoverageReport
-            else -> throw GradleException("found more than one matching report task with " +
-                    "${type.simpleName} in ${name}\n${jacocoAndroidReports.map { it.name }}")
-        }
+        return tasks.expectSingle(type, false) { it.skipCoverageReport }
     }
 
     private fun <T : BaseJacocoAndroidTestReport> Project.variantName(type: Class<T>): String {
-        val jacocoAndroidReports = tasks.withType(type)
+        return tasks.expectSingle(type, "Debug"){ it.variantForCoverage.capitalize() }
+    }
+
+    private fun <T : BaseJacocoAndroidTestReport, RESULT> TaskContainer.expectSingle(
+        type: Class<T>,
+        fallback: RESULT,
+        action: (found: BaseJacocoAndroidTestReport) -> RESULT
+    ): RESULT {
+        val jacocoAndroidReports = withType(type)
         return when (jacocoAndroidReports.size) {
-            0 -> "debug"
-            1 -> jacocoAndroidReports.first().variantForCoverage
-            else -> throw GradleException("found more than one matching report task with " +
-                    "${type.simpleName} in ${name}\n${jacocoAndroidReports.map { it.name }}")
-        }.capitalize()
+            0 -> fallback // TODO is this just because of not proper prepared tests?
+            1 -> action(jacocoAndroidReports.first())
+            else -> throw GradleException(
+                "found more than one matching report task with " +
+                        "${type.simpleName} in ${project.name}\n${jacocoAndroidReports.map { it.name }}"
+            )
+        }
     }
 }
