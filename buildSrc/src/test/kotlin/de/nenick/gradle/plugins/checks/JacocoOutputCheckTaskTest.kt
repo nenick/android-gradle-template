@@ -1,7 +1,8 @@
 package de.nenick.gradle.plugins.checks
 
 import com.android.build.gradle.internal.coverage.JacocoReportTask
-import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
+import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
 import de.nenick.gradle.plugins.jacoco.merge.JacocoMergeTask
 import de.nenick.gradle.test.tools.*
 import de.nenick.gradle.test.tools.extensions.withDirectory
@@ -22,6 +23,7 @@ import java.io.File
 class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask>(JacocoOutputCheckTask::class) {
     private val errorMessageNoReport = "found modules where jacoco reports are missing"
     private val errorMessageNoSourceFiles = "found modules where source files path could not be resolved"
+    private val errorMessageMultipleMatch = "found more than one matching report task"
 
     @Nested
     inner class Dependencies {
@@ -87,8 +89,8 @@ class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask>(JacocoOutputCh
             givenAndroidKotlinProject {
                 withValidMergedReport()
                 withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
-                tasks.register("anyJacocoReport", JacocoAndroidReport::class.java).get().apply {
-                    skipUnitTest = true
+                tasks.register("anyJacocoReport", JacocoAndroidUnitTestReport::class.java).get().apply {
+                    skipCoverageReport = true
                 }
             }
             whenRunTaskActions()
@@ -99,8 +101,34 @@ class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask>(JacocoOutputCh
             givenAndroidKotlinProject {
                 withValidMergedReport()
                 withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
-                tasks.register("anyJacocoReport", JacocoAndroidReport::class.java).get().apply {
-                    skipAndroidTest = true
+                tasks.register("anyJacocoReport", JacocoConnectedAndroidTestReport::class.java).get().apply {
+                    skipCoverageReport = true
+                }
+            }
+            whenRunTaskActions()
+        }
+
+        @Test
+        fun `different variant for android unit test reports`() {
+            givenAndroidKotlinProject {
+                withValidMergedReport()
+                withDirectory("build/reports/jacoco/testAnotherOne/html") { withValidIndexHtml() }
+                withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
+                tasks.register("anyJacocoReport", JacocoAndroidUnitTestReport::class.java).get().apply {
+                    variantForCoverage = "anotherOne"
+                }
+            }
+            whenRunTaskActions()
+        }
+
+        @Test
+        fun `different variant for connected android test reports`() {
+            givenAndroidKotlinProject {
+                withValidMergedReport()
+                withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
+                withDirectory("build/reports/jacoco/connectedAnotherOne/html") { withValidIndexHtml() }
+                tasks.register("anyJacocoReport", JacocoConnectedAndroidTestReport::class.java).get().apply {
+                    variantForCoverage = "anotherOne"
                 }
             }
             whenRunTaskActions()
@@ -129,6 +157,48 @@ class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask>(JacocoOutputCh
                 }
                 expectThrows<GradleException> { whenRunTaskActions() }
                     .message.isEqualTo("$errorMessageNoReport\n[build/reports/jacoco/connectedDebug/html]")
+            }
+
+            @Test
+            fun `multiple android unit test coverage tasks not supported yet`() {
+                givenAndroidKotlinProject {
+                    withValidMergedReport()
+                    tasks.register("anyJacocoReport", JacocoAndroidUnitTestReport::class.java)
+                    tasks.register("otherJacocoReport", JacocoAndroidUnitTestReport::class.java)
+                }
+                expectThrows<GradleException> { whenRunTaskActions() }.message.isEqualTo(
+                    "$errorMessageMultipleMatch with " +
+                            "${JacocoAndroidUnitTestReport::class.java.simpleName} in test\n[anyJacocoReport, otherJacocoReport]"
+                )
+            }
+
+            @Test
+            fun `multiple connected android test coverage tasks not supported yet`() {
+                givenAndroidKotlinProject {
+                    withValidMergedReport()
+                    tasks.register("anyJacocoReport", JacocoConnectedAndroidTestReport::class.java)
+                    tasks.register("otherJacocoReport", JacocoConnectedAndroidTestReport::class.java)
+                }
+                expectThrows<GradleException> { whenRunTaskActions() }.message.isEqualTo(
+                    "$errorMessageMultipleMatch with " +
+                            "${JacocoConnectedAndroidTestReport::class.java.simpleName} in test\n[anyJacocoReport, otherJacocoReport]"
+                )
+            }
+
+            @Test
+            fun `multiple android unit test coverage tasks not supported yet also when skipped`() {
+                givenAndroidKotlinProject {
+                    withValidMergedReport()
+                    tasks.register("anyJacocoReport", JacocoAndroidUnitTestReport::class.java)
+                    tasks.register("otherJacocoReport", JacocoAndroidUnitTestReport::class.java).get().apply {
+                        skipCoverageReport = true
+                    }
+                }
+                expectThrows<GradleException> { whenRunTaskActions() }
+                    .message.isEqualTo(
+                        "$errorMessageMultipleMatch with " +
+                                "${JacocoAndroidUnitTestReport::class.java.simpleName} in test\n[anyJacocoReport, otherJacocoReport]"
+                    )
             }
         }
 

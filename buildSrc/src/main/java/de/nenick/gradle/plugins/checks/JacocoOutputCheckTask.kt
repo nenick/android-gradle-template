@@ -4,7 +4,10 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
 import java.io.File
-import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport
+import de.nenick.gradle.plugins.jacoco.android.BaseJacocoAndroidTestReport
+import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
+import org.gradle.api.Project
 
 open class JacocoOutputCheckTask : DefaultTask() {
     init {
@@ -102,14 +105,14 @@ open class JacocoOutputCheckTask : DefaultTask() {
 
     private fun allAndroidUnitReportDirs() = project.allprojects
         .filter { it.plugins.hasPlugin("kotlin-android") }
-        .filter { it.tasks.withType(JacocoAndroidReport::class.java).none { it.skipUnitTest } }
-        .map { File(it.projectDir, "build/reports/jacoco/testDebug/html") }
+        .filter { !it.shouldBeSkipped(JacocoAndroidUnitTestReport::class.java) }
+        .map { File(it.projectDir, "build/reports/jacoco/test${it.variantName(JacocoAndroidUnitTestReport::class.java)}/html") }
         .toTypedArray()
 
     private fun allAndroidConnectedReportDirs() = project.allprojects
         .filter { it.plugins.hasPlugin("kotlin-android") }
-        .filter { it.tasks.withType(JacocoAndroidReport::class.java).none { it.skipAndroidTest } }
-        .map { File(it.projectDir, "build/reports/jacoco/connectedDebug/html") }
+        .filter { !it.shouldBeSkipped(JacocoConnectedAndroidTestReport::class.java) }
+        .map { File(it.projectDir, "build/reports/jacoco/connected${it.variantName(JacocoConnectedAndroidTestReport::class.java)}/html") }
         .toTypedArray()
 
     private fun buildSrcReportDir() = mutableListOf<File>()
@@ -121,4 +124,24 @@ open class JacocoOutputCheckTask : DefaultTask() {
         }.toTypedArray()
 
     private fun mergedReportDir() = arrayOf(File(project.buildDir, "reports/jacoco/merged/html"))
+
+    private fun <T : BaseJacocoAndroidTestReport> Project.shouldBeSkipped(type: Class<T>): Boolean {
+        val jacocoAndroidReports = tasks.withType(type)
+        return when (jacocoAndroidReports.size) {
+            0 -> false
+            1 -> jacocoAndroidReports.first().skipCoverageReport
+            else -> throw GradleException("found more than one matching report task with " +
+                    "${type.simpleName} in ${name}\n${jacocoAndroidReports.map { it.name }}")
+        }
+    }
+
+    private fun <T : BaseJacocoAndroidTestReport> Project.variantName(type: Class<T>): String {
+        val jacocoAndroidReports = tasks.withType(type)
+        return when (jacocoAndroidReports.size) {
+            0 -> "debug"
+            1 -> jacocoAndroidReports.first().variantForCoverage
+            else -> throw GradleException("found more than one matching report task with " +
+                    "${type.simpleName} in ${name}\n${jacocoAndroidReports.map { it.name }}")
+        }.capitalize()
+    }
 }

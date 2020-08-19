@@ -3,11 +3,11 @@ package de.nenick.gradle.plugins.jacoco.android
 import org.gradle.api.tasks.Input
 import org.gradle.testing.jacoco.tasks.JacocoReport
 
-open class JacocoAndroidReport : JacocoReport() {
+abstract class BaseJacocoAndroidTestReport : JacocoReport() {
 
     @Input
-    var skipUnitTest = false
+    var skipCoverageReport = false
 
     @Input
-    var skipAndroidTest = false
+    var variantForCoverage = "debug"
 }

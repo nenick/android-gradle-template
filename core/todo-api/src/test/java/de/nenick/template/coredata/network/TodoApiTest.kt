@@ -27,7 +27,7 @@ class TodoApiTest {
 
     @Before
     fun setup() {
-        startKoin { modules(CoreDateNetworkModule) }
+        startKoin { modules(KoinApiModule.default) }
     }
 
     @After

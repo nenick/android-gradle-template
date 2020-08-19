@@ -23,7 +23,7 @@ class AndroidApplicationModulePluginTest : PluginTest() {
     fun `applies base plugins for kotlin android application`() {
         givenEmptyProjectWithPluginApplied()
         expectThat(project.plugins) {
-            get { forEach { println(it) } }
+            get { /* TODO why is this get call necessary to succeed? */ }
             one { isA<ApplicationPlugin>() } // android application
             one { isA<KotlinAndroidPluginWrapper>() } // android kotlin
             one { isA<AndroidExtensionsSubpluginIndicator>() } // android kotlin extensions

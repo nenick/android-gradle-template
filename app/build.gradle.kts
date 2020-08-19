@@ -1,3 +1,6 @@
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
+import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
+
 plugins {
     id("de.nenick.android-application-module")
     id("de.nenick.ktlint-config")
@@ -106,11 +109,12 @@ val jacocoTestReport = tasks.register("jacocoTestReport").get()
 android.applicationVariants.all {
     val variantName = name.capitalize()
 
-    val mainVariantForAndroidTests = "debug"
+    val mainVariantForAndroidTests = "onDeviceServer"
     if (variantName.contains(mainVariantForAndroidTests, true)) {
-        tasks.register("jacoco${variantName}UnitTestReport", JacocoReport::class) {
+        tasks.register("jacoco${variantName}UnitTestReport", JacocoAndroidUnitTestReport::class) {
             group = "Verification"
             description = "Generate Jacoco unit test coverage reports for the $variantName build."
+            variantForCoverage = mainVariantForAndroidTests
             dependsOn("test${variantName}UnitTest")
 
             reports.html.apply {
@@ -132,10 +136,11 @@ android.applicationVariants.all {
             jacocoTestReport.dependsOn(it)
         }
 
-        tasks.register("jacoco${variantName}ConnectedTestReport", JacocoReport::class) {
+        tasks.register("jacoco${variantName}ConnectedTestReport", JacocoConnectedAndroidTestReport::class) {
             group = "Verification"
             description = "Generate Jacoco connected test coverage reports for the $variantName build."
             dependsOn("connected${variantName}AndroidTest")
+            variantForCoverage = mainVariantForAndroidTests
 
             reports.html.apply {
                 isEnabled = true

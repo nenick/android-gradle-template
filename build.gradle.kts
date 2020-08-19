@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import de.nenick.gradle.plugins.jacoco.merge.JacocoMergeTask
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -77,30 +76,37 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
         val kotlin = extensions.findByType<org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension>()
 
         if (androidApp != null || androidLibrary != null) {
+
+            val variantName = if( name == "app" ) {
+                "onDeviceServer"
+            } else {
+                "debug"
+            }
+
             val variant =
-                extensions.findByType<com.android.build.gradle.AppExtension>()?.applicationVariants?.findLast { it.name == "debug" }
-                    ?: extensions.getByType<com.android.build.gradle.LibraryExtension>().libraryVariants.findLast { it.name == "debug" }!!
+                extensions.findByType<com.android.build.gradle.AppExtension>()?.applicationVariants?.findLast { it.name == variantName }
+                    ?: extensions.getByType<com.android.build.gradle.LibraryExtension>().libraryVariants.findLast { it.name == variantName }!!
             val sourceFiles = files(variant.sourceSets.map { it.javaDirectories })
             additionalSourceDirs(sourceFiles)
 
-            tasks.getByName("jacocoDebugConnectedTestReport").run {
-                executionData(fileTree("${buildDir}/outputs/code_coverage/debugAndroidTest/connected/*"))
+            tasks.getByName("jacoco${variantName.capitalize()}ConnectedTestReport").run {
+                executionData(fileTree("${buildDir}/outputs/code_coverage/${variantName}AndroidTest/connected/*"))
             }
 
             tasks.matching {
                 val hasJacoco = it is JacocoReport
                 val skipUnitTests =
-                    it is de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport && it.name.contains("UnitTest") && it.skipUnitTest
+                    it is de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport && it.skipCoverageReport
                 val skipAndroidTests =
-                    it is de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport && it.name.contains("ConnectedTest") && it.skipAndroidTest
+                    it is de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport && it.skipCoverageReport
 
-                if (it is JacocoReport && it.name.contains("ConnectedTest") && !skipAndroidTests) {
+                if (it is de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport && !skipAndroidTests) {
                     androidApp?.let { extension ->
-                        if (!extension.buildTypes.getByName("debug").isTestCoverageEnabled)
+                        if (!extension.buildTypes.getByName(variantName).isTestCoverageEnabled)
                             throw IllegalStateException("test coverage has to be enabled for $name ${it.name}")
                     }
                     androidLibrary?.let { extension ->
-                        if (!extension.buildTypes.getByName("debug").isTestCoverageEnabled)
+                        if (!extension.buildTypes.getByName(variantName).isTestCoverageEnabled)
                             throw IllegalStateException("test coverage has to be enabled for $name ${it.name}")
                     }
                 }
@@ -111,9 +117,10 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                     executionData((this as JacocoReport).executionData)
                 }
             }
-            additionalClassDirs(fileTree("${buildDir}/tmp/kotlin-classes/debug") {
+            additionalClassDirs(fileTree("${buildDir}/tmp/kotlin-classes/${variantName}") {
                 exclude("**/*\$\$inlined*")
             })
+
         } else if (kotlin != null) {
             additionalSourceDirs(kotlin.sourceSets.findByName("main")!!.kotlin.sourceDirectories)
 

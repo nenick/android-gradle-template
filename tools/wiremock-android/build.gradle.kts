@@ -84,10 +84,10 @@ android.libraryVariants.all {
 
     val mainVariantForAndroidTests = "debug"
     if (variantName.contains(mainVariantForAndroidTests, true)) {
-        tasks.register("jacoco${variantName}UnitTestReport", de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport::class) {
+        tasks.register("jacoco${variantName}UnitTestReport", de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport::class) {
             group = "Verification"
             description = "Generate Jacoco unit test coverage reports for the $variantName build."
-            skipUnitTest = true // This is a on device feature and unit tests wasn't helpful yet.
+            skipCoverageReport = true // This is a an on device feature and unit tests wasn't helpful yet.
             dependsOn("test${variantName}UnitTest")
 
             reports.html.apply {
