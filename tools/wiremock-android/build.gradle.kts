@@ -77,7 +77,7 @@ afterEvaluate {
 }
 
 // One task to run all variant jacocoTestReport tasks.
-val jacocoTestReport = tasks.register("jacocoTestReport").get()
+val jacocoTestReport = tasks.getByName("jacocoTestReport")
 
 android.libraryVariants.all {
     val variantName = name.capitalize()

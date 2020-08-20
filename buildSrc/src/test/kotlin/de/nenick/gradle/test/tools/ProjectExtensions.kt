@@ -72,6 +72,14 @@ interface ProjectExtensions {
         directory.mkdirs()
         setup(directory)
     }
+
+
+}
+
+fun Project.withFile(name: String, setup: File.() -> Unit = {}) {
+    val file = File(projectDir, name)
+    file.createNewFile()
+    setup(file)
 }
 
 fun Project.applyAndroidApplication() {

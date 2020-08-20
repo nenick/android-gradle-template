@@ -4,7 +4,7 @@ import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
 plugins {
     id("de.nenick.android-application-module")
     id("de.nenick.ktlint-config")
-    id("jacoco")
+    id("de.nenick.jacoco-android-config")
 }
 
 android {
@@ -104,7 +104,7 @@ dependencies {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }
 
 // One task to run all variant jacocoTestReport tasks.
-val jacocoTestReport = tasks.register("jacocoTestReport").get()
+val jacocoTestReport = tasks.getByName("jacocoTestReport")
 
 android.applicationVariants.all {
     val variantName = name.capitalize()

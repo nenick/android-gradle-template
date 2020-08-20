@@ -4,7 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
 import java.io.File
-import de.nenick.gradle.plugins.jacoco.android.BaseJacocoAndroidTestReport
+import de.nenick.gradle.plugins.jacoco.android.BaseJacocoAndroidReport
 import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
 import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
 import org.gradle.api.Project
@@ -126,18 +126,18 @@ open class JacocoOutputCheckTask : DefaultTask() {
 
     private fun mergedReportDir() = arrayOf(File(project.buildDir, "reports/jacoco/merged/html"))
 
-    private fun <T : BaseJacocoAndroidTestReport> Project.shouldBeSkipped(type: Class<T>): Boolean {
+    private fun <T : BaseJacocoAndroidReport> Project.shouldBeSkipped(type: Class<T>): Boolean {
         return tasks.expectSingle(type, false) { it.skipCoverageReport }
     }
 
-    private fun <T : BaseJacocoAndroidTestReport> Project.variantName(type: Class<T>): String {
+    private fun <T : BaseJacocoAndroidReport> Project.variantName(type: Class<T>): String {
         return tasks.expectSingle(type, "Debug") { it.variantForCoverage.capitalize() }
     }
 
-    private fun <T : BaseJacocoAndroidTestReport, RESULT> TaskContainer.expectSingle(
+    private fun <T : BaseJacocoAndroidReport, RESULT> TaskContainer.expectSingle(
         type: Class<T>,
         fallback: RESULT,
-        action: (found: BaseJacocoAndroidTestReport) -> RESULT
+        action: (found: BaseJacocoAndroidReport) -> RESULT
     ): RESULT {
         val jacocoAndroidReports = withType(type)
         return when (jacocoAndroidReports.size) {
