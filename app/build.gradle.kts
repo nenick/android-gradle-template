@@ -54,7 +54,7 @@ android {
         //
         create("onDeviceServer") {
             // Make sure that new developers will have less issues when they want to run
-            // the androidTest the first time after initial cloning.
+            // the app or the androidTest the first time after initial cloning.
             isDefault = true
             // Basically it should have the same setup as the debug variant.
             initWith(getByName("debug"))
@@ -80,6 +80,7 @@ android {
 dependencies {
     // With Kotlin DSL we have to "access" first the dependency configuration  target for different variants.
     // The variable naming will be checked by the compiler that this variant does really exists.
+    // Search for #onDeviceServer
     val onDeviceServerImplementation by configurations
 
     implementation(project(":core:todo-api"))
@@ -154,7 +155,7 @@ android.applicationVariants.all {
                 exclude("**/*\$\$inlined*")
             }
 
-            // TODO check idea to include coverage for all used sub modules
+            // TODO check idea to include coverage for all used sub modules https://discuss.gradle.org/t/jacoco-plugin-with-multi-project-builds/22219
 
             sourceDirectories.setFrom(files(mainSrc))
             classDirectories.setFrom(javaClasses, kotlinClasses)
