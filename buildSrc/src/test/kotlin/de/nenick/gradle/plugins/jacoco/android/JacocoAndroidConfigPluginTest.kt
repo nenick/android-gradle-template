@@ -1,9 +1,9 @@
 package de.nenick.gradle.plugins.jacoco.android
 
-import de.nenick.gradle.test.tools.project.AndroidProject
 import de.nenick.gradle.test.tools.PluginTest
+import de.nenick.gradle.test.tools.project.AndroidProject
+import de.nenick.gradle.test.tools.project.KotlinProject
 import de.nenick.gradle.test.tools.taskDependenciesAsStrings
-import org.gradle.api.Project
 import org.gradle.api.internal.plugins.PluginApplicationException
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.testing.jacoco.plugins.JacocoPlugin
@@ -16,7 +16,7 @@ import strikt.api.expectThat
 import strikt.api.expectThrows
 import strikt.assertions.*
 
-class JacocoAndroidConfigPluginTest : PluginTest() {
+class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
 
     private val pluginId = "de.nenick.jacoco-android-config"
 
@@ -58,13 +58,9 @@ class JacocoAndroidConfigPluginTest : PluginTest() {
         @Test
         fun `apply plugin to pure kotlin project`() {
             // Within pure kotlin projects jacoco create his own jacocoTestReport task automatically.
-            expectThrows<PluginApplicationException> { givenKotlinProject { plugins.apply(pluginId) } }
+            expectThrows<PluginApplicationException> { KotlinProject().setup { plugins.apply(pluginId) } }
                 .message.isEqualTo("Failed to apply plugin [id '$pluginId']")
         }
-    }
-
-    override fun givenEmptyProjectWithPluginApplied(setup: Project.() -> Unit) {
-        givenEmptyProject { plugins.apply(JacocoAndroidConfigPlugin::class.java) }
     }
 
     private fun jacocoReportTask() = project.tasks.getByName("jacocoTestReport")

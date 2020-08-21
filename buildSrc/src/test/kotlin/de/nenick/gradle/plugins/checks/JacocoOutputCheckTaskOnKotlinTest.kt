@@ -1,6 +1,6 @@
 package de.nenick.gradle.plugins.checks
 
-import de.nenick.gradle.test.tools.Task2Test
+import de.nenick.gradle.test.tools.TaskTest
 import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.KotlinProject
@@ -14,7 +14,7 @@ import strikt.assertions.isEqualTo
 import strikt.assertions.message
 import java.io.File
 
-class JacocoOutputCheckTaskOnKotlinTest : Task2Test<JacocoOutputCheckTask, KotlinProject>(JacocoOutputCheckTask::class) {
+class JacocoOutputCheckTaskOnKotlinTest : TaskTest<JacocoOutputCheckTask, KotlinProject>(JacocoOutputCheckTask::class) {
     private val errorMessageNoReport = "found modules where jacoco reports are missing"
     private val errorMessageNoSourceFiles = "found modules where source files path could not be resolved"
 

@@ -18,7 +18,7 @@ import strikt.assertions.isEqualTo
 import strikt.assertions.message
 import java.lang.IllegalStateException
 
-class KtlintOutputCheckTaskTest : Task2Test<KtlintOutputCheckTask, KotlinProject>(KtlintOutputCheckTask::class) {
+class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask, KotlinProject>(KtlintOutputCheckTask::class) {
     private val errorMessage = "Found modules where ktlint reports are missing. " +
             "Did you forgot to add id(\"de.nenick.ktlint-config\") or id(\"de.nenick.ktlint-android-config\")?"
 

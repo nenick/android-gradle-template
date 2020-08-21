@@ -1,8 +1,7 @@
 package de.nenick.gradle.plugins.checks
 
 import de.nenick.gradle.plugins.modules.project.CleanTask
-import de.nenick.gradle.test.tools.Task2Test
-import de.nenick.gradle.test.tools.extensions.withDirectory
+import de.nenick.gradle.test.tools.TaskTest
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.RawProject
 import de.nenick.gradle.test.tools.taskDependenciesAsStrings
@@ -17,7 +16,7 @@ import strikt.assertions.hasSize
 import strikt.assertions.isEqualTo
 import strikt.assertions.message
 
-class CleanCheckTaskTest : Task2Test<CleanCheckTask, RawProject>(CleanCheckTask::class) {
+class CleanCheckTaskTest : TaskTest<CleanCheckTask, RawProject>(CleanCheckTask::class) {
 
     private val errorMessage = "Build folders were found in which not all of the content was cleaned."
 

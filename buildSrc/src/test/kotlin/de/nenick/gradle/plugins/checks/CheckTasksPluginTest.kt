@@ -1,6 +1,6 @@
 package de.nenick.gradle.plugins.checks
 
-import de.nenick.gradle.test.tools.Plugin2Test
+import de.nenick.gradle.test.tools.PluginTest
 import de.nenick.gradle.test.tools.hasGroup
 import de.nenick.gradle.test.tools.hasName
 import de.nenick.gradle.test.tools.project.RawProject
@@ -10,7 +10,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.one
 
-class CheckTasksPluginTest : Plugin2Test<RawProject>() {
+class CheckTasksPluginTest : PluginTest<RawProject>() {
 
     private val pluginId = "de.nenick.check-tasks"
 

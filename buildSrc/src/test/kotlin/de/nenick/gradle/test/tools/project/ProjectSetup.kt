@@ -59,4 +59,10 @@ abstract class ProjectSetup<SubClass : ProjectSetup<SubClass>>(
         directory.mkdirs()
         setup(directory)
     }
+
+    fun Project.withFile(name: String, setup: File.() -> Unit = {}) {
+        val file = File(projectDir, name)
+        file.createNewFile()
+        setup(file)
+    }
 }

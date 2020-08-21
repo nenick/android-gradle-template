@@ -1,27 +1,22 @@
 package de.nenick.gradle.test.tools
 
-import org.gradle.api.Project
+import de.nenick.gradle.test.tools.project.ProjectSetup
 import org.gradle.api.Task
 import org.gradle.kotlin.dsl.register
 import kotlin.reflect.KClass
 
-abstract class TaskTest<T : Task>(
+abstract class TaskTest<T : Task, P : ProjectSetup<P>>(
     private val taskClass: KClass<T>
-) : ProjectExtensions {
-    override lateinit var project: Project
+) {
+
+    lateinit var project: P
     lateinit var taskUnderTest: T
 
     fun whenRunTaskActions() {
         taskUnderTest.actions.forEach { it.execute(taskUnderTest) }
     }
 
-    override fun givenEmptyProject(setup: Project.() -> Unit): Project {
-        return super.givenEmptyProject(setup).also {
-            it.withTaskUnderTest()
-        }
-    }
-
-    private fun Project.withTaskUnderTest() {
+    fun ProjectSetup<*>.withTaskUnderTest() = setup {
         taskUnderTest = tasks.register("task", taskClass).get()
     }
 }

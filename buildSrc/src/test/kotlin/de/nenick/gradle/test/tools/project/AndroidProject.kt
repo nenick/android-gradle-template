@@ -1,7 +1,6 @@
 package de.nenick.gradle.test.tools.project
 
 import com.android.build.gradle.AppExtension
-import de.nenick.gradle.test.tools.withFile
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder
 import java.io.File
@@ -15,11 +14,11 @@ class AndroidProject(projectDefinition: ProjectBuilder.() -> Unit = {}) : Projec
         project.extensions.getByType<AppExtension>().run {
             compileSdkVersion(29)
         }
-        provideAndroidSdkPath()
+        // provideAndroidSdkPath()
         // When we call AppPlugin.variantManager.createVariantsAndTasks() directly it will fail
         // later because of adding duplicated task when calling methods like getTasksByName.
         // But we need createVariantsAndTasks() called to have access to all variants ands tasks.
-        project.getTasksByName("test", true)
+        // project.getTasksByName("test", true)
     }
 
     private fun provideAndroidSdkPath() {

@@ -1,7 +1,6 @@
 package de.nenick.gradle.plugins.jacoco.kotlin
 
-import de.nenick.gradle.test.tools.Plugin2Test
-import de.nenick.gradle.test.tools.extensions.withDirectory
+import de.nenick.gradle.test.tools.PluginTest
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.KotlinProject
 import org.gradle.api.internal.file.collections.DefaultConfigurableFileTree
@@ -16,7 +15,7 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.*
 
-class JacocoKotlinConfigPluginTest : Plugin2Test<KotlinProject>() {
+class JacocoKotlinConfigPluginTest : PluginTest<KotlinProject>() {
 
     private val pluginId = "de.nenick.jacoco-kotlin-config"
     private val kotlinClassDirectory = "build/classes/kotlin/main"

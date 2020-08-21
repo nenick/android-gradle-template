@@ -2,7 +2,6 @@ package de.nenick.gradle.plugins.checks
 
 import com.android.build.gradle.internal.coverage.JacocoReportTask
 import de.nenick.gradle.test.tools.*
-import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.ProjectSetup
 import de.nenick.gradle.test.tools.project.RawProject
@@ -19,7 +18,7 @@ import strikt.assertions.isEqualTo
 import strikt.assertions.message
 import java.io.File
 
-class JacocoOutputCheckTaskTest : Task2Test<JacocoOutputCheckTask, RawProject>(JacocoOutputCheckTask::class) {
+class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask, RawProject>(JacocoOutputCheckTask::class) {
 
     private val errorMessageNoReport = "found modules where jacoco reports are missing"
 

@@ -3,7 +3,6 @@ package de.nenick.gradle.plugins.checks
 import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
 import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
 import de.nenick.gradle.test.tools.*
-import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.AndroidProject
 import de.nenick.gradle.test.tools.project.ProjectSetup
@@ -12,12 +11,11 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import strikt.api.expectThrows
-import strikt.assertions.contains
 import strikt.assertions.isEqualTo
 import strikt.assertions.message
 import java.io.File
 
-class JacocoOutputCheckTaskOnAndroidTest : Task2Test<JacocoOutputCheckTask, AndroidProject>(JacocoOutputCheckTask::class) {
+class JacocoOutputCheckTaskOnAndroidTest : TaskTest<JacocoOutputCheckTask, AndroidProject>(JacocoOutputCheckTask::class) {
     private val errorMessageNoReport = "found modules where jacoco reports are missing"
     private val errorMessageNoSourceFiles = "found modules where source files path could not be resolved"
     private val errorMessageMultipleMatch = "found more than one matching report task"
