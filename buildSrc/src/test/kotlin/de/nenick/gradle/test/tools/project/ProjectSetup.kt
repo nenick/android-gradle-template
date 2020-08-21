@@ -1,10 +1,8 @@
 package de.nenick.gradle.test.tools.project
 
-import com.android.build.gradle.AppExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder
 import java.io.File
 import kotlin.reflect.KClass
@@ -33,7 +31,9 @@ abstract class ProjectSetup<SubClass : ProjectSetup<SubClass>>(
         }.apply(block)
     }
 
-    fun <T : Task> withTask(name: String, task: KClass<T>, block: T.() -> Unit = {}) = setup { block(tasks.register(name, task.java).get()) }
+    fun <T : Task> withTask(name: String, task: KClass<T>, block: T.() -> Unit = {}) = setup {
+        block(tasks.register(name, task.java).get())
+    }
 
     fun withKotlinModule(name: String, block: KotlinProject.() -> Unit = {}): KotlinProject {
         return KotlinProject {

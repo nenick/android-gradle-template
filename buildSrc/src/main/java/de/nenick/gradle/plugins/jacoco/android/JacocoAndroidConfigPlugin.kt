@@ -12,7 +12,6 @@ open class JacocoAndroidConfigPlugin @Inject constructor(instantiator: Instantia
     override fun apply(target: ProjectInternal) {
         super.apply(target)
 
-        target.tasks.register("jacocoTestReport")//.dependsOn("connectedDebugAndroidTest")
-
+        target.tasks.register("jacocoTestReport") // .dependsOn("connectedDebugAndroidTest")
     }
 }

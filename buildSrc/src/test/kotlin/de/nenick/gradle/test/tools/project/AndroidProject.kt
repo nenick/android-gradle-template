@@ -1,7 +1,6 @@
 package de.nenick.gradle.test.tools.project
 
 import com.android.build.gradle.AppExtension
-import com.android.build.gradle.internal.plugins.AppPlugin
 import de.nenick.gradle.test.tools.withFile
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder

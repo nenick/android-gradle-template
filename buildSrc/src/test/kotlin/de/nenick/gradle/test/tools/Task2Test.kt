@@ -16,7 +16,7 @@ abstract class Task2Test<T : Task, P : ProjectSetup<P>>(
         taskUnderTest.actions.forEach { it.execute(taskUnderTest) }
     }
 
-    fun ProjectSetup<*>.withTaskUnderTest() = setup{
+    fun ProjectSetup<*>.withTaskUnderTest() = setup {
         taskUnderTest = tasks.register("task", taskClass).get()
     }
 }

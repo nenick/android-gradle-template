@@ -72,8 +72,6 @@ interface ProjectExtensions {
         directory.mkdirs()
         setup(directory)
     }
-
-
 }
 
 fun Project.withFile(name: String, setup: File.() -> Unit = {}) {

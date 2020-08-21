@@ -1,16 +1,12 @@
 package de.nenick.gradle.plugins.checks
 
 import com.android.build.gradle.internal.coverage.JacocoReportTask
-import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
-import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
-import de.nenick.gradle.plugins.jacoco.merge.JacocoMergeTask
 import de.nenick.gradle.test.tools.*
 import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.ProjectSetup
 import de.nenick.gradle.test.tools.project.RawProject
 import org.gradle.api.GradleException
-import org.gradle.api.Project
 import org.gradle.testing.jacoco.plugins.JacocoPlugin
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested

@@ -2,10 +2,8 @@ package de.nenick.gradle.plugins.checks
 
 import de.nenick.gradle.plugins.modules.project.CleanTask
 import de.nenick.gradle.test.tools.Task2Test
-import de.nenick.gradle.test.tools.TaskTest
 import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
-import de.nenick.gradle.test.tools.project.KotlinProject
 import de.nenick.gradle.test.tools.project.RawProject
 import de.nenick.gradle.test.tools.taskDependenciesAsStrings
 import org.gradle.api.GradleException

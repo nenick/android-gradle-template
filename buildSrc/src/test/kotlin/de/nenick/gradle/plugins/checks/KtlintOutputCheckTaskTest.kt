@@ -127,8 +127,9 @@ class KtlintOutputCheckTaskTest : Task2Test<KtlintOutputCheckTask, KotlinProject
                 withAndroidModule("module-alpha")
                 withKotlinModule("module-beta")
             }
-            expectThrows<GradleException> { whenRunTaskActions() }
-                .message.isEqualTo("$errorMessage\n[build/reports/ktlint, module-alpha/build/reports/ktlint, module-beta/build/reports/ktlint]")
+            expectThrows<GradleException> { whenRunTaskActions() }.message.isEqualTo(
+                "$errorMessage\n[build/reports/ktlint, module-alpha/build/reports/ktlint, module-beta/build/reports/ktlint]"
+            )
         }
 
         @Test

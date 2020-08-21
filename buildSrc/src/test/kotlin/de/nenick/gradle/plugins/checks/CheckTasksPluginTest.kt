@@ -1,12 +1,9 @@
 package de.nenick.gradle.plugins.checks
 
 import de.nenick.gradle.test.tools.Plugin2Test
-import de.nenick.gradle.test.tools.PluginTest
 import de.nenick.gradle.test.tools.hasGroup
 import de.nenick.gradle.test.tools.hasName
-import de.nenick.gradle.test.tools.project.ProjectSetup
 import de.nenick.gradle.test.tools.project.RawProject
-import org.gradle.api.Project
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat

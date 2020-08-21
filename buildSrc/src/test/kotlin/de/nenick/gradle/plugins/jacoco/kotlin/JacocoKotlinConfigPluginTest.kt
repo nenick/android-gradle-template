@@ -1,11 +1,9 @@
 package de.nenick.gradle.plugins.jacoco.kotlin
 
 import de.nenick.gradle.test.tools.Plugin2Test
-import de.nenick.gradle.test.tools.PluginTest
 import de.nenick.gradle.test.tools.extensions.withDirectory
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.KotlinProject
-import org.gradle.api.Project
 import org.gradle.api.internal.file.collections.DefaultConfigurableFileTree
 import org.gradle.api.tasks.SourceSetOutput
 import org.gradle.kotlin.dsl.getByName
