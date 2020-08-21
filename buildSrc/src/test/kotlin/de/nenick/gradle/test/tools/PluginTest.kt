@@ -4,6 +4,7 @@ import org.gradle.api.Project
 import org.junit.jupiter.api.Test
 
 abstract class PluginTest : ProjectExtensions {
+
     override lateinit var project: Project
 
     @Test

@@ -2,8 +2,12 @@ package de.nenick.gradle.plugins.checks
 
 import de.nenick.gradle.test.tools.*
 import de.nenick.gradle.test.tools.extensions.withFile
+import de.nenick.gradle.test.tools.project.KotlinProject
+import de.nenick.gradle.test.tools.project.ProjectSetup
+import de.nenick.gradle.test.tools.project.RawProject
 import org.gradle.api.GradleException
 import org.jlleitschuh.gradle.ktlint.KtlintPlugin
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
@@ -14,18 +18,24 @@ import strikt.assertions.isEqualTo
 import strikt.assertions.message
 import java.lang.IllegalStateException
 
-class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask>(KtlintOutputCheckTask::class) {
+class KtlintOutputCheckTaskTest : Task2Test<KtlintOutputCheckTask, KotlinProject>(KtlintOutputCheckTask::class) {
     private val errorMessage = "Found modules where ktlint reports are missing. " +
             "Did you forgot to add id(\"de.nenick.ktlint-config\") or id(\"de.nenick.ktlint-android-config\")?"
+
+    @BeforeEach
+    fun setup() {
+        project = KotlinProject().setup { withTaskUnderTest() }
+    }
 
     @Nested
     inner class Dependencies {
         @Test
         fun `depends on all project and modules ktlintCheck tasks`() {
-            givenKotlinProject {
-                plugins.apply(KtlintPlugin::class.java)
-                withKotlinModule("module-alpha") { plugins.apply(KtlintPlugin::class.java) }
-                withKotlinModule("module-beta") { plugins.apply(KtlintPlugin::class.java) }
+            KotlinProject().setup {
+                withPlugin(KtlintPlugin::class)
+                withKotlinModule("module-alpha") { withPlugin(KtlintPlugin::class) }
+                withKotlinModule("module-beta") { withPlugin(KtlintPlugin::class) }
+                withTaskUnderTest()
             }
             expectThat(taskUnderTest.taskDependenciesAsStrings) {
                 hasSize(3)
@@ -40,27 +50,19 @@ class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask>(KtlintOutputCh
     inner class Success {
         @Test
         fun `non kotlin project`() {
-            givenEmptyProject()
+            RawProject().setup { withTaskUnderTest() }
             whenRunTaskActions()
         }
 
         @Test
         fun `reports exists as html`() {
-            givenKotlinProject {
-                withDirectory("build/reports/ktlint") {
-                    withFile("any-ktlint-report.html") { writeText(">Congratulations, no issues found!<") }
-                }
-            }
+            project.setup { withReportNoErrors() }
             whenRunTaskActions()
         }
 
         @Test
         fun `reports exists as txt`() {
-            givenKotlinProject {
-                withDirectory("build/reports/ktlint") {
-                    withFile("any-ktlint-report.txt")
-                }
-            }
+            project.setup { withDirectory("build/reports/ktlint") { withFile("any-ktlint-report.txt") } }
             whenRunTaskActions()
         }
     }
@@ -69,7 +71,7 @@ class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask>(KtlintOutputCh
     inner class Fail {
         @Test
         fun `html report contains violations`() {
-            givenKotlinProject {
+            project.setup {
                 withDirectory("build/reports/ktlint") {
                     withFile("any-ktlint-report.html") { writeText("some violations") }
                 }
@@ -80,7 +82,7 @@ class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask>(KtlintOutputCh
 
         @Test
         fun `txt report contains violations`() {
-            givenKotlinProject {
+            project.setup {
                 withDirectory("build/reports/ktlint") {
                     withFile("any-ktlint-report.txt") { writeText("some violations") }
                 }
@@ -91,51 +93,58 @@ class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask>(KtlintOutputCh
 
         @Test
         fun `report extensions is unknown`() {
-            givenKotlinProject {
-                withDirectory("build/reports/ktlint") {
-                    withFile("any-ktlint-report.any")
-                }
-            }
+            project.setup { withDirectory("build/reports/ktlint") { withFile("any-ktlint-report.any") } }
             expectThrows<IllegalStateException> { whenRunTaskActions() }
                 .message.isEqualTo("extension not supported yet: any")
         }
 
         @Test
         fun `no report directory was found`() {
-            givenKotlinProject()
             expectThrows<GradleException> { whenRunTaskActions() }
                 .message.isEqualTo("$errorMessage\n[build/reports/ktlint]")
         }
 
         @Test
         fun `no reports where found`() {
-            givenKotlinProject { withDirectory("build/reports/ktlint") }
+            project.setup { withDirectory("build/reports/ktlint") }
             expectThrows<GradleException> { whenRunTaskActions() }
                 .message.isEqualTo("$errorMessage\n[build/reports/ktlint]")
         }
 
         @Test
         fun `buildSrc has no report`() {
-            givenEmptyProject { withDirectory("buildSrc") }
+            project.setup {
+                withReportNoErrors()
+                withDirectory("buildSrc")
+            }
             expectThrows<GradleException> { whenRunTaskActions() }
                 .message.isEqualTo("$errorMessage\n[buildSrc/build/reports/ktlint]")
         }
 
         @Test
         fun `report multiple modules have no reports`() {
-            givenEmptyProject {
+            project.setup {
                 withAndroidModule("module-alpha")
                 withKotlinModule("module-beta")
             }
             expectThrows<GradleException> { whenRunTaskActions() }
-                .message.isEqualTo("$errorMessage\n[module-alpha/build/reports/ktlint, module-beta/build/reports/ktlint]")
+                .message.isEqualTo("$errorMessage\n[build/reports/ktlint, module-alpha/build/reports/ktlint, module-beta/build/reports/ktlint]")
         }
 
         @Test
         fun `report nested sub modules has no reports`() {
-            givenEmptyProject { withEmptyModule("nested") { withKotlinModule("subModule") } }
+            project.setup {
+                withReportNoErrors()
+                withRawModule("nested") { withKotlinModule("subModule") }
+            }
             expectThrows<GradleException> { whenRunTaskActions() }
                 .message.isEqualTo("$errorMessage\n[nested/subModule/build/reports/ktlint]")
+        }
+    }
+
+    private fun ProjectSetup<*>.withReportNoErrors() {
+        withDirectory("build/reports/ktlint") {
+            withFile("any-ktlint-report.html") { writeText(">Congratulations, no issues found!<") }
         }
     }
 }
