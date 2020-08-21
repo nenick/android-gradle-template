@@ -1,3 +1,3 @@
 package de.nenick.gradle.plugins.jacoco.android
 
-open class JacocoAndroidUnitTestReport : BaseJacocoAndroidReport()
+open class JacocoAndroidUnitTestReport : JacocoAndroidReport()
