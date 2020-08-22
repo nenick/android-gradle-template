@@ -44,6 +44,8 @@ class KtlintOutputCheckTaskTest : TaskTest<KtlintOutputCheckTask, KotlinProject>
                 contains("task ':module-beta:ktlintCheck'")
             }
         }
+
+        // TODO trigger ktlintFormat first to fix minor issues.
     }
 
     @Nested

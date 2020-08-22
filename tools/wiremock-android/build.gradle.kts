@@ -1,3 +1,5 @@
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -84,7 +86,7 @@ android.libraryVariants.all {
 
     val mainVariantForAndroidTests = "debug"
     if (variantName.contains(mainVariantForAndroidTests, true)) {
-        tasks.register("jacoco${variantName}UnitTestReport", de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport::class) {
+        tasks.getByName<JacocoAndroidUnitTestReport>("jacoco${variantName}UnitTestReport") {
             group = "Verification"
             description = "Generate Jacoco unit test coverage reports for the $variantName build."
             skipCoverageReport = true // This is a an on device feature and unit tests wasn't helpful yet.
@@ -107,7 +109,7 @@ android.libraryVariants.all {
             jacocoTestReport.dependsOn(it)
         }
 
-        tasks.register("jacoco${variantName}ConnectedTestReport", JacocoReport::class) {
+        tasks.getByName<JacocoReport>("jacoco${variantName}ConnectedTestReport") {
             group = "Verification"
             description = "Generate Jacoco connected test coverage reports for the $variantName build."
             dependsOn("connected${variantName}AndroidTest")

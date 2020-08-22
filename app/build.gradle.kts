@@ -106,13 +106,17 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.
 
 // One task to run all variant jacocoTestReport tasks.
 val jacocoTestReport = tasks.getByName("jacocoTestReport")
+jacocoAndroid {
+    androidUnitTests.variantForCoverage = android.testBuildType
+    connectedAndroidTests.variantForCoverage = android.testBuildType
+}
 
 android.applicationVariants.all {
     val variantName = name.capitalize()
 
     val mainVariantForAndroidTests = "onDeviceServer"
     if (variantName.contains(mainVariantForAndroidTests, true)) {
-        tasks.register("jacoco${variantName}UnitTestReport", JacocoAndroidUnitTestReport::class) {
+        tasks.getByName<JacocoAndroidUnitTestReport>("jacoco${variantName}UnitTestReport") {
             group = "Verification"
             description = "Generate Jacoco unit test coverage reports for the $variantName build."
             variantForCoverage = mainVariantForAndroidTests
@@ -137,7 +141,7 @@ android.applicationVariants.all {
             jacocoTestReport.dependsOn(it)
         }
 
-        tasks.register("jacoco${variantName}ConnectedTestReport", JacocoConnectedAndroidTestReport::class) {
+        tasks.getByName<JacocoConnectedAndroidTestReport>("jacoco${variantName}ConnectedTestReport") {
             group = "Verification"
             description = "Generate Jacoco connected test coverage reports for the $variantName build."
             dependsOn("connected${variantName}AndroidTest")

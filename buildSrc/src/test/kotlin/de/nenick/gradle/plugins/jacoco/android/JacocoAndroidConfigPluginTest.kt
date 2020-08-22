@@ -2,6 +2,7 @@ package de.nenick.gradle.plugins.jacoco.android
 
 import de.nenick.gradle.test.tools.PluginTest
 import de.nenick.gradle.test.tools.project.AndroidProject
+import de.nenick.gradle.test.tools.project.AndroidProject.AndroidType
 import de.nenick.gradle.test.tools.project.KotlinProject
 import de.nenick.gradle.test.tools.taskDependenciesAsStrings
 import org.gradle.api.internal.plugins.PluginApplicationException
@@ -38,6 +39,43 @@ class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
     }
 
     @Nested
+    inner class Extension {
+
+        @Test
+        fun `add extension`() {
+            expectThat(project.extensions.extensionsSchema.map { it.name }) {
+                contains("jacocoAndroid")
+            }
+        }
+
+        @Test
+        fun `default settings`() {
+            expectThat(project.extensions.getByType(JacocoAndroidExtension::class.java)) {
+                get { connectedAndroidTests.skipCoverageReport }.isEqualTo(false)
+                get { connectedAndroidTests.variantForCoverage }.isEqualTo("debug")
+                get { androidUnitTests.skipCoverageReport }.isEqualTo(false)
+                get { androidUnitTests.variantForCoverage }.isEqualTo("debug")
+
+                // Just to create coverage for alternate access option.
+                get {
+                    connectedAndroidTests { }
+                    androidUnitTests { }
+                }
+            }
+        }
+
+        @Test
+        fun `reset settings with new instance`() {
+            val instanceA = JacocoAndroidExtension()
+            expectThat(instanceA.androidUnitTests.variantForCoverage).isEqualTo("debug")
+            instanceA.androidUnitTests.variantForCoverage = "other"
+
+            val instanceB = JacocoAndroidExtension()
+            expectThat(instanceB.androidUnitTests.variantForCoverage).isEqualTo("debug")
+        }
+    }
+
+    @Nested
     inner class JacocoTestReportTask {
 
         @Test
@@ -60,6 +98,94 @@ class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
             // Within pure kotlin projects jacoco create his own jacocoTestReport task automatically.
             expectThrows<PluginApplicationException> { KotlinProject().setup { plugins.apply(pluginId) } }
                 .message.isEqualTo("Failed to apply plugin [id '$pluginId']")
+        }
+    }
+
+    @Nested
+    inner class ConnectedAndroidTests {
+
+        @Nested
+        inner class Application {
+
+            @BeforeEach
+            fun setup() {
+                project = AndroidProject(AndroidType.Application).withPlugin(JacocoAndroidConfigPlugin::class)
+            }
+
+            @Test
+            fun `add the default connect android tests report task`() {
+                project.forceCreateVariantsAndTasks()
+                expectThat(project.tasks) {
+                    one {
+                        get { name }.isEqualTo("jacocoDebugConnectedTestReport")
+                        isA<JacocoConnectedAndroidTestReport>()
+                    }
+                }
+            }
+        }
+
+        @Nested
+        inner class Library {
+
+            @BeforeEach
+            fun setup() {
+                project = AndroidProject(AndroidType.Library).withPlugin(JacocoAndroidConfigPlugin::class)
+            }
+
+            @Test
+            fun `add the default connect android tests report task`() {
+                project.forceCreateVariantsAndTasks()
+                expectThat(project.tasks) {
+                    one {
+                        get { name }.isEqualTo("jacocoDebugConnectedTestReport")
+                        isA<JacocoConnectedAndroidTestReport>()
+                    }
+                }
+            }
+        }
+    }
+
+    @Nested
+    inner class AndroidUnitTests {
+
+        @Nested
+        inner class Application {
+
+            @BeforeEach
+            fun setup() {
+                project = AndroidProject(AndroidType.Application).withPlugin(JacocoAndroidConfigPlugin::class)
+            }
+
+            @Test
+            fun `add the default android unit tests report task`() {
+                project.forceCreateVariantsAndTasks()
+                expectThat(project.tasks) {
+                    one {
+                        get { name }.isEqualTo("jacocoDebugUnitTestReport")
+                        isA<JacocoAndroidUnitTestReport>()
+                    }
+                }
+            }
+        }
+
+        @Nested
+        inner class Library {
+
+            @BeforeEach
+            fun setup() {
+                project = AndroidProject(AndroidType.Library).withPlugin(JacocoAndroidConfigPlugin::class)
+            }
+
+            @Test
+            fun `add the default android unit tests report task`() {
+                project.forceCreateVariantsAndTasks()
+                expectThat(project.tasks) {
+                    one {
+                        get { name }.isEqualTo("jacocoDebugUnitTestReport")
+                        isA<JacocoAndroidUnitTestReport>()
+                    }
+                }
+            }
         }
     }
 
