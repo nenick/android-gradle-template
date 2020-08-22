@@ -7,5 +7,4 @@ import org.gradle.api.DomainObjectSet
 class AndroidApplicationExtension(private val extension: AppExtension) : AndroidExtension {
 
     override fun variants() = extension.applicationVariants as DomainObjectSet<BaseVariant>
-    override fun testBuildType() = extension.testBuildType
 }

@@ -19,6 +19,7 @@ open class JacocoAndroidConfigPlugin @Inject constructor(instantiator: Instantia
         androidExtension.variants().all {
 
             // TODO support only single buildType but all productFlavors?
+            // TODO read variant from testBuildType?
             if (buildType.name == settings.connectedAndroidTests.variantForCoverage) {
                 target.tasks.register(
                     "jacoco${name.capitalize()}ConnectedTestReport",
