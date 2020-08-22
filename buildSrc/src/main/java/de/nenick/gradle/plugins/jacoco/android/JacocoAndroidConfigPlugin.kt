@@ -12,7 +12,7 @@ import javax.inject.Inject
 open class JacocoAndroidConfigPlugin @Inject constructor(instantiator: Instantiator) : JacocoPlugin(instantiator) {
     override fun apply(target: ProjectInternal) {
         super.apply(target)
-        target.tasks.register("jacocoTestReport") // TODO Test for .dependsOn("connectedDebugAndroidTest") is disabled
+        val jacocoTestReportTask = target.tasks.register("jacocoTestReport").get()
         val settings = target.extensions.create("jacocoAndroid", JacocoAndroidExtension::class.java)
         val androidExtension = AndroidExtension.wrap(target.extensions)
 
@@ -24,14 +24,18 @@ open class JacocoAndroidConfigPlugin @Inject constructor(instantiator: Instantia
                 target.tasks.register(
                     "jacoco${name.capitalize()}ConnectedTestReport",
                     JacocoConnectedAndroidTestReport::class.java
-                )
+                ).also {
+                    jacocoTestReportTask.dependsOn(it)
+                }
             }
 
             if (name == settings.androidUnitTests.variantForCoverage) {
                 target.tasks.register(
                     "jacoco${name.capitalize()}UnitTestReport",
                     JacocoAndroidUnitTestReport::class.java
-                )
+                ).also {
+                    jacocoTestReportTask.dependsOn(it)
+                }
             }
         }
     }

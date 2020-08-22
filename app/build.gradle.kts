@@ -104,8 +104,6 @@ dependencies {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }
 
-// One task to run all variant jacocoTestReport tasks.
-val jacocoTestReport = tasks.getByName("jacocoTestReport")
 jacocoAndroid {
     androidUnitTests.variantForCoverage = android.testBuildType
     connectedAndroidTests.variantForCoverage = android.testBuildType
@@ -137,8 +135,6 @@ android.applicationVariants.all {
             sourceDirectories.setFrom(files(mainSrc))
             classDirectories.setFrom(javaClasses, kotlinClasses)
             executionData.setFrom(execFiles)
-        }.also {
-            jacocoTestReport.dependsOn(it)
         }
 
         tasks.getByName<JacocoConnectedAndroidTestReport>("jacoco${variantName}ConnectedTestReport") {
@@ -164,8 +160,6 @@ android.applicationVariants.all {
             sourceDirectories.setFrom(files(mainSrc))
             classDirectories.setFrom(javaClasses, kotlinClasses)
             executionData.setFrom(execFiles)
-        }.also {
-            jacocoTestReport.dependsOn(it)
         }
     }
 }

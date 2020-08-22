@@ -78,9 +78,6 @@ afterEvaluate {
     tasks.findByName("testReleaseUnitTest")!!.enabled = false
 }
 
-// One task to run all variant jacocoTestReport tasks.
-val jacocoTestReport = tasks.getByName("jacocoTestReport")
-
 android.libraryVariants.all {
     val variantName = name.capitalize()
 
@@ -105,8 +102,6 @@ android.libraryVariants.all {
             sourceDirectories.setFrom(files(mainSrc))
             classDirectories.setFrom(javaClasses, kotlinClasses)
             executionData.setFrom(execFiles)
-        }.also {
-            jacocoTestReport.dependsOn(it)
         }
 
         tasks.getByName<JacocoReport>("jacoco${variantName}ConnectedTestReport") {
@@ -129,8 +124,6 @@ android.libraryVariants.all {
             sourceDirectories.setFrom(files(mainSrc))
             classDirectories.setFrom(javaClasses, kotlinClasses)
             executionData.setFrom(execFiles)
-        }.also {
-            jacocoTestReport.dependsOn(it)
         }
     }
 }

@@ -10,7 +10,6 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.testing.jacoco.plugins.JacocoPlugin
 import org.gradle.testing.jacoco.plugins.JacocoPluginExtension
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
@@ -86,10 +85,11 @@ class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
         }
 
         @Test
-        @Disabled("just a test that all tasks are generated, related code ist commented out")
-        fun `jacoco report task depends on connected android tests`() {
+        fun `jacoco report task depends on connect and unit tests report tasks`() {
+            project.forceCreateVariantsAndTasks()
             expectThat(jacocoReportTask().taskDependenciesAsStrings) {
-                contains("task ':connectedDebugAndroidTest'")
+                contains("task ':jacocoDebugConnectedTestReport'")
+                contains("task ':jacocoDebugUnitTestReport'")
             }
         }
 
