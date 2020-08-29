@@ -1,14 +1,11 @@
 package de.nenick.gradle.plugins.checks
 
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
 import java.io.File
-import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidReport
-import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
-import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
-import org.gradle.api.Project
-import org.gradle.api.tasks.TaskContainer
 
 open class JacocoOutputCheckTask : DefaultTask() {
     init {
@@ -106,14 +103,14 @@ open class JacocoOutputCheckTask : DefaultTask() {
 
     private fun allAndroidUnitReportDirs() = project.allprojects
         .filter { it.plugins.hasPlugin("kotlin-android") }
-        .filter { !it.shouldBeSkipped(JacocoAndroidUnitTestReport::class.java) }
-        .map { File(it.projectDir, "build/reports/jacoco/test${it.variantName(JacocoAndroidUnitTestReport::class.java)}/html") }
+        .filter { !it.shouldSkipAndroidUnitTest() }
+        .map { File(it.projectDir, "build/reports/jacoco/test${it.variantForAndroidUnitTest()}/html") }
         .toTypedArray()
 
     private fun allAndroidConnectedReportDirs() = project.allprojects
         .filter { it.plugins.hasPlugin("kotlin-android") }
-        .filter { !it.shouldBeSkipped(JacocoConnectedAndroidTestReport::class.java) }
-        .map { File(it.projectDir, "build/reports/jacoco/connected${it.variantName(JacocoConnectedAndroidTestReport::class.java)}/html") }
+        .filter { !it.shouldSkipConnectedAndroidTest() }
+        .map { File(it.projectDir, "build/reports/jacoco/connected${it.variantForConnectedAndroidTest()}/html") }
         .toTypedArray()
 
     private fun buildSrcReportDir() = mutableListOf<File>()
@@ -126,27 +123,19 @@ open class JacocoOutputCheckTask : DefaultTask() {
 
     private fun mergedReportDir() = arrayOf(File(project.buildDir, "reports/jacoco/merged/html"))
 
-    private fun <T : JacocoAndroidReport> Project.shouldBeSkipped(type: Class<T>): Boolean {
-        return tasks.expectSingle(type, false) { it.skipCoverageReport }
+    private fun Project.shouldSkipConnectedAndroidTest(): Boolean {
+        return extensions.getByType(JacocoAndroidExtension::class.java).connectedAndroidTests.skipCoverageReport
     }
 
-    private fun <T : JacocoAndroidReport> Project.variantName(type: Class<T>): String {
-        return tasks.expectSingle(type, "Debug") { it.variantForCoverage.capitalize() }
+    private fun Project.shouldSkipAndroidUnitTest(): Boolean {
+        return extensions.getByType(JacocoAndroidExtension::class.java).androidUnitTests.skipCoverageReport
     }
 
-    private fun <T : JacocoAndroidReport, RESULT> TaskContainer.expectSingle(
-        type: Class<T>,
-        fallback: RESULT,
-        action: (found: JacocoAndroidReport) -> RESULT
-    ): RESULT {
-        val jacocoAndroidReports = withType(type)
-        return when (jacocoAndroidReports.size) {
-            0 -> fallback // TODO is this just because of not proper prepared tests?
-            1 -> action(jacocoAndroidReports.first())
-            else -> throw GradleException(
-                "found more than one matching report task with " +
-                        "${type.simpleName} in ${project.name}\n${jacocoAndroidReports.map { it.name }}"
-            )
-        }
+    private fun Project.variantForConnectedAndroidTest(): String {
+        return extensions.getByType(JacocoAndroidExtension::class.java).connectedAndroidTests.variantForCoverage.capitalize()
+    }
+
+    private fun Project.variantForAndroidUnitTest(): String {
+        return extensions.getByType(JacocoAndroidExtension::class.java).androidUnitTests.variantForCoverage.capitalize()
     }
 }

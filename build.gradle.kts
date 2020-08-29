@@ -93,12 +93,13 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                 executionData(fileTree("${buildDir}/outputs/code_coverage/${variantName}AndroidTest/connected/*"))
             }
 
+            val jacocoAndroid = extensions.getByType(de.nenick.gradle.plugins.jacoco.android.JacocoAndroidExtension::class)
             tasks.matching {
                 val hasJacoco = it is JacocoReport
                 val skipUnitTests =
-                    it is de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport && it.skipCoverageReport
+                    it is de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport && jacocoAndroid.androidUnitTests.skipCoverageReport
                 val skipAndroidTests =
-                    it is de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport && it.skipCoverageReport
+                    it is de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport && jacocoAndroid.connectedAndroidTests.skipCoverageReport
 
                 if (it is de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport) {
                     androidApp?.let { extension ->

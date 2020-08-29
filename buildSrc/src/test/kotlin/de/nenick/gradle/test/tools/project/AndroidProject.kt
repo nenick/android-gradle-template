@@ -19,10 +19,12 @@ class AndroidProject(type: AndroidType = AndroidType.Application, projectDefinit
             AndroidType.Library -> withPlugin("com.android.library")
         }
         withPlugin("kotlin-android")
-        project.extensions.getByType<BaseExtension>().run {
+        androidExtension {
             compileSdkVersion(29)
         }
     }
+
+    fun androidExtension(block: BaseExtension.() -> Unit) = block(project.extensions.getByType())
 
     /**
      * Evaluate the project.

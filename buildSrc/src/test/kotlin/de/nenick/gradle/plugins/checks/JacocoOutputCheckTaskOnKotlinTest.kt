@@ -15,6 +15,7 @@ import strikt.assertions.message
 import java.io.File
 
 class JacocoOutputCheckTaskOnKotlinTest : TaskTest<JacocoOutputCheckTask, KotlinProject>(JacocoOutputCheckTask::class) {
+
     private val errorMessageNoReport = "found modules where jacoco reports are missing"
     private val errorMessageNoSourceFiles = "found modules where source files path could not be resolved"
 

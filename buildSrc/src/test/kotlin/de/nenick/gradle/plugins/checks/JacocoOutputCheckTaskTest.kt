@@ -1,6 +1,7 @@
 package de.nenick.gradle.plugins.checks
 
 import com.android.build.gradle.internal.coverage.JacocoReportTask
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidConfigPlugin
 import de.nenick.gradle.test.tools.*
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.ProjectSetup
@@ -68,7 +69,7 @@ class JacocoOutputCheckTaskTest : TaskTest<JacocoOutputCheckTask, RawProject>(Ja
         fun `report all modules without reports`() {
             project.setup {
                 withValidMergedReport()
-                withAndroidModule("module-alpha")
+                withAndroidModule("module-alpha").withPlugin(JacocoAndroidConfigPlugin::class)
                 withKotlinModule("module-beta")
             }
             expectThrows<GradleException> { whenRunTaskActions() }

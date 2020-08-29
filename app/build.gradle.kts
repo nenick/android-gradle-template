@@ -1,6 +1,3 @@
-import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
-import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
-
 plugins {
     id("de.nenick.android-application-module")
     id("de.nenick.ktlint-config")
@@ -107,59 +104,4 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.
 jacocoAndroid {
     androidUnitTests.variantForCoverage = android.testBuildType
     connectedAndroidTests.variantForCoverage = android.testBuildType
-}
-
-android.applicationVariants.all {
-    val variantName = name.capitalize()
-
-    val mainVariantForAndroidTests = "onDeviceServer"
-    if (variantName.contains(mainVariantForAndroidTests, true)) {
-        tasks.getByName<JacocoAndroidUnitTestReport>("jacoco${variantName}UnitTestReport") {
-            group = "Verification"
-            description = "Generate Jacoco unit test coverage reports for the $variantName build."
-            variantForCoverage = mainVariantForAndroidTests
-            dependsOn("test${variantName}UnitTest")
-
-            reports.html.apply {
-                isEnabled = true
-                destination = project.reporting.file("jacoco/test$variantName/html")
-            }
-
-            val mainSrc = sourceSets.map { it.javaDirectories }
-            val execFiles = "$buildDir/jacoco/test${variantName}UnitTest.exec"
-            val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
-            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName") {
-                exclude("**/*\$\$inlined*")
-            }
-
-            sourceDirectories.setFrom(files(mainSrc))
-            classDirectories.setFrom(javaClasses, kotlinClasses)
-            executionData.setFrom(execFiles)
-        }
-
-        tasks.getByName<JacocoConnectedAndroidTestReport>("jacoco${variantName}ConnectedTestReport") {
-            group = "Verification"
-            description = "Generate Jacoco connected test coverage reports for the $variantName build."
-            dependsOn("connected${variantName}AndroidTest")
-            variantForCoverage = mainVariantForAndroidTests
-
-            reports.html.apply {
-                isEnabled = true
-                destination = project.reporting.file("jacoco/connected$variantName/html")
-            }
-
-            val mainSrc = sourceSets.map { it.javaDirectories }
-            val execFiles = fileTree("$buildDir/outputs/code_coverage/${this@all.name}AndroidTest/connected/") { include("*-coverage.ec") }
-            val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
-            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName") {
-                exclude("**/*\$\$inlined*")
-            }
-
-            // TODO check idea to include coverage for all used sub modules https://discuss.gradle.org/t/jacoco-plugin-with-multi-project-builds/22219
-
-            sourceDirectories.setFrom(files(mainSrc))
-            classDirectories.setFrom(javaClasses, kotlinClasses)
-            executionData.setFrom(execFiles)
-        }
-    }
 }

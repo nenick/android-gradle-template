@@ -1,5 +1,3 @@
-import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -78,52 +76,6 @@ afterEvaluate {
     tasks.findByName("testReleaseUnitTest")!!.enabled = false
 }
 
-android.libraryVariants.all {
-    val variantName = name.capitalize()
-
-    val mainVariantForAndroidTests = "debug"
-    if (variantName.contains(mainVariantForAndroidTests, true)) {
-        tasks.getByName<JacocoAndroidUnitTestReport>("jacoco${variantName}UnitTestReport") {
-            group = "Verification"
-            description = "Generate Jacoco unit test coverage reports for the $variantName build."
-            skipCoverageReport = true // This is a an on device feature and unit tests wasn't helpful yet.
-            dependsOn("test${variantName}UnitTest")
-
-            reports.html.apply {
-                isEnabled = true
-                destination = project.reporting.file("jacoco/test$variantName/html")
-            }
-
-            val mainSrc = sourceSets.map { it.javaDirectories }
-            val execFiles = "$buildDir/jacoco/test${variantName}UnitTest.exec"
-            val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
-            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName")
-
-            sourceDirectories.setFrom(files(mainSrc))
-            classDirectories.setFrom(javaClasses, kotlinClasses)
-            executionData.setFrom(execFiles)
-        }
-
-        tasks.getByName<JacocoReport>("jacoco${variantName}ConnectedTestReport") {
-            group = "Verification"
-            description = "Generate Jacoco connected test coverage reports for the $variantName build."
-            dependsOn("connected${variantName}AndroidTest")
-
-            reports.html.apply {
-                isEnabled = true
-                destination = project.reporting.file("jacoco/connected$variantName/html")
-            }
-
-            val mainSrc = sourceSets.map { it.javaDirectories }
-            val execFiles = fileTree("$buildDir/outputs/code_coverage/${this@all.name}AndroidTest/connected/") { include("*-coverage.ec") }
-            val javaClasses = fileTree(javaCompileProvider.get().destinationDir) { exclude("**/BuildConfig.*") }
-            val kotlinClasses = fileTree("$buildDir/tmp/kotlin-classes/$variantName") {
-                exclude("**/*\$\$inlined*")
-            }
-
-            sourceDirectories.setFrom(files(mainSrc))
-            classDirectories.setFrom(javaClasses, kotlinClasses)
-            executionData.setFrom(execFiles)
-        }
-    }
+jacocoAndroid {
+    androidUnitTests.skipCoverageReport = true
 }

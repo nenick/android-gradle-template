@@ -1,8 +1,8 @@
 package de.nenick.gradle.plugins.checks
 
-import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidUnitTestReport
-import de.nenick.gradle.plugins.jacoco.android.JacocoConnectedAndroidTestReport
-import de.nenick.gradle.test.tools.*
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidConfigPlugin
+import de.nenick.gradle.plugins.jacoco.android.JacocoAndroidExtension
+import de.nenick.gradle.test.tools.TaskTest
 import de.nenick.gradle.test.tools.extensions.withFile
 import de.nenick.gradle.test.tools.project.AndroidProject
 import de.nenick.gradle.test.tools.project.ProjectSetup
@@ -16,13 +16,13 @@ import strikt.assertions.message
 import java.io.File
 
 class JacocoOutputCheckTaskOnAndroidTest : TaskTest<JacocoOutputCheckTask, AndroidProject>(JacocoOutputCheckTask::class) {
+
     private val errorMessageNoReport = "found modules where jacoco reports are missing"
-    private val errorMessageNoSourceFiles = "found modules where source files path could not be resolved"
-    private val errorMessageMultipleMatch = "found more than one matching report task"
 
     @BeforeEach
     fun setup() {
         project = AndroidProject().setup {
+            withPlugin(JacocoAndroidConfigPlugin::class)
             withTaskUnderTest()
             withValidMergedReport()
         }
@@ -43,9 +43,7 @@ class JacocoOutputCheckTaskOnAndroidTest : TaskTest<JacocoOutputCheckTask, Andro
         fun `skip missing android unit tests reports`() {
             project.setup {
                 withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
-                withTask("anyJacocoReport", JacocoAndroidUnitTestReport::class) {
-                    skipCoverageReport = true
-                }
+                extensions.getByType(JacocoAndroidExtension::class.java).androidUnitTests.skipCoverageReport = true
             }
             whenRunTaskActions()
         }
@@ -54,9 +52,7 @@ class JacocoOutputCheckTaskOnAndroidTest : TaskTest<JacocoOutputCheckTask, Andro
         fun `skip missing connected android tests reports`() {
             project.setup {
                 withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
-                withTask("anyJacocoReport", JacocoConnectedAndroidTestReport::class) {
-                    skipCoverageReport = true
-                }
+                extensions.getByType(JacocoAndroidExtension::class.java).connectedAndroidTests.skipCoverageReport = true
             }
             whenRunTaskActions()
         }
@@ -66,9 +62,7 @@ class JacocoOutputCheckTaskOnAndroidTest : TaskTest<JacocoOutputCheckTask, Andro
             project.setup {
                 withDirectory("build/reports/jacoco/testAnotherOne/html") { withValidIndexHtml() }
                 withDirectory("build/reports/jacoco/connectedDebug/html") { withValidIndexHtml() }
-                withTask("anyJacocoReport", JacocoAndroidUnitTestReport::class) {
-                    variantForCoverage = "anotherOne"
-                }
+                extensions.getByType(JacocoAndroidExtension::class.java).androidUnitTests.variantForCoverage = "anotherOne"
             }
             whenRunTaskActions()
         }
@@ -78,9 +72,7 @@ class JacocoOutputCheckTaskOnAndroidTest : TaskTest<JacocoOutputCheckTask, Andro
             project.setup {
                 withDirectory("build/reports/jacoco/testDebug/html") { withValidIndexHtml() }
                 withDirectory("build/reports/jacoco/connectedAnotherOne/html") { withValidIndexHtml() }
-                withTask("anyJacocoReport", JacocoConnectedAndroidTestReport::class) {
-                    variantForCoverage = "anotherOne"
-                }
+                extensions.getByType(JacocoAndroidExtension::class.java).connectedAndroidTests.variantForCoverage = "anotherOne"
             }
             whenRunTaskActions()
         }
@@ -104,45 +96,6 @@ class JacocoOutputCheckTaskOnAndroidTest : TaskTest<JacocoOutputCheckTask, Andro
             }
             expectThrows<GradleException> { whenRunTaskActions() }
                 .message.isEqualTo("$errorMessageNoReport\n[build/reports/jacoco/connectedDebug/html]")
-        }
-
-        @Test
-        fun `multiple android unit test coverage tasks not supported yet`() {
-            project.setup {
-                withTask("anyJacocoReport", JacocoAndroidUnitTestReport::class)
-                withTask("otherJacocoReport", JacocoAndroidUnitTestReport::class)
-            }
-            expectThrows<GradleException> { whenRunTaskActions() }.message.isEqualTo(
-                "$errorMessageMultipleMatch with " +
-                        "${JacocoAndroidUnitTestReport::class.java.simpleName} in test\n[anyJacocoReport, otherJacocoReport]"
-            )
-        }
-
-        @Test
-        fun `multiple connected android test coverage tasks not supported yet`() {
-            project.setup {
-                withTask("anyJacocoReport", JacocoConnectedAndroidTestReport::class)
-                withTask("otherJacocoReport", JacocoConnectedAndroidTestReport::class)
-            }
-            expectThrows<GradleException> { whenRunTaskActions() }.message.isEqualTo(
-                "$errorMessageMultipleMatch with " +
-                        "${JacocoConnectedAndroidTestReport::class.java.simpleName} in test\n[anyJacocoReport, otherJacocoReport]"
-            )
-        }
-
-        @Test
-        fun `multiple android unit test coverage tasks not supported yet also when skipped`() {
-            project.setup {
-                withTask("anyJacocoReport", JacocoAndroidUnitTestReport::class)
-                withTask("otherJacocoReport", JacocoAndroidUnitTestReport::class) {
-                    skipCoverageReport = true
-                }
-            }
-            expectThrows<GradleException> { whenRunTaskActions() }
-                .message.isEqualTo(
-                    "$errorMessageMultipleMatch with " +
-                            "${JacocoAndroidUnitTestReport::class.java.simpleName} in test\n[anyJacocoReport, otherJacocoReport]"
-                )
         }
     }
 

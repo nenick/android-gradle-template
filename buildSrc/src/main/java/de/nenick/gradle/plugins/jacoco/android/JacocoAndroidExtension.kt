@@ -2,17 +2,13 @@ package de.nenick.gradle.plugins.jacoco.android
 
 open class JacocoAndroidExtension {
 
-    data class ConnectedAndroidTestsSettings(
+    data class Settings(
         var skipCoverageReport: Boolean = false,
         var variantForCoverage: String = "debug"
     )
-    val connectedAndroidTests = ConnectedAndroidTestsSettings()
-    fun connectedAndroidTests(block: ConnectedAndroidTestsSettings.() -> Unit) = block(connectedAndroidTests)
+    val connectedAndroidTests = Settings()
+    fun connectedAndroidTests(block: Settings.() -> Unit) = block(connectedAndroidTests)
 
-    data class AndroidUnitTestsSettings(
-        var skipCoverageReport: Boolean = false,
-        var variantForCoverage: String = "debug"
-    )
-    val androidUnitTests = AndroidUnitTestsSettings()
-    fun androidUnitTests(block: AndroidUnitTestsSettings.() -> Unit) = block(androidUnitTests)
+    val androidUnitTests = Settings()
+    fun androidUnitTests(block: Settings.() -> Unit) = block(androidUnitTests)
 }

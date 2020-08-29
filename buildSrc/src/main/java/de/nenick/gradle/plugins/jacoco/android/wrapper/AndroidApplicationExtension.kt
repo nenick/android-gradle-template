@@ -6,5 +6,6 @@ import org.gradle.api.DomainObjectSet
 
 class AndroidApplicationExtension(private val extension: AppExtension) : AndroidExtension {
 
+    @Suppress("UNCHECKED_CAST")
     override fun variants() = extension.applicationVariants as DomainObjectSet<BaseVariant>
 }
