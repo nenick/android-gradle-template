@@ -21,8 +21,7 @@ android {
     buildTypes.getByName("debug").isTestCoverageEnabled = true
 
     packagingOptions {
-
-        // avoids e.g. More than one file was found with OS independent path "META-INF/ktor-client-json.kotlin_module".
+        // Avoid conflicts like "More than one file was found with OS independent path ..."
         exclude("META-INF/*.kotlin_module")
     }
 }
@@ -53,7 +52,7 @@ dependencies {
     // --------------------------------------------------------------------------------
     // Default dependencies for Android tests
     androidTestImplementation("androidx.test.ext:junit")
-    androidTestImplementation("androidx.test:rules:1.2.0")
+    androidTestImplementation("androidx.test:rules")
     androidTestImplementation("androidx.test.espresso:espresso-core")
     androidTestImplementation("io.strikt:strikt-core")
 
@@ -66,13 +65,8 @@ dependencies {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }
 
-//
-// COPY FROM APP MODULE
-//
-
 afterEvaluate {
     // Running unit tests in release variant brings no value yet.
-    // Java library modules also run only for "debug" by default.
     tasks.findByName("testReleaseUnitTest")!!.enabled = false
 }
 

@@ -16,7 +16,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:4.0.0")
+        classpath("com.android.tools.build:gradle:4.0.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -49,11 +49,13 @@ allprojects {
             dependency("androidx.core:core-ktx:1.3.1")
             dependency("androidx.activity:activity-ktx:1.1.0")
             dependency("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-            dependency("androidx.appcompat:appcompat:1.1.0")
-            dependency("androidx.constraintlayout:constraintlayout:1.1.3")
+            dependency("androidx.appcompat:appcompat:1.2.0")
+            dependency("androidx.constraintlayout:constraintlayout:2.0.1")
 
-            dependency("androidx.test.ext:junit:1.1.1")
-            dependency("androidx.test.espresso:espresso-core:3.2.0")
+            dependency("androidx.test.ext:junit:1.1.2")
+            dependency("androidx.test:rules:1.3.0")
+            dependency("androidx.test.espresso:espresso-core:3.3.0")
+            dependency("androidx.test.espresso:espresso-idling-resource:3.3.0")
 
             dependency("io.ktor:ktor-client-android:1.3.2")
             dependency("io.ktor:ktor-client-json:1.3.2")

@@ -15,7 +15,7 @@ android {
         targetSdkVersion(29)
 
         versionCode = 1 // TODO use the timestamp / 10 algorithm which avoids conflicts for the next few hundreds years.
-        versionName = "0.1.0"
+        versionName = "0.1.0-dev"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,11 +25,6 @@ android {
             isMinifyEnabled = true
             // Default generated proguard configuration, see also https://developer.android.com/studio/build/shrink-code
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-        getByName("debug") {
-            // TODO move this to onDeviceServer buildType because we use only that for automatic testing.
-            // We have it still in debug to support coverage report checks, which do report when coverage is not enabled.
-            isTestCoverageEnabled = true
         }
 
         // ================================================================================ #onDeviceServer
@@ -50,12 +45,13 @@ android {
         // * Missing hint why test classes aren't resolvable https://issuetracker.google.com/issues/148451831
         //
         create("onDeviceServer") {
-            // Make sure that new developers will have less issues when they want to run
-            // the app or the androidTest the first time after initial cloning.
-            isDefault = true
             // Basically it should have the same setup as the debug variant.
             initWith(getByName("debug"))
             matchingFallbacks = listOf("debug")
+            // Make sure that new developers will have less issues when they want to run
+            // the app or the androidTest the first time after initial cloning.
+            isDefault = true
+            isTestCoverageEnabled = true
         }
     }
 
@@ -69,7 +65,7 @@ android {
     }
 
     packagingOptions {
-        // Avoids issues like: More than one file was found with OS independent path "META-INF/ktor-client-json.kotlin_module".
+        // Avoid conflicts like "More than one file was found with OS independent path ..."
         exclude("META-INF/*.kotlin_module")
     }
 }
@@ -96,7 +92,7 @@ dependencies {
 
     androidTestImplementation("androidx.test.ext:junit")
     androidTestImplementation("androidx.test.espresso:espresso-core")
-    androidTestImplementation("androidx.test:rules:1.2.0")
+    androidTestImplementation("androidx.test:rules")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }

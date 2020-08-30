@@ -28,19 +28,15 @@ dependencies {
     implementation(project(":core:todo-api"))
     implementation(project(":tools:wiremock-android"))
     implementation(project(":tools:wiremock-kotlindsl"))
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("io.ktor:ktor-client-android")
     implementation("org.koin:koin-android")
-    implementation("androidx.test.espresso:espresso-idling-resource:3.2.0")
+    implementation("androidx.test.espresso:espresso-idling-resource")
 }
-
-//
-// COPY FROM APP MODULE
-//
 
 afterEvaluate {
     // Running unit tests in release variant brings no value yet.
-    // Java library modules also run only for "debug" by default.
     tasks.findByName("testReleaseUnitTest")!!.enabled = false
 }
 

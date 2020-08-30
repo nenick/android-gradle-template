@@ -7,7 +7,7 @@ plugins {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
     implementation("io.ktor:ktor-client-android")
     implementation("io.ktor:ktor-client-json")
