@@ -15,8 +15,9 @@ class MainViewModel : ViewModel(), KoinComponent {
 
     val result = MutableLiveData<String>()
 
-    fun requestTodo() = viewModelScope.launch {
-        val request = api.todoById(10)
+    fun loadTodo(id: Int) = viewModelScope.launch {
+        result.value = "doing request"
+        val request = api.todoById(id)
         result.value = when (request) {
             is ApiResponse.Success -> request.content.title
             is ApiResponse.Error -> request.error

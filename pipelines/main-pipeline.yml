@@ -4,8 +4,10 @@ parameters:
     default:
       - buildSrc
       - app
+      - app-tests-on-device-server
       - core/todo-api
       - core/todo-api-mock
+      - tools/coroutines-test
       - tools/wiremock-android
       - tools/wiremock-kotlindsl
 

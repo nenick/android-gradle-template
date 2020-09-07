@@ -16,7 +16,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:4.0.1")
+        classpath("com.android.tools.build:gradle:4.1.0-rc02")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -37,14 +37,17 @@ allprojects {
         dependencies {
             dependency("junit:junit:4.13")
             dependency("io.strikt:strikt-core:0.26.1")
+            dependency("io.mockk:mockk-android:1.10.0")
             dependency("com.github.tomakehurst:wiremock:2.26.3")
             dependency("com.github.tomakehurst:wiremock-jre8:2.26.3")
 
             dependency("org.koin:koin-core:2.1.6")
             dependency("org.koin:koin-android:2.1.6")
+            dependency("org.koin:koin-test:2.1.6")
 
             dependency("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
             dependency("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
+            dependency("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9")
 
             dependency("androidx.core:core-ktx:1.3.1")
             dependency("androidx.activity:activity-ktx:1.1.0")
@@ -75,11 +78,12 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
     subprojects {
         val androidApp = extensions.findByType<com.android.build.gradle.AppExtension>()
         val androidLibrary = extensions.findByType<com.android.build.gradle.LibraryExtension>()
+        val androidTest = extensions.findByType<com.android.build.gradle.TestExtension>()
         val kotlin = extensions.findByType<org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension>()
 
-        if (androidApp != null || androidLibrary != null) {
+        if (androidApp != null || androidLibrary != null || androidTest != null) {
 
-            val variantName = if( name == "app" ) {
+            val variantName = if( name == "app" || name == "app-tests-on-device-server") {
                 "onDeviceServer"
             } else {
                 "debug"
@@ -87,7 +91,8 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
 
             val variant =
                 extensions.findByType<com.android.build.gradle.AppExtension>()?.applicationVariants?.findLast { it.name == variantName }
-                    ?: extensions.getByType<com.android.build.gradle.LibraryExtension>().libraryVariants.findLast { it.name == variantName }!!
+                    ?: extensions.findByType<com.android.build.gradle.LibraryExtension>()?.libraryVariants?.findLast { it.name == variantName }
+                    ?: extensions.getByType<com.android.build.gradle.TestExtension>().applicationVariants.findLast { it.name == variantName }!!
             val sourceFiles = files(variant.sourceSets.map { it.javaDirectories })
             additionalSourceDirs(sourceFiles)
 

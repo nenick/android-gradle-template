@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="todo-api-mock" target="1.7" />
       <module name="wiremock-android-jvm" target="1.7" />
       <module name="wiremock-kotlindsl" target="1.7" />

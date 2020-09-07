@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="app unit tests" type="AndroidJUnit" factoryName="Android JUnit">
-    <module name="app" />
+    <module name="android-gradle-template.app" />
     <useClassPathOnly />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />

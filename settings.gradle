@@ -1,5 +1,7 @@
 include ':app'
+include ':app-tests-on-device-server'
 include ':core:todo-api'
 include ':core:todo-api-mock'
+include ':tools:coroutines-test'
 include ':tools:wiremock-android'
 include ':tools:wiremock-kotlindsl'

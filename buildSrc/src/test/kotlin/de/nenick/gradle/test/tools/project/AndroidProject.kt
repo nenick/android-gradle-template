@@ -1,6 +1,7 @@
 package de.nenick.gradle.test.tools.project
 
 import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.TestExtension
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.testfixtures.ProjectBuilder
 import java.io.File
@@ -10,13 +11,17 @@ class AndroidProject(type: AndroidType = AndroidType.Application, projectDefinit
     ProjectSetup<AndroidProject>(projectDefinition) {
 
     enum class AndroidType {
-        Application, Library
+        Application, Library, Test
     }
 
     init {
         when (type) {
             AndroidType.Application -> withPlugin("com.android.application")
             AndroidType.Library -> withPlugin("com.android.library")
+            AndroidType.Test -> {
+                withPlugin("com.android.test")
+                project.extensions.getByType<TestExtension>().targetProjectPath(":app")
+            }
         }
         withPlugin("kotlin-android")
         androidExtension {

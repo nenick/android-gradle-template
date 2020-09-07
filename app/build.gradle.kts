@@ -17,7 +17,7 @@ android {
         versionCode = 1 // TODO use the timestamp / 10 algorithm which avoids conflicts for the next few hundreds years.
         versionName = "0.1.0-dev"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "de.nenick.template.TemplateAppAndroidJunitRunner"
     }
 
     buildTypes {
@@ -47,7 +47,7 @@ android {
         create("onDeviceServer") {
             // Basically it should have the same setup as the debug variant.
             initWith(getByName("debug"))
-            matchingFallbacks = listOf("debug")
+            matchingFallbacks.add("debug")
             // Make sure that new developers will have less issues when they want to run
             // the app or the androidTest the first time after initial cloning.
             isDefault = true
@@ -55,6 +55,9 @@ android {
         }
     }
 
+    // This can safely changed to "debug" variant which would also give little performance improvements.
+    // It's targeting "onDeviceServer" because it is the default selected type.
+    // So new developers can just clone, import and run the tests from Android Studio.
     // Search for #onDeviceServer
     testBuildType = "onDeviceServer"
 
@@ -66,7 +69,7 @@ android {
 
     packagingOptions {
         // Avoid conflicts like "More than one file was found with OS independent path ..."
-        exclude("META-INF/*.kotlin_module")
+        exclude("META-INF/*")
     }
 }
 
@@ -74,10 +77,11 @@ dependencies {
     // With Kotlin DSL we have to "access" first the dependency configuration  target for different variants.
     // The variable naming will be checked by the compiler that this variant does really exists.
     // Search for #onDeviceServer
-    val onDeviceServerImplementation by configurations
+    // val onDeviceServerImplementation by configurations
+    val onDeviceServerApi by configurations
 
     implementation(project(":core:todo-api"))
-    onDeviceServerImplementation(project(":core:todo-api-mock"))
+    onDeviceServerApi(project(":core:todo-api-mock"))
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.koin:koin-android")
@@ -85,7 +89,7 @@ dependencies {
     implementation("androidx.core:core-ktx")
     implementation("androidx.activity:activity-ktx")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx")
-    implementation("androidx.appcompat:appcompat")
+    api("androidx.appcompat:appcompat")
     implementation("androidx.constraintlayout:constraintlayout")
 
     testImplementation("junit:junit")
@@ -93,6 +97,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit")
     androidTestImplementation("androidx.test.espresso:espresso-core")
     androidTestImplementation("androidx.test:rules")
+    androidTestImplementation("org.koin:koin-test")
+    androidTestImplementation("io.mockk:mockk-android")
+    androidTestImplementation(project(":core:todo-api-mock"))
+    androidTestImplementation(project(":tools:coroutines-test"))
+    androidTestImplementation(project(":tools:wiremock-android"))
+    androidTestImplementation(project(":tools:wiremock-kotlindsl"))
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }

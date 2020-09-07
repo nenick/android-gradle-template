@@ -8,6 +8,10 @@ import org.koin.core.context.startKoin
 open class TemplateApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        setupDependencyInjection()
+    }
+
+    open fun setupDependencyInjection() {
         startKoin {
             androidContext(this@TemplateApplication)
             modules(KoinApiModule.default)

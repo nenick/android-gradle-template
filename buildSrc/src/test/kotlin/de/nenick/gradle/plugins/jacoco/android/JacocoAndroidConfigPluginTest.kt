@@ -2,6 +2,7 @@ package de.nenick.gradle.plugins.jacoco.android
 
 import de.nenick.gradle.test.tools.PluginTest
 import de.nenick.gradle.test.tools.extensions.withFile
+import de.nenick.gradle.test.tools.project.RawProject
 import de.nenick.gradle.test.tools.project.AndroidProject
 import de.nenick.gradle.test.tools.project.AndroidProject.AndroidType
 import de.nenick.gradle.test.tools.project.KotlinProject
@@ -209,7 +210,8 @@ class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
                 project.forceCreateVariantsAndTasks()
                 expectThat(jacocoConnectedTestReportTask().executionData.files)
                     .containsExactly(
-                        File(project.projectDir, "build/outputs/code_coverage/debugAndroidTest/connected/My Device-coverage.ec"))
+                        File(project.projectDir, "build/outputs/code_coverage/debugAndroidTest/connected/My Device-coverage.ec")
+                    )
             }
 
             @Nested
@@ -232,6 +234,22 @@ class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
                 @Test
                 fun `add the default android unit tests report task`() {
                     project = AndroidProject(AndroidType.Library).withPlugin(JacocoAndroidConfigPlugin::class)
+                    project.forceCreateVariantsAndTasks()
+                    expectThat(project.tasks) {
+                        one {
+                            get { name }.isEqualTo("jacocoDebugUnitTestReport")
+                            isA<JacocoAndroidUnitTestReport>()
+                        }
+                    }
+                }
+            }
+
+            @Nested
+            inner class `for type test` {
+                @Test
+                fun `add the default android unit tests report task`() {
+                    val parent = RawProject().setup { withAndroidModule("app") }
+                    project = AndroidProject(AndroidType.Test) { withParent(parent.project) }.withPlugin(JacocoAndroidConfigPlugin::class)
                     project.forceCreateVariantsAndTasks()
                     expectThat(project.tasks) {
                         one {

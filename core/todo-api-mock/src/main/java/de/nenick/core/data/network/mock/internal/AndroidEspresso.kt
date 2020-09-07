@@ -7,7 +7,7 @@ import io.ktor.client.engine.android.AndroidEngineConfig
 /**
  * Mimics [io.ktor.client.engine.android.Android] to make engine more configurable.
  */
-object AndroidTestClientEngineFactory : HttpClientEngineFactory<AndroidEngineConfig> {
+object AndroidEspresso : HttpClientEngineFactory<AndroidEngineConfig> {
     override fun create(block: AndroidEngineConfig.() -> Unit): HttpClientEngine =
         AndroidTestEngineConfig(AndroidEngineConfig().apply(block))
 }

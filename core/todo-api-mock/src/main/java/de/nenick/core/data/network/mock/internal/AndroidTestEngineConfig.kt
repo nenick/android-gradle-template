@@ -17,7 +17,8 @@ class AndroidTestEngineConfig(override val config: AndroidEngineConfig) : HttpCl
     private val origin = AndroidClientEngine(config)
 
     override val dispatcher: CoroutineDispatcher
-        // We want to use TestCoroutineDispatcher instead of IO for more control but current this one is by default in main thread.
+        // Perhaps we find reasons to use TestCoroutineDispatcher instead of IO for more control but current network calls would fail
+        // with the reason of being in main thread.
         get() = EspressoTrackedDispatcher("api-calls", Dispatchers.IO)
 
     @InternalAPI
