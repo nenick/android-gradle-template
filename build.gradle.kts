@@ -94,7 +94,8 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                     ?: extensions.findByType<com.android.build.gradle.LibraryExtension>()?.libraryVariants?.findLast { it.name == variantName }
                     ?: extensions.getByType<com.android.build.gradle.TestExtension>().applicationVariants.findLast { it.name == variantName }!!
             val sourceFiles = files(variant.sourceSets.map { it.javaDirectories })
-            additionalSourceDirs(sourceFiles)
+            if(androidTest == null)
+                additionalSourceDirs(sourceFiles)
 
             tasks.getByName("jacoco${variantName.capitalize()}ConnectedTestReport").run {
                 executionData(fileTree("${buildDir}/outputs/code_coverage/${variantName}AndroidTest/connected/*"))
@@ -125,9 +126,10 @@ tasks.getByName<JacocoMergeTask>("jacocoTestReportMerge") {
                     executionData((this as JacocoReport).executionData)
                 }
             }
-            additionalClassDirs(fileTree("${buildDir}/tmp/kotlin-classes/${variantName}") {
-                exclude("**/*\$\$inlined*")
-            })
+            if(androidTest == null)
+                additionalClassDirs(fileTree("${buildDir}/tmp/kotlin-classes/${variantName}") {
+                    exclude("**/*\$\$inlined*")
+                })
 
         } else if (kotlin != null) {
             additionalSourceDirs(kotlin.sourceSets.findByName("main")!!.kotlin.sourceDirectories)
