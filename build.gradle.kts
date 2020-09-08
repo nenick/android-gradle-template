@@ -36,6 +36,8 @@ allprojects {
     dependencyManagement {
         dependencies {
             dependency("junit:junit:4.13")
+            // TODO replace? Newer versions does not support below Android 24 anymore.
+            // https://github.com/robfletcher/strikt/issues/229
             dependency("io.strikt:strikt-core:0.26.1")
             dependency("io.mockk:mockk-android:1.10.0")
             dependency("com.github.tomakehurst:wiremock:2.26.3")
