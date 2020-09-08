@@ -17,7 +17,7 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:4.1.0-rc02")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0")
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -36,7 +36,7 @@ allprojects {
     dependencyManagement {
         dependencies {
             dependency("junit:junit:4.13")
-            dependency("io.strikt:strikt-core:0.26.1")
+            dependency("io.strikt:strikt-core:0.27.0")
             dependency("io.mockk:mockk-android:1.10.0")
             dependency("com.github.tomakehurst:wiremock:2.26.3")
             dependency("com.github.tomakehurst:wiremock-jre8:2.26.3")
@@ -45,8 +45,9 @@ allprojects {
             dependency("org.koin:koin-android:2.1.6")
             dependency("org.koin:koin-test:2.1.6")
 
-            dependency("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
-            dependency("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
+            dependency("org.jetbrains.kotlin:kotlin-stdlib:1.4.0")
+            dependency("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+            dependency("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
             dependency("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9")
 
             dependency("androidx.core:core-ktx:1.3.1")

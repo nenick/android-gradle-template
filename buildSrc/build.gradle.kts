@@ -47,7 +47,7 @@ repositories {
 dependencies {
     // Default android/kotlin related build plugins.
     implementation("com.android.tools.build:gradle:4.1.0-rc02")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0")
 
     // Plugins we want to provide with common pre configurations for this project.
     implementation("org.jlleitschuh.gradle:ktlint-gradle:9.2.1")

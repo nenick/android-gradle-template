@@ -85,7 +85,7 @@ class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
     fun `apply plugin to pure kotlin project`() {
         // Within pure kotlin projects jacoco create his own jacocoTestReport task automatically.
         expectThrows<PluginApplicationException> { KotlinProject().setup { plugins.apply(pluginId) } }
-            .message.isEqualTo("Failed to apply plugin [id '$pluginId']")
+            .message.isEqualTo("Failed to apply plugin '$pluginId'.")
     }
 
     @Nested
