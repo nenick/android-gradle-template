@@ -36,7 +36,7 @@ allprojects {
     dependencyManagement {
         dependencies {
             dependency("junit:junit:4.13")
-            dependency("io.strikt:strikt-core:0.27.0")
+            dependency("io.strikt:strikt-core:0.26.1")
             dependency("io.mockk:mockk-android:1.10.0")
             dependency("com.github.tomakehurst:wiremock:2.26.3")
             dependency("com.github.tomakehurst:wiremock-jre8:2.26.3")
