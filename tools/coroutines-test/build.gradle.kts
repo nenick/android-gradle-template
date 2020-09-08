@@ -1,19 +1,19 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'de.nenick.jacoco-android-config'
-    id 'de.nenick.ktlint-android-config'
+    id("com.android.library")
+    id("kotlin-android")
+    id("de.nenick.jacoco-android-config")
+    id("de.nenick.ktlint-android-config")
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion(29)
     defaultConfig {
         minSdkVersion(21)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug {
-            testCoverageEnabled = true
+        getByName("debug") {
+            isTestCoverageEnabled = true
         }
     }
     packagingOptions {
@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-test")
     implementation("org.jetbrains.kotlinx:atomicfu:0.14.4")
     implementation("androidx.test.ext:junit")
@@ -33,6 +33,8 @@ dependencies {
     androidTestImplementation("androidx.lifecycle:lifecycle-viewmodel-ktx")
     androidTestImplementation("io.strikt:strikt-core")
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }
 
 jacocoAndroid {
     androidUnitTests.skipCoverageReport = true
