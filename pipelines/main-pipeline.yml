@@ -37,7 +37,14 @@ jobs:
       - template: tasks/unit-tests.yml
         parameters:
           modules: ${{parameters.modules}}
-      - template: templates/debug-build-and-test-part2.yml
+      - task: Bash@3
+        displayName: Wait for Emulator
+        inputs:
+          filePath: 'pipelines/templates/android-emulator-wait.sh'
+        condition: succeededOrFailed()
+      - template: tasks/instrumentation-tests.yml
+        parameters:
+          modules: ${{parameters.modules}}
       - template: tasks/publish-merged-coverage.yml
         parameters:
           modules: ${{parameters.modules}}

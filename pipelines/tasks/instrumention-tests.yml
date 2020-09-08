@@ -1,0 +1,15 @@
+parameters:
+  - name: 'modules'
+    type: object
+
+steps:
+  - ${{each module in parameters.modules}}:
+      - task: Gradle@2
+        displayName: Intrumentation Tests ${{module}}
+        inputs:
+          tasks: ":${{replace(module, '/', ':')}}:connectedCheck"
+          gradleWrapperFile: 'gradlew'
+          publishJUnitResults: true
+          testResultsFiles: '${{module}}/**/TEST-*-.xml'
+          testRunTitle: 'Instrumentation Tests - ${{module}}'
+        condition: and(succeededOrFailed(), ne('${{module}}', 'buildSrc'))
