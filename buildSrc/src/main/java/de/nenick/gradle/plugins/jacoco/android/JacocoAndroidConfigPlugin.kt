@@ -60,7 +60,10 @@ open class JacocoAndroidConfigPlugin @Inject constructor(instantiator: Instantia
 
             target.tasks.register(jacocoReportTaskName, jacocoReportTaskClass) {
                 reports.html.destination = project.reporting.file("$reportPrefix$variantName/html")
-                dependsOn(testTask)
+
+                if(!target.hasProperty("coverageSkipTestTasks")) {
+                    dependsOn(testTask)
+                }
 
                 configureSourceFiles(this@all, this)
                 configureClassFiles(this@all, this)

@@ -7,6 +7,7 @@ steps:
     displayName: Create Coverage Report
     inputs:
       tasks: 'jacocoTestReportMerge'
+      options: '-PcoverageSkipTestTasks'
       gradleWrapperFile: 'gradlew'
       publishJUnitResults: false
     condition: succeededOrFailed()

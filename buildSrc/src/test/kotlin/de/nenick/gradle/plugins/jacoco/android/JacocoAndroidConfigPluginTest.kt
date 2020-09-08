@@ -10,6 +10,7 @@ import de.nenick.gradle.tools.reporting
 import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.FileCollection
 import org.gradle.api.internal.plugins.PluginApplicationException
+import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.testing.jacoco.plugins.JacocoPlugin
 import org.gradle.testing.jacoco.plugins.JacocoPluginExtension
@@ -203,6 +204,15 @@ class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
             }
 
             @Test
+            fun `depend on connected android test execution skipped`() {
+                project.extra.set("coverageSkipTestTasks", null)
+                project.forceCreateVariantsAndTasks()
+                expectThat(jacocoConnectedTestReportTask().taskDependencies.getDependencies(jacocoConnectedTestReportTask())) {
+                    isEmpty()
+                }
+            }
+
+            @Test
             fun `include execution data`() {
                 project.withDirectory("build/outputs/code_coverage/debugAndroidTest/connected") {
                     withFile("My Device-coverage.ec")
@@ -290,6 +300,15 @@ class JacocoAndroidConfigPluginTest : PluginTest<AndroidProject>() {
                 project.forceCreateVariantsAndTasks()
                 expectThat(jacocoUnitTestReportTask().taskDependencies.getDependencies(jacocoUnitTestReportTask())) {
                     one { get { name }.isEqualTo("testDebugUnitTest") }
+                }
+            }
+
+            @Test
+            fun `depend on android unit test execution skipped`() {
+                project.extra.set("coverageSkipTestTasks", null)
+                project.forceCreateVariantsAndTasks()
+                expectThat(jacocoUnitTestReportTask().taskDependencies.getDependencies(jacocoUnitTestReportTask())) {
+                    isEmpty()
                 }
             }
 
