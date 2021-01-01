@@ -2,7 +2,7 @@ parameters:
   - name: 'modules'
     type: object
     default:
-      - buildSrc
+      #- gradle-plugins
       - app
       - app-tests-on-device-server
       - core/todo-api
@@ -27,6 +27,8 @@ jobs:
       - template: tasks/check-module-list.yml
         parameters:
           modules: ${{parameters.modules}}
+
+  - template: job-gradle-plugins-tests.yml
 
   - job:
     displayName: Unit and Android test coverage

@@ -5,3 +5,5 @@ include ':core:todo-api-mock'
 include ':tools:coroutines-test'
 include ':tools:wiremock-android'
 include ':tools:wiremock-kotlindsl'
+
+includeBuild 'gradle-plugins'

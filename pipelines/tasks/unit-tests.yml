@@ -12,4 +12,4 @@ steps:
           publishJUnitResults: true
           testResultsFiles: '${{module}}/**/TEST-*.xml'
           testRunTitle: 'Unit Tests - ${{module}}'
-        condition: and(succeededOrFailed(), ne('${{module}}', 'buildSrc'))
+        condition: succeededOrFailed()

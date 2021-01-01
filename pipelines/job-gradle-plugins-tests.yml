@@ -1,0 +1,39 @@
+jobs:
+  - job:
+    displayName: 'Gradle Plugins'
+
+    pool:
+      vmImage: 'macOS-10.15'
+
+    variables:
+      directory: 'gradle-plugins'
+
+    steps:
+      - task: Bash@3
+        displayName: Build
+        inputs:
+          targetType: inline
+          script: './gradlew assemble -p $(directory)'
+        condition: succeededOrFailed()
+
+      - task: Bash@3
+        displayName: Unit Tests
+        inputs:
+          targetType: inline
+          script: './gradlew test -p $(directory)'
+        condition: succeededOrFailed()
+
+      - task: Bash@3
+        displayName: KtLint Checks
+        inputs:
+          targetType: inline
+          script: './gradlew ktlintCheck -p $(directory)'
+        condition: succeededOrFailed()
+
+      - task: PublishTestResults@2
+        displayName: Publish Tests Results
+        inputs:
+          testResultsFiles: '$(directory)/**/TEST-*.xml'
+          testRunTitle: '$(directory) unit tests'
+          mergeTestResults: true
+        condition: succeededOrFailed()

@@ -4,12 +4,13 @@
 * More familiar code completion results.
 * Navigate into all classes and functions.
 
-## Folder buildSrc
+## Folder gradle-plugins
 
 * Reduce build.gradle size and complexity.
 
 See also
 * Blog about the advantages https://quickbirdstudios.com/blog/gradle-kotlin-buildsrc-plugin-android/
+* Switch to composite builds https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-instead-3c38ac7a2ab3
 * Basic gradle file structure https://docs.gradle.org/current/userguide/kotlin_dsl.html#type-safe-accessors
 
 ## Share dependency versions

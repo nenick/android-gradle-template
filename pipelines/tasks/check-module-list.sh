@@ -2,8 +2,8 @@
 
 MODULES_LISTED=$(echo $1 | sed $'s/ /\\\n/g')
 
-MODULES_EXISTS=$(cat settings.gradle | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
-MODULES_EXISTS=$(echo -e "buildSrc\\n$MODULES_EXISTS")
+MODULES_EXISTS=$(cat settings.gradle | grep "include " | sed s/"include ':"//g | sed s/\:/\\//g | sed s/\'//g)
+#MODULES_EXISTS=$(echo -e "buildSrc\\n$MODULES_EXISTS")
 
 echo ""
 echo "== MODULES_EXISTS =="

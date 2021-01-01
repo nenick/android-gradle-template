@@ -25,10 +25,10 @@ All other test targets are commonly run against a debug variant.
 Here we check finally that the release APK does start and work.
 They exist in `app-tests-release` module.
 
-## `buildSrc` Unit Tests
+## `gradle-plugins` Unit Tests
 
 These tests does not run when you just call `test` on root project but they are always checked when you build your app.
 
 *Run tests from command line*
 
-    ./gradlew -i -p buildSrc test
+    ./gradlew -i -p gradle-plugins test

@@ -7,7 +7,7 @@
 ## Template Features
 
 * ...
-* gradle config and enhanced logic separated by `buildSrc`
+* gradle config and enhanced logic separated as custom gradle plugin
 * code coverage everywhere
 * coroutines instead of rxjava
 * on device server for demo and testing

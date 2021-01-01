@@ -36,7 +36,7 @@ function renameApp() {
 
 # clean all build folders to avoid unecessary work and conflicts
 ./gradlew clean
-rm -rf buildSrc/build
+rm -rf gradle-plugins/build
 
 APP_PACKAGE_STRUCTURE=(${APP_PACKAGE//./ })
 

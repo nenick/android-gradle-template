@@ -1,3 +1,8 @@
+// Fix for missing com.android.tools.build:gradle from custom android gradle plugins dependencies.
+// Only this module is effected by this issue. Could be that only application modules are effected
+// or fixing it here does it also fix it for the included library modules.
+buildscript.repositories.google()
+
 plugins {
     id("de.nenick.android-application-module")
     id("de.nenick.ktlint-config")

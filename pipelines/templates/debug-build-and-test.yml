@@ -5,8 +5,6 @@ steps:
       filePath: 'pipelines/templates/android-emulator-install.sh'
     condition: succeededOrFailed()
 
-  - template: buildSrc.yml
-
   - task: Gradle@2
     displayName: Build Debug APK
     inputs:

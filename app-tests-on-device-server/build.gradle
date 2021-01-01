@@ -1,8 +1,10 @@
-apply plugin: 'com.android.test'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'de.nenick.ktlint-android-config'
-apply plugin: 'de.nenick.jacoco-android-config'
+plugins {
+    id("com.android.test")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("de.nenick.ktlint-android-config")
+    id("de.nenick.jacoco-android-config")
+}
 
 android {
     compileSdkVersion 29
